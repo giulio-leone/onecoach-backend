@@ -15,6 +15,7 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { prisma, Prisma } from '@onecoach/lib-core';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 import {
   createMcpTextResponse,
   safeHandleMemoryEvent,
@@ -178,7 +179,7 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
         durationWeeks: args.durationWeeks,
         goals: [args.goal],
         status: 'ACTIVE',
-        weeks: weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(weeks as unknown[]),
         userId: args.athleteId,
         updatedAt: new Date(),
       },
@@ -251,7 +252,7 @@ export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
     
     console.log('[workout_get_program] ✅ Program found:', {
       id: program.id,

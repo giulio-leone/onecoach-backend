@@ -63,7 +63,7 @@ function parseWeeks(weeksJson: Prisma.JsonValue): Week[] {
   if (!weeksJson || !Array.isArray(weeksJson)) {
     return [];
   }
-  return weeksJson as unknown as Week[];
+  return weeksJson as Week[];
 }
 
 // Helper to serialize weeks for Prisma

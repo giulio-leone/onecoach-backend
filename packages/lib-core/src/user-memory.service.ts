@@ -10,6 +10,7 @@ import { prisma } from './prisma';
 import { Prisma } from '@prisma/client';
 import type { user_memories } from '@prisma/client';
 import { createId } from '@onecoach/lib-shared/id-generator';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 import type {
   UserMemory,
   MemoryDomain,
@@ -94,7 +95,7 @@ export class UserMemoryService {
         data: {
           id: createId(),
           userId,
-          memory: DEFAULT_MEMORY as unknown as Prisma.InputJsonValue,
+          memory: toPrismaJsonValue(DEFAULT_MEMORY as Record<string, unknown>),
           version: 1,
           updatedAt: new Date(),
         },
@@ -109,7 +110,7 @@ export class UserMemoryService {
    */
   async getMemory(userId: string, options: GetMemoryOptions = {}): Promise<UserMemory> {
     const memory = await this.getOrCreate(userId);
-    const fullMemory = (memory.memory as unknown as UserMemory) || DEFAULT_MEMORY;
+    const fullMemory = (memory.memory as UserMemory) || DEFAULT_MEMORY;
 
     // If no domain specified, return full memory
     if (!options.domain) {
@@ -132,7 +133,7 @@ export class UserMemoryService {
    */
   async updateMemory(userId: string, update: MemoryUpdate): Promise<UserMemory> {
     const memory = await this.getOrCreate(userId);
-    const currentMemory = (memory.memory as unknown as UserMemory) || DEFAULT_MEMORY;
+    const currentMemory = (memory.memory as UserMemory) || DEFAULT_MEMORY;
 
     const domain = update.domain;
     const currentDomainMemory = currentMemory[domain] || {
@@ -171,7 +172,7 @@ export class UserMemoryService {
     await prisma.user_memories.update({
       where: { userId },
       data: {
-        memory: updatedMemory as unknown as Prisma.InputJsonValue,
+        memory: toPrismaJsonValue(updatedMemory as Record<string, unknown>),
         updatedAt: new Date(),
       },
     });
@@ -244,7 +245,7 @@ export class UserMemoryService {
     return versions.map((v) => ({
       id: v.id,
       versionNumber: v.versionNumber,
-      memory: v.memory as unknown as UserMemory,
+      memory: v.memory as UserMemory,
       changeType: v.changeType,
       changeNote: v.changeNote,
       changedBy: v.changedBy,
@@ -263,7 +264,7 @@ export class UserMemoryService {
       },
     });
 
-    return version ? (version.memory as unknown as UserMemory) : null;
+    return version ? (version.memory as UserMemory) : null;
   }
 
   /**
@@ -282,7 +283,7 @@ export class UserMemoryService {
     await prisma.user_memories.update({
       where: { userId },
       data: {
-        memory: version as unknown as Prisma.InputJsonValue,
+        memory: toPrismaJsonValue(version as Record<string, unknown>),
         updatedAt: new Date(),
       },
     });
@@ -517,7 +518,7 @@ export class UserMemoryService {
     await prisma.user_memories.update({
       where: { userId },
       data: {
-        memory: cleanedMemory as unknown as Prisma.InputJsonValue,
+        memory: toPrismaJsonValue(cleanedMemory as Record<string, unknown>),
         updatedAt: new Date(),
       },
     });

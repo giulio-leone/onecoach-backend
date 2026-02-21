@@ -17,7 +17,8 @@ import type { McpTool } from '../../types';
 import { GranularSessionService } from '@onecoach/one-workout';
 import { workoutProgramSchema } from '@onecoach/schemas';
 import { normalizeWorkoutProgram } from './program-normalizer';
-import { prisma, type Prisma } from '@onecoach/lib-core';
+import { prisma } from '@onecoach/lib-core';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 
 // =====================================================
 // MCP-Safe Schema (JSON-compatible for AI SDK)
@@ -121,7 +122,7 @@ Workflow:
     await prisma.workout_programs.update({
       where: { id: programId },
       data: {
-        weeks: normalizedProgram.weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(normalizedProgram.weeks as unknown[]),
         updatedAt: new Date(),
       },
     });

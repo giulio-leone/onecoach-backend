@@ -68,7 +68,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   // Calculate average volume (SSOT: usa getExerciseSets)
   let totalVolume = 0;
   completedSessions30d.forEach((session: any) => {
-    const exercises = session.exercises as unknown as Exercise[];
+    const exercises = session.exercises as Exercise[];
     exercises.forEach((exercise: Exercise) => {
       const sets = getExerciseSets(exercise);
       sets.forEach((set: any) => {

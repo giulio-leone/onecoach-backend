@@ -9,6 +9,7 @@
 
 import { prisma } from './prisma';
 import { Prisma } from '@prisma/client';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 import type { CalendarPlanType } from '@prisma/client';
 
 /**
@@ -163,7 +164,7 @@ export async function createCalendarAssignment(
       planType: data.planType,
       planId: data.planId,
       isRecurring: data.isRecurring ?? false,
-      recurrenceRule: data.recurrenceRule as unknown as Prisma.InputJsonValue,
+      recurrenceRule: toPrismaJsonValue(data.recurrenceRule),
     },
   });
 
@@ -266,7 +267,7 @@ export async function updateCalendarAssignment(
   if (data.planId !== undefined) updateData.planId = data.planId;
   if (data.isRecurring !== undefined) updateData.isRecurring = data.isRecurring;
   if (data.recurrenceRule !== undefined) {
-    updateData.recurrenceRule = data.recurrenceRule as unknown as Prisma.InputJsonValue;
+    updateData.recurrenceRule = toPrismaJsonValue(data.recurrenceRule);
   }
 
   const assignment = await prisma.calendar_assignments.update({
@@ -356,7 +357,7 @@ function mapToCalendarAssignment(
     planType: assignment.planType,
     planId: assignment.planId ?? '',
     isRecurring: assignment.isRecurring,
-    recurrenceRule: assignment.recurrenceRule as unknown as RecurrenceRule | null,
+    recurrenceRule: assignment.recurrenceRule as RecurrenceRule | null,
     createdAt: assignment.createdAt,
     updatedAt: assignment.updatedAt,
   };

@@ -638,7 +638,7 @@ export const addSupersetAction: AgenticActionHandler<WorkoutProgramData> = {
     day.exercises.push({
       ...supersetElement,
       setGroups: [],
-    } as unknown as WorkoutExerciseData);
+    } as WorkoutExerciseData);
 
     return program;
   },
@@ -703,7 +703,7 @@ export const addCircuitAction: AgenticActionHandler<WorkoutProgramData> = {
     day.exercises.push({
       ...circuitElement,
       setGroups: [],
-    } as unknown as WorkoutExerciseData);
+    } as WorkoutExerciseData);
 
     return program;
   },
@@ -759,7 +759,7 @@ export const addWarmupAction: AgenticActionHandler<WorkoutProgramData> = {
     day.exercises.unshift({
       ...warmupElement,
       setGroups: [],
-    } as unknown as WorkoutExerciseData);
+    } as WorkoutExerciseData);
 
     return program;
   },
@@ -818,7 +818,7 @@ export const addCardioAction: AgenticActionHandler<WorkoutProgramData> = {
     day.exercises.push({
       ...cardioElement,
       setGroups: [],
-    } as unknown as WorkoutExerciseData);
+    } as WorkoutExerciseData);
 
     return program;
   },

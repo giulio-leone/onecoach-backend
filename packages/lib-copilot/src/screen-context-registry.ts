@@ -71,7 +71,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildChatContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canAnalyze: true,
@@ -96,7 +96,7 @@ class ScreenContextRegistry {
         const planId = params?.planId as string;
         const context = await buildNutritionContext(userId, planId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: true,
@@ -123,7 +123,7 @@ class ScreenContextRegistry {
         const planId = params?.planId as string;
         const context = await buildNutritionContext(userId, planId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: true,
@@ -150,7 +150,7 @@ class ScreenContextRegistry {
         const programId = params?.programId as string;
         const context = await buildWorkoutContext(userId, programId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: true,
@@ -176,7 +176,7 @@ class ScreenContextRegistry {
         const programId = params?.programId as string;
         const context = await buildWorkoutContext(userId, programId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: true,
@@ -200,7 +200,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildExerciseContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canGenerate: true,
@@ -224,7 +224,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildAnalyticsContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canAnalyze: true,
@@ -248,7 +248,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildChatContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canUseCamera: true,
@@ -267,7 +267,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildChatContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: true,
@@ -290,7 +290,7 @@ class ScreenContextRegistry {
       builder: async (userId: string) => {
         const context = await buildChatContext(userId);
         return {
-          context: context as unknown as Record<string, unknown>,
+          context: context as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canChat: true,
@@ -320,7 +320,7 @@ class ScreenContextRegistry {
             ...context,
             sessionId,
             isLiveSession: true,
-          } as unknown as Record<string, unknown>,
+          } as Record<string, unknown>,
           capabilities: {
             ...DEFAULT_CAPABILITIES,
             canModify: false, // No structural modifications during live session

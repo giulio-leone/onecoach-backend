@@ -8,7 +8,8 @@
  */
 
 import { createAgenticTool } from '@onecoach/lib-copilot-framework';
-import { prisma, type Prisma } from '@onecoach/lib-core';
+import { prisma } from '@onecoach/lib-core';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 import { normalizeWorkoutProgram } from './program-normalizer';
 import { workoutActions, type WorkoutProgramData } from './workout.actions';
 import type { McpContext } from '../../types';
@@ -85,7 +86,7 @@ CHANGES FIELD MAPPING (for update_setgroup):
       return null;
     }
 
-    const weeks = existingProgram.weeks as unknown as WorkoutProgramData['weeks'];
+    const weeks = existingProgram.weeks as WorkoutProgramData['weeks'];
     if (!weeks || weeks.length === 0) {
       console.log('[workout.tool] ⚠️ Program has no weeks');
       return null;
@@ -103,7 +104,7 @@ CHANGES FIELD MAPPING (for update_setgroup):
 
     console.log('[workout.tool] ✅ Loaded program with', normalized.weeks.length, 'weeks');
 
-    return { weeks: normalized.weeks as unknown as WorkoutProgramData['weeks'] };
+    return { weeks: normalized.weeks as WorkoutProgramData['weeks'] };
   },
 
   saveEntity: async (programId: string, entity: WorkoutProgramData, _context: McpContext): Promise<void> => {
@@ -112,7 +113,7 @@ CHANGES FIELD MAPPING (for update_setgroup):
     await prisma.workout_programs.update({
       where: { id: programId },
       data: {
-        weeks: entity.weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(entity.weeks as unknown[]),
         updatedAt: new Date(),
       },
     });

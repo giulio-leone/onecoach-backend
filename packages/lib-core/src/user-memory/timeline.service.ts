@@ -103,7 +103,7 @@ export class TimelineService {
             unit: 'kg',
             previousValue: Number(previous.weight),
             period: `${daysDiff} giorni`,
-          } as unknown as Record<string, unknown>,
+          } as Record<string, unknown>,
           date: latest.date.toISOString().split('T')[0]!,
         });
       }
@@ -129,7 +129,7 @@ export class TimelineService {
         severity,
         recoveryStatus: 'recovering',
         notes,
-      } as unknown as Record<string, unknown>,
+      } as Record<string, unknown>,
       date: new Date().toISOString().split('T')[0]!,
     });
   }
@@ -168,7 +168,7 @@ export class TimelineService {
         status,
         targetDate: targetDate?.toISOString().split('T')[0],
         progress,
-      } as unknown as Record<string, unknown>,
+      } as Record<string, unknown>,
       date: new Date().toISOString().split('T')[0]!,
     });
   }

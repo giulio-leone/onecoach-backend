@@ -945,7 +945,7 @@ const nextAuth: NextAuthReturn = NextAuth({
     async session({ session, token }): Promise<typeof session> {
       // Se il token è null (invalido), non restituire la sessione
       if (!token || !token.id) {
-        return null as unknown as typeof session;
+        return null!;
       }
 
       if (token && session.user) {

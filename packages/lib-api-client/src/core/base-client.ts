@@ -122,7 +122,7 @@ export abstract class BaseApiClient {
           responseData = JSON.parse(text) as T;
         } catch (_error: unknown) {
           // If parsing fails, return text as data
-          responseData = text as unknown as T;
+          responseData = text as T;
         }
       }
 

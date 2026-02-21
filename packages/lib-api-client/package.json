@@ -50,7 +50,7 @@
     "@onecoach/lib-marketplace": "workspace:*",
     "@onecoach/lib-shared": "workspace:*",
     "@onecoach/lib-stores": "workspace:*",
-    "@tanstack/react-query": "^5.90.16",
+    "@tanstack/react-query": "^5.90.20",
     "react": "^19.2.3",
     "@onecoach/types-core": "workspace:*",
     "@onecoach/types-workout": "workspace:*",

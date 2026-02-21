@@ -14,6 +14,7 @@
 import { prisma } from '@onecoach/lib-core';
 import { Prisma } from '@prisma/client';
 import { createId } from '@onecoach/lib-shared/id-generator';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 import type { FoodItem } from '@onecoach/types';
 import type { Macros } from '@onecoach/types';
 import { SUPPORTED_FOOD_LOCALES } from '@onecoach/constants';
@@ -312,13 +313,13 @@ export class FoodService {
         name: data.name,
         nameNormalized,
         barcode: data.barcode,
-        macrosPer100g: data.macrosPer100g as unknown as Prisma.InputJsonValue,
+        macrosPer100g: toPrismaJsonValue(data.macrosPer100g as Record<string, unknown>),
         servingSize: data.servingSize,
         unit: data.unit || 'g',
         metadata: data.metadata as Prisma.InputJsonValue,
         imageUrl: data.imageUrl,
         brandId: resolvedBrandId || null, // Use brandId directly instead of relation
-        mainMacro: mainMacro as unknown as Prisma.InputJsonValue, // REQUIRED - campo presente nello schema
+        mainMacro: toPrismaJsonValue(mainMacro as Record<string, unknown>), // REQUIRED - campo presente nello schema
         proteinPct,
         carbPct,
         fatPct,
@@ -376,7 +377,7 @@ export class FoodService {
     const updateData: Prisma.food_itemsUpdateInput = {
       ...(data.name && { name: data.name, nameNormalized: normalizeFoodName(data.name) }),
       ...(data.macrosPer100g && {
-        macrosPer100g: data.macrosPer100g as unknown as Prisma.InputJsonValue,
+        macrosPer100g: toPrismaJsonValue(data.macrosPer100g as Record<string, unknown>),
       }),
       ...(data.servingSize !== undefined && { servingSize: data.servingSize }),
       ...(data.unit && { unit: data.unit }),
@@ -398,7 +399,7 @@ export class FoodService {
       // Calcola mainMacro
       const mainMacro = this.calculateMainMacro(data.macrosPer100g);
       (updateData as Record<string, unknown>).mainMacro =
-        mainMacro as unknown as Prisma.InputJsonValue;
+        toPrismaJsonValue(mainMacro as Record<string, unknown>);
     }
 
     // Brand (id o creazione da name)
@@ -635,7 +636,7 @@ export class FoodService {
       name: translation?.name || food.name,
       nameNormalized: food.nameNormalized,
       barcode: food.barcode || undefined,
-      macrosPer100g: food.macrosPer100g as unknown as Macros,
+      macrosPer100g: food.macrosPer100g as Macros,
       servingSize: food.servingSize ? Number(food.servingSize) : 0,
       unit: food.unit,
       imageUrl: food.imageUrl || undefined,

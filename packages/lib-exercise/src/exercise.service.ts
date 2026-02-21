@@ -11,7 +11,7 @@ import { ExerciseApprovalStatus, ExerciseRelationType, MuscleRole, Prisma } from
 import type { LocalizedExercise, ExerciseTranslationView } from '@onecoach/types';
 import type { Operation } from 'fast-json-patch';
 import { compare } from 'fast-json-patch';
-import { SimpleCache } from '@onecoach/lib-shared';
+import { SimpleCache, toPrismaJsonValue } from '@onecoach/lib-shared';
 
 const DEFAULT_LOCALE = 'en';
 // Cache disabilitata per debug e consistenza dati
@@ -941,7 +941,7 @@ export class ExerciseService {
       data: {
         exerciseId,
         version,
-        diff: diff as unknown as Prisma.InputJsonValue,
+        diff: toPrismaJsonValue(diff as unknown[]),
         baseVersion: previousSnapshot ? version - 1 : null,
         metadata: {
           ...(metadata ?? {}),

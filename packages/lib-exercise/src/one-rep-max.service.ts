@@ -468,7 +468,7 @@ export class OneRepMaxService {
         const normalized = {
           ...max,
           oneRepMax: Number(max.oneRepMax),
-        } as unknown as UserOneRepMax;
+        } as UserOneRepMax;
         map.set(max.exerciseId, normalized);
       }
 

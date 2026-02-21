@@ -79,7 +79,7 @@ export function useSessionPersistence<T>(options: SessionPersistenceOptions<T>) 
   } = options;
 
   const storageKey = `${STORAGE_PREFIX}${key}`;
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimeoutRef = useRef<number | null>(null);
   const lastPersistedRef = useRef<string | null>(null);
   const hasRecoveredRef = useRef(false);
 
@@ -95,7 +95,7 @@ export function useSessionPersistence<T>(options: SessionPersistenceOptions<T>) 
         clearTimeout(debounceTimeoutRef.current);
       }
 
-      debounceTimeoutRef.current = setTimeout(() => {
+      debounceTimeoutRef.current = window.setTimeout(() => {
         try {
           const serialized = JSON.stringify(data);
 

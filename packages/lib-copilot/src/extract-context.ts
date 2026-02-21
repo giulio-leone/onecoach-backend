@@ -93,7 +93,7 @@ Rispondi SOLO con un oggetto JSON valido nel formato:
       temperature: 0.1, // Bassa temperatura per risultati più deterministici
     } as any);
 
-    const extracted = result.output as unknown as ExtractionResult;
+    const extracted = result.output as ExtractionResult;
 
     // Valida i valori estratti
     if (extracted.dayNumber !== null && extracted.dayNumber !== undefined) {

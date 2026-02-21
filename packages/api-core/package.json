@@ -17,7 +17,7 @@
     "@onecoach/schemas": "workspace:*",
     "next": "16.1.1",
     "next-auth": "5.0.0-beta.30",
-    "zod": "4.3.4",
+    "zod": "4.3.6",
     "@onecoach/types-core": "workspace:*",
     "@onecoach/types-workout": "workspace:*",
     "@onecoach/types-nutrition": "workspace:*",

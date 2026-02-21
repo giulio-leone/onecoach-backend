@@ -108,7 +108,7 @@ export async function buildWorkoutContext(
   }
 
   // Normalizza il programma (se necessario, altrimenti usa direttamente)
-  const normalizedProgram = currentProgram as unknown as WorkoutProgram;
+  const normalizedProgram = currentProgram as WorkoutProgram;
 
   // Carica il profilo utente
   const profile = await prisma.user_profiles.findUnique({
@@ -128,7 +128,7 @@ export async function buildWorkoutContext(
     take: CHAT_CONSTANTS.RECENT_ITEMS_TAKE,
   });
 
-  const normalizedRecentPrograms = recentPrograms as unknown as WorkoutProgram[];
+  const normalizedRecentPrograms = recentPrograms as WorkoutProgram[];
 
   // Get user memory context
   const memoryContext = await userMemoryService.getMemoryContext(userId, 'workout');
@@ -177,7 +177,7 @@ export async function buildChatContext(
   });
 
   const normalizedRecentPlans = recentPlans.map((plan: any) => normalizeNutritionPlan(plan));
-  const normalizedRecentPrograms = recentPrograms as unknown as WorkoutProgram[];
+  const normalizedRecentPrograms = recentPrograms as WorkoutProgram[];
 
   // Get user memory context (all domains)
   const memoryContext = await userMemoryService.getMemoryContext(userId);

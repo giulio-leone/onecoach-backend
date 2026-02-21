@@ -3,9 +3,10 @@
  *
  * Registra tutte le implementazioni dei servizi nel registry
  *
- * NOTE: Alcuni servizi usano cast temporanei (as unknown as) per allineare
- * le implementazioni ai contratti. Questi devono essere sistemati in futuro
- * refactorando i servizi per implementare direttamente i contratti.
+ * NOTE: exerciseService e foodService sono classi statiche (typeof Class),
+ * ma i contratti richiedono istanze (IExerciseService/IFoodService).
+ * Il cast `as` è necessario finché non si refactorizzano
+ * i servizi per implementare direttamente i contratti.
  */
 
 import { registerService } from './index';
@@ -35,14 +36,14 @@ import {
  * TODO: Refactor ExerciseService per restituire Exercise invece di LocalizedExercise
  * e implementare direttamente IExerciseService
  */
-const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
+const exerciseServiceAdapter = exerciseService as IExerciseService;
 
 /**
  * Wrapper per FoodService che implementa IFoodService
  * TODO: Refactor FoodService per essere un'istanza invece di una classe statica
  * e implementare direttamente IFoodService (aggiungere delete e matchByBarcode)
  */
-const foodServiceAdapter = foodService as unknown as IFoodService;
+const foodServiceAdapter = foodService as IFoodService;
 
 /**
  * Wrapper per analyticsService che implementa IAnalyticsService

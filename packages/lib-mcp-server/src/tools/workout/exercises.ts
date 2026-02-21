@@ -16,6 +16,7 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { prisma, Prisma } from '@onecoach/lib-core';
+import { toPrismaJsonValue } from '@onecoach/lib-shared';
 
 // Types for JSON structure
 interface SetGroup {
@@ -269,7 +270,7 @@ export const workoutAddExerciseTool: McpTool<WorkoutAddExerciseParams> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
     const weekIndex = weeks.findIndex((w) => w.weekNumber === args.weekNumber);
     if (weekIndex === -1) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
@@ -313,7 +314,7 @@ export const workoutAddExerciseTool: McpTool<WorkoutAddExerciseParams> = {
     await prisma.workout_programs.update({
       where: { id: args.programId },
       data: {
-        weeks: weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(weeks as unknown[]),
         updatedAt: new Date(),
       },
     });
@@ -353,7 +354,7 @@ export const workoutRemoveExerciseTool: McpTool<WorkoutRemoveExerciseParams> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
     const weekIndex = weeks.findIndex((w) => w.weekNumber === args.weekNumber);
     if (weekIndex === -1) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
@@ -391,7 +392,7 @@ export const workoutRemoveExerciseTool: McpTool<WorkoutRemoveExerciseParams> = {
     await prisma.workout_programs.update({
       where: { id: args.programId },
       data: {
-        weeks: weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(weeks as unknown[]),
         updatedAt: new Date(),
       },
     });
@@ -429,7 +430,7 @@ export const workoutReorderExercisesTool: McpTool<WorkoutReorderExercisesParams>
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
     const weekIndex = weeks.findIndex((w) => w.weekNumber === args.weekNumber);
     if (weekIndex === -1) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
@@ -466,7 +467,7 @@ export const workoutReorderExercisesTool: McpTool<WorkoutReorderExercisesParams>
     await prisma.workout_programs.update({
       where: { id: args.programId },
       data: {
-        weeks: weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(weeks as unknown[]),
         updatedAt: new Date(),
       },
     });
@@ -508,7 +509,7 @@ export const workoutGetDayDetailsTool: McpTool<WorkoutGetDayDetailsParams> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
     const week = weeks.find((w: any) => w.weekNumber === args.weekNumber);
     if (!week) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
@@ -609,7 +610,7 @@ export const workoutCopyDayTool: McpTool<WorkoutCopyDayParams> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as unknown as WorkoutWeek[];
+    const weeks = program.weeks as WorkoutWeek[];
 
     const sourceWeekIndex = weeks.findIndex((w) => w.weekNumber === args.sourceWeek);
     if (sourceWeekIndex === -1) {
@@ -661,7 +662,7 @@ export const workoutCopyDayTool: McpTool<WorkoutCopyDayParams> = {
     await prisma.workout_programs.update({
       where: { id: args.programId },
       data: {
-        weeks: weeks as unknown as Prisma.InputJsonValue,
+        weeks: toPrismaJsonValue(weeks as unknown[]),
         updatedAt: new Date(),
       },
     });

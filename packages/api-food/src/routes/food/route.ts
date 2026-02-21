@@ -212,7 +212,7 @@ export async function GET(_req: NextRequest) {
     if (sortByParam === 'calories')
       orderBy = {
         macrosPer100g: { path: ['calories'], sort: sortOrder },
-      } as unknown as Prisma.food_itemsOrderByWithRelationInput;
+      } as Prisma.food_itemsOrderByWithRelationInput;
 
     const [total, rows] = await Promise.all([
       prisma.food_items.count({ where }),
