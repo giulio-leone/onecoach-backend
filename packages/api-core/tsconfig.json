@@ -3,8 +3,16 @@
   "compilerOptions": {
     "composite": false,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "incremental": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "../lib-core/src/db/init-db.*", "../lib-core/src/seeds/**/*"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "../lib-core/src/db/init-db.*",
+    "../lib-core/src/seeds/**/*"
+  ]
 }

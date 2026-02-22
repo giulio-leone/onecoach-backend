@@ -5,8 +5,15 @@
     "composite": false,
     "declaration": true,
     "declarationMap": true,
-    "noEmit": false
+    "noEmit": false,
+    "incremental": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
 }

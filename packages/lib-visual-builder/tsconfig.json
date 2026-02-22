@@ -8,12 +8,23 @@
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
-    "strict": true
+    "strict": true,
+    "incremental": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", ".tsbuild"],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".tsbuild"
+  ],
   "references": [
-    { "path": "../lib-core" },
-    { "path": "../../../onecoach-shared/packages/lib-shared" }
+    {
+      "path": "../lib-core"
+    },
+    {
+      "path": "../../../onecoach-shared/packages/lib-shared"
+    }
   ]
 }

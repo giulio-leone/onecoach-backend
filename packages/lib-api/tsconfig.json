@@ -4,8 +4,17 @@
     "outDir": "./dist",
     "noEmit": false,
     "strict": true,
-    "typeRoots": ["./src/types", "../node_modules/@types"]
+    "typeRoots": [
+      "./src/types",
+      "../node_modules/@types"
+    ],
+    "incremental": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

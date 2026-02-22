@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "composite": false,
-    "strict": true
+    "strict": true,
+    "incremental": false
   }
 }

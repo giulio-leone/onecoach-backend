@@ -2,8 +2,14 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "incremental": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
