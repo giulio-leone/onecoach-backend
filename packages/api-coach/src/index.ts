@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-coach
+ * @giulio-leone/api-coach
  *
  * API routes per il dominio coach
  * Esporta route handlers che possono essere usati in apps/next/app/api/*

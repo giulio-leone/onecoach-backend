@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth';
+import { auth } from '@giulio-leone/lib-core/auth';
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const GOOGLE_REDIRECT_URI = process.env.NEXTAUTH_URL + '/api/oneagenda/calendar/google/callback';

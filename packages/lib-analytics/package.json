@@ -1,53 +1,56 @@
 {
-  "name": "@onecoach/lib-analytics",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-analytics",
+  "version": "0.1.0",
   "description": "Servizi per il dominio analytics",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./analytics.service": {
-      "types": "./src/analytics.service.ts",
-      "default": "./src/analytics.service.ts"
+      "types": "./dist/analytics.service.d.ts",
+      "import": "./dist/analytics.service.js",
+      "require": "./dist/analytics.service.cjs"
     },
     "./body-measurements.service": {
-      "types": "./src/body-measurements.service.ts",
-      "default": "./src/body-measurements.service.ts"
+      "types": "./dist/body-measurements.service.d.ts",
+      "import": "./dist/body-measurements.service.js",
+      "require": "./dist/body-measurements.service.cjs"
     },
     "./coach-analytics.service": {
-      "types": "./src/coach-analytics.service.ts",
-      "default": "./src/coach-analytics.service.ts"
+      "types": "./dist/coach-analytics.service.d.ts",
+      "import": "./dist/coach-analytics.service.js",
+      "require": "./dist/coach-analytics.service.cjs"
     },
     "./progress-snapshot.service": {
-      "types": "./src/progress-snapshot.service.ts",
-      "default": "./src/progress-snapshot.service.ts"
+      "types": "./dist/progress-snapshot.service.d.ts",
+      "import": "./dist/progress-snapshot.service.js",
+      "require": "./dist/progress-snapshot.service.cjs"
     }
   },
+  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-ai": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-import-core": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/one-workout": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "@prisma/client": "^7.2.0",
-    "@onecoach/types": "workspace:*",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@giulio-leone/lib-ai": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-import-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/one-workout": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/contracts": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@giulio-leone/types": "^0.2.0",
+    "@prisma/client": "^7.2.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

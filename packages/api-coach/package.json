@@ -1,35 +1,45 @@
 {
-  "name": "@onecoach/api-coach",
-  "version": "0.0.0",
+  "name": "@giulio-leone/api-coach",
+  "version": "0.1.0",
   "description": "API routes per il dominio coach",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-analytics": "workspace:*",
-    "@onecoach/lib-coach": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-marketplace": "workspace:*",
-    "@onecoach/lib-registry": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "next": "16.1.1",
-    "zod": "4.3.6",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zod": "4.3.6"
+  },
+  "peerDependencies": {
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/lib-analytics": "^0.1.0",
+    "@giulio-leone/lib-coach": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-marketplace": "^0.1.0",
+    "@giulio-leone/lib-registry": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0",
+    "@prisma/client": "^5.0.0",
+    "next": "^16.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

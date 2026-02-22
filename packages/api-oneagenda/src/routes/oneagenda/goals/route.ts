@@ -6,10 +6,10 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth';
-import { oneagendaDB } from '@onecoach/oneagenda-core';
-import { logger } from '@onecoach/lib-shared';
-import type { GoalStatus } from '@onecoach/oneagenda-core';
+import { auth } from '@giulio-leone/lib-core/auth';
+import { oneagendaDB } from '@giulio-leone/oneagenda-core';
+import { logger } from '@giulio-leone/lib-shared';
+import type { GoalStatus } from '@giulio-leone/oneagenda-core';
 
 /**
  * GET /api/oneagenda/goals

@@ -6,12 +6,12 @@
  * Follows SOLID principles with single responsibility.
  */
 
-import { prisma } from '@onecoach/lib-core';
-import { getExerciseSets } from '@onecoach/one-workout';
-import type { Exercise } from '@onecoach/types';
+import { prisma } from '@giulio-leone/lib-core';
+import { getExerciseSets } from '@giulio-leone/one-workout';
+import type { Exercise } from '@giulio-leone/types/core';
 import { Prisma } from '@prisma/client';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // ============================================
 // SNAPSHOT GENERATION
 // ============================================

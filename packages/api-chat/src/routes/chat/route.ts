@@ -7,10 +7,10 @@
 
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { AI_REASONING_CONFIG } from '@onecoach/constants';
-import { logger, logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import { requireAuth, userProfileService } from '@onecoach/lib-core';
-import { getChatAgent, type ChatCallOptions } from '@onecoach/one-agent';
+import { AI_REASONING_CONFIG } from '@giulio-leone/constants';
+import { logger, logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import { requireAuth, userProfileService } from '@giulio-leone/lib-core';
+import { getChatAgent, type ChatCallOptions } from '@giulio-leone/one-agent';
 
 export const dynamic = 'force-dynamic';
 

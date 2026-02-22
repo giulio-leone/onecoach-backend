@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-chat
+ * @giulio-leone/api-chat
  *
  * API routes per chat e conversations
  * Esporta route handlers che possono essere usati in apps/next/app/api/*

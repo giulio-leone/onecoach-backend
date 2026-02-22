@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { AIProvider, ConversationRole } from '@prisma/client';
 
-import { requireAuth } from '@onecoach/lib-core';
-import { isAdminRole } from '@onecoach/lib-core/auth/roles';
-import { ConversationService } from '@onecoach/lib-chat-core';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { isAdminRole } from '@giulio-leone/lib-core/auth/roles';
+import { ConversationService } from '@giulio-leone/lib-chat-core';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

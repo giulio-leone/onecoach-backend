@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { ExerciseService } from '@onecoach/lib-exercise/exercise.service';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { ExerciseService } from '@giulio-leone/lib-exercise/exercise.service';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 /**

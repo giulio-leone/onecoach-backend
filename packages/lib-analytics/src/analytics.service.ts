@@ -7,20 +7,20 @@
 
 import 'server-only';
 
-import { prisma } from '@onecoach/lib-core';
-import { getExerciseSets } from '@onecoach/one-workout';
+import { prisma } from '@giulio-leone/lib-core';
+import { getExerciseSets } from '@giulio-leone/one-workout';
 import type {
   UserAnalyticsReport,
   AnalyticsChartData,
   TimeSeriesDataPoint,
   BodyMeasurement,
   UserGoal,
-} from '@onecoach/types';
+} from '@giulio-leone/types/analytics';
 import {
   toExerciseArrayTyped,
   toMacros,
   calculateSetVolume,
-} from '@onecoach/lib-shared/prisma-type-guards';
+} from '@giulio-leone/lib-shared/prisma-type-guards';
 import type { body_measurements, user_goals } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 

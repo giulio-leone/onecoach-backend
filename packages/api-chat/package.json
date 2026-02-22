@@ -1,35 +1,47 @@
 {
-  "name": "@onecoach/api-chat",
-  "version": "0.0.0",
+  "name": "@giulio-leone/api-chat",
+  "version": "0.1.0",
   "description": "API routes per chat, conversations, copilot e agents",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./routes": {
+      "types": "./dist/routes/index.d.ts",
+      "import": "./dist/routes/index.js",
+      "require": "./dist/routes/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-ai": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-registry": "workspace:*",
-    "@onecoach/one-agent": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "ai": "6.0.77",
-    "next": "16.1.1",
-    "zod": "4.3.6",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zod": "4.3.6"
+  },
+  "peerDependencies": {
+    "@giulio-leone/types": "^0.2.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-chat-core": "^0.1.0",
+    "@giulio-leone/one-agent": "^0.1.0",
+    "@prisma/client": "^5.0.0",
+    "next": "^16.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

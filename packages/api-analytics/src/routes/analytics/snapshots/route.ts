@@ -6,13 +6,13 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
+import { requireAuth } from '@giulio-leone/lib-core';
 import {
   generateProgressSnapshot,
   getProgressSnapshots,
   getLatestProgressSnapshot,
   backfillSnapshots,
-} from '@onecoach/lib-analytics/progress-snapshot.service';
+} from '@giulio-leone/lib-analytics/progress-snapshot.service';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';

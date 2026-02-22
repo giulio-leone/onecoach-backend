@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-exercise
+ * @giulio-leone/api-exercise
  *
  * API routes per il dominio esercizi
  * Esporta route handlers che possono essere usati in apps/next/app/api/exercises/*

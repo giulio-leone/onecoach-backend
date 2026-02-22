@@ -6,10 +6,10 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth';
-import { IntelligentAssistantService, type CalendarEvent, type Task } from '@onecoach/oneagenda-core';
-import { oneagendaDB } from '@onecoach/oneagenda-core';
-import { logger } from '@onecoach/lib-shared';
+import { auth } from '@giulio-leone/lib-core/auth';
+import { IntelligentAssistantService, type CalendarEvent, type Task } from '@giulio-leone/oneagenda-core';
+import { oneagendaDB } from '@giulio-leone/oneagenda-core';
+import { logger } from '@giulio-leone/lib-shared';
 
 /**
  * POST /api/oneagenda/schedule

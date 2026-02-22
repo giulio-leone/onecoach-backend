@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { prisma } from '@onecoach/lib-core';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
 export const dynamic = 'force-dynamic';
 

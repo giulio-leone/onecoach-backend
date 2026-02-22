@@ -4,10 +4,10 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { auth, roleSatisfies } from '@onecoach/lib-core/auth';
-import { prisma } from '@onecoach/lib-core';
-import type { MarketplacePlanType } from '@onecoach/types';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { auth, roleSatisfies } from '@giulio-leone/lib-core/auth';
+import { prisma } from '@giulio-leone/lib-core';
+import type { MarketplacePlanType } from '@giulio-leone/types';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

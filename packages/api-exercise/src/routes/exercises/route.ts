@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { ExerciseService } from '@onecoach/lib-exercise/exercise.service';
-import { extractSearchParams } from '@onecoach/lib-shared/utils';
-import { createExerciseSchema, exerciseQuerySchema } from '@onecoach/schemas/exercise.schema';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { ExerciseService } from '@giulio-leone/lib-exercise/exercise.service';
+import { extractSearchParams } from '@giulio-leone/lib-shared/utils';
+import { createExerciseSchema, exerciseQuerySchema } from '@giulio-leone/schemas/exercise.schema';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
