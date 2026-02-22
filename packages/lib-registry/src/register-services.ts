@@ -36,7 +36,7 @@ import {
  * TODO: Refactor ExerciseService per restituire Exercise invece di LocalizedExercise
  * e implementare direttamente IExerciseService
  */
-const exerciseServiceAdapter = exerciseService as IExerciseService;
+const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
 
 /**
  * Wrapper per FoodService che implementa IFoodService

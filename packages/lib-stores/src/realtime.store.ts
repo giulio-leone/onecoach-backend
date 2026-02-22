@@ -268,7 +268,7 @@ export const useRealtimeStore = create<RealtimeStore>()(
 
                 sub.listeners.forEach((l: any) => {
                   try {
-                    const typedPayload = payload as RealtimePayload<T>;
+                    const typedPayload = payload as unknown as RealtimePayload<T>;
                     switch (typedPayload.eventType) {
                       case 'INSERT':
                         (l as RealtimeListener<T>).onInsert?.(typedPayload.new);

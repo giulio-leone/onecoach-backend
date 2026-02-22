@@ -211,7 +211,7 @@ async function callVisionAI<T>(params: AICallParams<T>): Promise<T> {
     },
   });
 
-  const model = openai(modelId);
+  const model = openai(modelId) as unknown as Parameters<typeof streamText>[0]['model'];
   const dataUrl = base64ToDataUrl(contentBase64, mimeType);
 
   const streamResult = streamText({
@@ -249,7 +249,7 @@ async function callTextAI<T>(params: AICallParams<T>): Promise<T> {
     },
   });
 
-  const model = openai(modelId);
+  const model = openai(modelId) as unknown as Parameters<typeof streamText>[0]['model'];
   const fullPrompt = `${prompt}\n\nDATA:\n\`\`\`\n${textContent.substring(0, 50000)}\n\`\`\``;
 
   const streamResult = streamText({

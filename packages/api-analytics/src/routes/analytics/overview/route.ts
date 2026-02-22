@@ -64,7 +64,8 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
     }
 
     // Generate analytics report
-    const report = await generateAnalyticsReport(userOrError.id, startDate, endDate);
+    const user = userOrError as { id: string };
+    const report = await generateAnalyticsReport(user.id, startDate, endDate);
 
     return NextResponse.json({
       success: true,
