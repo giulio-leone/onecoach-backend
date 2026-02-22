@@ -5,7 +5,7 @@
  * Implements SOLID principles (SRP, DIP)
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@prisma/client';
 import type {
   CoachVerificationStatus,

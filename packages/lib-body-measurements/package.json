@@ -1,27 +1,49 @@
 {
-  "name": "@onecoach/lib-body-measurements",
-  "version": "0.0.1",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "name": "@giulio-leone/lib-body-measurements",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     }
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
-    "type-check": "tsc -b"
+    "type-check": "tsc -b",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/constants": "workspace:*",
-    "@onecoach/lib-ai": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-import-core": "workspace:*",
-    "ai": "6.0.77",
-    "zod": "4.3.6"
+    "@giulio-leone/lib-import-core": "^0.1.0",
+    "zod": "^4.3.6"
+  },
+  "peerDependencies": {
+    "@giulio-leone/constants": "^0.1.0",
+    "@giulio-leone/lib-ai": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giulio-leone/onecoach"
+  },
+  "keywords": [
+    "body-measurements",
+    "fitness",
+    "ai",
+    "vision"
+  ],
+  "license": "MIT"
 }

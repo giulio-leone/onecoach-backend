@@ -1,10 +1,10 @@
 /**
- * @onecoach/api-workout
+ * @giulio-leone/api-workout
  *
  * API routes per il dominio workout
  */
 
-import { getService } from '@onecoach/lib-registry';
+import { getService } from '@giulio-leone/lib-registry';
 import type { NextRequest } from 'next/server';
 
 /**

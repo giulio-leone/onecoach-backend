@@ -5,7 +5,7 @@
  * Handles CRUD operations, code generation, and deployment.
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@prisma/client';
 import type { user_skills, user_workflows, workflow_nodes, workflow_edges } from '@prisma/client';
 

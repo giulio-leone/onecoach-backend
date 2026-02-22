@@ -1,5 +1,5 @@
 /**
- * @onecoach/lib-registry
+ * @giulio-leone/lib-registry
  *
  * Service registry per dependency injection
  * Permette swap di implementazioni (test, mock, alternative)
@@ -19,7 +19,7 @@ import type {
   IChatService,
   IMarketplaceService,
   ICoachService,
-} from '@onecoach/contracts';
+} from '@giulio-leone/contracts';
 
 /**
  * Service registry type

@@ -1,30 +1,38 @@
 {
-  "name": "@onecoach/lib-planning",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-planning",
+  "version": "0.1.0",
   "description": "Servizi per il dominio planning",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "@prisma/client": "^7.2.0",
-    "@onecoach/types": "workspace:*",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@prisma/client": "^7.2.0"
+  },
+  "peerDependencies": {
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "sideEffects": false
 }

@@ -1,8 +1,8 @@
 /**
- * @onecoach/lib-coach
+ * @giulio-leone/lib-coach
  *
  * Servizi per il dominio coach
- * Implementa contratti da @onecoach/contracts
+ * Implementa contratti da @giulio-leone/contracts
  */
 
 export * from './coach.service';

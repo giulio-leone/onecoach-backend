@@ -1,43 +1,46 @@
 {
-  "name": "@onecoach/lib-visual-builder",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-visual-builder",
+  "version": "0.1.0",
   "description": "Servizi per il dominio visual-builder",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./hooks": {
-      "types": "./src/hooks.ts",
-      "default": "./src/hooks.ts"
+      "types": "./dist/hooks.d.ts",
+      "import": "./dist/hooks.js",
+      "require": "./dist/hooks.cjs"
     },
     "./visual-builder.service": {
-      "types": "./src/visual-builder.service.ts",
-      "default": "./src/visual-builder.service.ts"
+      "types": "./dist/visual-builder.service.d.ts",
+      "import": "./dist/visual-builder.service.js",
+      "require": "./dist/visual-builder.service.cjs"
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "@prisma/client": "^7.2.0",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@prisma/client": "^7.2.0"
+  },
+  "peerDependencies": {
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

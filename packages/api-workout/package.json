@@ -1,21 +1,38 @@
 {
-  "name": "@onecoach/api-workout",
-  "version": "0.0.0",
+  "name": "@giulio-leone/api-workout",
+  "version": "0.1.0",
   "description": "API routes per il dominio workout",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsup",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-registry": "workspace:*",
-    "@onecoach/one-workout": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "next": "16.1.1"
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/lib-registry": "^0.1.0",
+    "@giulio-leone/one-workout": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0"
+  },
+  "peerDependencies": {
+    "next": ">=16.0.0"
   },
   "devDependencies": {
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "sideEffects": false
 }

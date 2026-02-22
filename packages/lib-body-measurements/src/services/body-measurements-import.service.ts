@@ -7,9 +7,9 @@
  * @module lib-body-measurements/services/body-measurements-import.service
  */
 
-import { BaseImportService } from '@onecoach/lib-import-core';
-import type { ImportOptions, BaseImportResult } from '@onecoach/lib-import-core';
-import { prisma } from '@onecoach/lib-core';
+import { BaseImportService } from '@giulio-leone/lib-import-core';
+import type { ImportOptions, BaseImportResult } from '@giulio-leone/lib-import-core';
+import { prisma } from '@giulio-leone/lib-core';
 import type { ImportedBodyMeasurements, ImportedMeasurement } from '../schemas/imported-body-measurements.schema';
 
 export interface BodyMeasurementsImportResult extends BaseImportResult {

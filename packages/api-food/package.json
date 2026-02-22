@@ -1,35 +1,42 @@
 {
-  "name": "@onecoach/api-food",
-  "version": "0.0.0",
+  "name": "@giulio-leone/api-food",
+  "version": "0.1.0",
   "description": "API routes per il dominio alimenti",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-api": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-food": "workspace:*",
-    "@onecoach/lib-registry": "workspace:*",
-    "@onecoach/one-agent": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "next": "16.1.1",
-    "zod": "4.3.6",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zod": "^4.3.6"
+  },
+  "peerDependencies": {
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/lib-api": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-food": "^0.1.0",
+    "@giulio-leone/lib-registry": "^0.1.0",
+    "@giulio-leone/one-agent": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

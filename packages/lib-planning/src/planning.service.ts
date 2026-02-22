@@ -14,10 +14,10 @@
  * @version 2.0.0 - AI SDK v6 Integration
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@prisma/client';
 import type { $Enums } from '@prisma/client';
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 import type {
   PlanningPlan,
   PlanningTask,
@@ -26,8 +26,8 @@ import type {
   PlanningProgress,
   PlanningPlanParams,
   TaskStatus,
-} from '@onecoach/types';
-import type { MealType } from '@onecoach/types-nutrition';
+} from '@giulio-leone/types';
+import type { MealType } from '@giulio-leone/types/nutrition';
 
 // Type aliases for Prisma models with their relations
 type DbSubSubTask = Prisma.planning_sub_sub_tasksGetPayload<{}>;

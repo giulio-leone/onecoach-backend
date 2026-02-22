@@ -7,7 +7,7 @@
  * @module lib-body-measurements/services/body-measurements-vision
  */
 
-import { parseWithVisionAI } from '@onecoach/lib-import-core';
+import { parseWithVisionAI } from '@giulio-leone/lib-import-core';
 import {
   ImportedBodyMeasurementsSchema,
   type ImportedBodyMeasurements,

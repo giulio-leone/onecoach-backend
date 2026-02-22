@@ -1,27 +1,46 @@
 {
-  "name": "@onecoach/lib-registry",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-registry",
+  "version": "0.1.0",
   "description": "Service registry per dependency injection",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./register-services": {
-      "types": "./src/register-services.ts",
-      "default": "./src/register-services.ts"
+      "types": "./dist/register-services.d.ts",
+      "import": "./dist/register-services.mjs",
+      "require": "./dist/register-services.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
-  "dependencies": {
-    "@onecoach/contracts": "workspace:*"
+  "peerDependencies": {
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/one-nutrition": "^0.1.0",
+    "@giulio-leone/one-workout": "^0.1.0",
+    "@giulio-leone/lib-exercise": "^0.1.0",
+    "@giulio-leone/lib-food": "^0.1.0",
+    "@giulio-leone/lib-analytics": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-ai": "^0.1.0",
+    "@giulio-leone/lib-marketplace": "^0.1.0",
+    "@giulio-leone/lib-coach": "^0.1.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "sideEffects": false
 }

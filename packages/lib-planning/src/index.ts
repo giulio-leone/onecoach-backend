@@ -1,8 +1,8 @@
 /**
- * @onecoach/lib-planning
+ * @giulio-leone/lib-planning
  *
  * Servizi per il dominio planning
- * Implementa contratti da @onecoach/contracts
+ * Implementa contratti da @giulio-leone/contracts
  */
 
 export * from './planning.service';
