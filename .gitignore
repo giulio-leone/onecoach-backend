@@ -58,3 +58,4 @@ artifacts/
 .vercel/
 .expo/
 expo-env.d.ts
+dist/

@@ -31,7 +31,7 @@ export default defineConfig({
     'workout-builder.store': 'src/workout-builder.store.ts',
   },
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: { tsconfig: '../tsconfig.build.json' },
   sourcemap: true,
   clean: true,
   shims: true,

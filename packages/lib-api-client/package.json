@@ -4,7 +4,9 @@
   "description": "API client (core, hooks, queries, react-query) per web e native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -61,12 +63,6 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.20"
-  },
-  "devDependencies": {
-    "@types/node": "^25.0.3",
-    "@types/react": "^19.2.7",
-    "typescript": "^5.9.3",
-    "tsup": "^8.0.0"
   },
   "peerDependencies": {
     "react": "^18.3.1",

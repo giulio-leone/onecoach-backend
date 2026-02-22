@@ -31,7 +31,9 @@
       "require": "./dist/progress-snapshot.service.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -51,9 +53,6 @@
   "peerDependencies": {
     "@giulio-leone/types": "^0.2.0",
     "@prisma/client": "^7.2.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3"
   },
   "sideEffects": false
 }

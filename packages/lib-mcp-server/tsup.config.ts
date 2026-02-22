@@ -6,9 +6,16 @@ export default defineConfig({
     schemas: 'src/schemas/index.ts',
   },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: { tsconfig: '../tsconfig.build.json' },
   sourcemap: true,
   clean: true,
   splitting: false,
   shims: false,
+  external: [
+    /^@giulio-leone\//,
+    /^@modelcontextprotocol\//,
+    '@prisma/client',
+    'ai',
+    'zod',
+  ],
 });

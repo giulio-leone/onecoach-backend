@@ -99,9 +99,5 @@
       "optional": true
     }
   },
-  "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsup": "^8.0.0"
-  },
   "sideEffects": false
 }

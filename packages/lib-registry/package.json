@@ -35,10 +35,6 @@
     "@giulio-leone/lib-marketplace": "^0.1.0",
     "@giulio-leone/lib-coach": "^0.1.0"
   },
-  "devDependencies": {
-    "typescript": "^5.9.3",
-    "tsup": "^8.0.0"
-  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },

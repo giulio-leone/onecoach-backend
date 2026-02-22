@@ -14,9 +14,24 @@ export default defineConfig({
     'utils/streaming-handler': 'src/utils/streaming-handler.ts',
   },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: { tsconfig: '../tsconfig.build.json' },
   sourcemap: true,
   clean: true,
   splitting: false,
   shims: true,
+  external: [
+    /^@giulio-leone\//,
+    '@tanstack/react-query',
+    '@prisma/client',
+    '@google/gemini-cli-core',
+    'web-tree-sitter',
+    'tree-sitter-bash',
+    'react', 'react-native', 'react-native-health', 'expo-secure-store', '@react-native-async-storage/async-storage',
+    'react-native',
+    'next',
+    'next-auth',
+  ],
+  esbuildOptions(options) {
+    options.loader = { ...options.loader, '.wasm': 'binary' };
+  },
 });

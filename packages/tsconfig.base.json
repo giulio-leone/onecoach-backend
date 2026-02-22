@@ -26,7 +26,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true,
     "baseUrl": "..",
     "paths": {
       "@giulio-leone/constants": [
