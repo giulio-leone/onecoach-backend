@@ -23,9 +23,9 @@ import type { CompleteStepPayload, GoToStepPayload } from '../queries/onboarding
  * direttamente lo Zustand store.
  */
 export function useOnboardingProgress(options?: { enabled?: boolean }) {
-  const setProgress = useOnboardingStore((state) => state.setProgress);
-  const setLoading = useOnboardingStore((state) => state.setLoading);
-  const setError = useOnboardingStore((state) => state.setError);
+  const setProgress = useOnboardingStore((state: any) => state.setProgress);
+  const setLoading = useOnboardingStore((state: any) => state.setLoading);
+  const setError = useOnboardingStore((state: any) => state.setError);
 
   const query = useQuery({
     queryKey: onboardingKeys.progress(),
@@ -65,9 +65,9 @@ export function useOnboardingProgress(options?: { enabled?: boolean }) {
  */
 export function useCompleteStep() {
   const queryClient = useQueryClient();
-  const setProgress = useOnboardingStore((state) => state.setProgress);
-  const setLoading = useOnboardingStore((state) => state.setLoading);
-  const setError = useOnboardingStore((state) => state.setError);
+  const setProgress = useOnboardingStore((state: any) => state.setProgress);
+  const setLoading = useOnboardingStore((state: any) => state.setLoading);
+  const setError = useOnboardingStore((state: any) => state.setError);
 
   return useMutation({
     mutationFn: (payload: CompleteStepPayload) => onboardingQueries.completeStep(payload),
@@ -105,9 +105,9 @@ export function useSkipStep() {
  */
 export function useGoToStep() {
   const queryClient = useQueryClient();
-  const setProgress = useOnboardingStore((state) => state.setProgress);
-  const setLoading = useOnboardingStore((state) => state.setLoading);
-  const setError = useOnboardingStore((state) => state.setError);
+  const setProgress = useOnboardingStore((state: any) => state.setProgress);
+  const setLoading = useOnboardingStore((state: any) => state.setLoading);
+  const setError = useOnboardingStore((state: any) => state.setError);
 
   return useMutation({
     mutationFn: (payload: GoToStepPayload) => onboardingQueries.goToStep(payload),
@@ -132,10 +132,10 @@ export function useGoToStep() {
  */
 export function useResetOnboarding() {
   const queryClient = useQueryClient();
-  const setProgress = useOnboardingStore((state) => state.setProgress);
-  const setWizardOpen = useOnboardingStore((state) => state.setWizardOpen);
-  const setLoading = useOnboardingStore((state) => state.setLoading);
-  const setError = useOnboardingStore((state) => state.setError);
+  const setProgress = useOnboardingStore((state: any) => state.setProgress);
+  const setWizardOpen = useOnboardingStore((state: any) => state.setWizardOpen);
+  const setLoading = useOnboardingStore((state: any) => state.setLoading);
+  const setError = useOnboardingStore((state: any) => state.setError);
 
   return useMutation({
     mutationFn: onboardingQueries.reset,
@@ -161,10 +161,10 @@ export function useResetOnboarding() {
  */
 export function useCompleteAllSteps() {
   const queryClient = useQueryClient();
-  const setProgress = useOnboardingStore((state) => state.setProgress);
-  const setWizardOpen = useOnboardingStore((state) => state.setWizardOpen);
-  const setLoading = useOnboardingStore((state) => state.setLoading);
-  const setError = useOnboardingStore((state) => state.setError);
+  const setProgress = useOnboardingStore((state: any) => state.setProgress);
+  const setWizardOpen = useOnboardingStore((state: any) => state.setWizardOpen);
+  const setLoading = useOnboardingStore((state: any) => state.setLoading);
+  const setError = useOnboardingStore((state: any) => state.setError);
 
   return useMutation({
     mutationFn: onboardingQueries.completeAll,
@@ -190,7 +190,7 @@ export function useCompleteAllSteps() {
  * Usa lo Zustand store invece di fare fetch
  */
 export function useIsOnboardingCompleted(): boolean {
-  const progress = useOnboardingStore((state) => state.progress);
+  const progress = useOnboardingStore((state: any) => state.progress);
   return progress?.isCompleted ?? false;
 }
 
@@ -199,6 +199,6 @@ export function useIsOnboardingCompleted(): boolean {
  * Usa lo Zustand store invece di fare fetch
  */
 export function useCurrentOnboardingStep(): number {
-  const progress = useOnboardingStore((state) => state.progress);
+  const progress = useOnboardingStore((state: any) => state.progress);
   return progress?.currentStep ?? 1;
 }

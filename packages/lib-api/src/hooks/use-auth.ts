@@ -23,8 +23,8 @@ import { normalizeRole, roleSatisfies } from '@giulio-leone/lib-core';
  */
 export function useSyncAuth() {
   const { data: session, status } = useSession();
-  const setUser = useAuthStore((state) => state.setUser);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  const setUser = useAuthStore((state: any) => state.setUser);
+  const setLoading = useAuthStore((state: any) => state.setLoading);
 
   useEffect(() => {
     if (status === 'loading') {
@@ -68,8 +68,8 @@ export function useMe() {
   // Sync NextAuth with Zustand
   useSyncAuth();
 
-  const user = useAuthStore((state) => state.user);
-  const isLoading = useAuthStore((state) => state.isLoading);
+  const user = useAuthStore((state: any) => state.user);
+  const isLoading = useAuthStore((state: any) => state.isLoading);
   const { status } = useSession();
 
   // Return Zustand state with loading from both sources
@@ -88,9 +88,9 @@ export function useMe() {
  */
 export function useLogin() {
   const queryClient = useQueryClient();
-  const setUser = useAuthStore((state) => state.setUser);
-  const setTokens = useAuthStore((state) => state.setTokens);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  const setUser = useAuthStore((state: any) => state.setUser);
+  const setTokens = useAuthStore((state: any) => state.setTokens);
+  const setLoading = useAuthStore((state: any) => state.setLoading);
 
   return useMutation({
     mutationFn: authQueries.login,
@@ -121,9 +121,9 @@ export function useLogin() {
  */
 export function useRegister() {
   const queryClient = useQueryClient();
-  const setUser = useAuthStore((state) => state.setUser);
-  const setTokens = useAuthStore((state) => state.setTokens);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  const setUser = useAuthStore((state: any) => state.setUser);
+  const setTokens = useAuthStore((state: any) => state.setTokens);
+  const setLoading = useAuthStore((state: any) => state.setLoading);
 
   return useMutation({
     mutationFn: authQueries.register,
@@ -155,8 +155,8 @@ export function useRegister() {
  */
 export function useLogout() {
   const queryClient = useQueryClient();
-  const clearAuth = useAuthStore((state) => state.clearAuth);
-  const setLoading = useAuthStore((state) => state.setLoading);
+  const clearAuth = useAuthStore((state: any) => state.clearAuth);
+  const setLoading = useAuthStore((state: any) => state.setLoading);
 
   return useMutation({
     mutationFn: async () => {
@@ -186,7 +186,7 @@ export function useLogout() {
  * Use this for simple logout without mutations
  */
 export function useSignOut() {
-  const clearAuth = useAuthStore((state) => state.clearAuth);
+  const clearAuth = useAuthStore((state: any) => state.clearAuth);
 
   return async (options?: { callbackUrl?: string; redirect?: boolean }) => {
     if (options?.redirect === false) {
@@ -202,7 +202,7 @@ export function useSignOut() {
  * Hook to refresh access token
  */
 export function useRefreshToken() {
-  const setTokens = useAuthStore((state) => state.setTokens);
+  const setTokens = useAuthStore((state: any) => state.setTokens);
 
   return useMutation({
     mutationFn: (request: RefreshTokenRequest) => authQueries.refresh(request),
@@ -217,14 +217,14 @@ export function useRefreshToken() {
  * Hook to check if user is authenticated
  */
 export function useIsAuthenticated(): boolean {
-  return useAuthStore((state) => state.isAuthenticated);
+  return useAuthStore((state: any) => state.isAuthenticated);
 }
 
 /**
  * Hook to get current user from store
  */
 export function useCurrentUser() {
-  return useAuthStore((state) => state.user);
+  return useAuthStore((state: any) => state.user);
 }
 
 const CLIENT_ROLE_REQUIREMENTS = {

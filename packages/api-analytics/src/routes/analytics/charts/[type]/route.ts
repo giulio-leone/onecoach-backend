@@ -86,11 +86,11 @@ export async function GET(
 
     switch (params.type) {
       case 'weight':
-        chartData = await generateWeightChart(userOrError.id, startDate, endDate);
+        chartData = await generateWeightChart((userOrError as { id: string }).id, startDate, endDate);
         break;
 
       case 'volume':
-        chartData = await generateVolumeChart(userOrError.id, startDate, endDate);
+        chartData = await generateVolumeChart((userOrError as { id: string }).id, startDate, endDate);
         break;
 
       case 'macros':
@@ -100,7 +100,7 @@ export async function GET(
             { status: 400 }
           );
         }
-        chartData = await generateMacrosChart(userOrError.id, query.plan, startDate, endDate);
+        chartData = await generateMacrosChart((userOrError as { id: string }).id, query.plan, startDate, endDate);
         break;
 
       default:

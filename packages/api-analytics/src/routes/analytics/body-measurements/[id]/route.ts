@@ -51,7 +51,7 @@ export async function GET(
   }
 
   try {
-    const measurement = await getBodyMeasurementById(params.id, userOrError.id);
+    const measurement = await getBodyMeasurementById(params.id, (userOrError as { id: string }).id);
 
     if (!measurement) {
       return NextResponse.json({ error: 'Measurement not found' }, { status: 404 });
@@ -90,7 +90,7 @@ export async function PUT(
       ...rest,
       ...(date ? { date: new Date(date) } : {}),
     };
-    const measurement = await updateBodyMeasurement(params.id, userOrError.id, updateData);
+    const measurement = await updateBodyMeasurement(params.id, (userOrError as { id: string }).id, updateData);
 
     return NextResponse.json({
       success: true,
@@ -124,7 +124,7 @@ export async function DELETE(
   }
 
   try {
-    await deleteBodyMeasurement(params.id, userOrError.id);
+    await deleteBodyMeasurement(params.id, (userOrError as { id: string }).id);
 
     return NextResponse.json({
       success: true,

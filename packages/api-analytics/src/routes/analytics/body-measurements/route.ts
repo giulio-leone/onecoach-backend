@@ -69,7 +69,7 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
 
     // If latest requested, return only the latest measurement
     if (query.latest === 'true') {
-      const measurement = await getLatestBodyMeasurement(userOrError.id);
+      const measurement = await getLatestBodyMeasurement((userOrError as { id: string }).id);
       return NextResponse.json({
         success: true,
         measurement,
@@ -80,12 +80,12 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
     const endDate = query.endDate ? new Date(query.endDate) : undefined;
     const limit = query.limit ? parseInt(query.limit, 10) : undefined;
 
-    const measurements = await getBodyMeasurementHistory(userOrError.id, startDate, endDate, limit);
+    const measurements = await getBodyMeasurementHistory((userOrError as { id: string }).id, startDate, endDate, limit);
 
     // Include stats if date range is provided
     let stats = null;
     if (startDate && endDate) {
-      stats = await getBodyMeasurementStats(userOrError.id, startDate, endDate);
+      stats = await getBodyMeasurementStats((userOrError as { id: string }).id, startDate, endDate);
     }
 
     return NextResponse.json({
@@ -122,7 +122,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse> {
     const body = await _request.json();
     const validated = createSchema.parse(body);
 
-    const measurement = await createBodyMeasurement(userOrError.id, {
+    const measurement = await createBodyMeasurement((userOrError as { id: string }).id, {
       ...validated,
       date: new Date(validated.date),
     });

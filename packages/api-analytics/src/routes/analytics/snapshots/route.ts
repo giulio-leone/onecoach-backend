@@ -56,7 +56,7 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
 
     // If latest requested, return only the latest snapshot
     if (query.latest === 'true') {
-      const snapshot = await getLatestProgressSnapshot(userOrError.id);
+      const snapshot = await getLatestProgressSnapshot((userOrError as { id: string }).id);
       return NextResponse.json({
         success: true,
         snapshot,
@@ -70,7 +70,7 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
     const startDate = new Date(query.startDate);
     const endDate = new Date(query.endDate);
 
-    const snapshots = await getProgressSnapshots(userOrError.id, startDate, endDate);
+    const snapshots = await getProgressSnapshots((userOrError as { id: string }).id, startDate, endDate);
 
     return NextResponse.json({
       success: true,
@@ -123,7 +123,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse> {
       const startDate = new Date(validated.backfillStartDate);
       const endDate = new Date(validated.backfillEndDate);
 
-      const snapshots = await backfillSnapshots(userOrError.id, startDate, endDate);
+      const snapshots = await backfillSnapshots((userOrError as { id: string }).id, startDate, endDate);
 
       return NextResponse.json({
         success: true,
@@ -134,7 +134,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse> {
 
     // Single snapshot mode
     const date = validated.date ? new Date(validated.date) : new Date();
-    const snapshot = await generateProgressSnapshot(userOrError.id, date);
+    const snapshot = await generateProgressSnapshot((userOrError as { id: string }).id, date);
 
     return NextResponse.json({
       success: true,

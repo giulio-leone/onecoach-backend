@@ -18,7 +18,7 @@ import { getErrorMessage } from '@giulio-leone/lib-shared';
  * Automatically syncs with Zustand store
  */
 export function useHealthSummaryQuery() {
-  const setHealthSummary = useHealthStore((state) => state.setHealthSummary);
+  const setHealthSummary = useHealthStore((state: any) => state.setHealthSummary);
 
   const query = useQuery({
     queryKey: healthKeys.summary(),
@@ -44,7 +44,7 @@ export function useHealthSummaryQuery() {
  */
 export function useSyncHealthData() {
   const queryClient = useQueryClient();
-  const setSyncStatus = useHealthStore((state) => state.setSyncStatus);
+  const setSyncStatus = useHealthStore((state: any) => state.setSyncStatus);
 
   return useMutation({
     mutationFn: (request: HealthSyncRequest) => healthQueries.syncData(request),
@@ -81,6 +81,6 @@ export function useSyncHealthData() {
  * Hook to check if health sync is in progress
  */
 export function useHealthSyncStatus() {
-  const syncStatus = useHealthStore((state) => state.syncStatus);
+  const syncStatus = useHealthStore((state: any) => state.syncStatus);
   return syncStatus;
 }

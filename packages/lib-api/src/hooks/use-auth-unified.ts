@@ -64,9 +64,9 @@ export function useAuth(): UseAuthReturn {
   useSyncAuth();
 
   // Get state from Zustand (single source of truth)
-  const user = useAuthStore((state) => state.user);
-  const isLoading = useAuthStore((state) => state.isLoading);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state: any) => state.user);
+  const isLoading = useAuthStore((state: any) => state.isLoading);
+  const isAuthenticated = useAuthStore((state: any) => state.isAuthenticated);
 
   // Computed values (DRY - no duplication)
   const userId = user?.id ?? null;

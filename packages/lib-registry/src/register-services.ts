@@ -43,7 +43,7 @@ const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
  * TODO: Refactor FoodService per essere un'istanza invece di una classe statica
  * e implementare direttamente IFoodService (aggiungere delete e matchByBarcode)
  */
-const foodServiceAdapter = foodService as IFoodService;
+const foodServiceAdapter = foodService as unknown as IFoodService;
 
 /**
  * Wrapper per analyticsService che implementa IAnalyticsService

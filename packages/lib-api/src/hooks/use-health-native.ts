@@ -48,7 +48,7 @@ export function useHealth() {
   const { healthSummary } = useHealthSummary();
   const { mutate: syncHealthDataMutation } = useSyncHealthData();
   const { data: summaryData } = useHealthSummaryQuery();
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore((state: any) => state.user);
 
   // Initialize health kit/connect on mount
   useEffect(() => {
