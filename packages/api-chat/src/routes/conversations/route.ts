@@ -34,8 +34,8 @@ const conversationCreateSchema = z.object({
     .optional(),
 });
 
-export async function GET(req: NextRequest) {
-  const userOrError = await requireAuth();
+export async function GET(req: NextRequest): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -79,8 +79,8 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: NextRequest) {
-  const userOrError = await requireAuth();
+export async function POST(req: NextRequest): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

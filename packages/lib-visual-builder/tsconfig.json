@@ -1,13 +1,7 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": false,
-    "outDir": "./.tsbuild",
-    "rootDir": "./src",
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
+    "outDir": "./dist",
     "strict": true,
     "incremental": false
   },
@@ -18,13 +12,5 @@
     "node_modules",
     "dist",
     ".tsbuild"
-  ],
-  "references": [
-    {
-      "path": "../lib-core"
-    },
-    {
-      "path": "../../../onecoach-shared/packages/lib-shared"
-    }
   ]
 }

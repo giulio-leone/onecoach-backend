@@ -9,11 +9,11 @@ import { requireAdmin, requireAuth } from '@giulio-leone/lib-core';
 import { FoodService } from '@giulio-leone/lib-food';
 import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@giulio-leone/types/database';
-import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-api';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(_req: NextRequest) {
+export async function POST(_req: NextRequest): Promise<Response> {
   const userOrError = await requireAdmin();
 
   if (userOrError instanceof NextResponse) {
@@ -85,7 +85,7 @@ export async function POST(_req: NextRequest) {
  * - sortBy: 'createdAt' | 'updatedAt' | 'name' | 'calories'
  * - sortOrder: 'asc' | 'desc'
  */
-export async function GET(_req: NextRequest) {
+export async function GET(_req: NextRequest): Promise<Response> {
   const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
@@ -212,7 +212,7 @@ export async function GET(_req: NextRequest) {
     if (sortByParam === 'calories')
       orderBy = {
         macrosPer100g: { path: ['calories'], sort: sortOrder },
-      } as Prisma.food_itemsOrderByWithRelationInput;
+      } as any;
 
     const [total, rows] = await Promise.all([
       prisma.food_items.count({ where }),

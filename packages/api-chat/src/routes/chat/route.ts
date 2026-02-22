@@ -34,8 +34,8 @@ const chatStreamRequestSchema = z.object({
     .default(AI_REASONING_CONFIG.DEFAULT_REASONING_EFFORT),
 });
 
-export async function POST(_req: Request) {
-  const userOrError = await requireAuth();
+export async function POST(_req: Request): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

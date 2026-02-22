@@ -113,11 +113,11 @@ export class BodyMeasurementsVisionService {
     mimeType: string,
     userId: string
   ): Promise<ImportedBodyMeasurements> {
-    return parseWithVisionAI({
+    return parseWithVisionAI<ImportedBodyMeasurements>({
       contentBase64: imageBase64,
       mimeType,
       prompt: IMAGE_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema,
+      schema: ImportedBodyMeasurementsSchema as any,
       userId,
       fileType: 'image',
     });
@@ -130,11 +130,11 @@ export class BodyMeasurementsVisionService {
     pdfBase64: string,
     userId: string
   ): Promise<ImportedBodyMeasurements> {
-    return parseWithVisionAI({
+    return parseWithVisionAI<ImportedBodyMeasurements>({
       contentBase64: pdfBase64,
       mimeType: 'application/pdf',
       prompt: PDF_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema,
+      schema: ImportedBodyMeasurementsSchema as any,
       userId,
       fileType: 'pdf',
     });
@@ -148,11 +148,11 @@ export class BodyMeasurementsVisionService {
     mimeType: string,
     userId: string
   ): Promise<ImportedBodyMeasurements> {
-    return parseWithVisionAI({
+    return parseWithVisionAI<ImportedBodyMeasurements>({
       contentBase64: documentBase64,
       mimeType,
       prompt: DOCUMENT_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema,
+      schema: ImportedBodyMeasurementsSchema as any,
       userId,
       fileType: 'document',
     });
@@ -166,11 +166,11 @@ export class BodyMeasurementsVisionService {
     mimeType: string,
     userId: string
   ): Promise<ImportedBodyMeasurements> {
-    return parseWithVisionAI({
+    return parseWithVisionAI<ImportedBodyMeasurements>({
       contentBase64,
       mimeType,
       prompt: SPREADSHEET_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema,
+      schema: ImportedBodyMeasurementsSchema as any,
       userId,
       fileType: 'spreadsheet',
     });

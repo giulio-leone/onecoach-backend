@@ -73,7 +73,7 @@ const exerciseImportExtension = z.object({
 // Intersezione: mantiene i campi obbligatori da createExerciseSchema (translations, muscles, bodyPartIds)
 // Nota: Zod intersection mantiene i requisiti più restrittivi, quindi i campi obbligatori da createExerciseSchema
 // rimangono obbligatori anche se sono opzionali in exerciseImportExtension
-const exerciseImportSchemaBase = z.intersection(createExerciseSchema, exerciseImportExtension);
+const exerciseImportSchemaBase = z.intersection(createExerciseSchema as any, exerciseImportExtension);
 
 // Validazione esplicita per assicurarsi che i campi obbligatori siano sempre presenti
 export const exerciseImportSchema = exerciseImportSchemaBase.superRefine((data, ctx) => {
@@ -136,7 +136,7 @@ export const exerciseAiPlanSchema = z.object({
     .array(
       z.object({
         slug: z.string().trim().min(1),
-        data: updateExerciseSchema,
+        data: updateExerciseSchema as any,
       })
     )
     .default([]),

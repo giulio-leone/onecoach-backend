@@ -13,8 +13,8 @@ const batchSchema = z.object({
   status: z.nativeEnum(ExerciseApprovalStatus).optional(),
 });
 
-export async function POST(_req: Request) {
-  const adminOrError = await requireAdmin();
+export async function POST(_req: Request): Promise<Response> {
+  const adminOrError: any = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

@@ -9,9 +9,9 @@ import { onboardingService, requireAuth } from '@giulio-leone/lib-core';
 import { logger, logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
-export async function POST() {
+export async function POST(): Promise<Response> {
   try {
-    const userOrError = await requireAuth();
+    const userOrError: any = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;

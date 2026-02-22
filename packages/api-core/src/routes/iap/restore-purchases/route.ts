@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
  * POST /api/iap/restore-purchases
  * Restore previous purchases for the authenticated user
  */
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<Response> {
   try {
     const session = await auth();
     if (!session?.user) {

@@ -36,7 +36,7 @@ function checkRateLimit(identifier: string): boolean {
   return true;
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<Response> {
   try {
     const body = await request.json();
     const { email } = body;

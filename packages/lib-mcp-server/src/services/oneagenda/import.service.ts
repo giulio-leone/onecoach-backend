@@ -217,7 +217,7 @@ export function createOneAgendaAIContext(userId: string): AIParseContext<Importe
         contentBase64: content,
         mimeType,
         prompt,
-        schema: ImportedOneAgendaSchema,
+        schema: ImportedOneAgendaSchema as any,
         userId,
         fileType: mimeType.startsWith('image/') ? 'image' : mimeType === 'application/pdf' ? 'pdf' : 'document',
       }),

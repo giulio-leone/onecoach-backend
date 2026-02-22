@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
  * GET /api/health/summary
  * Get health data summary for the authenticated user
  */
-export async function GET(_request: NextRequest) {
+export async function GET(_request: NextRequest): Promise<Response> {
   try {
     const session = await auth();
     if (!session?.user) {

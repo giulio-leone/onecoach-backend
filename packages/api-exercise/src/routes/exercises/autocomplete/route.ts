@@ -17,8 +17,8 @@ export const dynamic = 'force-dynamic';
  * - bodyParts: comma-separated body parts (optional)
  * - equipments: comma-separated equipment names (optional)
  */
-export async function GET(_req: Request) {
-  const userOrError = await requireAuth();
+export async function GET(_req: Request): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

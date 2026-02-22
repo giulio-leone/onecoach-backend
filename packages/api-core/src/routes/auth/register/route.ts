@@ -16,7 +16,7 @@ import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
-export async function POST(_req: Request) {
+export async function POST(_req: Request): Promise<Response> {
   try {
     const body: RegisterData & { invitationCode?: string } = await _req.json();
     const { email, password, name, referralCode, invitationCode, privacyConsent, termsConsent } =

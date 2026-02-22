@@ -5,9 +5,9 @@ import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }): Promise<Response> {
   const { id } = await context.params;
-  const adminOrError = await requireAdmin();
+  const adminOrError: any = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

@@ -14,9 +14,9 @@ const goToStepSchema = z.object({
   stepNumber: z.number().int().min(1).max(TOTAL_STEPS),
 });
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
   try {
-    const userOrError = await requireAuth();
+    const userOrError: any = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;

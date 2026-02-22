@@ -4,8 +4,8 @@ import { prisma } from '@giulio-leone/lib-core';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: NextRequest) {
-  const userOrError = await requireAuth();
+export async function GET(_req: NextRequest): Promise<Response> {
+  const userOrError: any = await requireAuth();
   if (userOrError instanceof NextResponse) return userOrError;
 
   const url = new URL(_req.url);

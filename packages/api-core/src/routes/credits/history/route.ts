@@ -11,8 +11,8 @@ import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: Request) {
-  const userOrError = await requireAuth();
+export async function GET(_req: Request): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

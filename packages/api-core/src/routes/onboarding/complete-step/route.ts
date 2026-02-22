@@ -24,9 +24,9 @@ const completeStepSchema = z.object({
     .optional(),
 });
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
   try {
-    const userOrError = await requireAuth();
+    const userOrError: any = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;

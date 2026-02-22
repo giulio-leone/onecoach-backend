@@ -22,9 +22,9 @@ type RouteParams = {
   }>;
 };
 
-export async function GET(req: NextRequest, { params }: RouteParams) {
+export async function GET(req: NextRequest, { params }: RouteParams): Promise<Response> {
   const { conversationId } = await params;
-  const userOrError = await requireAuth();
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -63,9 +63,9 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: RouteParams) {
+export async function PATCH(req: NextRequest, { params }: RouteParams): Promise<Response> {
   const { conversationId } = await params;
-  const userOrError = await requireAuth();
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -99,9 +99,9 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_req: NextRequest, { params }: RouteParams) {
+export async function DELETE(_req: NextRequest, { params }: RouteParams): Promise<Response> {
   const { conversationId } = await params;
-  const userOrError = await requireAuth();
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

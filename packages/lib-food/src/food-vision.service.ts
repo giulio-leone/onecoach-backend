@@ -112,11 +112,11 @@ export class FoodVisionService {
     imageBase64: string,
     userId: string
   ): Promise<LabelExtractionResult> {
-    const result = await parseWithVisionAI({
+    const result = await parseWithVisionAI<LabelExtractionResult>({
       contentBase64: imageBase64,
       mimeType: 'image/jpeg',
       prompt: LABEL_EXTRACTION_PROMPT,
-      schema: labelExtractionSchema,
+      schema: labelExtractionSchema as any,
       userId,
       fileType: 'image',
       creditCost: 5,
@@ -132,11 +132,11 @@ export class FoodVisionService {
     imageBase64: string,
     userId: string
   ): Promise<DishSegmentationResult> {
-    const result = await parseWithVisionAI({
+    const result = await parseWithVisionAI<DishSegmentationResult>({
       contentBase64: imageBase64,
       mimeType: 'image/jpeg',
       prompt: DISH_SEGMENTATION_PROMPT,
-      schema: dishSegmentationSchema,
+      schema: dishSegmentationSchema as any,
       userId,
       fileType: 'image',
       creditCost: 8,

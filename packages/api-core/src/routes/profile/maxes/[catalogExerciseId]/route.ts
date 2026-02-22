@@ -22,8 +22,8 @@ export const dynamic = 'force-dynamic';
 export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ catalogExerciseId: string }> }
-) {
-  const userOrError = await requireAuth();
+): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -69,8 +69,8 @@ export async function GET(
 export async function DELETE(
   _req: NextRequest,
   context: { params: Promise<{ catalogExerciseId: string }> }
-) {
-  const userOrError = await requireAuth();
+): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

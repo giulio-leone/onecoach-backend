@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 /**
  * GET: Recupera dati fiscali utente
  */
-export async function GET() {
+export async function GET(): Promise<Response> {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -50,7 +50,7 @@ export async function GET() {
 /**
  * PUT: Aggiorna dati fiscali utente
  */
-export async function PUT(_req: Request) {
+export async function PUT(_req: Request): Promise<Response> {
   const user = await getCurrentUser();
 
   if (!user) {

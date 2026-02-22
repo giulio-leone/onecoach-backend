@@ -4,8 +4,8 @@ import { ExerciseAdminService } from '@giulio-leone/lib-exercise/exercise-admin.
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: NextRequest) {
-  const adminOrError = await requireAdmin();
+export async function GET(_req: NextRequest): Promise<Response> {
+  const adminOrError: any = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

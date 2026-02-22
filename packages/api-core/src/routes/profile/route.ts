@@ -42,9 +42,9 @@ const profileSchema = z.object({
   autoRecalculateMacros: z.boolean().optional(),
 });
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   try {
-    const userOrError = await requireAuth();
+    const userOrError: any = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;
@@ -131,8 +131,8 @@ export async function GET() {
   }
 }
 
-export async function PUT(_req: Request) {
-  const userOrError = await requireAuth();
+export async function PUT(_req: Request): Promise<Response> {
+  const userOrError: any = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

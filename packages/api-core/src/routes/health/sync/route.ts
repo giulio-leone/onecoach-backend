@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
  * POST /api/health/sync
  * Sync health data from mobile device
  */
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<Response> {
   try {
     const session = await auth();
     if (!session?.user) {
