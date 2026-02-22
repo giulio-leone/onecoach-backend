@@ -11,160 +11,394 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./config/env": {
-      "import": { "types": "./dist/config/env.d.ts", "default": "./dist/config/env.js" },
-      "require": { "types": "./dist/config/env.d.cts", "default": "./dist/config/env.cjs" }
+      "import": {
+        "types": "./dist/config/env.d.ts",
+        "default": "./dist/config/env.js"
+      },
+      "require": {
+        "types": "./dist/config/env.d.cts",
+        "default": "./dist/config/env.cjs"
+      }
     },
     "./prisma": {
-      "import": { "types": "./dist/prisma.d.ts", "default": "./dist/prisma.js" },
-      "require": { "types": "./dist/prisma.d.cts", "default": "./dist/prisma.cjs" }
+      "import": {
+        "types": "./dist/prisma.d.ts",
+        "default": "./dist/prisma.js"
+      },
+      "require": {
+        "types": "./dist/prisma.d.cts",
+        "default": "./dist/prisma.cjs"
+      }
     },
     "./db": {
-      "import": { "types": "./dist/db.d.ts", "default": "./dist/db.js" },
-      "require": { "types": "./dist/db.d.cts", "default": "./dist/db.cjs" }
+      "import": {
+        "types": "./dist/db.d.ts",
+        "default": "./dist/db.js"
+      },
+      "require": {
+        "types": "./dist/db.d.cts",
+        "default": "./dist/db.cjs"
+      }
     },
     "./db/*": {
-      "import": { "types": "./dist/db/*.d.ts", "default": "./dist/db/*.js" },
-      "require": { "types": "./dist/db/*.d.cts", "default": "./dist/db/*.cjs" }
+      "import": {
+        "types": "./dist/db/*.d.ts",
+        "default": "./dist/db/*.js"
+      },
+      "require": {
+        "types": "./dist/db/*.d.cts",
+        "default": "./dist/db/*.cjs"
+      }
     },
     "./logger.service": {
-      "import": { "types": "./dist/logger.service.d.ts", "default": "./dist/logger.service.js" },
-      "require": { "types": "./dist/logger.service.d.cts", "default": "./dist/logger.service.cjs" }
+      "import": {
+        "types": "./dist/logger.service.d.ts",
+        "default": "./dist/logger.service.js"
+      },
+      "require": {
+        "types": "./dist/logger.service.d.cts",
+        "default": "./dist/logger.service.cjs"
+      }
     },
     "./user-memory.service": {
-      "import": { "types": "./dist/user-memory.service.d.ts", "default": "./dist/user-memory.service.js" },
-      "require": { "types": "./dist/user-memory.service.d.cts", "default": "./dist/user-memory.service.cjs" }
+      "import": {
+        "types": "./dist/user-memory.service.d.ts",
+        "default": "./dist/user-memory.service.js"
+      },
+      "require": {
+        "types": "./dist/user-memory.service.d.cts",
+        "default": "./dist/user-memory.service.cjs"
+      }
     },
     "./user-memory/types": {
-      "import": { "types": "./dist/user-memory/types.d.ts", "default": "./dist/user-memory/types.js" },
-      "require": { "types": "./dist/user-memory/types.d.cts", "default": "./dist/user-memory/types.cjs" }
+      "import": {
+        "types": "./dist/user-memory/types.d.ts",
+        "default": "./dist/user-memory/types.js"
+      },
+      "require": {
+        "types": "./dist/user-memory/types.d.cts",
+        "default": "./dist/user-memory/types.cjs"
+      }
     },
     "./user-memory/listeners": {
-      "import": { "types": "./dist/user-memory/listeners.d.ts", "default": "./dist/user-memory/listeners.js" },
-      "require": { "types": "./dist/user-memory/listeners.d.cts", "default": "./dist/user-memory/listeners.cjs" }
+      "import": {
+        "types": "./dist/user-memory/listeners.d.ts",
+        "default": "./dist/user-memory/listeners.js"
+      },
+      "require": {
+        "types": "./dist/user-memory/listeners.d.cts",
+        "default": "./dist/user-memory/listeners.cjs"
+      }
     },
     "./user-memory/timeline.service": {
-      "import": { "types": "./dist/user-memory/timeline.service.d.ts", "default": "./dist/user-memory/timeline.service.js" },
-      "require": { "types": "./dist/user-memory/timeline.service.d.cts", "default": "./dist/user-memory/timeline.service.cjs" }
+      "import": {
+        "types": "./dist/user-memory/timeline.service.d.ts",
+        "default": "./dist/user-memory/timeline.service.js"
+      },
+      "require": {
+        "types": "./dist/user-memory/timeline.service.d.cts",
+        "default": "./dist/user-memory/timeline.service.cjs"
+      }
     },
     "./auth": {
-      "import": { "types": "./dist/auth/index.d.ts", "default": "./dist/auth/index.js" },
-      "require": { "types": "./dist/auth/index.d.cts", "default": "./dist/auth/index.cjs" }
+      "import": {
+        "types": "./dist/auth/index.d.ts",
+        "default": "./dist/auth/index.js"
+      },
+      "require": {
+        "types": "./dist/auth/index.d.cts",
+        "default": "./dist/auth/index.cjs"
+      }
     },
     "./auth/session": {
-      "import": { "types": "./dist/auth/session.d.ts", "default": "./dist/auth/session.js" },
-      "require": { "types": "./dist/auth/session.d.cts", "default": "./dist/auth/session.cjs" }
+      "import": {
+        "types": "./dist/auth/session.d.ts",
+        "default": "./dist/auth/session.js"
+      },
+      "require": {
+        "types": "./dist/auth/session.d.cts",
+        "default": "./dist/auth/session.cjs"
+      }
     },
     "./auth/session.native": {
-      "import": { "types": "./dist/auth/session.native.d.ts", "default": "./dist/auth/session.native.js" },
-      "require": { "types": "./dist/auth/session.native.d.cts", "default": "./dist/auth/session.native.cjs" }
+      "import": {
+        "types": "./dist/auth/session.native.d.ts",
+        "default": "./dist/auth/session.native.js"
+      },
+      "require": {
+        "types": "./dist/auth/session.native.d.cts",
+        "default": "./dist/auth/session.native.cjs"
+      }
     },
     "./auth/guards": {
-      "import": { "types": "./dist/auth/guards.d.ts", "default": "./dist/auth/guards.js" },
-      "require": { "types": "./dist/auth/guards.d.cts", "default": "./dist/auth/guards.cjs" }
+      "import": {
+        "types": "./dist/auth/guards.d.ts",
+        "default": "./dist/auth/guards.js"
+      },
+      "require": {
+        "types": "./dist/auth/guards.d.cts",
+        "default": "./dist/auth/guards.cjs"
+      }
     },
     "./auth/guards-client": {
-      "import": { "types": "./dist/auth/guards-client.d.ts", "default": "./dist/auth/guards-client.js" },
-      "require": { "types": "./dist/auth/guards-client.d.cts", "default": "./dist/auth/guards-client.cjs" }
+      "import": {
+        "types": "./dist/auth/guards-client.d.ts",
+        "default": "./dist/auth/guards-client.js"
+      },
+      "require": {
+        "types": "./dist/auth/guards-client.d.cts",
+        "default": "./dist/auth/guards-client.cjs"
+      }
     },
     "./auth/roles": {
-      "import": { "types": "./dist/auth/roles.d.ts", "default": "./dist/auth/roles.js" },
-      "require": { "types": "./dist/auth/roles.d.cts", "default": "./dist/auth/roles.cjs" }
+      "import": {
+        "types": "./dist/auth/roles.d.ts",
+        "default": "./dist/auth/roles.js"
+      },
+      "require": {
+        "types": "./dist/auth/roles.d.cts",
+        "default": "./dist/auth/roles.cjs"
+      }
     },
     "./auth/config": {
-      "import": { "types": "./dist/auth/config.d.ts", "default": "./dist/auth/config.js" },
-      "require": { "types": "./dist/auth/config.d.cts", "default": "./dist/auth/config.cjs" }
+      "import": {
+        "types": "./dist/auth/config.d.ts",
+        "default": "./dist/auth/config.js"
+      },
+      "require": {
+        "types": "./dist/auth/config.d.cts",
+        "default": "./dist/auth/config.cjs"
+      }
     },
     "./auth/*": {
-      "import": { "types": "./dist/auth/*.d.ts", "default": "./dist/auth/*.js" },
-      "require": { "types": "./dist/auth/*.d.cts", "default": "./dist/auth/*.cjs" }
+      "import": {
+        "types": "./dist/auth/*.d.ts",
+        "default": "./dist/auth/*.js"
+      },
+      "require": {
+        "types": "./dist/auth/*.d.cts",
+        "default": "./dist/auth/*.cjs"
+      }
     },
     "./types/*": {
-      "import": { "types": "./dist/types/*.d.ts", "default": "./dist/types/*.js" },
-      "require": { "types": "./dist/types/*.d.cts", "default": "./dist/types/*.cjs" }
+      "import": {
+        "types": "./dist/types/*.d.ts",
+        "default": "./dist/types/*.js"
+      },
+      "require": {
+        "types": "./dist/types/*.d.cts",
+        "default": "./dist/types/*.cjs"
+      }
     },
     "./stripe": {
-      "import": { "types": "./dist/stripe/index.d.ts", "default": "./dist/stripe/index.js" },
-      "require": { "types": "./dist/stripe/index.d.cts", "default": "./dist/stripe/index.cjs" }
+      "import": {
+        "types": "./dist/stripe/index.d.ts",
+        "default": "./dist/stripe/index.js"
+      },
+      "require": {
+        "types": "./dist/stripe/index.d.cts",
+        "default": "./dist/stripe/index.cjs"
+      }
     },
     "./stripe/*": {
-      "import": { "types": "./dist/stripe/*.d.ts", "default": "./dist/stripe/*.js" },
-      "require": { "types": "./dist/stripe/*.d.cts", "default": "./dist/stripe/*.cjs" }
+      "import": {
+        "types": "./dist/stripe/*.d.ts",
+        "default": "./dist/stripe/*.js"
+      },
+      "require": {
+        "types": "./dist/stripe/*.d.cts",
+        "default": "./dist/stripe/*.cjs"
+      }
     },
     "./credit.service": {
-      "import": { "types": "./dist/credit.service.d.ts", "default": "./dist/credit.service.js" },
-      "require": { "types": "./dist/credit.service.d.cts", "default": "./dist/credit.service.cjs" }
+      "import": {
+        "types": "./dist/credit.service.d.ts",
+        "default": "./dist/credit.service.js"
+      },
+      "require": {
+        "types": "./dist/credit.service.d.cts",
+        "default": "./dist/credit.service.cjs"
+      }
     },
     "./subscription.service": {
-      "import": { "types": "./dist/subscription.service.d.ts", "default": "./dist/subscription.service.js" },
-      "require": { "types": "./dist/subscription.service.d.cts", "default": "./dist/subscription.service.cjs" }
+      "import": {
+        "types": "./dist/subscription.service.d.ts",
+        "default": "./dist/subscription.service.js"
+      },
+      "require": {
+        "types": "./dist/subscription.service.d.cts",
+        "default": "./dist/subscription.service.cjs"
+      }
     },
     "./user-profile.service": {
-      "import": { "types": "./dist/user-profile.service.d.ts", "default": "./dist/user-profile.service.js" },
-      "require": { "types": "./dist/user-profile.service.d.cts", "default": "./dist/user-profile.service.cjs" }
+      "import": {
+        "types": "./dist/user-profile.service.d.ts",
+        "default": "./dist/user-profile.service.js"
+      },
+      "require": {
+        "types": "./dist/user-profile.service.d.cts",
+        "default": "./dist/user-profile.service.cjs"
+      }
     },
     "./payment.service": {
-      "import": { "types": "./dist/payment.service.d.ts", "default": "./dist/payment.service.js" },
-      "require": { "types": "./dist/payment.service.d.cts", "default": "./dist/payment.service.cjs" }
+      "import": {
+        "types": "./dist/payment.service.d.ts",
+        "default": "./dist/payment.service.js"
+      },
+      "require": {
+        "types": "./dist/payment.service.d.cts",
+        "default": "./dist/payment.service.cjs"
+      }
     },
     "./onboarding.service": {
-      "import": { "types": "./dist/onboarding.service.d.ts", "default": "./dist/onboarding.service.js" },
-      "require": { "types": "./dist/onboarding.service.d.cts", "default": "./dist/onboarding.service.cjs" }
+      "import": {
+        "types": "./dist/onboarding.service.d.ts",
+        "default": "./dist/onboarding.service.js"
+      },
+      "require": {
+        "types": "./dist/onboarding.service.d.cts",
+        "default": "./dist/onboarding.service.cjs"
+      }
     },
     "./calendar.service": {
-      "import": { "types": "./dist/calendar.service.d.ts", "default": "./dist/calendar.service.js" },
-      "require": { "types": "./dist/calendar.service.d.cts", "default": "./dist/calendar.service.cjs" }
+      "import": {
+        "types": "./dist/calendar.service.d.ts",
+        "default": "./dist/calendar.service.js"
+      },
+      "require": {
+        "types": "./dist/calendar.service.d.cts",
+        "default": "./dist/calendar.service.cjs"
+      }
     },
     "./invitation.service": {
-      "import": { "types": "./dist/invitation.service.d.ts", "default": "./dist/invitation.service.js" },
-      "require": { "types": "./dist/invitation.service.d.cts", "default": "./dist/invitation.service.cjs" }
+      "import": {
+        "types": "./dist/invitation.service.d.ts",
+        "default": "./dist/invitation.service.js"
+      },
+      "require": {
+        "types": "./dist/invitation.service.d.cts",
+        "default": "./dist/invitation.service.cjs"
+      }
     },
     "./consent.service": {
-      "import": { "types": "./dist/consent.service.d.ts", "default": "./dist/consent.service.js" },
-      "require": { "types": "./dist/consent.service.d.cts", "default": "./dist/consent.service.cjs" }
+      "import": {
+        "types": "./dist/consent.service.d.ts",
+        "default": "./dist/consent.service.js"
+      },
+      "require": {
+        "types": "./dist/consent.service.d.cts",
+        "default": "./dist/consent.service.cjs"
+      }
     },
     "./policy.service": {
-      "import": { "types": "./dist/policy.service.d.ts", "default": "./dist/policy.service.js" },
-      "require": { "types": "./dist/policy.service.d.cts", "default": "./dist/policy.service.cjs" }
+      "import": {
+        "types": "./dist/policy.service.d.ts",
+        "default": "./dist/policy.service.js"
+      },
+      "require": {
+        "types": "./dist/policy.service.d.cts",
+        "default": "./dist/policy.service.cjs"
+      }
     },
     "./setup-intent.service": {
-      "import": { "types": "./dist/setup-intent.service.d.ts", "default": "./dist/setup-intent.service.js" },
-      "require": { "types": "./dist/setup-intent.service.d.cts", "default": "./dist/setup-intent.service.cjs" }
+      "import": {
+        "types": "./dist/setup-intent.service.d.ts",
+        "default": "./dist/setup-intent.service.js"
+      },
+      "require": {
+        "types": "./dist/setup-intent.service.d.cts",
+        "default": "./dist/setup-intent.service.cjs"
+      }
     },
     "./user/onboarding-profile.service": {
-      "import": { "types": "./dist/user/onboarding-profile.service.d.ts", "default": "./dist/user/onboarding-profile.service.js" },
-      "require": { "types": "./dist/user/onboarding-profile.service.d.cts", "default": "./dist/user/onboarding-profile.service.cjs" }
+      "import": {
+        "types": "./dist/user/onboarding-profile.service.d.ts",
+        "default": "./dist/user/onboarding-profile.service.js"
+      },
+      "require": {
+        "types": "./dist/user/onboarding-profile.service.d.cts",
+        "default": "./dist/user/onboarding-profile.service.cjs"
+      }
     },
     "./edge-config.service": {
-      "import": { "types": "./dist/edge-config.service.d.ts", "default": "./dist/edge-config.service.js" },
-      "require": { "types": "./dist/edge-config.service.d.cts", "default": "./dist/edge-config.service.cjs" }
+      "import": {
+        "types": "./dist/edge-config.service.d.ts",
+        "default": "./dist/edge-config.service.js"
+      },
+      "require": {
+        "types": "./dist/edge-config.service.d.cts",
+        "default": "./dist/edge-config.service.cjs"
+      }
     },
     "./feature-flags.service": {
-      "import": { "types": "./dist/feature-flags.service.d.ts", "default": "./dist/feature-flags.service.js" },
-      "require": { "types": "./dist/feature-flags.service.d.cts", "default": "./dist/feature-flags.service.cjs" }
+      "import": {
+        "types": "./dist/feature-flags.service.d.ts",
+        "default": "./dist/feature-flags.service.js"
+      },
+      "require": {
+        "types": "./dist/feature-flags.service.d.cts",
+        "default": "./dist/feature-flags.service.cjs"
+      }
     },
     "./feature-flags.evaluator": {
-      "import": { "types": "./dist/feature-flags.evaluator.d.ts", "default": "./dist/feature-flags.evaluator.js" },
-      "require": { "types": "./dist/feature-flags.evaluator.d.cts", "default": "./dist/feature-flags.evaluator.cjs" }
+      "import": {
+        "types": "./dist/feature-flags.evaluator.d.ts",
+        "default": "./dist/feature-flags.evaluator.js"
+      },
+      "require": {
+        "types": "./dist/feature-flags.evaluator.d.cts",
+        "default": "./dist/feature-flags.evaluator.cjs"
+      }
     },
     "./ai": {
-      "import": { "types": "./dist/ai/provider-factory.d.ts", "default": "./dist/ai/provider-factory.js" },
-      "require": { "types": "./dist/ai/provider-factory.d.cts", "default": "./dist/ai/provider-factory.cjs" }
+      "import": {
+        "types": "./dist/ai/provider-factory.d.ts",
+        "default": "./dist/ai/provider-factory.js"
+      },
+      "require": {
+        "types": "./dist/ai/provider-factory.d.cts",
+        "default": "./dist/ai/provider-factory.cjs"
+      }
     },
     "./iap-verification.server": {
-      "import": { "types": "./dist/iap-verification.server.d.ts", "default": "./dist/iap-verification.server.js" },
-      "require": { "types": "./dist/iap-verification.server.d.cts", "default": "./dist/iap-verification.server.cjs" }
+      "import": {
+        "types": "./dist/iap-verification.server.d.ts",
+        "default": "./dist/iap-verification.server.js"
+      },
+      "require": {
+        "types": "./dist/iap-verification.server.d.cts",
+        "default": "./dist/iap-verification.server.cjs"
+      }
     },
     "./direct-messaging.service": {
-      "import": { "types": "./dist/direct-messaging.service.d.ts", "default": "./dist/direct-messaging.service.js" },
-      "require": { "types": "./dist/direct-messaging.service.d.cts", "default": "./dist/direct-messaging.service.cjs" }
+      "import": {
+        "types": "./dist/direct-messaging.service.d.ts",
+        "default": "./dist/direct-messaging.service.js"
+      },
+      "require": {
+        "types": "./dist/direct-messaging.service.d.cts",
+        "default": "./dist/direct-messaging.service.cjs"
+      }
     },
     "./versioning": {
-      "import": { "types": "./dist/versioning/index.d.ts", "default": "./dist/versioning/index.js" },
-      "require": { "types": "./dist/versioning/index.d.cts", "default": "./dist/versioning/index.cjs" }
+      "import": {
+        "types": "./dist/versioning/index.d.ts",
+        "default": "./dist/versioning/index.js"
+      },
+      "require": {
+        "types": "./dist/versioning/index.d.cts",
+        "default": "./dist/versioning/index.cjs"
+      }
     }
   },
   "scripts": {

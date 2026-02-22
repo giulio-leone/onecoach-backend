@@ -143,7 +143,7 @@ export class FoodVisionService {
     });
 
     // Filter items with confidence < 0.5
-    const filteredItems = result.items.filter((item) => item.confidence >= 0.5);
+    const filteredItems = result.items.filter((item: { confidence: number }) => item.confidence >= 0.5);
 
     return {
       items: filteredItems,

@@ -53,7 +53,8 @@ export default defineConfig({
   splitting: true,
   external: [
     /^@giulio-leone\//,
-    '@prisma/client',
+    /^@onecoach\//,
+    /^@prisma\//,
     'zod',
     /^date-fns/,
     /^next/,
@@ -61,5 +62,7 @@ export default defineConfig({
     /^expo/,
     /^@react-native/,
     'react-native',
+    'pg',
+    '@paralleldrive/cuid2',
   ],
 });

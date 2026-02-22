@@ -6,7 +6,7 @@ import type {
   ExerciseRelationInput,
   ExerciseTranslationInput,
   UpdateExerciseInput,
-} from '@giulio-leone/schemas/exercise.schema';
+} from '@giulio-leone/schemas/exercise';
 import { ExerciseApprovalStatus, ExerciseRelationType, MuscleRole, Prisma } from '@prisma/client';
 import type { LocalizedExercise, ExerciseTranslationView } from '@giulio-leone/types';
 import type { Operation } from 'fast-json-patch';
