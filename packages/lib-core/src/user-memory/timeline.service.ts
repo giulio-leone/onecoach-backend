@@ -7,7 +7,7 @@
  */
 
 import { prisma } from '../prisma';
-import { createId } from '@onecoach/lib-shared/id-generator';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
 import { Prisma } from '@prisma/client';
 import type { TimelineEvent, TimelineEventType, MemoryDomain, ProgressEventData } from './types';
 

@@ -1,8 +1,8 @@
 /**
- * @onecoach/lib-food
+ * @giulio-leone/lib-food
  *
  * Servizi per il dominio alimenti
- * Implementa contratti da @onecoach/contracts
+ * Implementa contratti da @giulio-leone/contracts
  */
 
 export * from './food.service';

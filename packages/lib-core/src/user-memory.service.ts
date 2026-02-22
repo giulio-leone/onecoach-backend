@@ -7,10 +7,10 @@
  */
 
 import { prisma } from './prisma';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import type { user_memories } from '@prisma/client';
-import { createId } from '@onecoach/lib-shared/id-generator';
-import { toPrismaJsonValue } from '@onecoach/lib-shared';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
+import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import type {
   UserMemory,
   MemoryDomain,

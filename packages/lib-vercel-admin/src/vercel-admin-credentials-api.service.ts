@@ -5,7 +5,7 @@
  * Permette aggiornamenti in tempo reale senza redeploy
  *
  * Principi: KISS, SOLID, DRY, YAGNI
- */import { logger } from '@onecoach/lib-core';
+ */import { logger } from '@giulio-leone/lib-core';
 
 
 function logError(message: string, error: unknown) {
@@ -32,7 +32,7 @@ export interface UpdateCredentialsResult {
 async function updateEdgeConfigValue(key: string, value: string): Promise<void> {
   // Prova prima il servizio Next.js
   try {
-    const edgeConfigModule = await import('@onecoach/lib-core/edge-config.service');
+    const edgeConfigModule = await import('@giulio-leone/lib-core/edge-config.service');
     if (edgeConfigModule.setEdgeConfigValue) {
       const result = await edgeConfigModule.setEdgeConfigValue(key, value);
       if (result.success) return;

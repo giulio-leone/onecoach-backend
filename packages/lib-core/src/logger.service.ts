@@ -1,4 +1,4 @@
-import { Logger as SharedLogger, type LogLevel as SharedLogLevel } from '@onecoach/lib-shared';
+import { Logger as SharedLogger, type LogLevel as SharedLogLevel } from '@giulio-leone/lib-shared';
 
 /**
  * @onecoach/lib-core

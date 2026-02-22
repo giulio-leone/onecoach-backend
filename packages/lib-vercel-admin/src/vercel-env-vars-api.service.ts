@@ -7,8 +7,7 @@
  * Principi: KISS, SOLID, DRY, YAGNI
  */
 
-import { logError } from '@onecoach/lib-shared';
-import { logger } from '@onecoach/lib-shared';
+import { logError, logger } from '@giulio-leone/lib-shared';
 
 export type VercelEnvironment = 'production' | 'preview' | 'development';
 

@@ -8,8 +8,8 @@
  */
 
 import { prisma } from './prisma';
-import { Prisma } from '@prisma/client';
-import { toPrismaJsonValue } from '@onecoach/lib-shared';
+import type { Prisma } from '@prisma/client';
+import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import type { CalendarPlanType } from '@prisma/client';
 
 /**

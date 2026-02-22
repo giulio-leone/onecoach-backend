@@ -1,5 +1,5 @@
 import { prisma } from './prisma';
-import { Prisma, InvitationType, InvitationStatus } from '@prisma/client';
+import { type Prisma, InvitationType, InvitationStatus } from '@prisma/client';
 
 export interface CreateInvitationInput {
   type: InvitationType;

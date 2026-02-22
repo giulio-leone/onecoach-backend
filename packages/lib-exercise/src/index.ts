@@ -11,4 +11,4 @@ export * from './exercise-id-resolver.service';
 export * from './one-rep-max.service';
 
 // Re-export types for convenience
-export type { LocalizedExercise, ExerciseTranslationView } from '@onecoach/types';
+export type { LocalizedExercise, ExerciseTranslationView } from '@giulio-leone/types';

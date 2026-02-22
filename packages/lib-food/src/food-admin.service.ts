@@ -6,16 +6,16 @@
  * - Operazioni batch (CRUD) e automazioni AI
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { FoodService, normalizeFoodName } from './food.service';
-import { createFoodSchema, type CreateFoodInput, type UpdateFoodInput } from '@onecoach/schemas';
+import { createFoodSchema, type CreateFoodInput, type UpdateFoodInput } from '@giulio-leone/schemas';
 import { z } from 'zod';
-// import { FoodGenerationAgent, createAIAgentConfig, createAgentInstance } from '@onecoach/one-agent';
-// import { processBatchesInParallel } from '@onecoach/lib-shared/batch-processing';
-// import { normalizeUrl } from '@onecoach/lib-shared/url-normalizer';
+// import { FoodGenerationAgent, createAIAgentConfig, createAgentInstance } from '@giulio-leone/one-agent';
+// import { processBatchesInParallel } from '@giulio-leone/lib-shared/batch-processing';
+// import { normalizeUrl } from '@giulio-leone/lib-shared/url-normalizer';
 
-// import { TOKEN_LIMITS } from '@onecoach/constants';
-// import { MODEL_CONSTANTS } from '@onecoach/lib-ai';
+// import { TOKEN_LIMITS } from '@giulio-leone/constants';
+// import { MODEL_CONSTANTS } from '@giulio-leone/lib-ai';
 
 
 

@@ -2,7 +2,7 @@
  * @onecoach/lib-core
  *
  * Servizi core (auth, credit, subscription, prisma, profile, payment, onboarding)
- * Implementa contratti da @onecoach/contracts
+ * Implementa contratti da @giulio-leone/contracts
  */
 
 // Re-export ID generation utility

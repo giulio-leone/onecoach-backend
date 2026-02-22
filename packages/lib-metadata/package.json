@@ -1,51 +1,45 @@
 {
-  "name": "@onecoach/lib-metadata",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-metadata",
+  "version": "0.1.0",
   "description": "Servizi metadata (translation, validation, catalog)",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    },
-    "./metadata-translation.service": {
-      "types": "./src/metadata-translation.service.ts",
-      "default": "./src/metadata-translation.service.ts"
-    },
-    "./catalog-provider.service": {
-      "types": "./src/catalog-provider.service.ts",
-      "default": "./src/catalog-provider.service.ts"
-    },
-    "./metadata-id-resolver.service": {
-      "types": "./src/metadata-id-resolver.service.ts",
-      "default": "./src/metadata-id-resolver.service.ts"
-    },
-    "./metadata-validator.service": {
-      "types": "./src/metadata-validator.service.ts",
-      "default": "./src/metadata-validator.service.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
+    "build": "tsup",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@paralleldrive/cuid2": "^2.2.2"
+  },
+  "peerDependencies": {
     "@prisma/client": "^7.2.0",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zod": "^3.0.0"
   },
   "devDependencies": {
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
   "sideEffects": false

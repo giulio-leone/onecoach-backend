@@ -10,17 +10,17 @@
  * La validazione usa lo schema Zod centralizzato da @onecoach/schemas
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import type {
   UserOneRepMax,
   UserOneRepMaxWithExercise,
   UserOneRepMaxVersion,
-} from '@onecoach/types';
+} from '@giulio-leone/types';
 import { Prisma } from '@prisma/client';
-import { createId } from '@onecoach/lib-shared';
-import { OneRepMaxInputSchema, type OneRepMaxInput } from '@onecoach/schemas';
+import { createId } from '@giulio-leone/lib-shared';
+import { OneRepMaxInputSchema, type OneRepMaxInput } from '@giulio-leone/schemas';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 /**
  * Input per creare/aggiornare un massimale
  */

@@ -1,56 +1,49 @@
 {
-  "name": "@onecoach/lib-exercise",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-exercise",
+  "version": "0.1.0",
   "description": "Servizi per il dominio esercizi",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    },
-    "./exercise-admin.service": {
-      "types": "./src/exercise-admin.service.ts",
-      "default": "./src/exercise-admin.service.ts"
-    },
-    "./exercise.service": {
-      "types": "./src/exercise.service.ts",
-      "default": "./src/exercise.service.ts"
-    },
-    "./one-rep-max.service": {
-      "types": "./src/one-rep-max.service.ts",
-      "default": "./src/one-rep-max.service.ts"
-    },
-    "./exercise-id-resolver.service": {
-      "types": "./src/exercise-id-resolver.service.ts",
-      "default": "./src/exercise-id-resolver.service.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
+    "build": "tsup",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@onecoach/constants": "workspace:*",
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-ai": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-metadata": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0",
+    "@giulio-leone/lib-metadata": "^0.1.0",
+    "@giulio-leone/lib-api": "^0.1.0",
+    "fast-json-patch": "^3.1.1"
+  },
+  "peerDependencies": {
     "@prisma/client": "^7.2.0",
-    "ai": "6.0.77",
-    "@onecoach/types": "workspace:*",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zod": "^3.0.0"
   },
   "devDependencies": {
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
   "sideEffects": false

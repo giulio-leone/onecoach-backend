@@ -1,39 +1,41 @@
 {
-  "name": "@onecoach/lib-vercel-admin",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-vercel-admin",
+  "version": "0.1.0",
   "description": "Servizi per gestione Vercel admin (credentials, env vars)",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    },
-    "./vercel-env-vars-api.service": {
-      "types": "./src/vercel-env-vars-api.service.ts",
-      "default": "./src/vercel-env-vars-api.service.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
+  "files": ["dist", "README.md"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
+    "build": "tsup",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@prisma/client": "^7.2.0",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@prisma/client": ">=7.0.0",
+    "zod": ">=3.0.0"
   },
   "devDependencies": {
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
   "sideEffects": false

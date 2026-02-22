@@ -6,9 +6,9 @@
  */
 
 import { prisma } from './prisma';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import type { TransactionType } from '@prisma/client';
-import type { ICreditService } from '@onecoach/contracts';
+import type { ICreditService } from '@giulio-leone/contracts';
 
 /**
  * Implementazione Credit Service

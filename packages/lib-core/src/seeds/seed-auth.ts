@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { createId } from '@onecoach/lib-shared';
+import { createId } from '@giulio-leone/lib-shared';
 import { seedAdminsFromEnv } from '../auth/admin-seed';
 
 import { logger } from '../logger.service';

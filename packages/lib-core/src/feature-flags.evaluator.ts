@@ -7,9 +7,9 @@
 
 import { getEdgeConfigValue } from './edge-config.service';
 import { prisma } from './prisma';
-import type { UserRole } from '@onecoach/types';
+import type { UserRole } from '@giulio-leone/types';
 
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 /**
  * Rollout strategy configuration
  */

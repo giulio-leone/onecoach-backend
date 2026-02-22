@@ -7,10 +7,10 @@
 
 import { prisma } from './prisma';
 import type { user_profiles } from '@prisma/client';
-import type { IUserProfileService, UserProfileInput } from '@onecoach/contracts';
-import { createId } from '@onecoach/lib-shared/id-generator';
+import type { IUserProfileService, UserProfileInput } from '@giulio-leone/contracts';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
 
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 function sanitizeStringArray(values?: string[] | null): string[] {
   if (!values || values.length === 0) {
     return [];

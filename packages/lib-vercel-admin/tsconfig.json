@@ -1,19 +1,15 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "strict": true,
     "outDir": "./dist",
-    "composite": true,
     "declaration": true,
-    "noEmit": false,
-    "strict": true
+    "declarationMap": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../../../onecoach-types" },
-    { "path": "../../../onecoach-schemas" },
-    { "path": "../../../onecoach-shared/packages/contracts" },
-    { "path": "../../../onecoach-shared/packages/lib-shared" },
-    { "path": "../lib-core" }
-  ]
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { createId } from '@onecoach/lib-shared';
+import { createId } from '@giulio-leone/lib-shared';
 
 export async function seedTranslationsAndGoals(prisma: PrismaClient) {
   // ExerciseType - crea i tipi se non esistono

@@ -1,24 +1,43 @@
 {
-  "name": "@onecoach/lib-import-core",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-import-core",
+  "version": "0.1.0",
+  "type": "module",
   "description": "Core utilities condivisi per i flussi di import AI multi-dominio",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "files": ["dist"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "scripts": {
+    "build": "tsup",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-
-    "ai": "6.0.77"
+    "@ai-sdk/openai": "^1.0.0",
+    "@giulio-leone/lib-ai": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "ai": "6.0.77",
+    "zod": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
   "sideEffects": false

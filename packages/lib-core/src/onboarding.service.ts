@@ -6,12 +6,12 @@
  */
 
 import { prisma } from './prisma';
-import { createId } from '@onecoach/lib-shared/id-generator';
-import type { IOnboardingService } from '@onecoach/contracts';
-import type { OnboardingProgress, StepCompletionInput } from '@onecoach/types';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
+import type { IOnboardingService } from '@giulio-leone/contracts';
+import type { OnboardingProgress, StepCompletionInput } from '@giulio-leone/types';
 import type { Prisma } from '@prisma/client';
 
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 type DbOnboardingProgress = Prisma.user_onboarding_progressGetPayload<object>;
 
 /**

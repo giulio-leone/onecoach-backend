@@ -8,7 +8,7 @@
  */
 
 import { FoodService, normalizeFoodName } from './food.service';
-import type { FoodItem, FoodMatchResult, LabelExtractionResult } from '@onecoach/types';
+import type { FoodItem, FoodMatchResult, LabelExtractionResult } from '@giulio-leone/types';
 
 const BM25_SIMILARITY_THRESHOLD = 0.3;
 const FUZZY_SIMILARITY_THRESHOLD = 0.85;

@@ -12,9 +12,9 @@
  */
 
 import { streamText, Output } from 'ai';
-import { AIFrameworkConfigService, FrameworkFeature, type ImportModelsConfig, AIProviderConfigService } from '@onecoach/lib-ai';
+import { AIFrameworkConfigService, FrameworkFeature, type ImportModelsConfig, AIProviderConfigService } from '@giulio-leone/lib-ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import { logger, creditService } from '@onecoach/lib-core';
+import { logger, creditService } from '@giulio-leone/lib-core';
 import type { VisionParseParams, ImportFileType } from './types';
 
 // ==================== CONFIG ====================

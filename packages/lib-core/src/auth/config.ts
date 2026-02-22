@@ -11,7 +11,7 @@ import Google from 'next-auth/providers/google';
 import Apple from 'next-auth/providers/apple';
 import bcrypt from 'bcryptjs';
 import { prisma, getPrisma } from '../prisma';
-import { createId, generateUUID } from '@onecoach/lib-shared/id-generator';
+import { createId, generateUUID } from '@giulio-leone/lib-shared/id-generator';
 import type { UserRole } from '@prisma/client';
 
 import { logger } from '../logger.service';

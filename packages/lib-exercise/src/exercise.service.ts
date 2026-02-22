@@ -1,17 +1,17 @@
-import { prisma } from '@onecoach/lib-core';
-import { createId, toSlug } from '@onecoach/lib-shared/utils';
+import { prisma } from '@giulio-leone/lib-core';
+import { createId, toSlug } from '@giulio-leone/lib-shared/utils';
 import type {
   CreateExerciseInput,
   ExerciseQueryParams,
   ExerciseRelationInput,
   ExerciseTranslationInput,
   UpdateExerciseInput,
-} from '@onecoach/schemas/exercise.schema';
+} from '@giulio-leone/schemas/exercise.schema';
 import { ExerciseApprovalStatus, ExerciseRelationType, MuscleRole, Prisma } from '@prisma/client';
-import type { LocalizedExercise, ExerciseTranslationView } from '@onecoach/types';
+import type { LocalizedExercise, ExerciseTranslationView } from '@giulio-leone/types';
 import type { Operation } from 'fast-json-patch';
 import { compare } from 'fast-json-patch';
-import { SimpleCache, toPrismaJsonValue } from '@onecoach/lib-shared';
+import { SimpleCache, toPrismaJsonValue } from '@giulio-leone/lib-shared';
 
 const DEFAULT_LOCALE = 'en';
 // Cache disabilitata per debug e consistenza dati
@@ -149,9 +149,9 @@ interface ExerciseSnapshot {
 
 // SSOT: Usa direttamente ExercisesResponse<LocalizedExercise> da lib-api
 // Nessuna duplicazione - tutti i service devono usare i tipi da lib-api come unica fonte di verità
-import type { ExercisesResponse } from '@onecoach/lib-api';
+import type { ExercisesResponse } from '@giulio-leone/lib-api';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // Tipo helper per garantire che page, pageSize, total siano sempre presenti
 // Questo è compatibile con ExercisesResponse che li ha opzionali
 // NOTA: Questo è un tipo interno al service, non un'interfaccia pubblica duplicata

@@ -7,7 +7,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import type { Stripe } from '@stripe/stripe-js';
 
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 let stripePromise: Promise<Stripe | null> | null = null;
 
 /**

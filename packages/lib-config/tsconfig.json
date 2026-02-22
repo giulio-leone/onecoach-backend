@@ -1,11 +1,19 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "declaration": true,
     "outDir": "./dist",
-    "composite": true,
-    "noEmit": false,
-    "strict": true
+    "rootDir": "./src",
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts", "tsup.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -11,14 +11,14 @@
  * safely used in client components.
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@prisma/client';
-import { createId } from '@onecoach/lib-shared/id-generator';
-import { toPrismaJsonValue } from '@onecoach/lib-shared';
-import type { FoodItem } from '@onecoach/types';
-import type { Macros } from '@onecoach/types';
-import { SUPPORTED_FOOD_LOCALES } from '@onecoach/constants';
-import type { FoodsResponse } from '@onecoach/lib-api';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
+import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
+import type { FoodItem } from '@giulio-leone/types';
+import type { Macros } from '@giulio-leone/types';
+import { SUPPORTED_FOOD_LOCALES } from '@giulio-leone/constants';
+import type { FoodsResponse } from '@giulio-leone/lib-api';
 
 const DEFAULT_LOCALE = 'it';
 

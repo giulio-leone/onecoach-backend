@@ -1,27 +1,19 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": "..",
-    "noEmit": false,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "jsx": "react-jsx"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "references": [
-    { "path": "../../../onecoach-constants" },
-    { "path": "../../../onecoach-types" },
-    { "path": "../../../onecoach-schemas" },
-    { "path": "../../../onecoach-shared/packages/contracts" },
-    { "path": "../lib-core" },
-    { "path": "../../../onecoach-shared/packages/lib-shared" },
-    { "path": "../../../lib-ai" }
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*.ts", "tsup.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }

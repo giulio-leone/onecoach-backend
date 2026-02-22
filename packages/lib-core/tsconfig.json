@@ -1,29 +1,34 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "composite": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "declaration": true,
-    "allowJs": false,
-    "noEmit": false,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
     "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
     "paths": {
-      "@onecoach/lib-shared": ["../lib-shared/src/index.ts"],
-      "@onecoach/lib-shared/*": ["../lib-shared/src/*"],
-      "@onecoach/lib-shared/utils/*": ["../lib-shared/src/utils/*"],
-      "@onecoach/lib-shared/id-generator": ["../lib-shared/src/id-generator.ts"],
-      "@onecoach/lib-shared/utils/logger": ["../lib-shared/src/utils/logger/index.ts"],
-      "@onecoach/types": ["../types/src/index.ts"],
-      "@onecoach/types/*": ["../types/src/*"],
-      "@onecoach/contracts": ["../contracts/src/index.ts"],
-      "@onecoach/contracts/*": ["../contracts/src/*"],
-      "@onecoach/constants": ["../constants/src/index.ts"],
-      "@onecoach/constants/*": ["../constants/src/*"],
-      "@onecoach/lib-config": ["../lib-config/src/index.ts"],
-      "@onecoach/lib-config/*": ["../lib-config/src/*"]
+      "@giulio-leone/lib-shared": ["../lib-shared/src/index.ts"],
+      "@giulio-leone/lib-shared/*": ["../lib-shared/src/*"],
+      "@giulio-leone/lib-shared/id-generator": ["../lib-shared/src/id-generator.ts"],
+      "@giulio-leone/types": ["../types/src/index.ts"],
+      "@giulio-leone/types/*": ["../types/src/*"],
+      "@giulio-leone/contracts": ["../contracts/src/index.ts"],
+      "@giulio-leone/contracts/*": ["../contracts/src/*"],
+      "@giulio-leone/constants": ["../constants/src/index.ts"],
+      "@giulio-leone/constants/*": ["../constants/src/*"],
+      "@giulio-leone/lib-config": ["../lib-config/src/index.ts"],
+      "@giulio-leone/lib-config/*": ["../lib-config/src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "dist",
@@ -31,8 +36,6 @@
     "src/auth/auth-components.*",
     "src/user-memory/analyzer.*",
     "src/seeds/**/*",
-    "src/db/init-db.ts",
-    "src/db/init-db.js",
-    "src/db/init-db.*"
+    "src/db/init-db.ts"
   ]
 }

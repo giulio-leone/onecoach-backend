@@ -1,5 +1,5 @@
 import { createClient } from '@vercel/edge-config';
-import { logError } from '@onecoach/lib-shared';
+import { logError } from '@giulio-leone/lib-shared';
 
 /**
  * Edge Config Service

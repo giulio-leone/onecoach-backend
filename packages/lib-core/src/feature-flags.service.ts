@@ -7,9 +7,9 @@
 
 import { prisma } from './prisma';
 import { setEdgeConfigValue } from './edge-config.service';
-import type { RolloutStrategy, FlagEventType } from '@onecoach/types';
+import type { RolloutStrategy, FlagEventType } from '@giulio-leone/types';
 
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 /**
  * Rollout configuration interface
  */

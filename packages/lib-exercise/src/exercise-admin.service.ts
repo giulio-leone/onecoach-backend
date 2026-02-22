@@ -6,17 +6,17 @@
  * - Operazioni batch (CRUD) e automazioni AI
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { ExerciseService } from './exercise.service';
-import { toSlug } from '@onecoach/lib-shared';
+import { toSlug } from '@giulio-leone/lib-shared';
 import {
   createExerciseSchema,
   updateExerciseSchema,
   type CreateExerciseInput,
   type UpdateExerciseInput,
   type ExerciseRelationInput,
-} from '@onecoach/schemas';
-import { validateExerciseTypeByName } from '@onecoach/lib-metadata';
+} from '@giulio-leone/schemas';
+import { validateExerciseTypeByName } from '@giulio-leone/lib-metadata';
 
 import { z } from 'zod';
 type ExerciseApprovalStatus = 'APPROVED' | 'PENDING';

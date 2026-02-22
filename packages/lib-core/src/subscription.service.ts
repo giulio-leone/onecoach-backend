@@ -8,8 +8,8 @@
 import Stripe from 'stripe';
 import { createId } from '@paralleldrive/cuid2';
 import { SubscriptionPlan, SubscriptionStatus } from '@prisma/client';
-import { getSubscriptionPriceId, getCreditsFromPriceId } from '@onecoach/constants';
-import type { ISubscriptionService } from '@onecoach/contracts'; 
+import { getSubscriptionPriceId, getCreditsFromPriceId } from '@giulio-leone/constants';
+import type { ISubscriptionService } from '@giulio-leone/contracts'; 
 import { logger } from './logger.service';
 import { creditService } from './credit.service';
 import { SetupIntentService } from './setup-intent.service';

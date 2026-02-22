@@ -7,9 +7,9 @@
  * @module lib-food/food-vision
  */
 
-import { parseWithVisionAI } from '@onecoach/lib-import-core';
+import { parseWithVisionAI } from '@giulio-leone/lib-import-core';
 import { z } from 'zod';
-import type { LabelExtractionResult, DishSegmentationResult } from '@onecoach/types';
+import type { LabelExtractionResult, DishSegmentationResult } from '@giulio-leone/types';
 
 // ==================== SCHEMAS ====================
 
@@ -160,7 +160,7 @@ export async function updateVisionModelConfig(
   dishSegmentation?: string
 ): Promise<void> {
   // Import dynamically to avoid circular dependencies
-  const { prisma } = await import('@onecoach/lib-core');
+  const { prisma } = await import('@giulio-leone/lib-core');
   const { AIProvider } = await import('@prisma/client');
   
   const currentConfig = await prisma.ai_provider_configs.findUnique({

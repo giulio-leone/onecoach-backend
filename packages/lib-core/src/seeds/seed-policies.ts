@@ -1,5 +1,5 @@
 import { PolicyStatus, PrismaClient } from '@prisma/client';
-import { createId } from '@onecoach/lib-shared';
+import { createId } from '@giulio-leone/lib-shared';
 
 export async function seedPolicies(prisma: PrismaClient, adminUserId: string) {
   const basePolicies = [

@@ -1,8 +1,7 @@
 /**
- * @onecoach/lib-metadata
+ * @giulio-leone/lib-metadata
  *
  * Servizi per il dominio metadata
- * Implementa contratti da @onecoach/contracts
  */
 
 export * from './catalog-provider.service';

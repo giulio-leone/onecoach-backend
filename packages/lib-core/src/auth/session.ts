@@ -9,7 +9,7 @@ import type { Session } from 'next-auth';
 import type { UserRole } from '@prisma/client';
 // TODO: Spostare logError in lib-shared o creare utility per errori
 // Per ora manteniamo import da lib/utils/logger per evitare dipendenze extra
-import { logError } from '@onecoach/lib-shared';
+import { logError } from '@giulio-leone/lib-shared';
 import { normalizeRole, roleSatisfies } from './roles';
 
 export type AuthenticatedUser = {
