@@ -26,14 +26,14 @@
     "zod": "^4.3.6"
   },
   "peerDependencies": {
-    "@giulio-leone/contracts": "^0.1.0",
-    "@giulio-leone/lib-api": "^0.1.0",
-    "@giulio-leone/lib-core": "^0.1.0",
-    "@giulio-leone/lib-food": "^0.1.0",
-    "@giulio-leone/lib-registry": "^0.1.0",
-    "@giulio-leone/one-agent": "^0.1.0",
-    "@giulio-leone/schemas": "^0.1.0",
-    "@giulio-leone/types": "^0.2.0"
+    "@giulio-leone/contracts": "workspace:*",
+    "@giulio-leone/lib-api": "workspace:*",
+    "@giulio-leone/lib-core": "workspace:*",
+    "@giulio-leone/lib-food": "workspace:*",
+    "@giulio-leone/lib-registry": "workspace:*",
+    "@giulio-leone/one-agent": "workspace:*",
+    "@giulio-leone/schemas": "workspace:*",
+    "@giulio-leone/types": "workspace:*"
   },
   "sideEffects": false
 }

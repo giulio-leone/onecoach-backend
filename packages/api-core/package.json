@@ -22,16 +22,16 @@
     "zod": "4.3.6"
   },
   "peerDependencies": {
-    "@giulio-leone/constants": "^0.1.0",
-    "@giulio-leone/contracts": "^0.1.0",
-    "@giulio-leone/lib-core": "^0.1.0",
-    "@giulio-leone/lib-marketplace": "^0.1.0",
-    "@giulio-leone/lib-registry": "^0.1.0",
-    "@giulio-leone/one-workout": "^0.1.0",
-    "@giulio-leone/schemas": "^0.1.0",
-    "@giulio-leone/types": "^0.2.0",
+    "@giulio-leone/constants": "workspace:*",
+    "@giulio-leone/contracts": "workspace:*",
+    "@giulio-leone/lib-core": "workspace:*",
+    "@giulio-leone/lib-marketplace": "workspace:*",
+    "@giulio-leone/lib-registry": "workspace:*",
+    "@giulio-leone/one-workout": "workspace:*",
+    "@giulio-leone/schemas": "workspace:*",
+    "@giulio-leone/types": "workspace:*",
     "next": ">=16.0.0",
-    "next-auth": ">=5.0.0"
+    "next-auth": "5.0.0-beta.30"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

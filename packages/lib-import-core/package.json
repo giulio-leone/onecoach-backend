@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",
-    "@giulio-leone/lib-ai": "^0.1.0",
-    "@giulio-leone/lib-core": "^0.1.0",
-    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-ai": "workspace:*",
+    "@giulio-leone/lib-core": "workspace:*",
+    "@giulio-leone/lib-shared": "workspace:*",
     "ai": "6.0.77",
     "zod": "^3.0.0"
   },

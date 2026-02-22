@@ -9,10 +9,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@giulio-leone/contracts": "^0.1.0",
-    "@giulio-leone/lib-registry": "^0.1.0",
-    "@giulio-leone/one-workout": "^0.1.0",
-    "@giulio-leone/schemas": "^0.1.0"
+    "@giulio-leone/contracts": "workspace:*",
+    "@giulio-leone/lib-registry": "workspace:*",
+    "@giulio-leone/one-workout": "workspace:*",
+    "@giulio-leone/schemas": "workspace:*"
   },
   "peerDependencies": {
     "next": ">=16.0.0"

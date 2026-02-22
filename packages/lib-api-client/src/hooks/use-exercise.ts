@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Exercise React Query Hooks
  *

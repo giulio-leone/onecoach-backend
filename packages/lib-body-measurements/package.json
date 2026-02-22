@@ -23,13 +23,13 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@giulio-leone/lib-import-core": "^0.1.0",
+    "@giulio-leone/lib-import-core": "workspace:*",
     "zod": "^4.3.6"
   },
   "peerDependencies": {
-    "@giulio-leone/constants": "^0.1.0",
-    "@giulio-leone/lib-ai": "^0.1.0",
-    "@giulio-leone/lib-core": "^0.1.0"
+    "@giulio-leone/constants": "workspace:*",
+    "@giulio-leone/lib-ai": "workspace:*",
+    "@giulio-leone/lib-core": "workspace:*"
   },
   "sideEffects": false,
   "repository": {

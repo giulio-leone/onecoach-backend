@@ -30,8 +30,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@giulio-leone/lib-core": "^0.1.0",
-    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-core": "workspace:*",
+    "@giulio-leone/lib-shared": "workspace:*",
     "@paralleldrive/cuid2": "^2.2.2"
   },
   "peerDependencies": {

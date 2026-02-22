@@ -24,9 +24,9 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@giulio-leone/lib-registry": "^0.1.0",
-    "@giulio-leone/schemas": "^0.1.0",
-    "@giulio-leone/one-nutrition": "^0.1.0"
+    "@giulio-leone/lib-registry": "workspace:*",
+    "@giulio-leone/schemas": "workspace:*",
+    "@giulio-leone/one-nutrition": "workspace:*"
   },
   "peerDependencies": {
     "next": "^16.0.0"
