@@ -11,7 +11,7 @@ import type { McpTool } from '../../types';
 import {
   BodyMeasurementsImportService,
   BodyMeasurementsVisionService,
-} from '@onecoach/lib-body-measurements';
+} from '@giulio-leone/lib-body-measurements';
 import {
   ImportFileSchema,
   ImportOptionsSchema,
@@ -20,11 +20,11 @@ import {
   type ImportProgress,
   type AIParseContext,
   type ImportFile,
-} from '@onecoach/lib-import-core';
-import type { ImportedBodyMeasurements } from '@onecoach/lib-body-measurements';
+} from '@giulio-leone/lib-import-core';
+import type { ImportedBodyMeasurements } from '@giulio-leone/lib-body-measurements';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // Re-export constants for UI/Client usage
 export const supportedFormats = {
   spreadsheets: ['csv', 'xlsx', 'xls', 'ods'],

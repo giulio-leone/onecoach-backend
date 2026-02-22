@@ -10,7 +10,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { exerciseApi } from '../exercise';
 import { exerciseKeys, exerciseQueries } from '../queries/exercise.queries';
 import type { ExercisesResponse, ExerciseListParams, Exercise } from '../exercise';
-import { ExerciseApprovalStatus } from '@onecoach/types-database';
+import { ExerciseApprovalStatus } from '@giulio-leone/types/database';
 
 /**
  * Hook to get all exercises with optional filters

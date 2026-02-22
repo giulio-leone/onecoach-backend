@@ -13,14 +13,14 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { exerciseService } from '@onecoach/lib-exercise';
+import { exerciseService } from '@giulio-leone/lib-exercise';
 import { MuscleRole } from '@prisma/client';
 import {
   validateExerciseTypeByName,
   validateMusclesByName,
   validateBodyPartsByName,
   validateEquipmentByName,
-} from '@onecoach/lib-metadata';
+} from '@giulio-leone/lib-metadata';
 
 /**
  * Valid muscle names from the database catalog.

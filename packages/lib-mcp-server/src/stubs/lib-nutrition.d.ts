@@ -3,7 +3,7 @@ import type {
   ImportFile,
   ImportOptions,
   ImportProgress,
-} from '@onecoach/lib-import-core';
+} from '@giulio-leone/lib-import-core';
 
 export type NutritionImportResult = {
   success: boolean;

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { foodService } from '@onecoach/lib-food';
-import { updateFoodSchema } from '@onecoach/schemas';
+import { foodService } from '@giulio-leone/lib-food';
+import { updateFoodSchema } from '@giulio-leone/schemas';
 
 const updateParameters = z.object({
   id: z.string(),

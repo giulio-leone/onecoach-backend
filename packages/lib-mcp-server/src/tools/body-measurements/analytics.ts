@@ -8,7 +8,7 @@
 
 import { z } from 'zod';
 import type { McpTool } from '../../types';
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
 // ==================== ANALYZE TRENDS ====================
 

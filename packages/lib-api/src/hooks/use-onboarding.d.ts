@@ -16,11 +16,11 @@ import type { CompleteStepPayload, GoToStepPayload } from '../queries/onboarding
  */
 export declare function useOnboardingProgress(options?: {
     enabled?: boolean;
-}): import("@tanstack/react-query").UseQueryResult<import("@onecoach/constants").OnboardingProgress, Error>;
+}): import("@tanstack/react-query").UseQueryResult<import("@giulio-leone/constants").OnboardingProgress, Error>;
 /**
  * Hook to complete a step
  */
-export declare function useCompleteStep(): import("@tanstack/react-query").UseMutationResult<import("@onecoach/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
+export declare function useCompleteStep(): import("@tanstack/react-query").UseMutationResult<import("@giulio-leone/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
 /**
  * Hook to skip a step
  */
@@ -39,7 +39,7 @@ export declare function useSkipStep(): {
     failureReason: Error | null;
     isPaused: boolean;
     submittedAt: number;
-    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@onecoach/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
+    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@giulio-leone/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
     mutate: (stepNumber: number) => void;
 } | {
     data: undefined;
@@ -56,7 +56,7 @@ export declare function useSkipStep(): {
     failureReason: Error | null;
     isPaused: boolean;
     submittedAt: number;
-    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@onecoach/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
+    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@giulio-leone/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
     mutate: (stepNumber: number) => void;
 } | {
     data: undefined;
@@ -73,10 +73,10 @@ export declare function useSkipStep(): {
     failureReason: Error | null;
     isPaused: boolean;
     submittedAt: number;
-    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@onecoach/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
+    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@giulio-leone/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
     mutate: (stepNumber: number) => void;
 } | {
-    data: import("@onecoach/constants").OnboardingProgress;
+    data: import("@giulio-leone/constants").OnboardingProgress;
     error: null;
     variables: CompleteStepPayload;
     isError: false;
@@ -90,21 +90,21 @@ export declare function useSkipStep(): {
     failureReason: Error | null;
     isPaused: boolean;
     submittedAt: number;
-    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@onecoach/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
+    mutateAsync: import("@tanstack/react-query").UseMutateAsyncFunction<import("@giulio-leone/constants").OnboardingProgress, Error, CompleteStepPayload, void>;
     mutate: (stepNumber: number) => void;
 };
 /**
  * Hook to go to a specific step
  */
-export declare function useGoToStep(): import("@tanstack/react-query").UseMutationResult<import("@onecoach/constants").OnboardingProgress, Error, GoToStepPayload, void>;
+export declare function useGoToStep(): import("@tanstack/react-query").UseMutationResult<import("@giulio-leone/constants").OnboardingProgress, Error, GoToStepPayload, void>;
 /**
  * Hook to reset onboarding
  */
-export declare function useResetOnboarding(): import("@tanstack/react-query").UseMutationResult<import("@onecoach/constants").OnboardingProgress, Error, void, void>;
+export declare function useResetOnboarding(): import("@tanstack/react-query").UseMutationResult<import("@giulio-leone/constants").OnboardingProgress, Error, void, void>;
 /**
  * Hook to complete all steps
  */
-export declare function useCompleteAllSteps(): import("@tanstack/react-query").UseMutationResult<import("@onecoach/constants").OnboardingProgress, Error, void, void>;
+export declare function useCompleteAllSteps(): import("@tanstack/react-query").UseMutationResult<import("@giulio-leone/constants").OnboardingProgress, Error, void, void>;
 /**
  * Hook to check if onboarding is completed
  * Usa lo Zustand store invece di fare fetch

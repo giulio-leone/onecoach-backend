@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { NutritionImportService, createNutritionAIContext } from '@onecoach/lib-nutrition';
-import { IMPORT_LIMITS } from '@onecoach/lib-import-core';
+import { NutritionImportService, createNutritionAIContext } from '@giulio-leone/lib-nutrition';
+import { IMPORT_LIMITS } from '@giulio-leone/lib-import-core';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 const importFileSchema = z.object({
   name: z.string(),
   mimeType: z.string().optional(),

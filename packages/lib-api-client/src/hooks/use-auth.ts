@@ -10,10 +10,10 @@ import { useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession, signOut as nextAuthSignOut } from 'next-auth/react';
 import { authKeys, authQueries } from '../queries/auth.queries';
-import { useAuthStore } from '@onecoach/lib-stores/auth.store';
+import { useAuthStore } from '@giulio-leone/lib-stores/auth.store';
 import type { RefreshTokenRequest } from '../queries/auth.queries';
-import type { User } from '@onecoach/lib-stores/auth.store';
-import { normalizeRole, roleSatisfies } from '@onecoach/lib-core/auth/roles';
+import type { User } from '@giulio-leone/lib-stores/auth.store';
+import { normalizeRole, roleSatisfies } from '@giulio-leone/lib-core/auth/roles';
 
 /**
  * Hook to sync NextAuth session with Zustand store

@@ -9,7 +9,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, type Prisma } from '@onecoach/lib-core';
+import { prisma, type Prisma } from '@giulio-leone/lib-core';
 
 // ============================================================================
 // MARKETPLACE PLAN TOOLS

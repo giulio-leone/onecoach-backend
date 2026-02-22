@@ -4,7 +4,7 @@
  * Standardized query keys and query functions for coach-related queries
  */
 import type { PublicCoachProfileResponse } from '../coach';
-import type { MarketplacePlanType } from '@onecoach/types';
+import type { MarketplacePlanType } from '@giulio-leone/types';
 /**
  * MarketplacePlanCardProps - aligned with CoachPlanCardProps in UI
  */

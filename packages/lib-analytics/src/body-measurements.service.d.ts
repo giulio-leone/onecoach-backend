@@ -5,7 +5,7 @@
  * Follows SOLID principles with single responsibility.
  */
 import 'server-only';
-import type { BodyMeasurement } from '@onecoach/types';
+import type { BodyMeasurement } from '@giulio-leone/types';
 export interface CreateBodyMeasurementInput {
     date: Date;
     weight?: number;

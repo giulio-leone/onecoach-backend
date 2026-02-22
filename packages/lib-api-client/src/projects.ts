@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import type { Project } from '@onecoach/types-domain';
+import type { Project } from '@giulio-leone/types/domain';
 
 export interface ProjectsResponse {
   projects: Project[];

@@ -10,7 +10,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { projectsApi, type CreateProjectInput } from '../projects';
 import { getErrorMessage } from '../utils/error';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 /**
  * Query keys for projects
  */

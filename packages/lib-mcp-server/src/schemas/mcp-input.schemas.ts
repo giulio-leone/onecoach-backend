@@ -1,10 +1,10 @@
 /**
  * MCP Input Schemas
  *
- * RE-EXPORTED FROM @onecoach/schemas/ai
+ * RE-EXPORTED FROM @giulio-leone/schemas/ai
  *
  * Schemi Zod tipizzati per validazione input MCP tools.
- * Spostati in @onecoach/schemas per evitare cicli.
+ * Spostati in @giulio-leone/schemas per evitare cicli.
  *
  * @module lib-mcp-server/schemas
  */
@@ -31,7 +31,7 @@ import {
   // Validation helpers
   validateNutritionPlan,
   validateWorkoutProgram,
-} from '@onecoach/schemas';
+} from '@giulio-leone/schemas';
 
 // Re-export constants
 export {

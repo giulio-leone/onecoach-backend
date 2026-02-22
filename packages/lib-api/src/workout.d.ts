@@ -3,7 +3,7 @@
  *
  * API functions per workout programs
  */
-import type { WorkoutProgram } from '@onecoach/types';
+import type { WorkoutProgram } from '@giulio-leone/types';
 export interface WorkoutProgramResponse {
     program: WorkoutProgram;
 }

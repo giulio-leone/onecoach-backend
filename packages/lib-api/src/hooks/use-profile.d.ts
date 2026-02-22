@@ -4,7 +4,7 @@
  * Custom hooks for user profile queries and mutations
  */
 import type { UserProfileData } from '../queries/profile.queries';
-import type { WeightUnit } from '@onecoach/types/client';
+import type { WeightUnit } from '@giulio-leone/types/client';
 /**
  * Hook to get user profile
  *

@@ -9,7 +9,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { profileKeys, profileQueries } from '../queries/profile.queries';
 import type { UserProfileData } from '../queries/profile.queries';
-import type { WeightUnit } from '@onecoach/types';
+import type { WeightUnit } from '@giulio-leone/types';
 
 /**
  * Hook to get user profile

@@ -22,11 +22,11 @@ import {
   type Purchase,
   type PurchaseError,
 } from 'react-native-iap';
-import { useIAPProducts, useIAPSubscription, useIAPPurchase } from '@onecoach/lib-stores/iap.store';
+import { useIAPProducts, useIAPSubscription, useIAPPurchase } from '@giulio-leone/lib-stores/iap.store';
 import { useSubscriptionStatus, usePurchaseProduct, useRestorePurchases } from './use-iap';
-import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@onecoach/constants';
-import type { ProductId } from '@onecoach/lib-stores/iap.store';
-import { logger } from '@onecoach/lib-shared';
+import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@giulio-leone/constants';
+import type { ProductId } from '@giulio-leone/lib-stores/iap.store';
+import { logger } from '@giulio-leone/lib-shared';
 
 /**
  * Hook to manage IAP in React Native

@@ -9,8 +9,8 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, type Prisma } from '@onecoach/lib-core';
-import { fuzzyMatch, successResult } from '@onecoach/lib-copilot-framework';
+import { prisma, type Prisma } from '@giulio-leone/lib-core';
+import { fuzzyMatch, successResult } from '@giulio-leone/lib-copilot-framework';
 
 // =====================================================
 // Type Definitions (Mirrors day-meal.ts)

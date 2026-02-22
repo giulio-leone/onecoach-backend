@@ -9,8 +9,8 @@
 import { useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { healthKeys, healthQueries, type HealthSyncRequest } from '../queries/health.queries';
-import { useHealthStore } from '@onecoach/lib-stores/health.store';
-import { getErrorMessage } from '@onecoach/lib-shared';
+import { useHealthStore } from '@giulio-leone/lib-stores/health.store';
+import { getErrorMessage } from '@giulio-leone/lib-shared';
 
 /**
  * Hook to get health summary

@@ -1,91 +1,107 @@
 {
-  "name": "@onecoach/lib-api",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-api",
+  "version": "0.1.0",
   "description": "API client e hooks per React Query",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./client": {
-      "types": "./src/client.ts",
-      "default": "./src/client.ts"
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.js"
     },
     "./react-query": {
-      "types": "./src/react-query/index.ts",
-      "default": "./src/react-query/index.ts"
+      "types": "./dist/react-query/index.d.ts",
+      "import": "./dist/react-query/index.mjs",
+      "require": "./dist/react-query/index.js"
     },
     "./hooks": {
-      "types": "./src/hooks/index.ts",
-      "default": "./src/hooks/index.ts"
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.mjs",
+      "require": "./dist/hooks/index.js"
     },
     "./hooks/*": {
-      "types": "./src/hooks/*.ts",
-      "default": "./src/hooks/*.ts"
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.mjs",
+      "require": "./dist/hooks/*.js"
     },
     "./habits": {
-      "types": "./src/habits.ts",
-      "default": "./src/habits.ts"
+      "types": "./dist/habits.d.ts",
+      "import": "./dist/habits.mjs",
+      "require": "./dist/habits.js"
     },
     "./error-handler/core": {
-      "types": "./src/error-handler/core.ts",
-      "default": "./src/error-handler/core.ts"
+      "types": "./dist/error-handler/core.d.ts",
+      "import": "./dist/error-handler/core.mjs",
+      "require": "./dist/error-handler/core.js"
     },
     "./projects": {
-      "types": "./src/projects.ts",
-      "default": "./src/projects.ts"
+      "types": "./dist/projects.d.ts",
+      "import": "./dist/projects.mjs",
+      "require": "./dist/projects.js"
     },
     "./queries/exercise.queries": {
-      "types": "./src/queries/exercise.queries.ts",
-      "default": "./src/queries/exercise.queries.ts"
+      "types": "./dist/queries/exercise.queries.d.ts",
+      "import": "./dist/queries/exercise.queries.mjs",
+      "require": "./dist/queries/exercise.queries.js"
     },
     "./utils/generation-handler": {
-      "types": "./src/utils/generation-handler.ts",
-      "default": "./src/utils/generation-handler.ts"
+      "types": "./dist/utils/generation-handler.d.ts",
+      "import": "./dist/utils/generation-handler.mjs",
+      "require": "./dist/utils/generation-handler.js"
     },
     "./utils/streaming-handler": {
-      "types": "./src/utils/streaming-handler.ts",
-      "default": "./src/utils/streaming-handler.ts"
+      "types": "./dist/utils/streaming-handler.d.ts",
+      "import": "./dist/utils/streaming-handler.mjs",
+      "require": "./dist/utils/streaming-handler.js"
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/constants": "workspace:*",
-    "@onecoach/contracts": "workspace:*",
-    "@onecoach/lib-config": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/lib-stores": "workspace:*",
-    "@onecoach/schemas": "workspace:*",
-    "@prisma/client": "^7.2.0",
-    "@tanstack/react-query": "^5.90.20",
-    "react": "^19.2.3",
-    "react-native": "^0.83.1",
-    "@onecoach/types": "workspace:*",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@giulio-leone/constants": "^0.1.0",
+    "@giulio-leone/contracts": "^0.1.0",
+    "@giulio-leone/lib-config": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-stores": "^0.1.0",
+    "@giulio-leone/schemas": "^0.1.0",
+    "@tanstack/react-query": "^5.90.20"
   },
   "peerDependencies": {
+    "@giulio-leone/types": "^0.2.0",
+    "@prisma/client": "*",
     "react": ">=19.1.0 <20",
-    "react-native": ">=0.81 <0.83"
+    "react-native": ">=0.81 <0.83",
+    "next": "*",
+    "next-auth": "*"
   },
   "peerDependenciesMeta": {
     "react-native": {
       "optional": true
+    },
+    "next": {
+      "optional": true
+    },
+    "next-auth": {
+      "optional": true
     }
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

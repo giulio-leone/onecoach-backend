@@ -3,7 +3,7 @@
  *
  * TanStack Query keys and functions for in-app purchases
  */
-import type { SubscriptionStatus, ProductId } from '@onecoach/lib-stores/iap.store';
+import type { SubscriptionStatus, ProductId } from '@giulio-leone/lib-stores/iap.store';
 /**
  * IAP query keys factory
  */

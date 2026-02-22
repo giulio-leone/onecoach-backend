@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { OneAgendaImportService } from '../import.service';
-import type { AIParseContext } from '@onecoach/lib-import-core';
+import type { AIParseContext } from '@giulio-leone/lib-import-core';
 import type { ImportedOneAgenda } from '../imported-oneagenda.schema';
 
-vi.mock('@onecoach/lib-core', () => ({
+vi.mock('@giulio-leone/lib-core', () => ({
   prisma: {
     $transaction: (fn: any) =>
       fn({

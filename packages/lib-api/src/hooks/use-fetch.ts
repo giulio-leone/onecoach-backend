@@ -13,7 +13,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { handleApiError } from '@onecoach/lib-shared';
+import { handleApiError } from '@giulio-leone/lib-shared';
 
 export interface UseFetchOptions<T> {
   url: string | null;

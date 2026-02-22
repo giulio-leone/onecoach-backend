@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { exerciseService } from '@onecoach/lib-exercise';
+import { exerciseService } from '@giulio-leone/lib-exercise';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 const batchDeleteParameters = z.object({
   ids: z.array(z.string()).max(100),
 });

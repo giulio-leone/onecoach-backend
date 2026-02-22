@@ -14,8 +14,8 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, Prisma } from '@onecoach/lib-core';
-import { toPrismaJsonValue } from '@onecoach/lib-shared';
+import { prisma, Prisma } from '@giulio-leone/lib-core';
+import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import {
   createMcpTextResponse,
   safeHandleMemoryEvent,

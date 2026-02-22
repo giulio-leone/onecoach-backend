@@ -119,7 +119,7 @@ interface QueryProviderProps {
  *
  * Usage:
  * ```tsx
- * import { QueryProvider } from '@onecoach/lib-api-client/react-query';
+ * import { QueryProvider } from '@giulio-leone/lib-api-client/react-query';
  *
  * function App() {
  *   return (

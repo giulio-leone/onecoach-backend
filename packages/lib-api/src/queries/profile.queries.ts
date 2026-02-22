@@ -4,7 +4,7 @@
  * Standardized query keys and query functions for user profile queries
  */
 
-import type { ActivityLevel, Sex, WeightUnit, DietType } from '@onecoach/types';
+import type { ActivityLevel, Sex, WeightUnit, DietType } from '@giulio-leone/types';
 
 /**
  * User profile data type

@@ -11,8 +11,8 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { userProfileService, prisma } from '@onecoach/lib-core';
-import { createId } from '@onecoach/lib-shared';
+import { userProfileService, prisma } from '@giulio-leone/lib-core';
+import { createId } from '@giulio-leone/lib-shared';
 
 // ============================================================================
 // PROFILE TOOLS

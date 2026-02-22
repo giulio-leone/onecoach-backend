@@ -12,7 +12,7 @@
  * @module lib-mcp-server/utils/helpers
  */
 
-import { logger, handleMemoryEvent } from '@onecoach/lib-core';
+import { logger, handleMemoryEvent } from '@giulio-leone/lib-core';
 import type { McpSuccessResponse, McpTool } from '../types';
 
 // ============================================================================

@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * MCP Context - Extended context for all MCP tools
  *
- * Aligned with McpToolContext from @onecoach/lib-stores/copilot.store.ts
+ * Aligned with McpToolContext from @giulio-leone/lib-stores/copilot.store.ts
  * Contains all contextual information needed for MCP tool execution
  */
 export interface McpContext {

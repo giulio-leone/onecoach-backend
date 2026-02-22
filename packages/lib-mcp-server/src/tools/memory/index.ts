@@ -7,7 +7,7 @@
  */
 
 import { z } from 'zod';
-import { type MemoryDomain, userMemoryService, timelineService } from '@onecoach/lib-core';
+import { type MemoryDomain, userMemoryService, timelineService } from '@giulio-leone/lib-core';
 import type { McpTool, McpContext } from '../../types'; // Assuming types are here or widely available
 
 // ============================================================================

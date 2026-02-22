@@ -5,7 +5,7 @@
  */
 
 import { apiClient } from '../client';
-import type { HealthSummary, HealthPlatform } from '@onecoach/lib-stores/health.store';
+import type { HealthSummary, HealthPlatform } from '@giulio-leone/lib-stores/health.store';
 
 /**
  * Health data type

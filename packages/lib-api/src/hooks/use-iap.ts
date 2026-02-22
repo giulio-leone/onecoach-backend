@@ -14,8 +14,8 @@ import {
   type VerifyReceiptRequest,
   type RestorePurchasesRequest,
 } from '../queries/iap.queries';
-import { useIAPStore } from '@onecoach/lib-stores/iap.store';
-import { getErrorMessage } from '@onecoach/lib-shared';
+import { useIAPStore } from '@giulio-leone/lib-stores/iap.store';
+import { getErrorMessage } from '@giulio-leone/lib-shared';
 
 /**
  * Hook to get subscription status

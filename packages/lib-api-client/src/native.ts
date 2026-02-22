@@ -2,7 +2,7 @@
  * Native API Client Entry Point
  *
  * This is the entry point for React Native apps.
- * Import from '@onecoach/lib-api-client/native' in React Native.
+ * Import from '@giulio-leone/lib-api-client/native' in React Native.
  */
 
 import { NativeApiClient } from './core/native-client';

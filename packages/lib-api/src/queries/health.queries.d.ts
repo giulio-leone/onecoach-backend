@@ -3,7 +3,7 @@
  *
  * TanStack Query keys and functions for health data
  */
-import type { HealthSummary, HealthPlatform } from '@onecoach/lib-stores/health.store';
+import type { HealthSummary, HealthPlatform } from '@giulio-leone/lib-stores/health.store';
 /**
  * Health data type
  */

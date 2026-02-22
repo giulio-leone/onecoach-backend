@@ -8,8 +8,8 @@
  */
 
 import { z } from 'zod';
-import type { AgenticActionHandler } from '@onecoach/lib-copilot-framework';
-import { generateId } from '@onecoach/lib-copilot-framework';
+import type { AgenticActionHandler } from '@giulio-leone/lib-copilot-framework';
+import { generateId } from '@giulio-leone/lib-copilot-framework';
 
 // =====================================================
 // Types

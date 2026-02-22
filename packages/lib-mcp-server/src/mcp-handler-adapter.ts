@@ -18,7 +18,7 @@
 import type { McpTool, McpContext, McpResponse } from './types';
 import { formatMcpSuccess, formatMcpError } from './utils/error-handler';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // Tipo per authInfo secondo la documentazione ufficiale
 interface AuthInfo {
   token: string;

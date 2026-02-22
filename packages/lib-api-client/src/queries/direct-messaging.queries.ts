@@ -5,7 +5,7 @@
  */
 
 import type { direct_conversations, direct_messages, ConversationPriority } from '@prisma/client';
-import type { DirectConversationWithUser, DirectMessageWithSender } from '@onecoach/lib-core';
+import type { DirectConversationWithUser, DirectMessageWithSender } from '@giulio-leone/lib-core';
 
 // ============================================================================
 // Query Keys

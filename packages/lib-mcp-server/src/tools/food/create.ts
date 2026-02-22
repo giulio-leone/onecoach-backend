@@ -1,8 +1,8 @@
 import type { McpTool, McpContext } from '../../types';
-import { foodService } from '@onecoach/lib-food';
-import { createFoodSchema } from '@onecoach/schemas';
+import { foodService } from '@giulio-leone/lib-food';
+import { createFoodSchema } from '@giulio-leone/schemas';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const foodCreateTool: McpTool = {
   name: 'food_create',
   description: `Creates a new food item. Requires admin privileges.

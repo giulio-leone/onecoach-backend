@@ -1,74 +1,97 @@
 {
-  "name": "@onecoach/lib-api-client",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-api-client",
+  "version": "0.1.0",
   "description": "API client (core, hooks, queries, react-query) per web e native",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./hooks": {
-      "types": "./src/hooks/index.ts",
-      "default": "./src/hooks/index.ts"
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.mjs",
+      "require": "./dist/hooks/index.js"
     },
     "./hooks/*": {
-      "types": "./src/hooks/*.ts",
-      "default": "./src/hooks/*.ts"
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.mjs",
+      "require": "./dist/hooks/*.js"
     },
     "./react-query": {
-      "types": "./src/react-query/index.ts",
-      "default": "./src/react-query/index.ts"
+      "types": "./dist/react-query/index.d.ts",
+      "import": "./dist/react-query/index.mjs",
+      "require": "./dist/react-query/index.js"
     },
     "./react-query/*": {
-      "types": "./src/react-query/*.ts",
-      "default": "./src/react-query/*.ts"
+      "types": "./dist/react-query/*.d.ts",
+      "import": "./dist/react-query/*.mjs",
+      "require": "./dist/react-query/*.js"
     },
     "./queries": {
-      "types": "./src/queries/index.ts",
-      "default": "./src/queries/index.ts"
+      "types": "./dist/queries/index.d.ts",
+      "import": "./dist/queries/index.mjs",
+      "require": "./dist/queries/index.js"
     },
     "./queries/*": {
-      "types": "./src/queries/*.ts",
-      "default": "./src/queries/*.ts"
+      "types": "./dist/queries/*.d.ts",
+      "import": "./dist/queries/*.mjs",
+      "require": "./dist/queries/*.js"
     },
     "./memory": {
-      "types": "./src/memory.ts",
-      "default": "./src/memory.ts"
+      "types": "./dist/memory.d.ts",
+      "import": "./dist/memory.mjs",
+      "require": "./dist/memory.js"
     },
     "./native": {
-      "types": "./src/native.ts",
-      "default": "./src/native.ts"
+      "types": "./dist/native.d.ts",
+      "import": "./dist/native.mjs",
+      "require": "./dist/native.js"
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-marketplace": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/lib-stores": "workspace:*",
-    "@tanstack/react-query": "^5.90.20",
-    "react": "^19.2.3",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "@tanstack/react-query": "^5.90.20"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "peerDependencies": {
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-marketplace": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-stores": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@giulio-leone/lib-core": {
+      "optional": false
+    },
+    "@giulio-leone/lib-marketplace": {
+      "optional": false
+    },
+    "@giulio-leone/lib-shared": {
+      "optional": false
+    },
+    "@giulio-leone/lib-stores": {
+      "optional": false
+    },
+    "@giulio-leone/types": {
+      "optional": false
+    }
   },
   "sideEffects": false
 }

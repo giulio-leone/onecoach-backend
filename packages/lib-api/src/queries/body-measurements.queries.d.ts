@@ -3,7 +3,7 @@
  *
  * Standardized query keys and query functions for body measurements queries
  */
-import type { BodyMeasurement } from '@onecoach/types';
+import type { BodyMeasurement } from '@giulio-leone/types';
 /**
  * Query keys for body measurements queries
  */

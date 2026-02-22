@@ -16,14 +16,14 @@ import {
   IMPORT_LIMITS,
   SUPPORTED_MIME_TYPES,
   WorkoutVisionService as VisionService,
-} from '@onecoach/one-workout';
-import type { ImportProgress } from '@onecoach/lib-import-core';
+} from '@giulio-leone/one-workout';
+import type { ImportProgress } from '@giulio-leone/lib-import-core';
 import {
   type ImportedWorkoutProgram,
-} from '@onecoach/schemas';
+} from '@giulio-leone/schemas';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 /**
  * Schema per i parametri del tool
  */

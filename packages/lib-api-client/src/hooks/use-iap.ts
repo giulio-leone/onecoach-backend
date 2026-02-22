@@ -14,7 +14,7 @@ import {
   type VerifyReceiptRequest,
   type RestorePurchasesRequest,
 } from '../queries/iap.queries';
-import { useIAPStore } from '@onecoach/lib-stores';
+import { useIAPStore } from '@giulio-leone/lib-stores';
 import { getErrorMessage } from '../utils/error';
 
 /**

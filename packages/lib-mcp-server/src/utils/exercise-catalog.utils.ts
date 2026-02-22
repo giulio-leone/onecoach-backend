@@ -7,7 +7,7 @@
  * Schema: exercises has no 'name' field - names are in exercise_translations
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
 // ============================================================================
 // Types

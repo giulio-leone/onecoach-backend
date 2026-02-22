@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-food
+ * @giulio-leone/api-food
  *
  * API routes per il dominio alimenti
  * Esporta route handlers che possono essere usati in apps/next/app/api/food/*

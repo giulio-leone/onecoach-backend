@@ -5,7 +5,7 @@
  * Follows SOLID principles with single responsibility.
  */
 import 'server-only';
-import type { UserAnalyticsReport, AnalyticsChartData, TimeSeriesDataPoint, UserGoal } from '@onecoach/types';
+import type { UserAnalyticsReport, AnalyticsChartData, TimeSeriesDataPoint, UserGoal } from '@giulio-leone/types';
 export declare function getBodyMetricsTimeSeries(userId: string, metric: 'weight' | 'bodyFat' | 'muscleMass', startDate: Date, endDate: Date): Promise<TimeSeriesDataPoint[]>;
 export declare function getBodyMetricsChange(userId: string, startDate: Date, endDate: Date): Promise<{
     weight: number | undefined;

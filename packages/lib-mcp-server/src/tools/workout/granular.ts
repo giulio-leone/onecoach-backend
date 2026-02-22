@@ -14,11 +14,11 @@
 
 import { z } from 'zod';
 import type { McpTool } from '../../types';
-import { GranularSessionService } from '@onecoach/one-workout';
-import { workoutProgramSchema } from '@onecoach/schemas';
+import { GranularSessionService } from '@giulio-leone/one-workout';
+import { workoutProgramSchema } from '@giulio-leone/schemas';
 import { normalizeWorkoutProgram } from './program-normalizer';
-import { prisma } from '@onecoach/lib-core';
-import { toPrismaJsonValue } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 
 // =====================================================
 // MCP-Safe Schema (JSON-compatible for AI SDK)

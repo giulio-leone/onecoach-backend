@@ -14,14 +14,14 @@
 'use client';
 
 import { useSyncAuth } from './use-auth';
-import { useAuthStore } from '@onecoach/lib-stores/auth';
-import type { User } from '@onecoach/lib-stores/auth';
+import { useAuthStore } from '@giulio-leone/lib-stores/auth';
+import type { User } from '@giulio-leone/lib-stores/auth';
 import {
   isAdminRole,
   isCoachRole,
   normalizeRole,
   roleSatisfies,
-} from '@onecoach/lib-core';
+} from '@giulio-leone/lib-core';
 
 /**
  * Unified auth hook return type

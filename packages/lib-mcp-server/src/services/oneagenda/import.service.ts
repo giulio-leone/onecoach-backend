@@ -1,14 +1,14 @@
 import type { Prisma } from '@prisma/client';
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import type {
   AIParseContext,
   ImportOptions,
   BaseImportResult,
-} from '@onecoach/lib-import-core';
+} from '@giulio-leone/lib-import-core';
 import {
   BaseImportService,
   parseWithVisionAI,
-} from '@onecoach/lib-import-core';
+} from '@giulio-leone/lib-import-core';
 import type {
   ImportedOneAgenda,
   ImportedProject,

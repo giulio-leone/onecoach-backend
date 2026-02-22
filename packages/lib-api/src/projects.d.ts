@@ -1,4 +1,4 @@
-import type { Project } from '@onecoach/types';
+import type { Project } from '@giulio-leone/types';
 export interface ProjectsResponse {
     projects: Project[];
 }

@@ -1,4 +1,4 @@
-import type { WorkoutProgram, WorkoutStatus } from '@onecoach/types';
+import type { WorkoutProgram, WorkoutStatus } from '@giulio-leone/types';
 
 type WorkoutProgramLike = Omit<
   Partial<WorkoutProgram>,
@@ -17,7 +17,7 @@ type WorkoutProgramLike = Omit<
 
 /**
  * Normalizza un programma workout di input aggiungendo i metadati obbligatori
- * richiesti dai servizi @onecoach/lib-workout (status/id/timestamps).
+ * richiesti dai servizi @giulio-leone/lib-workout (status/id/timestamps).
  */
 export function normalizeWorkoutProgram(program: WorkoutProgramLike): WorkoutProgram {
   const nowIso = new Date().toISOString();
