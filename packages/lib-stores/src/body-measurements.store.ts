@@ -6,11 +6,11 @@
  * Zustand store for managing body measurement state with Realtime sync.
  * Each measurement entry is a version, providing built-in history.
  *
- * SSOT: Types imported from @onecoach/types
+ * SSOT: Types imported from @giulio-leone/types
  */
 
 import { create } from 'zustand';
-import type { BodyMeasurement } from '@onecoach/types-analytics';
+import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 
 interface BodyMeasurementsState {
   /** All measurements (sorted by date, newest first) */

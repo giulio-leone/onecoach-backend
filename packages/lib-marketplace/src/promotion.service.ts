@@ -5,15 +5,15 @@
  * Segue principi KISS, SOLID, DRY
  */
 
-import { prisma } from '@onecoach/lib-core';
-import { getStripe } from '@onecoach/lib-core/stripe';
-import { creditService } from '@onecoach/lib-core/credit.service';
-import { createId } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import { getStripe } from '@giulio-leone/lib-core/stripe';
+import { creditService } from '@giulio-leone/lib-core/credit.service';
+import { createId } from '@giulio-leone/lib-shared';
 import type { PromotionType, DiscountType } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 import type Stripe from 'stripe';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export interface CreatePromotionParams {
   code: string;
   type: PromotionType;

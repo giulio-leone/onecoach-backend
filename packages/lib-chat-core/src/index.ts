@@ -52,7 +52,7 @@
  * @example
  * ```tsx
  * // Chat unificata (fullscreen)
- * import { useUnifiedChat, UnifiedChatProvider } from '@onecoach/lib-chat-core';
+ * import { useUnifiedChat, UnifiedChatProvider } from '@giulio-leone/lib-chat-core';
  *
  * function Chat() {
  *   const { messages, sendMessage, status } = useUnifiedChat({ mode: 'fullscreen' });
@@ -63,7 +63,7 @@
  * @example
  * ```tsx
  * // Copilot sidebar con contesto
- * import { useUnifiedChat } from '@onecoach/lib-chat-core';
+ * import { useUnifiedChat } from '@giulio-leone/lib-chat-core';
  *
  * function Copilot({ workoutId }) {
  *   const { messages, sendMessage } = useUnifiedChat({
@@ -76,7 +76,7 @@
  */
 
 // Server-safe exports only.
-// Client-only hooks/components/providers are available via `@onecoach/lib-chat-core/client`.
+// Client-only hooks/components/providers are available via `@giulio-leone/lib-chat-core/client`.
 export * from './types';
 export * from './utils';
 export * from './conversation.service';

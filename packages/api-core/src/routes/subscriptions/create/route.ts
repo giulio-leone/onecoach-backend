@@ -5,11 +5,11 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { subscriptionService, SetupIntentService } from '@onecoach/lib-core';
-import type { SubscriptionPlan } from '@onecoach/types';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { subscriptionService, SetupIntentService } from '@giulio-leone/lib-core';
+import type { SubscriptionPlan } from '@giulio-leone/types';
 import type Stripe from 'stripe';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

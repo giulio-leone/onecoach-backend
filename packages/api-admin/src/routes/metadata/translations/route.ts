@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
+import { requireAdmin } from '@giulio-leone/lib-core';
 
 export const dynamic = 'force-dynamic';
 import {
@@ -14,7 +14,7 @@ import {
   upsertMuscleTranslation,
   upsertBodyPartTranslation,
   upsertEquipmentTranslation,
-} from '@onecoach/lib-metadata';
+} from '@giulio-leone/lib-metadata';
 
 interface TranslationUpdate {
   entityType: 'exerciseType' | 'muscle' | 'bodyPart' | 'equipment';

@@ -5,7 +5,7 @@
  * recent exercises, and available equipment.
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { buildUserProfileData, USER_PROFILE_SELECT } from './user-profile-builder';
 import type { CopilotContext } from './types';
 

@@ -1,70 +1,66 @@
 {
-  "name": "@onecoach/lib-stores",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-stores",
+  "version": "0.1.0",
   "description": "Zustand stores per web e native",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./auth": {
-      "types": "./src/auth.store.ts",
-      "default": "./src/auth.store.ts"
-    },
-    "./auth.store": {
-      "types": "./src/auth.store.ts",
-      "default": "./src/auth.store.ts"
+      "types": "./dist/auth.store.d.ts",
+      "import": "./dist/auth.store.js",
+      "require": "./dist/auth.store.cjs"
     },
     "./onboarding": {
-      "types": "./src/onboarding.store.ts",
-      "default": "./src/onboarding.store.ts"
-    },
-    "./onboarding.store": {
-      "types": "./src/onboarding.store.ts",
-      "default": "./src/onboarding.store.ts"
+      "types": "./dist/onboarding.store.d.ts",
+      "import": "./dist/onboarding.store.js",
+      "require": "./dist/onboarding.store.cjs"
     },
     "./health.store": {
-      "types": "./src/health.store.ts",
-      "default": "./src/health.store.ts"
+      "types": "./dist/health.store.d.ts",
+      "import": "./dist/health.store.js",
+      "require": "./dist/health.store.cjs"
     },
     "./iap.store": {
-      "types": "./src/iap.store.ts",
-      "default": "./src/iap.store.ts"
+      "types": "./dist/iap.store.d.ts",
+      "import": "./dist/iap.store.js",
+      "require": "./dist/iap.store.cjs"
     },
     "./dialog.store": {
-      "types": "./src/dialog.store.ts",
-      "default": "./src/dialog.store.ts"
-    },
-    "./index": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/dialog.store.d.ts",
+      "import": "./dist/dialog.store.js",
+      "require": "./dist/dialog.store.cjs"
     }
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
-    "@onecoach/constants": "workspace:*",
-    "@onecoach/lib-core": "workspace:*",
-    "@onecoach/lib-shared": "workspace:*",
-    "@onecoach/lib-theme": "workspace:*",
-    "zustand": "^5.0.9",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "zustand": "^5.0.9"
+  },
+  "peerDependencies": {
+    "@giulio-leone/constants": "^0.1.0",
+    "@giulio-leone/lib-core": "^0.1.0",
+    "@giulio-leone/lib-shared": "^0.1.0",
+    "@giulio-leone/lib-theme": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0",
+    "@prisma/client": "*"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

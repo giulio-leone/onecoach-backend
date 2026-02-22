@@ -19,7 +19,7 @@ import { useChatCore } from './use-chat-core';
 import { useUnifiedChatContextSafe } from '../providers/unified-chat-provider';
 import type { UseUnifiedChatOptions, UseUnifiedChatResult, QueuedMessage } from '../types/unified-chat';
 import { DEFAULT_CHAT_FEATURES } from '../types/unified-chat';
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 import {
   useAIModelsStore,
   selectSelectedModelName,
@@ -29,7 +29,7 @@ import {
   selectConversations,
   selectCurrentConversationId,
   useCopilotActiveContextStore,
-} from '@onecoach/lib-stores';
+} from '@giulio-leone/lib-stores';
 
 // Note: Status-based notification doesn't require parsing tool result structures
 // The active context already has the resource IDs we need

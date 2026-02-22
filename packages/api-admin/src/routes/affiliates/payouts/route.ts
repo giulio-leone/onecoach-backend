@@ -5,13 +5,13 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { prisma } from '@onecoach/lib-core';
-import { AffiliateRewardStatus, Prisma } from '@onecoach/types';
-import { PayoutAuditService } from '@onecoach/lib-marketplace/payout-audit.service';
-import { getCurrentUserId } from '@onecoach/lib-core';
-import { affiliateLogger } from '@onecoach/lib-marketplace';
-import { logger } from '@onecoach/lib-shared';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
+import { AffiliateRewardStatus, Prisma } from '@giulio-leone/types';
+import { PayoutAuditService } from '@giulio-leone/lib-marketplace/payout-audit.service';
+import { getCurrentUserId } from '@giulio-leone/lib-core';
+import { affiliateLogger } from '@giulio-leone/lib-marketplace';
+import { logger } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

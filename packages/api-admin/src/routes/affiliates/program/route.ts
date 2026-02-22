@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@onecoach/lib-core';
-import { requireAdmin } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
+import { requireAdmin } from '@giulio-leone/lib-core';
 import type { Prisma as PrismaTypes } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 function sanitizeNumber(value: unknown, fallback = 0) {

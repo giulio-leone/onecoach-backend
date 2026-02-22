@@ -1,4 +1,4 @@
-import { AIProviderFactory } from '@onecoach/lib-core';
+import { AIProviderFactory } from '@giulio-leone/lib-core';
 import type { LanguageModel } from 'ai';
 
 export interface ModelConfig {

@@ -11,9 +11,9 @@ import {
   onboardingService,
   requireAuth,
   saveOnboardingProfile,
-} from '@onecoach/lib-core';
+} from '@giulio-leone/lib-core';
 import { z } from 'zod';
-import { getErrorMessage, logError, logger } from '@onecoach/lib-shared';
+import { getErrorMessage, logError, logger } from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
 const completeStepSchema = z.object({

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import {
   useCopilotActiveContextStore,
   type CopilotActiveContextStore,
-} from '@onecoach/lib-stores';
+} from '@giulio-leone/lib-stores';
 
 // ============================================================================
 // Types

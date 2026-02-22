@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { ExerciseAdminService } from '@onecoach/lib-exercise';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { ExerciseAdminService } from '@giulio-leone/lib-exercise';
 
 export const dynamic = 'force-dynamic';
 

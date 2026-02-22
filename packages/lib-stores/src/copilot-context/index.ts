@@ -12,11 +12,11 @@
  * @example
  * ```ts
  * // 1. Register domains at app startup
- * import { registerAllDomains } from '@onecoach/lib-stores/copilot-context';
+ * import { registerAllDomains } from '@giulio-leone/lib-stores/copilot-context';
  * registerAllDomains();
  * 
  * // 2. Use in components
- * import { useCopilotContext } from '@onecoach/lib-stores/copilot-context';
+ * import { useCopilotContext } from '@giulio-leone/lib-stores/copilot-context';
  * 
  * const { data, update, init } = useCopilotContext<WorkoutProgram>('workout');
  * 

@@ -3,8 +3,8 @@
  *
  * Shared interfaces for Copilot context builders
  */
-import type { NutritionPlan } from '@onecoach/types';
-import type { WorkoutProgram } from '@onecoach/types';
+import type { NutritionPlan } from '@giulio-leone/types';
+import type { WorkoutProgram } from '@giulio-leone/types';
 import type { UserProfileData } from './user-profile-builder';
 
 /**

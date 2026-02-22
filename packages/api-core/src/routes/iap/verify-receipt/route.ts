@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth/config';
-import { prisma as db } from '@onecoach/lib-core';
+import { auth } from '@giulio-leone/lib-core/auth/config';
+import { prisma as db } from '@giulio-leone/lib-core';
 import {
   verifyAppleReceipt,
   verifyGoogleReceipt,
-} from '@onecoach/lib-core/iap-verification.server';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import type { SubscriptionPlan } from '@onecoach/types';
+} from '@giulio-leone/lib-core/iap-verification.server';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import type { SubscriptionPlan } from '@giulio-leone/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Store/update subscription in database
-    const { createId } = await import('@onecoach/lib-shared/id-generator');
+    const { createId } = await import('@giulio-leone/lib-shared/id-generator');
     const existingSubscription = await db.subscriptions.findFirst({
       where: { userId: session.user.id },
     });

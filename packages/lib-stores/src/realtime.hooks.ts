@@ -11,7 +11,7 @@ import { useEffect, useRef, useCallback, useState } from 'react';
 import { useRealtimeStore, selectIsRealtimeReady, type RealtimeListener } from './realtime.store';
 import type { QueryClient, QueryKey } from '@tanstack/react-query';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export type MagicAnimationType = 'glow' | 'shimmer' | 'pulse' | 'border' | 'ripple' | 'update';
 
 export interface UseMagicAnimationOptions {

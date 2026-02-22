@@ -5,7 +5,7 @@
  * These functions use Zustand store directly (can be called outside React components)
  *
  * Usage:
- *   import { dialog } from '@onecoach/lib-stores/utils/dialog-global';
+ *   import { dialog } from '@giulio-leone/lib-stores/utils/dialog-global';
  *   await dialog.alert('Message');
  *   const confirmed = await dialog.confirm('Are you sure?');
  *   const value = await dialog.prompt('Enter value:');

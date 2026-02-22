@@ -7,12 +7,12 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { subscriptionService } from '@onecoach/lib-core';
-import { getStripe } from '@onecoach/lib-core/stripe';
-import { prisma } from '@onecoach/lib-core';
-import type { SubscriptionPlan } from '@onecoach/types';
-import { logError, getErrorMessage, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { subscriptionService } from '@giulio-leone/lib-core';
+import { getStripe } from '@giulio-leone/lib-core/stripe';
+import { prisma } from '@giulio-leone/lib-core';
+import type { SubscriptionPlan } from '@giulio-leone/types';
+import { logError, getErrorMessage, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

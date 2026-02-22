@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth';
-import { InvitationService } from '@onecoach/lib-core/invitation.service';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import type { UserRole } from '@onecoach/types';
+import { auth } from '@giulio-leone/lib-core/auth';
+import { InvitationService } from '@giulio-leone/lib-core/invitation.service';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import type { UserRole } from '@giulio-leone/types';
 
 export const dynamic = 'force-dynamic';
 

@@ -5,13 +5,13 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAuth } from '@onecoach/lib-core';
-import { paymentService } from '@onecoach/lib-core';
-import { PromotionService, cartService, marketplaceService } from '@onecoach/lib-marketplace';
-import type { PromotionValidationResult } from '@onecoach/lib-marketplace';
-import { findCreditPackOption } from '@onecoach/constants';
+import { requireAuth } from '@giulio-leone/lib-core';
+import { paymentService } from '@giulio-leone/lib-core';
+import { PromotionService, cartService, marketplaceService } from '@giulio-leone/lib-marketplace';
+import type { PromotionValidationResult } from '@giulio-leone/lib-marketplace';
+import { findCreditPackOption } from '@giulio-leone/constants';
 
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

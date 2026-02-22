@@ -15,15 +15,15 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
+import { requireAdmin } from '@giulio-leone/lib-core';
 import {
   getEdgeConfigValue,
   getAllEdgeConfigValues,
   setEdgeConfigValue,
   setEdgeConfigValues,
   deleteEdgeConfigValue,
-} from '@onecoach/lib-core/edge-config.service';
-import { logError } from '@onecoach/lib-shared';
+} from '@giulio-leone/lib-core/edge-config.service';
+import { logError } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

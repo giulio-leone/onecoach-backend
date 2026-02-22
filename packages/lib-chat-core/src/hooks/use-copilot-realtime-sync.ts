@@ -3,7 +3,7 @@ import {
   useCopilotActiveContextStore,
   useRealtimeSubscription,
   type CopilotActiveContextStore,
-} from '@onecoach/lib-stores';
+} from '@giulio-leone/lib-stores';
 
 // ============================================================================
 // Types

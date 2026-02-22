@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { PayoutProfileService } from '@onecoach/lib-marketplace';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { PayoutProfileService } from '@giulio-leone/lib-marketplace';
 
 export const dynamic = 'force-dynamic';
 

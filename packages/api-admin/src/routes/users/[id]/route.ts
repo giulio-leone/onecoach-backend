@@ -7,15 +7,15 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAdmin, requireSuperAdmin } from '@onecoach/lib-core';
-import { prisma } from '@onecoach/lib-core';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { requireAdmin, requireSuperAdmin } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 import bcrypt from 'bcryptjs';
-import type { UserRole, UserStatus } from '@onecoach/types';
+import type { UserRole, UserStatus } from '@giulio-leone/types';
 import {
   updateVercelAdminCredentials,
   updateVercelSuperAdminCredentials,
-} from '@onecoach/lib-vercel-admin';
+} from '@giulio-leone/lib-vercel-admin';
 
 export const dynamic = 'force-dynamic';
 

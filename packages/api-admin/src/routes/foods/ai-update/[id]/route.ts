@@ -6,16 +6,16 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { FoodService } from '@onecoach/lib-food';
-import { createAIProvider } from '@onecoach/lib-ai';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import { createFoodSchema } from '@onecoach/schemas/food.schema';
-import type { Macros } from '@onecoach/types';
-import { AIProviderConfigService } from '@onecoach/lib-ai';
-import { TOKEN_LIMITS } from '@onecoach/constants';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { FoodService } from '@giulio-leone/lib-food';
+import { createAIProvider } from '@giulio-leone/lib-ai';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import { createFoodSchema } from '@giulio-leone/schemas/food.schema';
+import type { Macros } from '@giulio-leone/types';
+import { AIProviderConfigService } from '@giulio-leone/lib-ai';
+import { TOKEN_LIMITS } from '@giulio-leone/constants';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 // Helper for structural compatibility - macros are already per 100g

@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-admin
+ * @giulio-leone/api-admin
  *
  * API routes per admin (users, feature-flags, policies, invitations, metadata, affiliates, promotions, config, etc.)
  *

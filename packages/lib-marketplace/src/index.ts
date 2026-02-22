@@ -1,8 +1,8 @@
 /**
- * @onecoach/lib-marketplace
+ * @giulio-leone/lib-marketplace
  *
  * Servizi per il dominio marketplace
- * Implementa contratti da @onecoach/contracts
+ * Implementa contratti da @giulio-leone/contracts
  */
 
 export * from './affiliate.service';

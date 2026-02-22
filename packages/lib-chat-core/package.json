@@ -1,42 +1,53 @@
 {
-  "name": "@onecoach/lib-chat-core",
-  "version": "0.0.0",
+  "name": "@giulio-leone/lib-chat-core",
+  "version": "0.1.0",
   "description": "Core condiviso per Chat e Copilot - SSOT, AI SDK v6, Supabase Realtime",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./client": {
-      "types": "./src/client.ts",
-      "default": "./src/client.ts"
+      "import": "./dist/client.js",
+      "require": "./dist/client.cjs",
+      "types": "./dist/client.d.ts"
     },
     "./hooks": {
-      "types": "./src/hooks/index.ts",
-      "default": "./src/hooks/index.ts"
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.cjs",
+      "types": "./dist/hooks/index.d.ts"
     },
     "./types": {
-      "types": "./src/types/index.ts",
-      "default": "./src/types/index.ts"
+      "import": "./dist/types/index.js",
+      "require": "./dist/types/index.cjs",
+      "types": "./dist/types/index.d.ts"
     },
     "./components": {
-      "types": "./src/components/index.ts",
-      "default": "./src/components/index.ts"
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.cjs",
+      "types": "./dist/components/index.d.ts"
     },
     "./utils": {
-      "types": "./src/utils/index.ts",
-      "default": "./src/utils/index.ts"
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.cjs",
+      "types": "./dist/utils/index.d.ts"
     }
   },
   "scripts": {
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
     "@ai-sdk/react": "3.0.79",
-    "@onecoach/lib-design-system": "workspace:*",
-    "@onecoach/lib-stores": "workspace:*",
     "@supabase/supabase-js": "^2.89.0",
     "ai": "6.0.77",
     "clsx": "^2.1.1",
@@ -45,18 +56,13 @@
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^16.1.0",
     "zustand": "^5.0.9",
-    "remark-gfm": "^4.0.0",
-    "@onecoach/types-core": "workspace:*",
-    "@onecoach/types-workout": "workspace:*",
-    "@onecoach/types-nutrition": "workspace:*",
-    "@onecoach/types-chat": "workspace:*",
-    "@onecoach/types-analytics": "workspace:*",
-    "@onecoach/types-ai": "workspace:*",
-    "@onecoach/types-ui": "workspace:*",
-    "@onecoach/types-domain": "workspace:*",
-    "@onecoach/types-database": "workspace:*"
+    "remark-gfm": "^4.0.0"
   },
   "peerDependencies": {
+    "@giulio-leone/lib-design-system": "^0.1.0",
+    "@giulio-leone/lib-stores": "^0.1.0",
+    "@giulio-leone/types": "^0.2.0",
+    "@prisma/client": "*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -64,7 +70,8 @@
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsup": "^8.0.0"
   },
   "sideEffects": false
 }

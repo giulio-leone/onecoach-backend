@@ -12,9 +12,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useRealtimeSubscription } from './realtime.hooks';
 import { useBodyMeasurementsStore } from './body-measurements.store';
-import type { BodyMeasurement } from '@onecoach/types-analytics';
+import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // Query keys for body measurements
 export const bodyMeasurementsKeys = {
   all: ['body-measurements'] as const,

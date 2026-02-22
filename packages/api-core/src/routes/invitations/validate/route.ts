@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { InvitationService } from '@onecoach/lib-core/invitation.service';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { InvitationService } from '@giulio-leone/lib-core/invitation.service';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

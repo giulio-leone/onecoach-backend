@@ -2,7 +2,7 @@
  * Maxes Store
  *
  * Gestione centralizzata dei massimali (1RM) con Zustand.
- * I tipi sono importati da @onecoach/types per SSOT.
+ * I tipi sono importati da @giulio-leone/types per SSOT.
  *
  * FUNZIONALITÀ:
  * - CRUD completo massimali
@@ -17,7 +17,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Visibility } from '@prisma/client';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 
 // ============================================================================
 // Types (no legacy imports)

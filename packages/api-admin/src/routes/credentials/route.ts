@@ -6,15 +6,15 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { prisma } from '@onecoach/lib-core';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 import {
   updateVercelAdminCredentials,
   updateVercelSuperAdminCredentials,
-} from '@onecoach/lib-vercel-admin';
+} from '@giulio-leone/lib-vercel-admin';
 import bcrypt from 'bcryptjs';
-import { validatePassword } from '@onecoach/lib-shared';
+import { validatePassword } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
@@ -143,7 +143,7 @@ export async function PATCH(req: Request) {
       });
     } else {
       // Crea nuovo utente (dovrebbe essere raro, ma gestiamolo)
-      const { generateUUID } = await import('@onecoach/lib-shared/id-generator');
+      const { generateUUID } = await import('@giulio-leone/lib-shared/id-generator');
       updatedUser = await prisma.users.create({
         data: {
           id: generateUUID(), // UUID required for Supabase Realtime compatibility

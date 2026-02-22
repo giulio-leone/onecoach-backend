@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { ExerciseAdminService, exerciseImportSchema } from '@onecoach/lib-exercise';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { ExerciseAdminService, exerciseImportSchema } from '@giulio-leone/lib-exercise';
 import { z } from 'zod';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

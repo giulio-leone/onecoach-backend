@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@onecoach/lib-core/auth';
-import { InvitationService } from '@onecoach/lib-core/invitation.service';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { auth } from '@giulio-leone/lib-core/auth';
+import { InvitationService } from '@giulio-leone/lib-core/invitation.service';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 import { z } from 'zod';
-import type { UserRole } from '@onecoach/types';
+import type { UserRole } from '@giulio-leone/types';
 import { InvitationStatus, InvitationType } from '@prisma/client';
 
 export const dynamic = 'force-dynamic';

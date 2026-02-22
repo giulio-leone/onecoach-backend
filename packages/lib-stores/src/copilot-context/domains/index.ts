@@ -16,7 +16,7 @@ export { liveSessionDomain, type LiveSessionContext } from './live-session.domai
  * 
  * @example
  * ```ts
- * import { allDomains, registerDomain } from '@onecoach/lib-stores/copilot-context';
+ * import { allDomains, registerDomain } from '@giulio-leone/lib-stores/copilot-context';
  * 
  * // Register all domains at once
  * allDomains.forEach(registerDomain);

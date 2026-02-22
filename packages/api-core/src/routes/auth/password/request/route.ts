@@ -5,12 +5,12 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@onecoach/lib-core';
-import { createId } from '@onecoach/lib-shared/id-generator';
+import { prisma } from '@giulio-leone/lib-core';
+import { createId } from '@giulio-leone/lib-shared/id-generator';
 import crypto from 'crypto';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 // Rate limiting: In-memory implementation for simplicity

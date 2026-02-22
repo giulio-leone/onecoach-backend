@@ -7,11 +7,11 @@
  */
 
 import { NextResponse } from 'next/server';
-import { AIProviderConfigService, PROVIDER_MAP } from '@onecoach/lib-ai';
-import type { ProviderName } from '@onecoach/lib-ai';
-import { deleteEnvVar, getEnvVarByKey } from '@onecoach/lib-vercel-admin';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import { requireAdmin } from '@onecoach/lib-core/auth/guards';
+import { AIProviderConfigService, PROVIDER_MAP } from '@giulio-leone/lib-ai';
+import type { ProviderName } from '@giulio-leone/lib-ai';
+import { deleteEnvVar, getEnvVarByKey } from '@giulio-leone/lib-vercel-admin';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import { requireAdmin } from '@giulio-leone/lib-core/auth/guards';
 
 export const dynamic = 'force-dynamic';
 

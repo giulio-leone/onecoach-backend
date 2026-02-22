@@ -4,7 +4,7 @@
  * Centralized state for AI Settings admin page.
  * Caches tab data to prevent reloads when switching tabs.
  * 
- * Types imported from @onecoach/types-ai (SSOT).
+ * Types imported from @giulio-leone/types/ai (SSOT).
  */
 
 'use client';
@@ -17,7 +17,7 @@ import type {
   AISettingsModelAccess,
   AISettingsFrameworkConfig,
   AISettingsSectionId,
-} from '@onecoach/types-ai';
+} from '@giulio-leone/types/ai';
 
 // Re-export types for consumers
 export type {

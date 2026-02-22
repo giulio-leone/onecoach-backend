@@ -1,7 +1,7 @@
 // Note: This service is server-only due to Prisma dependency
 
-import { prisma } from '@onecoach/lib-core';
-import { logError } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import { logError } from '@giulio-leone/lib-shared';
 import type {
   AIProvider,
   ConversationRole,

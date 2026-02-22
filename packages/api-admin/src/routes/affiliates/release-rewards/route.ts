@@ -5,12 +5,12 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { AffiliateService } from '@onecoach/lib-marketplace';
-import { prisma } from '@onecoach/lib-core';
-import { AffiliateRewardStatus } from '@onecoach/types';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { AffiliateService } from '@giulio-leone/lib-marketplace';
+import { prisma } from '@giulio-leone/lib-core';
+import { AffiliateRewardStatus } from '@giulio-leone/types';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 /**

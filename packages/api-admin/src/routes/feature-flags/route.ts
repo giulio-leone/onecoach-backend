@@ -6,10 +6,10 @@
  */
 
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { featureFlagsService } from '@onecoach/lib-core';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
-import type { RolloutStrategy } from '@onecoach/types';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { featureFlagsService } from '@giulio-leone/lib-core';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
+import type { RolloutStrategy } from '@giulio-leone/types';
 
 export const dynamic = 'force-dynamic';
 

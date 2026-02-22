@@ -6,8 +6,8 @@
 
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { TOTAL_STEPS, onboardingService, requireAuth } from '@onecoach/lib-core';
-import { logger, logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { TOTAL_STEPS, onboardingService, requireAuth } from '@giulio-leone/lib-core';
+import { logger, logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
 const goToStepSchema = z.object({

@@ -1,5 +1,5 @@
-import { prisma } from '@onecoach/lib-core';
-import { logger } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-shared';
 // Utility locale per generare codici senza dipendenze esterne
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 function generateCode(length: number): string {
@@ -16,7 +16,7 @@ import {
   Prisma,
   ReferralAttributionStatus,
 } from '@prisma/client';
-import { CreditService } from '@onecoach/lib-core';
+import { CreditService } from '@giulio-leone/lib-core';
 import { affiliateLogger } from './affiliate-logger.service';
 
 const creditService = new CreditService();

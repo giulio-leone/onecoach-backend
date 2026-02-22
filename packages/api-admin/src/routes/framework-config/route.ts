@@ -9,13 +9,13 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
+import { requireAdmin } from '@giulio-leone/lib-core';
 
 export const dynamic = 'force-dynamic';
 import {
   AIFrameworkConfigService,
   FrameworkFeature,
-} from '@onecoach/lib-ai';
+} from '@giulio-leone/lib-ai';
 
 export async function GET(_request: NextRequest) {
   try {

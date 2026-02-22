@@ -1,7 +1,8 @@
 /**
  * Parse JSON response from LLM safely
  * Handles code blocks, whitespace, and potential trailing commas
- */import { logger } from '@onecoach/lib-core';
+ */
+import { logger } from '@giulio-leone/lib-core';
 
 export function parseJsonResponse(text: string): any {
   try {

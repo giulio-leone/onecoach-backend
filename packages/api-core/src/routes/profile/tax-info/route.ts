@@ -5,9 +5,9 @@
  */
 
 import { NextResponse } from 'next/server';
-import { getCurrentUser } from '@onecoach/lib-core';
-import { prisma } from '@onecoach/lib-core';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { getCurrentUser } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 

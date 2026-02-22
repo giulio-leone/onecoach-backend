@@ -10,7 +10,7 @@
 'use client';
 
 import { useEffect, useCallback, useRef } from 'react';
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 
 // ============================================================================
 // Types

@@ -5,9 +5,9 @@
  * Provides real-time progress updates via Server-Sent Events (SSE).
  */
 
-import { AgentRole } from '@onecoach/one-agent';
-import { generateFoods } from '@onecoach/one-nutrition';
-import { createStreamingHandler } from '@onecoach/lib-api';
+import { AgentRole } from '@giulio-leone/one-agent';
+import { generateFoods } from '@giulio-leone/one-nutrition';
+import { createStreamingHandler } from '@giulio-leone/lib-api';
 
 interface FoodStreamInput {
   prompt: string;
@@ -57,7 +57,7 @@ export const POST = createStreamingHandler<
     };
 
     // Fetch food categories from database
-    const { prisma } = await import('@onecoach/lib-core');
+    const { prisma } = await import('@giulio-leone/lib-core');
     const allCategories = await prisma.food_categories.findMany({
       select: { id: true, name: true, slug: true },
     });

@@ -1,6 +1,6 @@
 
-import { generateExercises } from '@onecoach/one-workout';
-import { createGenerationHandler } from '@onecoach/lib-api';
+import { generateExercises } from '@giulio-leone/one-workout';
+import { createGenerationHandler } from '@giulio-leone/lib-api';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';

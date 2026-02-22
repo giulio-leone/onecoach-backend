@@ -8,7 +8,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { ActivityLevel, DietType, Sex, WeightUnit } from '@prisma/client';
-import { prisma, requireAuth, userProfileService } from '@onecoach/lib-core';
+import { prisma, requireAuth, userProfileService } from '@giulio-leone/lib-core';
 import {
   convertDecimalToNumber,
   isError,
@@ -17,7 +17,7 @@ import {
   logError,
   logger,
   mapErrorToApiResponse,
-} from '@onecoach/lib-shared';
+} from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
 // Prisma richiede il runtime Node.js

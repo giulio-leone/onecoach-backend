@@ -6,9 +6,9 @@
  */
 
 import { NextResponse } from 'next/server';
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 

@@ -6,13 +6,13 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
+import { requireAdmin } from '@giulio-leone/lib-core';
 
 export const dynamic = 'force-dynamic';
 import {
   AIFrameworkConfigService,
   FrameworkFeature,
-} from '@onecoach/lib-ai';
+} from '@giulio-leone/lib-ai';
 
 type RouteParams = Promise<{ feature: string }>;
 
@@ -61,7 +61,7 @@ export async function PUT(request: NextRequest, context: { params: RouteParams }
   // TypeScript type narrowing: userOrError is now definitely User
   // Use explicit type to help TypeScript understand the narrowed type
   const user = userOrError as Awaited<
-    ReturnType<typeof import('@onecoach/lib-core').getCurrentUser>
+    ReturnType<typeof import('@giulio-leone/lib-core').getCurrentUser>
   > & { id: string };
 
   try {

@@ -1,3 +1,3 @@
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
 export const db = prisma;

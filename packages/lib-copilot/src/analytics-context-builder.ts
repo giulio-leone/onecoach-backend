@@ -4,10 +4,10 @@
  * Builds context for analytics copilot including recent metrics and snapshots.
  */
 
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import type { CopilotContext } from './types';
-import { getLatestBodyMeasurement } from '@onecoach/lib-analytics';
-import { getLatestProgressSnapshot } from '@onecoach/lib-analytics/progress-snapshot.service';
+import { getLatestBodyMeasurement } from '@giulio-leone/lib-analytics';
+import { getLatestProgressSnapshot } from '@giulio-leone/lib-analytics/progress-snapshot.service';
 
 /**
  * Build analytics context for copilot

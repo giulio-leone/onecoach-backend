@@ -17,7 +17,7 @@
 
 import { useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
-import { useCopilotStore, type CopilotDomain } from '@onecoach/lib-stores';
+import { useCopilotStore, type CopilotDomain } from '@giulio-leone/lib-stores';
 
 /**
  * Route pattern matchers for domain detection

@@ -13,7 +13,7 @@
 'use client';
 
 import { useCallback, useRef, useEffect } from 'react';
-import { useRealtimeStore, selectIsRealtimeReady } from '@onecoach/lib-stores';
+import { useRealtimeStore, selectIsRealtimeReady } from '@giulio-leone/lib-stores';
 import type {
   ChatMessage,
   UseChatRealtimeOptions,
@@ -231,7 +231,7 @@ export function useChatConversationsRealtime(options: UseConversationsRealtimeOp
 // ============================================================================
 
 import { useChatCore } from './use-chat-core';
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 
 interface UseChatWithRealtimeOptions extends UseChatCoreOptions {
   userId?: string;

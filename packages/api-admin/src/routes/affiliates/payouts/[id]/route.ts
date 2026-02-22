@@ -6,8 +6,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@onecoach/lib-core';
-import { AffiliateService } from '@onecoach/lib-marketplace';
+import { requireAdmin } from '@giulio-leone/lib-core';
+import { AffiliateService } from '@giulio-leone/lib-marketplace';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';

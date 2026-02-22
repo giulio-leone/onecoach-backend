@@ -19,7 +19,7 @@ import { usePathname, useParams } from 'next/navigation';
 import {
   useCopilotActiveContextStore,
   type ActiveDomain,
-} from '@onecoach/lib-stores';
+} from '@giulio-leone/lib-stores';
 
 // ============================================================================
 // Route Pattern Detection

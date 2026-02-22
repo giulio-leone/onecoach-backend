@@ -5,12 +5,12 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 const PASSWORD_MIN_LENGTH = 8;

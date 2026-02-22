@@ -31,7 +31,7 @@ import {
   type SelectedMilestone,
   type HoveredElement,
   type ActiveDomain,
-} from '@onecoach/lib-stores';
+} from '@giulio-leone/lib-stores';
 
 // ============================================================================
 // Types

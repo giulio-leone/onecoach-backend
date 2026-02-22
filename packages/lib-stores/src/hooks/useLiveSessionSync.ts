@@ -30,7 +30,7 @@
 
 import { useEffect, useCallback, useRef } from 'react';
 import { useCopilotActiveContextStore } from '../copilot-active-context.store';
-import { logger } from '@onecoach/lib-shared';
+import { logger } from '@giulio-leone/lib-shared';
 
 export interface UseLiveSessionSyncOptions {
   sessionId: string;

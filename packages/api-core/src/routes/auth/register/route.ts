@@ -6,14 +6,14 @@
 
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { prisma } from '@onecoach/lib-core';
-import type { RegisterData } from '@onecoach/types';
-import { AffiliateService } from '@onecoach/lib-marketplace';
-import { InvitationService } from '@onecoach/lib-core/invitation.service';
-import { ConsentService } from '@onecoach/lib-core/consent.service';
-import { logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import type { RegisterData } from '@giulio-leone/types';
+import { AffiliateService } from '@giulio-leone/lib-marketplace';
+import { InvitationService } from '@giulio-leone/lib-core/invitation.service';
+import { ConsentService } from '@giulio-leone/lib-core/consent.service';
+import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 export const dynamic = 'force-dynamic';
 
 export async function POST(_req: Request) {
@@ -99,7 +99,7 @@ export async function POST(_req: Request) {
     // Crea utente con crediti di benvenuto
     const WELCOME_CREDITS = 100;
 
-    const { generateUUID } = await import('@onecoach/lib-shared/id-generator');
+    const { generateUUID } = await import('@giulio-leone/lib-shared/id-generator');
 
     // Estrai IP e User-Agent dalla request per il tracciamento consensi
     const ipAddress =
@@ -122,7 +122,7 @@ export async function POST(_req: Request) {
         },
       });
 
-      const { createId } = await import('@onecoach/lib-shared/id-generator');
+      const { createId } = await import('@giulio-leone/lib-shared/id-generator');
 
       await tx.credit_transactions.create({
         data: {

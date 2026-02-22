@@ -33,7 +33,7 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { useChat as useAIChat } from '@ai-sdk/react';
 import type { ChatStatus, UseChatCoreOptions, UseChatCoreResult, UIMessage } from '../types';
 
-import { logger } from '@onecoach/lib-core';
+import { logger } from '@giulio-leone/lib-core';
 // ============================================================================
 // Constants
 // ============================================================================

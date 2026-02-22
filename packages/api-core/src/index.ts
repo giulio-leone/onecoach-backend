@@ -1,5 +1,5 @@
 /**
- * @onecoach/api-core
+ * @giulio-leone/api-core
  *
  * API routes per il dominio core (auth, profile, onboarding, payments, subscriptions, credits, invitations, policies, health, iap)
  * Esporta route handlers che possono essere usati in apps/next/app/api/*

@@ -6,7 +6,7 @@
  */
 
 import { Prisma } from '@prisma/client';
-import { prisma } from '@onecoach/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import type {
   MarketplacePlanType,
   PurchaseStatus,
@@ -14,7 +14,7 @@ import type {
   plan_purchases,
   plan_ratings,
 } from '@prisma/client';
-import type { MarketplacePlanDetails as ContractMarketplacePlanDetails } from '@onecoach/contracts';
+import type { MarketplacePlanDetails as ContractMarketplacePlanDetails } from '@giulio-leone/contracts';
 
 /**
  * Interface for Marketplace Service

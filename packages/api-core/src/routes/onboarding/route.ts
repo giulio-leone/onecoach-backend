@@ -5,8 +5,8 @@
  */
 
 import { NextResponse } from 'next/server';
-import { onboardingService, requireAuth } from '@onecoach/lib-core';
-import { logger, logError, mapErrorToApiResponse } from '@onecoach/lib-shared';
+import { onboardingService, requireAuth } from '@giulio-leone/lib-core';
+import { logger, logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {

@@ -1,5 +1,5 @@
 /**
- * @onecoach/lib-copilot
+ * @giulio-leone/lib-copilot
  *
  * Copilot client-side exports (components and hooks)
  *
@@ -9,7 +9,7 @@
  */
 
 // Client-side exports only
-// NOTE: useCopilotChat è stato rimosso - usa useCopilotChatCore da @onecoach/lib-chat-core
+// NOTE: useCopilotChat è stato rimosso - usa useCopilotChatCore da @giulio-leone/lib-chat-core
 export * from './components';
 
 // Hooks for route sync and context management

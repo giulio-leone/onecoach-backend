@@ -26,9 +26,9 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import {
   useCopilotActiveContextStore,
   type ActiveDomain,
-} from '@onecoach/lib-stores';
-import type { WorkoutProgram } from '@onecoach/types-workout';
-import type { NutritionPlan } from '@onecoach/types-nutrition';
+} from '@giulio-leone/lib-stores';
+import type { WorkoutProgram } from '@giulio-leone/types/workout';
+import type { NutritionPlan } from '@giulio-leone/types/nutrition';
 
 // ============================================================================
 // Types

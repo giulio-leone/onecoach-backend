@@ -4,8 +4,8 @@
  * Servizio per logging strutturato di eventi affiliate
  */
 
-import { prisma } from '@onecoach/lib-core';
-import { logger } from '@onecoach/lib-shared';
+import { prisma } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-shared';
 
 interface AffiliateEvent {
   event: string;
