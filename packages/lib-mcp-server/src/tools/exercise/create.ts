@@ -46,12 +46,7 @@ export type ValidMuscle = (typeof VALID_MUSCLES)[number];
  * Valid body part names from the database catalog.
  * IMPORTANT: Do NOT invent new values - use only these exact strings.
  */
-export const VALID_BODY_PARTS = [
-  'Upper Body',
-  'Lower Body',
-  'Core',
-  'Full Body',
-] as const;
+export const VALID_BODY_PARTS = ['Upper Body', 'Lower Body', 'Core', 'Full Body'] as const;
 
 export type ValidBodyPart = (typeof VALID_BODY_PARTS)[number];
 
@@ -97,25 +92,18 @@ export type ValidEquipment = (typeof VALID_EQUIPMENT)[number];
  * IMPORTANTE: Usa SOLO i valori enum specificati per muscles, bodyParts, exerciseType, equipment.
  */
 const mcpExerciseCreateSchema = z.object({
-  name: z
-    .string()
-    .min(1)
-    .describe('Exercise name in English (e.g., "Push-up", "Bench Press")'),
+  name: z.string().min(1).describe('Exercise name in English (e.g., "Push-up", "Bench Press")'),
 
   exerciseType: z
     .enum(VALID_EXERCISE_TYPES)
-    .describe(
-      `Exercise type. VALID VALUES: ${VALID_EXERCISE_TYPES.join(', ')}`
-    ),
+    .describe(`Exercise type. VALID VALUES: ${VALID_EXERCISE_TYPES.join(', ')}`),
 
   muscles: z
     .array(
       z.object({
         name: z
           .enum(VALID_MUSCLES)
-          .describe(
-            `Muscle name. VALID VALUES ONLY: ${VALID_MUSCLES.join(', ')}`
-          ),
+          .describe(`Muscle name. VALID VALUES ONLY: ${VALID_MUSCLES.join(', ')}`),
         role: z.nativeEnum(MuscleRole).describe('Muscle role: PRIMARY or SECONDARY'),
       })
     )

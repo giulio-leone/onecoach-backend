@@ -30,10 +30,9 @@ export const foodCreateTool: McpTool = {
     logger.warn('✅ [food_create] Autorizzazione OK, creazione alimento...');
     const food = await foodService.createFood(args);
     logger.warn('✅ [food_create] Alimento creato con successo');
-    logger.warn(
-      '📊 [food_create] Alimento creato:',
-      { data: JSON.stringify(food, null, 2).substring(0, 300) }
-    );
+    logger.warn('📊 [food_create] Alimento creato:', {
+      data: JSON.stringify(food, null, 2).substring(0, 300),
+    });
 
     return food;
   },

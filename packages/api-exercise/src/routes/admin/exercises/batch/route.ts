@@ -14,7 +14,7 @@ const batchSchema = z.object({
 });
 
 export async function POST(_req: Request): Promise<Response> {
-  const adminOrError: any = await requireAdmin();
+  const adminOrError = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

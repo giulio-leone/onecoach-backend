@@ -19,7 +19,9 @@ import type { ChatMessage, ChatRole, MessagePart } from '../types';
 /**
  * Verifica se una parte è di tipo testo.
  */
-export function isTextPart(part: MessagePart): part is MessagePart & { type: 'text'; text: string } {
+export function isTextPart(
+  part: MessagePart
+): part is MessagePart & { type: 'text'; text: string } {
   return part.type === 'text';
 }
 
@@ -97,7 +99,7 @@ export function truncateMessageContent(content: string, maxLength: number = 100)
  * Usa il primo messaggio utente, troncato.
  */
 export function extractConversationTitle(messages: ChatMessage[], maxLength: number = 50): string {
-  const firstUserMessage = messages.find((m: any) => m.role === 'user');
+  const firstUserMessage = messages.find((m) => m.role === 'user');
   if (!firstUserMessage) return 'Nuova conversazione';
   return truncateMessageContent(firstUserMessage.content, maxLength);
 }
@@ -124,7 +126,7 @@ export function extractConversationPreview(
  * Filtra messaggi per ruolo.
  */
 export function filterMessagesByRole(messages: ChatMessage[], role: ChatRole): ChatMessage[] {
-  return messages.filter((m: any) => m.role === role);
+  return messages.filter((m) => m.role === role);
 }
 
 /**
@@ -145,7 +147,7 @@ export function sortMessagesByDate(
  * Rimuove messaggi di sistema dalla lista (per display).
  */
 export function filterDisplayableMessages(messages: ChatMessage[]): ChatMessage[] {
-  return messages.filter((m: any) => m.role !== 'system');
+  return messages.filter((m) => m.role !== 'system');
 }
 
 // ============================================================================
@@ -186,6 +188,6 @@ export function areMessagesEqual(a: ChatMessage, b: ChatMessage): boolean {
  * Trova messaggi nuovi confrontando due liste.
  */
 export function findNewMessages(current: ChatMessage[], previous: ChatMessage[]): ChatMessage[] {
-  const previousIds = new Set(previous.map((m: any) => m.id));
-  return current.filter((m: any) => !previousIds.has(m.id));
+  const previousIds = new Set(previous.map((m) => m.id));
+  return current.filter((m) => !previousIds.has(m.id));
 }

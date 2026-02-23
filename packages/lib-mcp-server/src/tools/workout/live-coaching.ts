@@ -40,8 +40,8 @@ interface LiveSessionFromContext {
 }
 
 function getLiveSessionFromContext(context: McpContext): LiveSessionFromContext | null {
-  const liveSession = (context as any)?.liveSession;
-  
+  const liveSession = (context as Record<string, unknown>)?.liveSession;
+
   logger.debug('[LiveCoaching] 📥 Context received:', {
     hasLiveSession: !!liveSession,
     sessionId: liveSession?.sessionId ?? 'none',
@@ -50,7 +50,7 @@ function getLiveSessionFromContext(context: McpContext): LiveSessionFromContext 
     totalSets: liveSession?.totalSets ?? 0,
     lastSetWeight: liveSession?.lastSet?.weight ?? null,
   });
-  
+
   if (!liveSession?.sessionId) return null;
   return liveSession;
 }
@@ -81,7 +81,7 @@ Use this to understand where the user is in their workout.`,
   execute: async (_args, context) => {
     logger.info('[LiveCoaching:workout_session_read] 🔧 Executing');
     const liveSession = getLiveSessionFromContext(context);
-    
+
     if (!liveSession) {
       logger.warn('[LiveCoaching:workout_session_read] ❌ No active session found in context');
       return {
@@ -106,8 +106,8 @@ Use this to understand where the user is in their workout.`,
         progress: {
           completedSets: liveSession.completedSets,
           totalSets: liveSession.totalSets,
-          percentComplete: liveSession.totalSets 
-            ? Math.round((liveSession.completedSets ?? 0) / liveSession.totalSets * 100)
+          percentComplete: liveSession.totalSets
+            ? Math.round(((liveSession.completedSets ?? 0) / liveSession.totalSets) * 100)
             : 0,
         },
         lastSet: liveSession.lastSet,
@@ -125,7 +125,9 @@ Use this to understand where the user is in their workout.`,
 // =====================================================
 
 const sessionAnalyzeParams = z.object({
-  aspectToAnalyze: z.enum(['volume', 'intensity', 'fatigue', 'overall']).optional()
+  aspectToAnalyze: z
+    .enum(['volume', 'intensity', 'fatigue', 'overall'])
+    .optional()
     .describe('Specific aspect to analyze. Defaults to overall.'),
 });
 
@@ -146,7 +148,7 @@ Use this when the user asks how they're doing or wants feedback.`,
   execute: async (_args, context) => {
     logger.info('[LiveCoaching:workout_session_analyze] 🔧 Executing');
     const liveSession = getLiveSessionFromContext(context);
-    
+
     if (!liveSession) {
       logger.warn('[LiveCoaching:workout_session_analyze] ❌ No active session');
       return {
@@ -162,11 +164,12 @@ Use this when the user asks how they're doing or wants feedback.`,
       progress: {
         completed: completedSets ?? 0,
         remaining: (totalSets ?? 0) - (completedSets ?? 0),
-        status: completedSets === 0 
-          ? 'just_started'
-          : (completedSets ?? 0) >= (totalSets ?? 0) * 0.8 
-            ? 'almost_done' 
-            : 'in_progress',
+        status:
+          completedSets === 0
+            ? 'just_started'
+            : (completedSets ?? 0) >= (totalSets ?? 0) * 0.8
+              ? 'almost_done'
+              : 'in_progress',
       },
     };
 
@@ -175,23 +178,27 @@ Use this when the user asks how they're doing or wants feedback.`,
         weight: lastSet.weight,
         reps: lastSet.reps,
         rpe: lastSet.rpe,
-        fatigueLevel: lastSet.rpe 
-          ? lastSet.rpe >= 9 ? 'high' : lastSet.rpe >= 7 ? 'moderate' : 'low'
+        fatigueLevel: lastSet.rpe
+          ? lastSet.rpe >= 9
+            ? 'high'
+            : lastSet.rpe >= 7
+              ? 'moderate'
+              : 'low'
           : 'unknown',
       };
     }
 
     // Coaching suggestions based on analysis
     const suggestions: string[] = [];
-    
+
     if (lastSet?.rpe && lastSet.rpe >= 9) {
       suggestions.push('RPE alto - considera ridurre il peso o le reps per il prossimo set');
     }
-    
+
     if ((completedSets ?? 0) > 0 && (completedSets ?? 0) < (totalSets ?? 0) * 0.5) {
-      suggestions.push('Sei ancora all\'inizio - mantieni il ritmo!');
+      suggestions.push("Sei ancora all'inizio - mantieni il ritmo!");
     }
-    
+
     if ((completedSets ?? 0) >= (totalSets ?? 0) * 0.8) {
       suggestions.push('Quasi finito! Ultima spinta per completare al meglio');
     }
@@ -210,7 +217,8 @@ Use this when the user asks how they're doing or wants feedback.`,
 // =====================================================
 
 const coachSuggestParams = z.object({
-  requestType: z.enum(['next_weight', 'rest_time', 'technique', 'motivation', 'general'])
+  requestType: z
+    .enum(['next_weight', 'rest_time', 'technique', 'motivation', 'general'])
     .describe('Type of coaching suggestion requested'),
 });
 
@@ -242,7 +250,8 @@ Use this when the user asks for advice or recommendations.`,
       };
     }
 
-    const { lastSet, currentExerciseName, restTimeRemaining, completedSets, totalSets } = liveSession;
+    const { lastSet, currentExerciseName, restTimeRemaining, completedSets, totalSets } =
+      liveSession;
 
     let suggestion = '';
     let details: Record<string, unknown> = {};
@@ -270,13 +279,13 @@ Use this when the user asks for advice or recommendations.`,
       case 'rest_time':
         const baseRest = 90; // Default rest time
         let suggestedRest = baseRest;
-        
+
         if (lastSet?.rpe) {
           if (lastSet.rpe >= 9) suggestedRest = 180;
           else if (lastSet.rpe >= 7) suggestedRest = 120;
           else suggestedRest = 90;
         }
-        
+
         suggestion = `Riposo suggerito: ${suggestedRest} secondi`;
         if (restTimeRemaining > 0) {
           suggestion += ` (${restTimeRemaining}s rimanenti)`;
@@ -285,14 +294,14 @@ Use this when the user asks for advice or recommendations.`,
         break;
 
       case 'technique':
-        suggestion = `Per ${currentExerciseName || 'l\'esercizio corrente'}, concentrati su: `;
+        suggestion = `Per ${currentExerciseName || "l'esercizio corrente"}, concentrati su: `;
         suggestion += 'controllo eccentrico, posizione stabile, respirazione coordinata.';
         break;
 
       case 'motivation':
         const progress = completedSets && totalSets ? completedSets / totalSets : 0;
         if (progress < 0.3) {
-          suggestion = 'Ottimo inizio! Mantieni alta l\'intensità 💪';
+          suggestion = "Ottimo inizio! Mantieni alta l'intensità 💪";
         } else if (progress < 0.7) {
           suggestion = 'Sei a metà strada! Continua così, ogni set conta!';
         } else {
@@ -306,7 +315,7 @@ Use this when the user asks for advice or recommendations.`,
         if (lastSet?.rpe && lastSet.rpe >= 8) {
           suggestion += 'Stai lavorando bene, la fatica è al punto giusto.';
         } else {
-          suggestion += 'Puoi spingere un po\' di più se ti senti bene.';
+          suggestion += "Puoi spingere un po' di più se ti senti bene.";
         }
         break;
     }
@@ -326,8 +335,13 @@ Use this when the user asks for advice or recommendations.`,
 // =====================================================
 
 const exerciseTipsParams = z.object({
-  exerciseName: z.string().optional().describe('Exercise name. Uses current exercise if not provided.'),
-  tipType: z.enum(['form', 'breathing', 'common_mistakes', 'all']).optional()
+  exerciseName: z
+    .string()
+    .optional()
+    .describe('Exercise name. Uses current exercise if not provided.'),
+  tipType: z
+    .enum(['form', 'breathing', 'common_mistakes', 'all'])
+    .optional()
     .describe('Type of tips to provide. Defaults to all.'),
 });
 
@@ -345,7 +359,7 @@ Returns:
 Use this when the user asks how to do an exercise or wants form tips.`,
   parameters: exerciseTipsParams,
   execute: async (args, context) => {
-    logger.info('[LiveCoaching:workout_exercise_tips] 🔧 Executing', { 
+    logger.info('[LiveCoaching:workout_exercise_tips] 🔧 Executing', {
       requestedExercise: args.exerciseName ?? 'from session',
       tipType: args.tipType ?? 'all',
     });
@@ -359,7 +373,7 @@ Use this when the user asks how to do an exercise or wants form tips.`,
         error: 'No exercise specified and no current exercise found in session.',
       };
     }
-    
+
     logger.info('[LiveCoaching:workout_exercise_tips] 💪 Fetching tips for:', exerciseName);
 
     // Try to fetch exercise from catalog for detailed tips
@@ -381,20 +395,28 @@ Use this when the user asks how to do an exercise or wants form tips.`,
     };
 
     // Form cues from catalog (exerciseTips) or generic
-    if (catalogExercise?.exerciseTips && Array.isArray(catalogExercise.exerciseTips) && catalogExercise.exerciseTips.length > 0) {
+    if (
+      catalogExercise?.exerciseTips &&
+      Array.isArray(catalogExercise.exerciseTips) &&
+      catalogExercise.exerciseTips.length > 0
+    ) {
       tips.formCues = catalogExercise.exerciseTips;
-    } else if (catalogExercise?.instructions && Array.isArray(catalogExercise.instructions) && catalogExercise.instructions.length > 0) {
+    } else if (
+      catalogExercise?.instructions &&
+      Array.isArray(catalogExercise.instructions) &&
+      catalogExercise.instructions.length > 0
+    ) {
       tips.formCues = catalogExercise.instructions.slice(0, 3);
     } else {
       tips.formCues = [
         'Mantieni la schiena in posizione neutra',
         'Controlla il movimento in fase eccentrica',
-        'Attiva il core durante tutta l\'esecuzione',
+        "Attiva il core durante tutta l'esecuzione",
       ];
     }
 
     // Breathing pattern (generic, could be enhanced per exercise)
-    tips.breathing = 'Espira durante la fase concentrica (sforzo), inspira durante l\'eccentrica';
+    tips.breathing = "Espira durante la fase concentrica (sforzo), inspira durante l'eccentrica";
 
     // Common mistakes (generic)
     tips.commonMistakes = [

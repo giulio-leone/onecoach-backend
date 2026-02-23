@@ -68,7 +68,7 @@ function Devtools({ client }: { client?: QueryClient }) {
           // Usa Function constructor per evitare che il bundler risolva l'import
           const loadDevtools = new Function('return import("@tanstack/react-query-devtools")');
           loadDevtools()
-            .then((mod: { ReactQueryDevtools: React.ComponentType<any> }) => {
+            .then((mod: { ReactQueryDevtools: React.ComponentType<Record<string, unknown>> }) => {
               setDevtoolsComponent(() => mod.ReactQueryDevtools);
               setIsReady(true);
             })

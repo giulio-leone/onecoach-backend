@@ -38,7 +38,7 @@ Returns matching exercises with their IDs and names.`,
   execute: async ({ query, limit }) => {
     const normalizedQuery = query.toLowerCase().trim();
     const limitValue = limit ?? 10;
-    
+
     try {
       // Search exercises via translations (for multi-language support)
       const exercises = await prisma.exercise_translations.findMany({
@@ -57,20 +57,20 @@ Returns matching exercises with their IDs and names.`,
               exercise_muscles: {
                 select: {
                   role: true,
-                  muscles: { select: { name: true } }
-                }
+                  muscles: { select: { name: true } },
+                },
               },
               exercise_equipments: {
-                select: { equipments: { select: { name: true } } }
+                select: { equipments: { select: { name: true } } },
               },
-            }
-          }
+            },
+          },
         },
         take: limitValue * 2, // Get more to dedupe by exerciseId
       });
 
       // Dedupe by exerciseId (prefer 'it' then 'en')
-      const seen = new Map<string, typeof exercises[0]>();
+      const seen = new Map<string, (typeof exercises)[0]>();
       for (const ex of exercises) {
         if (!seen.has(ex.exerciseId)) {
           seen.set(ex.exerciseId, ex);
@@ -118,10 +118,7 @@ const searchFoodCatalogParams = z.object({
   limit: z.number().optional().default(10).describe('Maximum results to return'),
 });
 
-export const searchFoodCatalogTool: McpTool<
-  z.infer<typeof searchFoodCatalogParams>,
-  unknown
-> = {
+export const searchFoodCatalogTool: McpTool<z.infer<typeof searchFoodCatalogParams>, unknown> = {
   name: 'search_food_catalog',
   description: `Search the food catalog to find foods/ingredients.
 Use this tool when you need to:
@@ -134,7 +131,7 @@ Returns matching foods with their IDs, names, and macros.`,
   execute: async ({ query, limit }) => {
     const normalizedQuery = query.toLowerCase().trim();
     const limitValue = limit ?? 10;
-    
+
     try {
       // Search food items by name
       const foods = await prisma.food_items.findMany({
@@ -167,7 +164,12 @@ Returns matching foods with their IDs, names, and macros.`,
         success: true,
         found: foods.length,
         foods: foods.map((f) => {
-          const macros = f.macrosPer100g as { protein?: number; carbs?: number; fats?: number; calories?: number } | null;
+          const macros = f.macrosPer100g as {
+            protein?: number;
+            carbs?: number;
+            fats?: number;
+            calories?: number;
+          } | null;
           return {
             catalogFoodId: f.id, // This ID is needed to add the food
             name: f.name,

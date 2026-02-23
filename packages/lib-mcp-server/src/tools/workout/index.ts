@@ -30,10 +30,7 @@ export {
 export { workoutApplyModificationTool } from './workout.tool';
 
 // Legacy utilities (still needed)
-export {
-  workoutCopyProgressionPatternTool,
-  workoutPersistProgramTool,
-} from './granular';
+export { workoutCopyProgressionPatternTool, workoutPersistProgramTool } from './granular';
 
 // Program Generation Tools
 export { workoutProgramTools } from './program';

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@giulio-leone/lib-core';
-import { ExerciseAdminService, exerciseImportSchema } from '@giulio-leone/lib-exercise/exercise-admin.service';
+import {
+  ExerciseAdminService,
+  exerciseImportSchema,
+} from '@giulio-leone/lib-exercise/exercise-admin.service';
 import { z } from 'zod';
 import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
@@ -9,14 +12,14 @@ export const dynamic = 'force-dynamic';
 const importRequestSchema = z.object({
   items: z.preprocess(
     (value) => (Array.isArray(value) ? value : value ? [value] : []),
-    z.array(exerciseImportSchema as any)
+    z.array(exerciseImportSchema as z.ZodType)
   ),
   autoApprove: z.boolean().optional(),
   mergeExisting: z.boolean().optional(),
 });
 
 export async function POST(_req: NextRequest): Promise<Response> {
-  const adminOrError: any = await requireAdmin();
+  const adminOrError = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

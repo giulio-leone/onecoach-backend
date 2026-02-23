@@ -48,7 +48,7 @@ export function useHealth() {
   const { healthSummary } = useHealthSummary();
   const { mutate: syncHealthDataMutation } = useSyncHealthData();
   const { data: summaryData } = useHealthSummaryQuery();
-  const user = useAuthStore((state: any) => state.user);
+  const user = useAuthStore((state) => state.user);
 
   // Initialize health kit/connect on mount
   useEffect(() => {
@@ -94,17 +94,20 @@ export function useHealth() {
   const initializeHealthKit = async () => {
     try {
       if (Platform.OS === 'ios') {
-        AppleHealthKit.initHealthKit(APPLE_HEALTH_PERMISSIONS as any, (error) => {
-          if (error) {
-            logger.error('HealthKit initialization error', error);
-            store.setIsAvailable(false);
-          } else {
-            logger.info('HealthKit initialized successfully');
-            store.setIsAvailable(true);
-            store.setPlatform('ios');
-            checkPermissions();
+        AppleHealthKit.initHealthKit(
+          APPLE_HEALTH_PERMISSIONS as unknown as Parameters<typeof AppleHealthKit.initHealthKit>[0],
+          (error) => {
+            if (error) {
+              logger.error('HealthKit initialization error', error);
+              store.setIsAvailable(false);
+            } else {
+              logger.info('HealthKit initialized successfully');
+              store.setIsAvailable(true);
+              store.setPlatform('ios');
+              checkPermissions();
+            }
           }
-        });
+        );
       } else if (Platform.OS === 'android') {
         const status = await getSdkStatus();
         if (status === SdkAvailabilityStatus.SDK_AVAILABLE) {
@@ -162,7 +165,9 @@ export function useHealth() {
         perms.weight = true;
         perms.workout = true;
       } else if (Platform.OS === 'android') {
-        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as any);
+        const granted = await requestPermission(
+          ANDROID_HEALTH_PERMISSIONS as unknown as Parameters<typeof requestPermission>[0]
+        );
         const hasPermission = Array.isArray(granted) && granted.length > 0;
         perms.steps = hasPermission;
         perms.heartRate = hasPermission;
@@ -181,7 +186,9 @@ export function useHealth() {
   const requestPermissions = async (): Promise<boolean> => {
     try {
       if (Platform.OS === 'android') {
-        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as any);
+        const granted = await requestPermission(
+          ANDROID_HEALTH_PERMISSIONS as unknown as Parameters<typeof requestPermission>[0]
+        );
         if (Array.isArray(granted) && granted.length > 0) {
           await checkPermissions();
           return true;

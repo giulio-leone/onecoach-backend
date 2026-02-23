@@ -99,7 +99,7 @@ export class OneRepMaxService {
         orderBy: { lastUpdated: 'desc' },
       });
 
-      const normalized: UserOneRepMaxWithExercise[] = maxes.map((max: any) => ({
+      const normalized: UserOneRepMaxWithExercise[] = maxes.map((max) => ({
         ...max,
         oneRepMax: Number(max.oneRepMax),
       })) as UserOneRepMaxWithExercise[];
@@ -286,10 +286,10 @@ export class OneRepMaxService {
           });
 
           if (exerciseData) {
-            (normalized as any).exercise = {
+            (normalized as Record<string, unknown>).exercise = {
               id: exerciseData.id,
               slug: exerciseData.slug,
-              translations: exerciseData.exercise_translations.map((t: any) => ({
+              translations: exerciseData.exercise_translations.map((t) => ({
                 name: t.name,
                 locale: t.locale,
               })),
@@ -395,7 +395,7 @@ export class OneRepMaxService {
         orderBy: { version: 'desc' },
       });
 
-      const normalized: UserOneRepMaxVersion[] = versions.map((v: any) => ({
+      const normalized: UserOneRepMaxVersion[] = versions.map((v) => ({
         ...v,
         oneRepMax: Number(v.oneRepMax),
       })) as UserOneRepMaxVersion[];

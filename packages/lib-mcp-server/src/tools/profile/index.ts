@@ -38,7 +38,7 @@ export const profileGetTool: McpTool<ProfileGetArgs> = {
 
     const profile = await userProfileService.getSerialized(context.userId);
 
-    const result: any = { profile };
+    const result: Record<string, unknown> = { profile };
 
     if (args.includeMeasurements) {
       const measurements = await prisma.body_measurements.findMany({
@@ -295,11 +295,12 @@ Grasso corporeo: ${measurement.bodyFat ?? 'N/A'}%`
       };
     }
 
-    const where: any = { userId: context.userId };
+    const where: Record<string, unknown> = { userId: context.userId };
     if (args.startDate || args.endDate) {
-      where.date = {};
-      if (args.startDate) where.date.gte = new Date(args.startDate);
-      if (args.endDate) where.date.lte = new Date(args.endDate);
+      const dateFilter: Record<string, Date> = {};
+      if (args.startDate) dateFilter.gte = new Date(args.startDate);
+      if (args.endDate) dateFilter.lte = new Date(args.endDate);
+      where.date = dateFilter;
     }
 
     const measurements = await prisma.body_measurements.findMany({
@@ -314,7 +315,7 @@ Grasso corporeo: ${measurement.bodyFat ?? 'N/A'}%`
           type: 'text',
           text: `📏 **Misurazioni Corporee** (${measurements.length} trovate)
 
-${measurements.length > 0 ? measurements.map((m: any) => `- ${m.date.toISOString().split('T')[0]}: ${m.weight ?? 'N/A'} kg`).join('\n') : 'Nessuna misurazione trovata'}`,
+${measurements.length > 0 ? measurements.map((m) => `- ${m.date.toISOString().split('T')[0]}: ${m.weight ?? 'N/A'} kg`).join('\n') : 'Nessuna misurazione trovata'}`,
         },
       ],
       measurements,
@@ -360,7 +361,7 @@ export const bodyMeasurementUpdateTool: McpTool<BodyMeasurementUpdateArgs> = {
       throw new Error('Measurement not found or unauthorized');
     }
 
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     if (args.date !== undefined) updateData.date = new Date(args.date);
     if (args.weight !== undefined) updateData.weight = args.weight;
     if (args.bodyFat !== undefined) updateData.bodyFat = args.bodyFat;
@@ -464,7 +465,7 @@ export const goalCreateTool: McpTool<GoalCreateArgs> = {
         id: createId(),
         userId: context.userId,
         type: args.type,
-        target: args.target as any,
+        target: args.target as unknown as Prisma.JsonValue,
         deadline: args.deadline ? new Date(args.deadline) : null,
         startDate: new Date(args.startDate),
         status: 'ACTIVE',
@@ -512,7 +513,7 @@ export const goalGetTool: McpTool<GoalGetArgs> = {
       throw new Error('Unauthorized: User ID required');
     }
 
-    const where: any = { userId: context.userId };
+    const where: Record<string, unknown> = { userId: context.userId };
     if (args.status) {
       where.status = args.status;
     }
@@ -529,7 +530,7 @@ export const goalGetTool: McpTool<GoalGetArgs> = {
           type: 'text',
           text: `🎯 **Obiettivi** (${goals.length} trovati)
 
-${goals.length > 0 ? goals.map((g: any) => `- ${g.type} (${g.status}) - Inizio: ${g.startDate.toISOString().split('T')[0]}`).join('\n') : 'Nessun obiettivo trovato'}`,
+${goals.length > 0 ? goals.map((g) => `- ${g.type} (${g.status}) - Inizio: ${g.startDate.toISOString().split('T')[0]}`).join('\n') : 'Nessun obiettivo trovato'}`,
         },
       ],
       goals,
@@ -566,9 +567,9 @@ export const goalUpdateTool: McpTool<GoalUpdateArgs> = {
       throw new Error('Goal not found or unauthorized');
     }
 
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     if (args.type !== undefined) updateData.type = args.type;
-    if (args.target !== undefined) updateData.target = args.target as any;
+    if (args.target !== undefined) updateData.target = args.target as unknown as Prisma.JsonValue;
     if (args.deadline !== undefined)
       updateData.deadline = args.deadline ? new Date(args.deadline) : null;
     if (args.status !== undefined) updateData.status = args.status;
@@ -656,4 +657,4 @@ export const profileTools = [
 
 import { arrayToToolRecord } from '../../utils/helpers';
 
-export const profileToolsRecord = arrayToToolRecord(profileTools as any);
+export const profileToolsRecord = arrayToToolRecord(profileTools as unknown as McpTool[]);

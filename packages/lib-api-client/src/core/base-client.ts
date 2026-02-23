@@ -141,8 +141,8 @@ export abstract class BaseApiClient {
 
       if (!response.ok) {
         throw new ApiError(
-          (finalResponse.data as any)?.error ||
-            (finalResponse.data as any)?.message ||
+          (finalResponse.data as Record<string, unknown>)?.error ||
+            (finalResponse.data as Record<string, unknown>)?.message ||
             `API Error: ${response.statusText}`,
           response.status,
           finalResponse.data,

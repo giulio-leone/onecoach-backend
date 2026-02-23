@@ -66,7 +66,7 @@ export const athleteListTool: McpTool<AthleteListParams> = {
             athletes.length > 0
               ? `Trovati ${athletes.length} atleti:\n${athletes
                   .map(
-                    (a: any) =>
+                    (a) =>
                       `- ${a.name ?? 'N/A'} (${a.email}) - ${a.status === 'ACTIVE' ? '🟢' : '🔴'} ${a.status}`
                   )
                   .join('\n')}`
@@ -232,7 +232,7 @@ export const athleteGetMaxesTool: McpTool<AthleteGetMaxesParams> = {
           text:
             maxes.length > 0
               ? `💪 **Massimali:**\n${maxes
-                  .map((m: any) => `- Exercise ${m.exerciseId}: ${m.oneRepMax}kg 1RM`)
+                  .map((m) => `- Exercise ${m.exerciseId}: ${m.oneRepMax}kg 1RM`)
                   .join('\n')}`
               : 'Nessun massimale registrato',
         },
@@ -438,6 +438,6 @@ export const athleteTools = [
   athleteSetMaxTool,
   athleteGetProgressTool,
   athleteAssignPlanTool,
-] satisfies McpTool<any, any>[];
+] satisfies McpTool[];
 
 export const athleteToolsRecord = arrayToToolRecord(athleteTools);

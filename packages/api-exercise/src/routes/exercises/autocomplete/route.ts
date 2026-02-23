@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic';
  * - equipments: comma-separated equipment names (optional)
  */
 export async function GET(_req: Request): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

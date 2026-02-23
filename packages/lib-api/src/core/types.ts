@@ -30,7 +30,7 @@ export interface RequestInterceptor {
 
 export interface ResponseInterceptor {
   onResponse<T>(response: ResponseConfig<T>): Promise<ResponseConfig<T>> | ResponseConfig<T>;
-  onError?(error: ApiError): Promise<unknown> | any;
+  onError?(error: ApiError): Promise<unknown> | unknown;
 }
 
 export class ApiError extends Error {

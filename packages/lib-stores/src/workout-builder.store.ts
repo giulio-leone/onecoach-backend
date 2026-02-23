@@ -55,118 +55,118 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>()(
     immer((set, get) => ({
       // Initial State
       dependencies: null,
-        activeProgram: null,
-        isLoading: false,
-        isSaving: false,
-        isRealtimeConnected: false,
-        selectedWeekIndex: 0,
-        selectedDayIndex: 0,
-        viewMode: 'editor',
+      activeProgram: null,
+      isLoading: false,
+      isSaving: false,
+      isRealtimeConnected: false,
+      selectedWeekIndex: 0,
+      selectedDayIndex: 0,
+      viewMode: 'editor',
 
-        // Configure dependencies
-        configure: (dependencies: WorkoutBuilderDependencies) => {
-          set({ dependencies });
-        },
+      // Configure dependencies
+      configure: (dependencies: WorkoutBuilderDependencies) => {
+        set({ dependencies });
+      },
 
-        // Actions
-        init: async (programId: string) => {
-          const { dependencies } = get();
-          if (!dependencies) {
-            logger.error('WorkoutBuilderStore: Dependencies not configured. Call configure() first.');
-            return;
-          }
+      // Actions
+      init: async (programId: string) => {
+        const { dependencies } = get();
+        if (!dependencies) {
+          logger.error('WorkoutBuilderStore: Dependencies not configured. Call configure() first.');
+          return;
+        }
 
-          set({ isLoading: true });
-          try {
-            const response = await dependencies.workoutApi.getById(programId);
-            set({ activeProgram: response.program });
+        set({ isLoading: true });
+        try {
+          const response = await dependencies.workoutApi.getById(programId);
+          set({ activeProgram: response.program });
 
-            // Initialize Supabase Realtime subscription if available
-            if (dependencies.supabase) {
-              dependencies.supabase
-                .channel(`workout-program:${programId}`)
-                .on(
-                  'postgres_changes',
-                  {
-                    event: 'UPDATE',
-                    schema: 'public',
-                    table: 'workout_programs',
-                    filter: `id=eq.${programId}`,
-                  },
-                  (payload) => {
-                    // Update program when changed externally
-                    const currentProgram = get().activeProgram;
-                    if (currentProgram && currentProgram.id === programId) {
-                      set({ activeProgram: { ...currentProgram, ...payload.new } });
-                    }
+          // Initialize Supabase Realtime subscription if available
+          if (dependencies.supabase) {
+            dependencies.supabase
+              .channel(`workout-program:${programId}`)
+              .on(
+                'postgres_changes',
+                {
+                  event: 'UPDATE',
+                  schema: 'public',
+                  table: 'workout_programs',
+                  filter: `id=eq.${programId}`,
+                },
+                (payload) => {
+                  // Update program when changed externally
+                  const currentProgram = get().activeProgram;
+                  if (currentProgram && currentProgram.id === programId) {
+                    set({ activeProgram: { ...currentProgram, ...payload.new } });
                   }
-                )
-                .subscribe();
+                }
+              )
+              .subscribe();
 
-              set({ isRealtimeConnected: true });
-            }
-          } catch (error) {
-            logger.error('WorkoutBuilderStore.init error:', error);
-          } finally {
-            set({ isLoading: false });
+            set({ isRealtimeConnected: true });
           }
-        },
+        } catch (error) {
+          logger.error('WorkoutBuilderStore.init error:', error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
 
-        cleanup: () => {
-          const { dependencies } = get();
-          if (dependencies?.supabase) {
-            // Unsubscribe from all channels
-            dependencies.supabase.removeAllChannels();
+      cleanup: () => {
+        const { dependencies } = get();
+        if (dependencies?.supabase) {
+          // Unsubscribe from all channels
+          dependencies.supabase.removeAllChannels();
+        }
+        set({ activeProgram: null, isRealtimeConnected: false });
+      },
+
+      setProgram: (program: WorkoutProgram) => {
+        set({ activeProgram: program });
+      },
+
+      updateProgram: async (updates: Partial<WorkoutProgram>) => {
+        const currentProgram = get().activeProgram;
+        if (!currentProgram) return;
+
+        const { dependencies } = get();
+        if (!dependencies) {
+          logger.error('WorkoutBuilderStore: Dependencies not configured. Call configure() first.');
+          return;
+        }
+
+        // Optimistic Update
+        set((state) => {
+          if (state.activeProgram) {
+            Object.assign(state.activeProgram, updates);
           }
-          set({ activeProgram: null, isRealtimeConnected: false });
-        },
+          state.isSaving = true;
+        });
 
-        setProgram: (program: WorkoutProgram) => {
-          set({ activeProgram: program });
-        },
+        // Autosave with debouncing would be handled by the caller
+        try {
+          const response = await dependencies.workoutApi.update(currentProgram.id, updates);
+          set({ activeProgram: response.program, isSaving: false });
+        } catch (error) {
+          logger.error('WorkoutBuilderStore.updateProgram error:', error);
+          // Revert optimistic update on error
+          set({ activeProgram: currentProgram, isSaving: false });
+        }
+      },
 
-        updateProgram: async (updates: Partial<WorkoutProgram>) => {
-          const currentProgram = get().activeProgram;
-          if (!currentProgram) return;
-
-          const { dependencies } = get();
-          if (!dependencies) {
-            logger.error('WorkoutBuilderStore: Dependencies not configured. Call configure() first.');
-            return;
-          }
-
-          // Optimistic Update
-          set((state) => {
-            if (state.activeProgram) {
-              Object.assign(state.activeProgram, updates);
-            }
-            state.isSaving = true;
-          });
-
-          // Autosave with debouncing would be handled by the caller
-          try {
-            const response = await dependencies.workoutApi.update(currentProgram.id, updates);
-            set({ activeProgram: response.program, isSaving: false });
-          } catch (error) {
-            logger.error('WorkoutBuilderStore.updateProgram error:', error);
-            // Revert optimistic update on error
-            set({ activeProgram: currentProgram, isSaving: false });
-          }
-        },
-
-        // UI Actions
-        setSelectedWeek: (index: number) => set({ selectedWeekIndex: index }),
-        setSelectedDay: (index: number) => set({ selectedDayIndex: index }),
-        setViewMode: (mode: 'editor' | 'statistics' | 'progression') => set({ viewMode: mode }),
-      })),
-      {
-        name: 'workout-builder-storage',
-        storage: createJSONStorage(() => localStorage),
-        partialize: (state) => ({
-          selectedWeekIndex: state.selectedWeekIndex,
-          selectedDayIndex: state.selectedDayIndex,
-          viewMode: state.viewMode,
-        }),
-      }
-    )
-  ) as UseBoundStore<StoreApi<WorkoutBuilderState>> | any; // forced cast to avoid complex middleware typing issues
+      // UI Actions
+      setSelectedWeek: (index: number) => set({ selectedWeekIndex: index }),
+      setSelectedDay: (index: number) => set({ selectedDayIndex: index }),
+      setViewMode: (mode: 'editor' | 'statistics' | 'progression') => set({ viewMode: mode }),
+    })),
+    {
+      name: 'workout-builder-storage',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        selectedWeekIndex: state.selectedWeekIndex,
+        selectedDayIndex: state.selectedDayIndex,
+        viewMode: state.viewMode,
+      }),
+    }
+  )
+) as UseBoundStore<StoreApi<WorkoutBuilderState>>; // forced cast to avoid complex middleware typing issues

@@ -2,13 +2,20 @@ import type { WorkoutProgram, WorkoutStatus } from '@giulio-leone/types';
 
 type WorkoutProgramLike = Omit<
   Partial<WorkoutProgram>,
-  'difficulty' | 'name' | 'description' | 'durationWeeks' | 'weeks' | 'goals' | 'createdAt' | 'updatedAt'
+  | 'difficulty'
+  | 'name'
+  | 'description'
+  | 'durationWeeks'
+  | 'weeks'
+  | 'goals'
+  | 'createdAt'
+  | 'updatedAt'
 > & {
   name: string;
   description: string;
   difficulty: string;
   durationWeeks: number;
-  weeks: any[]; // Allow any structure for weeks to avoid schema mismatch
+  weeks: unknown[];
   goals: string[];
   // Allow both Date and string for timestamps (Zod schema outputs Date, but type expects string)
   createdAt?: Date | string;

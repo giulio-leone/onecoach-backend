@@ -67,11 +67,11 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
 
   // Calculate average volume (SSOT: usa getExerciseSets)
   let totalVolume = 0;
-  completedSessions30d.forEach((session: any) => {
+  completedSessions30d.forEach((session) => {
     const exercises = session.exercises as Exercise[];
     exercises.forEach((exercise: Exercise) => {
       const sets = getExerciseSets(exercise);
-      sets.forEach((set: any) => {
+      sets.forEach((set) => {
         if (set.done && set.repsDone && set.weightDone) {
           totalVolume += set.repsDone * set.weightDone;
         }
@@ -97,7 +97,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   // Group by exercise and calculate progress
   type PerformanceRecord = (typeof performanceRecords)[number];
   const exerciseMap = new Map<string, PerformanceRecord[]>();
-  performanceRecords.forEach((record: any) => {
+  performanceRecords.forEach((record) => {
     if (!exerciseMap.has(record.exerciseId)) {
       exerciseMap.set(record.exerciseId, []);
     }
@@ -163,7 +163,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   let totalCarbs = 0;
   let totalFats = 0;
 
-  nutritionLogsWithMacros.forEach((log: any) => {
+  nutritionLogsWithMacros.forEach((log) => {
     const macros = log.actualDailyMacros as Record<string, number> | null;
     if (macros) {
       totalCalories += macros.calories || 0;
@@ -229,8 +229,8 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
     avgCarbs: new Prisma.Decimal(avgCarbs),
     avgFats: new Prisma.Decimal(avgFats),
     adherenceRate: new Prisma.Decimal(adherenceRate),
-    activeGoals: activeGoals.map((g: any) => g.id),
-    completedGoals: completedGoals.map((g: any) => g.id),
+    activeGoals: activeGoals.map((g) => g.id),
+    completedGoals: completedGoals.map((g) => g.id),
   };
 
   const snapshot = existingSnapshot
@@ -302,19 +302,23 @@ export async function generateSnapshotsForAllUsers(date: Date) {
   });
 
   const results = await Promise.allSettled(
-    users.map((user: any) => generateProgressSnapshot(user.id, date))
+    users.map((user) => generateProgressSnapshot(user.id, date))
   );
 
-  const successful = results.filter((r: any) => r.status === 'fulfilled').length;
-  const failed = results.filter((r: any) => r.status === 'rejected').length;
+  const successful = results.filter(
+    (r: PromiseSettledResult<unknown>) => r.status === 'fulfilled'
+  ).length;
+  const failed = results.filter(
+    (r: PromiseSettledResult<unknown>) => r.status === 'rejected'
+  ).length;
 
   return {
     total: users.length,
     successful,
     failed,
     errors: results
-      .filter((r: any) => r.status === 'rejected')
-      .map((r: any) => (r as PromiseRejectedResult).reason),
+      .filter((r: PromiseSettledResult<unknown>) => r.status === 'rejected')
+      .map((r: PromiseSettledResult<unknown>) => (r as PromiseRejectedResult).reason),
   };
 }
 

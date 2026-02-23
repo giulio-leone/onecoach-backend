@@ -94,7 +94,7 @@ export function useHealth() {
   const initializeHealthKit = async () => {
     try {
       if (Platform.OS === 'ios') {
-        AppleHealthKit.initHealthKit(APPLE_HEALTH_PERMISSIONS as any, (error) => {
+        AppleHealthKit.initHealthKit(APPLE_HEALTH_PERMISSIONS as never, (error) => {
           if (error) {
             logger.error('HealthKit initialization error', error);
             store.setIsAvailable(false);
@@ -162,7 +162,7 @@ export function useHealth() {
         perms.weight = true;
         perms.workout = true;
       } else if (Platform.OS === 'android') {
-        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as any);
+        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as never);
         const hasPermission = Array.isArray(granted) && granted.length > 0;
         perms.steps = hasPermission;
         perms.heartRate = hasPermission;
@@ -181,7 +181,7 @@ export function useHealth() {
   const requestPermissions = async (): Promise<boolean> => {
     try {
       if (Platform.OS === 'android') {
-        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as any);
+        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as never);
         if (Array.isArray(granted) && granted.length > 0) {
           await checkPermissions();
           return true;

@@ -15,7 +15,10 @@ import { prisma } from '@giulio-leone/lib-core';
 const analyzeParams = z.object({
   userId: z.string().optional(),
   days: z.number().int().min(7).max(365).default(30).describe('Analysis period in days'),
-  metrics: z.array(z.string()).optional().describe('Specific metrics to analyze (e.g. weight, bodyFat)'),
+  metrics: z
+    .array(z.string())
+    .optional()
+    .describe('Specific metrics to analyze (e.g. weight, bodyFat)'),
 });
 
 export const bodyMeasurementsAnalyzeTool: McpTool<z.infer<typeof analyzeParams>> = {
@@ -53,21 +56,21 @@ export const bodyMeasurementsAnalyzeTool: McpTool<z.infer<typeof analyzeParams>>
     type NumericMeasurementKey = 'weight' | 'bodyFat' | 'muscleMass' | 'waist';
 
     const calculateTrend = (key: NumericMeasurementKey) => {
-        // Safe access and number conversion
-        const startVal = first[key];
-        const endVal = last[key];
+      // Safe access and number conversion
+      const startVal = first[key];
+      const endVal = last[key];
 
-        const start = startVal !== null ? Number(startVal) : 0;
-        const end = endVal !== null ? Number(endVal) : 0;
-        
-        if (!start) return null; // Avoid division by zero or invalid start
-        
-        return {
-            start,
-            end,
-            delta: Number((end - start).toFixed(2)),
-            percent: Number(((end - start) / start * 100).toFixed(1)),
-        };
+      const start = startVal !== null ? Number(startVal) : 0;
+      const end = endVal !== null ? Number(endVal) : 0;
+
+      if (!start) return null; // Avoid division by zero or invalid start
+
+      return {
+        start,
+        end,
+        delta: Number((end - start).toFixed(2)),
+        percent: Number((((end - start) / start) * 100).toFixed(1)),
+      };
     };
 
     const weightTrend = calculateTrend('weight');
@@ -105,18 +108,18 @@ Recorded ${measurements.length} entries.`,
         period: args.days,
         entries: measurements.length,
         current: {
-            weight: last.weight,
-            bodyFat: last.bodyFat,
-            muscleMass: last.muscleMass,
-            bmi: currentBMI,
-            bmiCategory,
+          weight: last.weight,
+          bodyFat: last.bodyFat,
+          muscleMass: last.muscleMass,
+          bmi: currentBMI,
+          bmiCategory,
         },
         trends: {
-            weight: weightTrend,
-            bodyFat: bodyFatTrend,
-            muscleMass: muscleTrend,
-            waist: waistTrend,
-        }
+          weight: weightTrend,
+          bodyFat: bodyFatTrend,
+          muscleMass: muscleTrend,
+          waist: waistTrend,
+        },
       },
     };
   },
@@ -125,66 +128,82 @@ Recorded ${measurements.length} entries.`,
 // ==================== COMPARE ====================
 
 const compareParams = z.object({
-    userId: z.string().optional(),
-    dateA: z.string().describe('First date (ISO)'),
-    dateB: z.string().describe('Second date (ISO)'),
+  userId: z.string().optional(),
+  dateA: z.string().describe('First date (ISO)'),
+  dateB: z.string().describe('Second date (ISO)'),
 });
 
 export const bodyMeasurementsCompareTool: McpTool<z.infer<typeof compareParams>> = {
-    name: 'body_measurements_compare',
-    description: 'Compare measurements between two specific dates.',
-    parameters: compareParams,
-    execute: async (args, context) => {
-        const userId = args.userId || context.userId;
-        if (!userId) throw new Error('User ID required');
+  name: 'body_measurements_compare',
+  description: 'Compare measurements between two specific dates.',
+  parameters: compareParams,
+  execute: async (args, context) => {
+    const userId = args.userId || context.userId;
+    if (!userId) throw new Error('User ID required');
 
-        const dateA = new Date(args.dateA);
-        const dateB = new Date(args.dateB);
+    const dateA = new Date(args.dateA);
+    const dateB = new Date(args.dateB);
 
-        // Find closest measurement to dates? Or exact?
-        // Let's try exact first, usually users pick from list.
-        // Or findFirst with date lte/gte range?
-        // Let's stick to simple "find entry on this day".
-        
-        const [entryA, entryB] = await Promise.all([
-            prisma.body_measurements.findFirst({ where: { userId, date: dateA } }),
-            prisma.body_measurements.findFirst({ where: { userId, date: dateB } }),
-        ]);
+    // Find closest measurement to dates? Or exact?
+    // Let's try exact first, usually users pick from list.
+    // Or findFirst with date lte/gte range?
+    // Let's stick to simple "find entry on this day".
 
-        if (!entryA || !entryB) {
-            return {
-                content: [{ type: 'text', text: 'One or both dates have no data.' }],
-                success: false,
-            };
-        }
+    const [entryA, entryB] = await Promise.all([
+      prisma.body_measurements.findFirst({ where: { userId, date: dateA } }),
+      prisma.body_measurements.findFirst({ where: { userId, date: dateB } }),
+    ]);
 
-        const numericKeys = ['weight', 'bodyFat', 'muscleMass', 'waterPercentage', 'visceralFat', 'chest', 'waist', 'hips', 'arm', 'thigh', 'calf', 'neck', 'shoulders'] as const;
+    if (!entryA || !entryB) {
+      return {
+        content: [{ type: 'text', text: 'One or both dates have no data.' }],
+        success: false,
+      };
+    }
 
-        const comparison: Record<string, any> = {};
-        const diffs: Record<string, any> = {};
+    const numericKeys = [
+      'weight',
+      'bodyFat',
+      'muscleMass',
+      'waterPercentage',
+      'visceralFat',
+      'chest',
+      'waist',
+      'hips',
+      'arm',
+      'thigh',
+      'calf',
+      'neck',
+      'shoulders',
+    ] as const;
 
-        numericKeys.forEach(key => {
-            const valA = Number(entryA[key as keyof typeof entryA]) || 0;
-            const valB = Number(entryB[key as keyof typeof entryB]) || 0;
-            if (valA || valB) {
-                comparison[key] = { A: valA, B: valB };
-                diffs[key] = Number((valB - valA).toFixed(2));
-            }
-        });
+    const comparison: Record<string, unknown> = {};
+    const diffs: Record<string, unknown> = {};
 
-        return {
-            content: [{
-                type: 'text',
-                text: `⚖️ **Comparison**
+    numericKeys.forEach((key) => {
+      const valA = Number(entryA[key as keyof typeof entryA]) || 0;
+      const valB = Number(entryB[key as keyof typeof entryB]) || 0;
+      if (valA || valB) {
+        comparison[key] = { A: valA, B: valB };
+        diffs[key] = Number((valB - valA).toFixed(2));
+      }
+    });
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `⚖️ **Comparison**
 ${args.dateA} vs ${args.dateB}
 
 Weight: ${entryA.weight} -> ${entryB.weight} (${diffs.weight > 0 ? '+' : ''}${diffs.weight})
 Body Fat: ${entryA.bodyFat}% -> ${entryB.bodyFat}% (${diffs.bodyFat > 0 ? '+' : ''}${diffs.bodyFat}%)
-Muscle: ${entryA.muscleMass} -> ${entryB.muscleMass} (${diffs.muscleMass > 0 ? '+' : ''}${diffs.muscleMass})`
-            }],
-            comparison,
-            diffs,
-            dates: { A: entryA.date, B: entryB.date }
-        };
-    }
-}
+Muscle: ${entryA.muscleMass} -> ${entryB.muscleMass} (${diffs.muscleMass > 0 ? '+' : ''}${diffs.muscleMass})`,
+        },
+      ],
+      comparison,
+      diffs,
+      dates: { A: entryA.date, B: entryB.date },
+    };
+  },
+};

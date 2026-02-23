@@ -116,7 +116,7 @@ export class FoodVisionService {
       contentBase64: imageBase64,
       mimeType: 'image/jpeg',
       prompt: LABEL_EXTRACTION_PROMPT,
-      schema: labelExtractionSchema as any,
+      schema: labelExtractionSchema as z.ZodSchema<LabelExtractionResult>,
       userId,
       fileType: 'image',
       creditCost: 5,
@@ -128,22 +128,21 @@ export class FoodVisionService {
   /**
    * Segment dish and identify food items with quantities
    */
-  static async segmentDish(
-    imageBase64: string,
-    userId: string
-  ): Promise<DishSegmentationResult> {
+  static async segmentDish(imageBase64: string, userId: string): Promise<DishSegmentationResult> {
     const result = await parseWithVisionAI<DishSegmentationResult>({
       contentBase64: imageBase64,
       mimeType: 'image/jpeg',
       prompt: DISH_SEGMENTATION_PROMPT,
-      schema: dishSegmentationSchema as any,
+      schema: dishSegmentationSchema as z.ZodSchema<DishSegmentationResult>,
       userId,
       fileType: 'image',
       creditCost: 8,
     });
 
     // Filter items with confidence < 0.5
-    const filteredItems = result.items.filter((item: { confidence: number }) => item.confidence >= 0.5);
+    const filteredItems = result.items.filter(
+      (item: { confidence: number }) => item.confidence >= 0.5
+    );
 
     return {
       items: filteredItems,
@@ -162,20 +161,20 @@ export async function updateVisionModelConfig(
   // Import dynamically to avoid circular dependencies
   const { prisma } = await import('@giulio-leone/lib-core');
   const { AIProvider } = await import('@prisma/client');
-  
+
   const currentConfig = await prisma.ai_provider_configs.findUnique({
     where: { provider: AIProvider.OPENROUTER },
   });
-  
+
   const currentMetadata = (currentConfig?.metadata as Record<string, unknown>) || {};
   const currentVisionModels = (currentMetadata.visionModels as Record<string, string>) || {};
-  
+
   const updatedVisionModels = {
     ...currentVisionModels,
     ...(labelExtraction && { labelExtraction }),
     ...(dishSegmentation && { dishSegmentation }),
   };
-  
+
   await prisma.ai_provider_configs.upsert({
     where: { provider: AIProvider.OPENROUTER },
     update: {

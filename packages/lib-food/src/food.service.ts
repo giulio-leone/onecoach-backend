@@ -249,11 +249,11 @@ export class FoodService {
     });
 
     // Mantieni ordine BM25
-    const foodMap = new Map<string, FoodItemWithRelations>(foods.map((f: any) => [f.id, f]));
+    const foodMap = new Map<string, FoodItemWithRelations>(foods.map((f) => [f.id, f]));
     return searchResults
-      .map((r: any) => foodMap.get(r.id))
+      .map((r) => foodMap.get(r.id))
       .filter((f): f is FoodItemWithRelations => f !== undefined)
-      .map((f: any) => this.mapToFoodItem(f));
+      .map((f) => this.mapToFoodItem(f));
   }
 
   /**
@@ -335,7 +335,7 @@ export class FoodService {
           ? {
               categories: {
                 createMany: {
-                  data: data.categoryIds.map((cid: any) => ({ categoryId: String(cid) })),
+                  data: data.categoryIds.map((cid) => ({ categoryId: String(cid) })),
                   skipDuplicates: true,
                 },
               },
@@ -398,8 +398,9 @@ export class FoodService {
 
       // Calcola mainMacro
       const mainMacro = this.calculateMainMacro(data.macrosPer100g);
-      (updateData as Record<string, unknown>).mainMacro =
-        toPrismaJsonValue(mainMacro as Record<string, unknown>);
+      (updateData as Record<string, unknown>).mainMacro = toPrismaJsonValue(
+        mainMacro as Record<string, unknown>
+      );
     }
 
     // Brand (id o creazione da name)
@@ -437,7 +438,7 @@ export class FoodService {
               categories: {
                 deleteMany: {},
                 createMany: {
-                  data: data.categoryIds.map((cid: any) => ({ categoryId: String(cid) })),
+                  data: data.categoryIds.map((cid) => ({ categoryId: String(cid) })),
                   skipDuplicates: true,
                 },
               },
@@ -654,7 +655,7 @@ export class FoodService {
         ...('categories' in food && Array.isArray(food.categories) && food.categories.length > 0
           ? {
               categories: food.categories
-                .map((fc: any) => {
+                .map((fc) => {
                   const category = (
                     fc as { food_categories: { id: string; name: string; slug: string } }
                   ).food_categories;

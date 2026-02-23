@@ -17,7 +17,7 @@ import { logError, getErrorMessage, mapErrorToApiResponse } from '@giulio-leone/
 export const dynamic = 'force-dynamic';
 
 export async function GET(): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -39,7 +39,7 @@ export async function GET(): Promise<Response> {
 }
 
 export async function PUT(req: Request): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -102,7 +102,7 @@ export async function PUT(req: Request): Promise<Response> {
 }
 
 export async function DELETE(): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

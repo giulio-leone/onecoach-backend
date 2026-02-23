@@ -13,7 +13,7 @@ import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

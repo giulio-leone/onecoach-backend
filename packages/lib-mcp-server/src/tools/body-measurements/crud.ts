@@ -28,7 +28,7 @@ export const bodyMeasurementsListTool: McpTool<z.infer<typeof listParams>> = {
     const userId = args.userId || context.userId;
     if (!userId) throw new Error('User ID required');
 
-    const where: any = { userId };
+    const where: Record<string, unknown> = { userId };
     if (args.startDate) where.date = { ...where.date, gte: new Date(args.startDate) };
     if (args.endDate) where.date = { ...where.date, lte: new Date(args.endDate) };
 
@@ -101,21 +101,21 @@ export const bodyMeasurementsCreateTool: McpTool<z.infer<typeof createParams>> =
     // Logic: Find first by date, if exists update, else create.
 
     const existing = await prisma.body_measurements.findFirst({
-        where: { userId, date },
+      where: { userId, date },
     });
 
     const dataPayload = { ...args, userId: undefined, date: undefined }; // exclude special fields
 
     let result;
     if (existing) {
-        result = await prisma.body_measurements.update({
-            where: { id: existing.id },
-            data: { ...dataPayload, date },
-        });
+      result = await prisma.body_measurements.update({
+        where: { id: existing.id },
+        data: { ...dataPayload, date },
+      });
     } else {
-        result = await prisma.body_measurements.create({
-            data: { ...dataPayload, userId, date },
-        });
+      result = await prisma.body_measurements.create({
+        data: { ...dataPayload, userId, date },
+      });
     }
 
     return {
@@ -129,69 +129,69 @@ export const bodyMeasurementsCreateTool: McpTool<z.infer<typeof createParams>> =
 // ==================== UPDATE ====================
 
 const updateParamsFull = createParams.omit({ userId: true, date: true }).partial().extend({
-    id: z.string(),
-    date: z.string().optional(),
+  id: z.string(),
+  date: z.string().optional(),
 });
 
 export const bodyMeasurementsUpdateTool: McpTool<z.infer<typeof updateParamsFull>> = {
-    name: 'body_measurements_update',
-    description: 'Update an existing measurement entry.',
-    parameters: updateParamsFull,
-    execute: async (args, context) => {
-        const userId = context.userId;
-        if (!userId) throw new Error('User ID required');
+  name: 'body_measurements_update',
+  description: 'Update an existing measurement entry.',
+  parameters: updateParamsFull,
+  execute: async (args, context) => {
+    const userId = context.userId;
+    if (!userId) throw new Error('User ID required');
 
-        const { id, ...data } = args;
-        
-        // Verify ownership
-        const existing = await prisma.body_measurements.findUnique({
-            where: { id },
-        });
+    const { id, ...data } = args;
 
-        if (!existing || existing.userId !== userId) {
-            throw new Error('Measurement not found or access denied');
-        }
-        
-        let updateData: any = { ...data };
-        if (data.date) {
-            updateData.date = new Date(data.date);
-        }
+    // Verify ownership
+    const existing = await prisma.body_measurements.findUnique({
+      where: { id },
+    });
 
-        const result = await prisma.body_measurements.update({
-            where: { id },
-            data: updateData,
-        });
-
-        return { success: true, data: result };
+    if (!existing || existing.userId !== userId) {
+      throw new Error('Measurement not found or access denied');
     }
+
+    let updateData: Record<string, unknown> = { ...data };
+    if (data.date) {
+      updateData.date = new Date(data.date);
+    }
+
+    const result = await prisma.body_measurements.update({
+      where: { id },
+      data: updateData,
+    });
+
+    return { success: true, data: result };
+  },
 };
 
 // ==================== DELETE ====================
 
 const deleteParams = z.object({
-    id: z.string(),
+  id: z.string(),
 });
 
 export const bodyMeasurementsDeleteTool: McpTool<z.infer<typeof deleteParams>> = {
-    name: 'body_measurements_delete',
-    description: 'Delete a measurement entry.',
-    parameters: deleteParams,
-    execute: async (args, context) => {
-        const userId = context.userId;
-        if (!userId) throw new Error('User ID required');
+  name: 'body_measurements_delete',
+  description: 'Delete a measurement entry.',
+  parameters: deleteParams,
+  execute: async (args, context) => {
+    const userId = context.userId;
+    if (!userId) throw new Error('User ID required');
 
-        // Verify ownership
-        const existing = await prisma.body_measurements.findUnique({
-            where: { id: args.id },
-        });
+    // Verify ownership
+    const existing = await prisma.body_measurements.findUnique({
+      where: { id: args.id },
+    });
 
-        if (!existing || existing.userId !== userId) {
-            throw new Error('Measurement not found or access denied');
-        }
-
-        await prisma.body_measurements.delete({
-            where: { id: args.id },
-        });
-        return { success: true };
+    if (!existing || existing.userId !== userId) {
+      throw new Error('Measurement not found or access denied');
     }
+
+    await prisma.body_measurements.delete({
+      where: { id: args.id },
+    });
+    return { success: true };
+  },
 };

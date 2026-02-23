@@ -220,10 +220,10 @@ class CartService {
 
     const ctx: OfferEvaluationContext = {
       subtotal: Number(cart.subtotal || 0),
-      itemIds: cart.cart_items.map((i: any) => i.itemId),
+      itemIds: cart.cart_items.map((i) => i.itemId),
     };
 
-    return rules.filter((rule: any) =>
+    return rules.filter((rule) =>
       this.evaluateRule(rule.conditions as Record<string, unknown> | null, ctx)
     );
   }
@@ -240,7 +240,7 @@ class CartService {
       throw new Error('Carrello non trovato');
     }
 
-    const subtotal = cart.cart_items.reduce((sum: any, item: any) => {
+    const subtotal = cart.cart_items.reduce((sum: number, item) => {
       return sum + Number(item.unitPrice) * item.quantity;
     }, 0);
 
@@ -327,7 +327,6 @@ class CartService {
         currency: pack.currency,
         title: `${pack.credits} crediti`,
         description: `Pacchetto ${pack.credits} crediti`,
-
       };
     }
 

@@ -8,12 +8,12 @@ import { logger } from '@giulio-leone/lib-shared';
 
 const log = logger.child('AffiliateService');
 const affiliateLogger = {
-  logRegistration: (data: any) => log.info('Affiliate registration', data),
-  logSubscription: (data: any) => log.info('Affiliate subscription', data),
-  logRewardReleased: (data: any) => log.info('Affiliate reward released', data),
-  logPayoutApproved: (data: any) => log.info('Affiliate payout approved', data),
-  logError: (data: any) => log.error('Affiliate error', data),
-  error: (data: any) => log.error('Affiliate error', data), // Alias for compatibility
+  logRegistration: (data: unknown) => log.info('Affiliate registration', data),
+  logSubscription: (data: unknown) => log.info('Affiliate subscription', data),
+  logRewardReleased: (data: unknown) => log.info('Affiliate reward released', data),
+  logPayoutApproved: (data: unknown) => log.info('Affiliate payout approved', data),
+  logError: (data: unknown) => log.error('Affiliate error', data),
+  error: (data: unknown) => log.error('Affiliate error', data), // Alias for compatibility
 };
 // Utility locale per generare codici senza dipendenze esterne
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -217,7 +217,7 @@ export class AffiliateService {
       }
 
       const levelConfig = program.affiliate_program_levels.find(
-        (level: any) => level.level === attribution.level
+        (level) => level.level === attribution.level
       );
       const commissionRateDecimal = levelConfig?.commissionRate ?? program.baseCommissionRate;
       const numericRate = Number(commissionRateDecimal);
@@ -329,9 +329,7 @@ export class AffiliateService {
       return 0;
     }
 
-    const creditRewards = rewards.filter(
-      (r: any) => r.type === AffiliateRewardType.REGISTRATION_CREDIT
-    );
+    const creditRewards = rewards.filter((r) => r.type === AffiliateRewardType.REGISTRATION_CREDIT);
 
     // Accreditare crediti per reward REGISTRATION_CREDIT
     for (const reward of creditRewards) {
@@ -444,7 +442,7 @@ export class AffiliateService {
         createdAttributionIds.push(attribution.id);
 
         const levelConfig = program.affiliate_program_levels.find(
-          (level: any) => level.level === chainItem.level
+          (level) => level.level === chainItem.level
         );
 
         const creditReward =

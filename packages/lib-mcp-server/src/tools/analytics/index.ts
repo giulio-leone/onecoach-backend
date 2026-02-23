@@ -77,7 +77,7 @@ export const analyticsAthleteOverviewTool: McpTool<AnalyticsAthleteOverviewParam
     }
 
     // Sessions with completedAt are considered completed
-    const completedWorkouts = workoutSessions.filter((s: any) => s.completedAt !== null).length;
+    const completedWorkouts = workoutSessions.filter((s) => s.completedAt !== null).length;
     const workoutCompletionRate =
       workoutSessions.length > 0
         ? Math.round((completedWorkouts / workoutSessions.length) * 100)
@@ -172,12 +172,12 @@ export const analyticsWorkoutProgressTool: McpTool<AnalyticsWorkoutProgressParam
 
     const avgVolumeFirst =
       firstHalf.length > 0
-        ? firstHalf.reduce((s: any, rec: any) => s + (rec.volume?.toNumber() ?? 0), 0) /
+        ? firstHalf.reduce((s: number, rec) => s + (rec.volume?.toNumber() ?? 0), 0) /
           firstHalf.length
         : 0;
     const avgVolumeSecond =
       secondHalf.length > 0
-        ? secondHalf.reduce((s: any, rec: any) => s + (rec.volume?.toNumber() ?? 0), 0) /
+        ? secondHalf.reduce((s: number, rec) => s + (rec.volume?.toNumber() ?? 0), 0) /
           secondHalf.length
         : 0;
 
@@ -323,7 +323,7 @@ export const analyticsAthleteComparisonTool: McpTool<AnalyticsAthleteComparisonP
             },
             select: { volume: true },
           });
-          metricValue = records.reduce((s: any, rec: any) => s + (rec.volume?.toNumber() ?? 0), 0);
+          metricValue = records.reduce((s: number, rec) => s + (rec.volume?.toNumber() ?? 0), 0);
         }
 
         return {
@@ -586,7 +586,7 @@ export const analyticsTools = [
   analyticsRevenueTool,
   analyticsEngagementTool,
   analyticsGoalProjectionTool,
-] satisfies McpTool<any, any>[];
+] satisfies McpTool[];
 
 import { arrayToToolRecord } from '../../utils/helpers';
 

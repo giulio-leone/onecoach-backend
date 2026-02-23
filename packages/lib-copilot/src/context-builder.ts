@@ -12,10 +12,7 @@
 
 import { prisma } from '@giulio-leone/lib-core';
 import { normalizeNutritionPlan, resolveFoodReferences } from '@giulio-leone/one-nutrition';
-import {
-  buildUserProfileData,
-  USER_PROFILE_SELECT,
-} from './user-profile-builder';
+import { buildUserProfileData, USER_PROFILE_SELECT } from './user-profile-builder';
 import { userMemoryService } from '@giulio-leone/lib-core';
 import type { WorkoutProgram } from '@giulio-leone/types';
 
@@ -44,8 +41,9 @@ export async function buildNutritionContext(
     throw new Error('Piano non trovato o non autorizzato');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const normalizedPlan = normalizeNutritionPlan(currentPlan as any);
+  const normalizedPlan = normalizeNutritionPlan(
+    currentPlan as Parameters<typeof normalizeNutritionPlan>[0]
+  );
   // Risolvi foodItemId in dati completi per UI/API
   const resolvedPlan = await resolveFoodReferences(normalizedPlan);
 
@@ -68,7 +66,11 @@ export async function buildNutritionContext(
   });
 
   const normalizedRecentPlans = await Promise.all(
-    recentPlans.map((plan: any) => resolveFoodReferences(normalizeNutritionPlan(plan)))
+    recentPlans.map((plan) =>
+      resolveFoodReferences(
+        normalizeNutritionPlan(plan as Parameters<typeof normalizeNutritionPlan>[0])
+      )
+    )
   );
 
   // Get user memory context
@@ -176,7 +178,9 @@ export async function buildChatContext(
     take: CHAT_CONSTANTS.RECENT_ITEMS_TAKE,
   });
 
-  const normalizedRecentPlans = recentPlans.map((plan: any) => normalizeNutritionPlan(plan));
+  const normalizedRecentPlans = recentPlans.map((plan) =>
+    normalizeNutritionPlan(plan as Parameters<typeof normalizeNutritionPlan>[0])
+  );
   const normalizedRecentPrograms = recentPrograms as WorkoutProgram[];
 
   // Get user memory context (all domains)

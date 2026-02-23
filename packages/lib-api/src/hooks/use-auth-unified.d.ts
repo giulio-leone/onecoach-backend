@@ -15,15 +15,15 @@ import type { User } from '@giulio-leone/lib-stores/auth';
  * Unified auth hook return type
  */
 export interface UseAuthReturn {
-    user: User | null;
-    userId: string | null;
-    isLoading: boolean;
-    isAuthenticated: boolean;
-    isAdmin: boolean;
-    isSuperAdmin: boolean;
-    isCoach: boolean;
-    isAthlete: boolean;
-    hasRole: (role: 'ATHLETE' | 'COACH' | 'ADMIN' | 'SUPER_ADMIN') => boolean;
+  user: User | null;
+  userId: string | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+  isSuperAdmin: boolean;
+  isCoach: boolean;
+  isAthlete: boolean;
+  hasRole: (role: 'ATHLETE' | 'COACH' | 'ADMIN' | 'SUPER_ADMIN') => boolean;
 }
 /**
  * Main authentication hook

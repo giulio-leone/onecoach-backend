@@ -8,17 +8,17 @@
 import { QueryClient } from '@tanstack/react-query';
 import { type ReactNode } from 'react';
 interface QueryProviderProps {
-    children: ReactNode;
-    /**
-     * Optional QueryClient instance
-     * If not provided, a new one will be created with default config
-     */
-    client?: QueryClient;
-    /**
-     * Enable persistence with AsyncStorage (React Native only)
-     * Default: false
-     */
-    persist?: boolean;
+  children: ReactNode;
+  /**
+   * Optional QueryClient instance
+   * If not provided, a new one will be created with default config
+   */
+  client?: QueryClient;
+  /**
+   * Enable persistence with AsyncStorage (React Native only)
+   * Default: false
+   */
+  persist?: boolean;
 }
 /**
  * Cross-platform React Query Provider
@@ -36,6 +36,10 @@ interface QueryProviderProps {
  * }
  * ```
  */
-export declare function QueryProvider({ children, client, persist }: QueryProviderProps): import("react/jsx-runtime").JSX.Element;
+export declare function QueryProvider({
+  children,
+  client,
+  persist,
+}: QueryProviderProps): import('react/jsx-runtime').JSX.Element;
 export {};
 //# sourceMappingURL=provider.d.ts.map

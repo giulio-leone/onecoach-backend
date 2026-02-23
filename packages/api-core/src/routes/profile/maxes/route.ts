@@ -28,7 +28,7 @@ const upsertSchema = z.object({
  * Lista tutti i massimali dell'utente autenticato
  */
 export async function GET(): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -69,7 +69,7 @@ export async function GET(): Promise<Response> {
  * Crea o aggiorna un massimale (upsert)
  */
 export async function POST(_req: Request): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

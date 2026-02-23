@@ -18,9 +18,7 @@ import {
   WorkoutVisionService as VisionService,
 } from '@giulio-leone/one-workout';
 import type { ImportProgress } from '@giulio-leone/lib-import-core';
-import {
-  type ImportedWorkoutProgram,
-} from '@giulio-leone/schemas';
+import { type ImportedWorkoutProgram } from '@giulio-leone/schemas';
 import { randomUUID } from 'crypto';
 
 import { logger } from '@giulio-leone/lib-core';

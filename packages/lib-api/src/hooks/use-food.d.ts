@@ -11,36 +11,61 @@ import type { FoodListParams } from '../food';
  * IMPORTANT: Quando cambiano i params (es. page), React Query rifa automaticamente il fetch
  * perché la queryKey cambia. Non usare refetchOnMount: false per evitare problemi di paginazione.
  */
-export declare function useFoods(params?: FoodListParams, initialData?: FoodsResponse): import("@tanstack/react-query").UseQueryResult<FoodsResponse, Error>;
+export declare function useFoods(
+  params?: FoodListParams,
+  initialData?: FoodsResponse
+): import('@tanstack/react-query').UseQueryResult<FoodsResponse, Error>;
 /**
  * Hook to get a food by ID
  */
-export declare function useFood(id: string | null | undefined): import("@tanstack/react-query").UseQueryResult<import("..").FoodResponse, Error>;
+export declare function useFood(
+  id: string | null | undefined
+): import('@tanstack/react-query').UseQueryResult<import('..').FoodResponse, Error>;
 /**
  * Hook to create a food
  */
-export declare function useCreateFood(): import("@tanstack/react-query").UseMutationResult<import("..").FoodResponse, Error, unknown, unknown>;
+export declare function useCreateFood(): import('@tanstack/react-query').UseMutationResult<
+  import('..').FoodResponse,
+  Error,
+  unknown,
+  unknown
+>;
 /**
  * Hook to update a food
  */
-export declare function useUpdateFood(): import("@tanstack/react-query").UseMutationResult<import("..").FoodResponse, Error, {
+export declare function useUpdateFood(): import('@tanstack/react-query').UseMutationResult<
+  import('..').FoodResponse,
+  Error,
+  {
     id: string;
     data: unknown;
-}, unknown>;
+  },
+  unknown
+>;
 /**
  * Hook to delete a food
  */
-export declare function useDeleteFood(): import("@tanstack/react-query").UseMutationResult<void, Error, string, unknown>;
+export declare function useDeleteFood(): import('@tanstack/react-query').UseMutationResult<
+  void,
+  Error,
+  string,
+  unknown
+>;
 /**
  * Hook to update a food using AI
  */
-export declare function useUpdateFoodWithAI(): import("@tanstack/react-query").UseMutationResult<import("..").FoodResponse, Error, {
+export declare function useUpdateFoodWithAI(): import('@tanstack/react-query').UseMutationResult<
+  import('..').FoodResponse,
+  Error,
+  {
     id: string;
     data: {
-        description: string;
-        customPrompt?: string;
+      description: string;
+      customPrompt?: string;
     };
-}, unknown>;
+  },
+  unknown
+>;
 /**
  * Hook for batch operations (delete, update)
  *
@@ -49,18 +74,23 @@ export declare function useUpdateFoodWithAI(): import("@tanstack/react-query").U
  * Il realtime è gestito globalmente tramite useRealtimeSubscription che usa
  * useRealtimeStore (Zustand) per una singola subscription condivisa.
  */
-export declare function useBatchFoodOperations(): import("@tanstack/react-query").UseMutationResult<{
+export declare function useBatchFoodOperations(): import('@tanstack/react-query').UseMutationResult<
+  {
     success: boolean;
     results: Array<{
-        id: string;
-        success: boolean;
-        error?: string;
+      id: string;
+      success: boolean;
+      error?: string;
     }>;
     deleted?: number;
     updated?: number;
-}, Error, {
-    action: "delete" | "update";
+  },
+  Error,
+  {
+    action: 'delete' | 'update';
     ids: string[];
     data?: Record<string, unknown>;
-}, unknown>;
+  },
+  unknown
+>;
 //# sourceMappingURL=use-food.d.ts.map

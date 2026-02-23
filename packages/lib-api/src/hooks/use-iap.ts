@@ -23,7 +23,7 @@ import { getErrorMessage } from '@giulio-leone/lib-shared';
  * Automatically syncs with Zustand store
  */
 export function useSubscriptionStatus() {
-  const setSubscriptionStatus = useIAPStore((state: any) => state.setSubscriptionStatus);
+  const setSubscriptionStatus = useIAPStore((state) => state.setSubscriptionStatus);
 
   const query = useQuery({
     queryKey: iapKeys.subscriptionStatus(),
@@ -52,9 +52,9 @@ export function useSubscriptionStatus() {
  */
 export function usePurchaseProduct() {
   const queryClient = useQueryClient();
-  const setPurchaseState = useIAPStore((state: any) => state.setPurchaseState);
-  const setError = useIAPStore((state: any) => state.setError);
-  const setSubscriptionStatus = useIAPStore((state: any) => state.setSubscriptionStatus);
+  const setPurchaseState = useIAPStore((state) => state.setPurchaseState);
+  const setError = useIAPStore((state) => state.setError);
+  const setSubscriptionStatus = useIAPStore((state) => state.setSubscriptionStatus);
 
   return useMutation({
     mutationFn: (request: VerifyReceiptRequest) => iapQueries.verifyReceipt(request),
@@ -68,7 +68,7 @@ export function usePurchaseProduct() {
         // Update subscription status in store
         setSubscriptionStatus({
           isActive: response.subscription.isActive,
-          productId: response.subscription.productId as any,
+          productId: response.subscription.productId as ProductId,
           expirationDate: response.subscription.expirationDate,
           isInTrialPeriod: response.subscription.isInTrial,
           willAutoRenew: response.subscription.willAutoRenew,
@@ -101,8 +101,8 @@ export function usePurchaseProduct() {
  */
 export function useRestorePurchases() {
   const queryClient = useQueryClient();
-  const setPurchaseState = useIAPStore((state: any) => state.setPurchaseState);
-  const setError = useIAPStore((state: any) => state.setError);
+  const setPurchaseState = useIAPStore((state) => state.setPurchaseState);
+  const setError = useIAPStore((state) => state.setError);
 
   return useMutation({
     mutationFn: (request: RestorePurchasesRequest) => iapQueries.restorePurchases(request),

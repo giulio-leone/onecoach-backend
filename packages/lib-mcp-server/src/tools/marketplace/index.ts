@@ -56,7 +56,7 @@ export const marketplaceListPlansTool: McpTool = {
             plans.length > 0
               ? `🛒 **${plans.length} piani trovati:**\n\n${plans
                   .map(
-                    (p: any) =>
+                    (p) =>
                       `• **${p.title}** (${p.planType})\n  💰 €${p.price} | ⭐ ${p.averageRating ?? 'N/A'} | 👤 ${p.coach?.name ?? 'N/A'}`
                   )
                   .join('\n\n')}`
@@ -237,9 +237,7 @@ export const marketplaceListPurchasesTool: McpTool = {
         {
           type: 'text',
           text: `📦 **${purchases.length} acquisti** (€${totalRevenue.toFixed(2)} totali)\n\n${purchases
-            .map(
-              (o: any) => `• ${o.marketplace_plan?.title ?? 'N/A'} - €${o.price ?? 0} (${o.status})`
-            )
+            .map((o) => `• ${o.marketplace_plan?.title ?? 'N/A'} - €${o.price ?? 0} (${o.status})`)
             .join('\n')}`,
         },
       ],
@@ -444,7 +442,7 @@ export const affiliateListReferralsTool: McpTool = {
             referrals.length > 0
               ? `👥 **${referrals.length} Referral**\n\n${referrals
                   .map(
-                    (r: any) =>
+                    (r) =>
                       `• Status: ${r.status} | Livello: ${r.level} | ${r.createdAt.toLocaleDateString('it-IT')}`
                   )
                   .join('\n')}`

@@ -112,9 +112,7 @@ function findExerciseByName(
   exerciseName: string
 ): { exerciseIndex: number; exercise: WorkoutExerciseData } | null {
   const nameLower = exerciseName.toLowerCase();
-  const exerciseIndex = day.exercises.findIndex((ex) =>
-    ex.name?.toLowerCase().includes(nameLower)
-  );
+  const exerciseIndex = day.exercises.findIndex((ex) => ex.name?.toLowerCase().includes(nameLower));
   if (exerciseIndex === -1) return null;
   return { exerciseIndex, exercise: day.exercises[exerciseIndex]! };
 }
@@ -149,7 +147,8 @@ export interface WorkoutModificationContext {
 // =====================================================
 
 export const updateSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
-  description: 'Update setgroup (sets, reps, weight, intensity, rest, rpe). For "5x5" use count:5, reps:5',
+  description:
+    'Update setgroup (sets, reps, weight, intensity, rest, rpe). For "5x5" use count:5, reps:5',
   targetSchema: WorkoutTargetSchema,
   changesSchema: SetGroupChangesSchema,
 
@@ -159,7 +158,9 @@ export const updateSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
     const ctx = ((context as Record<string, unknown>)?.workout || {}) as WorkoutModificationContext;
 
     if (!c || Object.keys(c).length === 0) {
-      throw new Error('Empty changes. Specify at least one field (count, reps, weight, intensityPercent, rest, rpe).');
+      throw new Error(
+        'Empty changes. Specify at least one field (count, reps, weight, intensityPercent, rest, rpe).'
+      );
     }
 
     const weekIndex = t.weekIndex ?? ctx.defaultWeekIndex ?? 0;
@@ -200,7 +201,18 @@ export const updateSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
     };
 
     // Update baseSet
-    const baseSetFields = ['reps', 'repsMax', 'weight', 'weightMax', 'intensityPercent', 'intensityPercentMax', 'rpe', 'rpeMax', 'rest', 'duration'] as const;
+    const baseSetFields = [
+      'reps',
+      'repsMax',
+      'weight',
+      'weightMax',
+      'intensityPercent',
+      'intensityPercentMax',
+      'rpe',
+      'rpeMax',
+      'rest',
+      'duration',
+    ] as const;
     if (currentSetGroup.baseSet) {
       const baseSetChanges: Partial<WorkoutSetData> = {};
       for (const field of baseSetFields) {
@@ -247,7 +259,8 @@ export const updateSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
       }
     }
 
-    program.weeks[weekIndex]!.days[dayIndex]!.exercises[targetExerciseIndex]!.setGroups[sgIdx] = updatedSetGroup;
+    program.weeks[weekIndex]!.days[dayIndex]!.exercises[targetExerciseIndex]!.setGroups[sgIdx] =
+      updatedSetGroup;
     return program;
   },
 };
@@ -259,13 +272,15 @@ export const updateSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
 const AddSetGroupDataSchema = z.object({
   id: z.string().optional(),
   count: z.number().int().positive().optional().default(3),
-  baseSet: z.object({
-    reps: z.number().int().positive().optional(),
-    intensityPercent: z.number().min(0).max(100).optional(),
-    rest: z.number().int().positive().optional(),
-    weight: z.number().optional(),
-    rpe: z.number().min(1).max(10).optional(),
-  }).optional(),
+  baseSet: z
+    .object({
+      reps: z.number().int().positive().optional(),
+      intensityPercent: z.number().min(0).max(100).optional(),
+      rest: z.number().int().positive().optional(),
+      weight: z.number().optional(),
+      rpe: z.number().min(1).max(10).optional(),
+    })
+    .optional(),
   sets: z.array(z.record(z.string(), z.unknown())).optional(),
 });
 
@@ -307,7 +322,7 @@ export const addSetgroupAction: AgenticActionHandler<WorkoutProgramData> = {
         intensityPercent: 70,
         ...(payload.baseSet || {}),
       },
-      sets: payload.sets as WorkoutSetData[] || [],
+      sets: (payload.sets as WorkoutSetData[]) || [],
     };
 
     exercise.setGroups.push(newSetGroup);
@@ -419,16 +434,23 @@ const AddExerciseDataSchema = z.object({
   equipment: z.array(z.string()).optional(),
   muscleGroups: z.array(z.string()).optional(),
   category: z.string().optional(),
-  setGroups: z.array(z.object({
-    count: z.number().int().positive().optional(),
-    baseSet: z.object({
-      reps: z.number().int().positive().optional(),
-      repsMax: z.number().int().positive().optional(),
-      intensityPercent: z.number().min(0).max(100).optional(),
-      rest: z.number().int().positive().optional(),
-      rpe: z.number().min(1).max(10).optional(),
-    }).optional(),
-  })).min(1).describe('REQUIRED: At least one setgroup'),
+  setGroups: z
+    .array(
+      z.object({
+        count: z.number().int().positive().optional(),
+        baseSet: z
+          .object({
+            reps: z.number().int().positive().optional(),
+            repsMax: z.number().int().positive().optional(),
+            intensityPercent: z.number().min(0).max(100).optional(),
+            rest: z.number().int().positive().optional(),
+            rpe: z.number().min(1).max(10).optional(),
+          })
+          .optional(),
+      })
+    )
+    .min(1)
+    .describe('REQUIRED: At least one setgroup'),
 });
 
 type AddExerciseInput = z.infer<typeof AddExerciseDataSchema>;
@@ -557,7 +579,6 @@ export const removeExerciseAction: AgenticActionHandler<WorkoutProgramData> = {
   },
 };
 
-
 // =====================================================
 // =====================================================
 // Element Actions: Superset
@@ -565,17 +586,29 @@ export const removeExerciseAction: AgenticActionHandler<WorkoutProgramData> = {
 
 const AddSupersetDataSchema = z.object({
   name: z.string().optional().describe('Superset name'),
-  exercises: z.array(z.object({
-    name: z.string().describe('Exercise name'),
-    catalogExerciseId: z.string().optional(),
-    setGroups: z.array(z.object({
-      count: z.number().int().positive().optional().default(3),
-      baseSet: z.object({
-        reps: z.number().int().positive().optional(),
-        rest: z.number().int().positive().optional(),
-      }).optional(),
-    })).min(1).optional(),
-  })).min(2).describe('At least 2 exercises for superset'),
+  exercises: z
+    .array(
+      z.object({
+        name: z.string().describe('Exercise name'),
+        catalogExerciseId: z.string().optional(),
+        setGroups: z
+          .array(
+            z.object({
+              count: z.number().int().positive().optional().default(3),
+              baseSet: z
+                .object({
+                  reps: z.number().int().positive().optional(),
+                  rest: z.number().int().positive().optional(),
+                })
+                .optional(),
+            })
+          )
+          .min(1)
+          .optional(),
+      })
+    )
+    .min(2)
+    .describe('At least 2 exercises for superset'),
   restBetweenExercises: z.number().int().nonnegative().optional().default(0),
   restAfterSuperset: z.number().int().positive().optional().default(90),
   rounds: z.number().int().positive().optional().default(1),
@@ -650,12 +683,17 @@ export const addSupersetAction: AgenticActionHandler<WorkoutProgramData> = {
 
 const AddCircuitDataSchema = z.object({
   name: z.string().describe('Circuit name'),
-  exercises: z.array(z.object({
-    name: z.string().describe('Exercise name'),
-    reps: z.number().int().positive().optional(),
-    duration: z.number().int().positive().optional().describe('Duration in seconds'),
-    notes: z.string().optional(),
-  })).min(2).describe('At least 2 exercises for circuit'),
+  exercises: z
+    .array(
+      z.object({
+        name: z.string().describe('Exercise name'),
+        reps: z.number().int().positive().optional(),
+        duration: z.number().int().positive().optional().describe('Duration in seconds'),
+        notes: z.string().optional(),
+      })
+    )
+    .min(2)
+    .describe('At least 2 exercises for circuit'),
   rounds: z.number().int().positive().optional().default(3),
   restBetweenExercises: z.number().int().nonnegative().optional().default(0),
   restBetweenRounds: z.number().int().positive().optional().default(60),
@@ -716,11 +754,16 @@ export const addCircuitAction: AgenticActionHandler<WorkoutProgramData> = {
 const AddWarmupDataSchema = z.object({
   name: z.string().optional().default('Riscaldamento'),
   durationMinutes: z.number().int().positive().optional().default(10),
-  exercises: z.array(z.object({
-    name: z.string().describe('Warmup exercise name'),
-    duration: z.number().int().positive().optional().describe('Duration in seconds'),
-    reps: z.number().int().positive().optional(),
-  })).min(1).describe('Warmup exercises'),
+  exercises: z
+    .array(
+      z.object({
+        name: z.string().describe('Warmup exercise name'),
+        duration: z.number().int().positive().optional().describe('Duration in seconds'),
+        reps: z.number().int().positive().optional(),
+      })
+    )
+    .min(1)
+    .describe('Warmup exercises'),
   notes: z.string().optional(),
 });
 
@@ -772,7 +815,10 @@ export const addWarmupAction: AgenticActionHandler<WorkoutProgramData> = {
 const AddCardioDataSchema = z.object({
   name: z.string().describe('Cardio exercise name'),
   exerciseId: z.string().optional().describe('Exercise ID from catalog'),
-  machine: z.enum(['treadmill', 'bike', 'rower', 'elliptical', 'stairmaster', 'jump_rope', 'other']).optional().default('treadmill'),
+  machine: z
+    .enum(['treadmill', 'bike', 'rower', 'elliptical', 'stairmaster', 'jump_rope', 'other'])
+    .optional()
+    .default('treadmill'),
   duration: z.number().int().positive().describe('Duration in seconds'),
   distance: z.number().positive().optional().describe('Target distance in meters'),
   intensity: z.enum(['low', 'moderate', 'high', 'interval']).optional().default('moderate'),

@@ -196,16 +196,14 @@ export const useChatStore = create<ChatStore>()(
 
       updateConversation: (id, updates) => {
         set((state) => ({
-          conversations: state.conversations.map((c: any) =>
-            c.id === id ? { ...c, ...updates } : c
-          ),
+          conversations: state.conversations.map((c) => (c.id === id ? { ...c, ...updates } : c)),
         }));
       },
 
       removeConversation: (id) => {
         const { currentConversationId } = get();
         set((state) => ({
-          conversations: state.conversations.filter((c: any) => c.id !== id),
+          conversations: state.conversations.filter((c) => c.id !== id),
           // Se stiamo cancellando la conversazione corrente, resetta
           ...(currentConversationId === id && {
             currentConversationId: null,
@@ -217,7 +215,7 @@ export const useChatStore = create<ChatStore>()(
       removeConversations: (ids) => {
         const { currentConversationId } = get();
         set((state) => ({
-          conversations: state.conversations.filter((c: any) => !ids.includes(c.id)),
+          conversations: state.conversations.filter((c) => !ids.includes(c.id)),
           // Se stiamo cancellando la conversazione corrente, resetta
           ...(currentConversationId &&
             ids.includes(currentConversationId) && {
@@ -252,13 +250,13 @@ export const useChatStore = create<ChatStore>()(
 
       updateMessage: (id, updates) => {
         set((state) => ({
-          messages: state.messages.map((m: any) => (m.id === id ? { ...m, ...updates } : m)),
+          messages: state.messages.map((m) => (m.id === id ? { ...m, ...updates } : m)),
         }));
       },
 
       removeMessage: (id) => {
         set((state) => ({
-          messages: state.messages.filter((m: any) => m.id !== id),
+          messages: state.messages.filter((m) => m.id !== id),
         }));
       },
 
@@ -471,7 +469,7 @@ export const selectHasActiveConversation = (state: ChatStore) =>
 /** Selettore per la conversazione corrente (oggetto completo) */
 export const selectCurrentConversation = (state: ChatStore) =>
   state.currentConversationId
-    ? state.conversations.find((c: any) => c.id === state.currentConversationId)
+    ? state.conversations.find((c) => c.id === state.currentConversationId)
     : null;
 
 /** Selettore per verificare se ci sono conversazioni */

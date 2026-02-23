@@ -1,4 +1,5 @@
 import { AIProviderFactory } from '@giulio-leone/lib-core';
+import type { AIProviderType } from '@giulio-leone/lib-core';
 import type { LanguageModel } from 'ai';
 
 export interface ModelConfig {
@@ -17,7 +18,9 @@ export function createCustomModel(
   _options: CustomModelOptions = {}, // Unused in model creation
   apiKey?: string
 ): Promise<LanguageModel> {
-  return AIProviderFactory.getModel(config.provider as any, config.model, { apiKey }) as Promise<LanguageModel>;
+  return AIProviderFactory.getModel(config.provider as AIProviderType, config.model, {
+    apiKey,
+  }) as Promise<LanguageModel>;
 }
 
 export function getModelByTier(tier: 'fast' | 'balanced' | 'quality'): ModelConfig {

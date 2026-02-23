@@ -105,17 +105,17 @@ export const workoutSearchExercisesTool: McpTool<WorkoutSearchExercisesParams> =
     // Filter by muscle if specified
     let filteredTranslations = translations;
     if (args.muscleSlug) {
-      filteredTranslations = translations.filter((t: any) =>
-        t.exercises.exercise_muscles.some((em: any) => em.muscles.slug === args.muscleSlug)
+      filteredTranslations = translations.filter((t) =>
+        t.exercises.exercise_muscles.some((em) => em.muscles.slug === args.muscleSlug)
       );
     }
 
-    const exercises = filteredTranslations.map((t: any) => ({
+    const exercises = filteredTranslations.map((t) => ({
       id: t.exercises.id,
       name: t.name,
       description: t.description,
-      muscles: t.exercises.exercise_muscles.map((em: any) => em.muscles.name),
-      equipment: t.exercises.exercise_equipments.map((eq: any) => eq.equipments.name),
+      muscles: t.exercises.exercise_muscles.map((em) => em.muscles.name),
+      equipment: t.exercises.exercise_equipments.map((eq) => eq.equipments.name),
     }));
 
     return {
@@ -126,7 +126,7 @@ export const workoutSearchExercisesTool: McpTool<WorkoutSearchExercisesParams> =
             exercises.length > 0
               ? `🏋️ **${exercises.length} Esercizi trovati:**\n\n${exercises
                   .map(
-                    (e: any) =>
+                    (e) =>
                       `• **${e.name}**\n  Muscoli: ${e.muscles.join(', ') || 'N/A'} | Attrezzi: ${e.equipment.join(', ') || 'Corpo libero'}`
                   )
                   .join('\n\n')}`
@@ -177,8 +177,8 @@ export const workoutGetExerciseDetailsTool: McpTool<WorkoutGetExerciseDetailsPar
     }
 
     const translation = exercise.exercise_translations[0];
-    const muscles = exercise.exercise_muscles.map((em: any) => em.muscles.name);
-    const equipment = exercise.exercise_equipments.map((eq: any) => eq.equipments.name);
+    const muscles = exercise.exercise_muscles.map((em) => em.muscles.name);
+    const equipment = exercise.exercise_equipments.map((eq) => eq.equipments.name);
     const typeName = exercise.exercise_types?.exercise_type_translations[0]?.name;
 
     return {
@@ -199,7 +199,7 @@ export const workoutGetExerciseDetailsTool: McpTool<WorkoutGetExerciseDetailsPar
 ${exercise.instructions.map((inst, i) => `${i + 1}. ${inst}`).join('\n') || 'Nessuna istruzione'}
 
 💡 **Suggerimenti:**
-${exercise.exerciseTips.map((tip: any) => `• ${tip}`).join('\n') || 'Nessun suggerimento'}
+${exercise.exerciseTips.map((tip) => `• ${tip}`).join('\n') || 'Nessun suggerimento'}
 
 📹 Video: ${exercise.videoUrl ?? 'Non disponibile'}`,
         },
@@ -454,7 +454,7 @@ export const workoutReorderExercisesTool: McpTool<WorkoutReorderExercisesParams>
     // Reorder exercises based on newOrder array
     const reorderedExercises: WorkoutExercise[] = [];
     args.newOrder.forEach((oldOrder: number, newIndex: number) => {
-      const exercise = day.exercises.find((e: any) => e.order === oldOrder);
+      const exercise = day.exercises.find((e) => e.order === oldOrder);
       if (exercise) {
         reorderedExercises.push({ ...exercise, order: newIndex + 1 });
       }
@@ -510,18 +510,18 @@ export const workoutGetDayDetailsTool: McpTool<WorkoutGetDayDetailsParams> = {
     }
 
     const weeks = program.weeks as WorkoutWeek[];
-    const week = weeks.find((w: any) => w.weekNumber === args.weekNumber);
+    const week = weeks.find((w) => w.weekNumber === args.weekNumber);
     if (!week) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
     }
 
-    const day = week.days.find((d: any) => d.dayNumber === args.dayNumber);
+    const day = week.days.find((d) => d.dayNumber === args.dayNumber);
     if (!day) {
       throw new Error(`Giorno ${args.dayNumber} non trovato`);
     }
 
     // Get exercise details
-    const exerciseIds = day.exercises.map((e: any) => e.exerciseId);
+    const exerciseIds = day.exercises.map((e) => e.exerciseId);
     const exerciseTranslations = await prisma.exercise_translations.findMany({
       where: {
         exerciseId: { in: exerciseIds },
@@ -539,11 +539,11 @@ export const workoutGetDayDetailsTool: McpTool<WorkoutGetDayDetailsParams> = {
     });
 
     const exerciseMap = new Map(
-      exerciseTranslations.map((t: any) => [
+      exerciseTranslations.map((t) => [
         t.exerciseId,
         {
           name: t.name,
-          muscles: t.exercises.exercise_muscles.map((em: any) => em.muscles.name),
+          muscles: t.exercises.exercise_muscles.map((em) => em.muscles.name),
         },
       ])
     );
@@ -557,7 +557,7 @@ export const workoutGetDayDetailsTool: McpTool<WorkoutGetDayDetailsParams> = {
     const exercisesList = day.exercises
       .map((ex, i: number) => {
         const details = exerciseMap.get(ex.exerciseId);
-        const setInfo = ex.setGroups.map((sg: any) => `${sg.sets}x${sg.reps}`).join(', ');
+        const setInfo = ex.setGroups.map((sg) => `${sg.sets}x${sg.reps}`).join(', ');
         return `${i + 1}. **${details?.name ?? 'Sconosciuto'}**\n   ${setInfo} | Rest: ${ex.setGroups[0]?.rest ?? 90}s`;
       })
       .join('\n');

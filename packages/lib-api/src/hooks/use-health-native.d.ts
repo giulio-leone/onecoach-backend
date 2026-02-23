@@ -11,15 +11,19 @@ import type { HealthDataType } from '../queries/health.queries';
  * Replaces HealthProvider context
  */
 export declare function useHealth(): {
-    permissions: import("@giulio-leone/lib-stores/health.store").HealthPermissions | null;
-    requestPermissions: () => Promise<boolean>;
-    hasAllPermissions: () => boolean;
-    syncStatus: import("@giulio-leone/lib-stores/health.store").SyncStatus;
-    syncHealthData: (dataTypes?: HealthDataType[]) => Promise<void>;
-    healthSummary: HealthSummary | null;
-    isAvailable: boolean;
-    platform: import("@giulio-leone/lib-stores/health.store").HealthPlatform | null;
-    isAutoSyncEnabled: boolean;
-    getHealthData: (_dataType: HealthDataType, _startDate: Date, _endDate: Date) => Promise<unknown[]>;
+  permissions: import('@giulio-leone/lib-stores/health.store').HealthPermissions | null;
+  requestPermissions: () => Promise<boolean>;
+  hasAllPermissions: () => boolean;
+  syncStatus: import('@giulio-leone/lib-stores/health.store').SyncStatus;
+  syncHealthData: (dataTypes?: HealthDataType[]) => Promise<void>;
+  healthSummary: HealthSummary | null;
+  isAvailable: boolean;
+  platform: import('@giulio-leone/lib-stores/health.store').HealthPlatform | null;
+  isAutoSyncEnabled: boolean;
+  getHealthData: (
+    _dataType: HealthDataType,
+    _startDate: Date,
+    _endDate: Date
+  ) => Promise<unknown[]>;
 };
 //# sourceMappingURL=use-health-native.d.ts.map

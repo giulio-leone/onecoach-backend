@@ -5,7 +5,7 @@ interface NavigationState {
   // Storage generico per stati di form/pagine
   // Key: identificativo univoco della rotta/feature (es: 'nutrition-builder-draft')
   // Value: qualsiasi oggetto serializzabile
-  states: Record<string, any>;
+  states: Record<string, unknown>;
 
   // Actions
   saveState: <T>(key: string, state: T) => void;

@@ -10,15 +10,23 @@ import type { WeightUnit } from '@giulio-leone/types/client';
  *
  * @returns Query result with profile data
  */
-export declare function useProfile(): import("@tanstack/react-query").UseQueryResult<UserProfileData, Error>;
+export declare function useProfile(): import('@tanstack/react-query').UseQueryResult<
+  UserProfileData,
+  Error
+>;
 /**
  * Hook to update user profile
  *
  * @returns Mutation result with update function
  */
-export declare function useUpdateProfile(): import("@tanstack/react-query").UseMutationResult<UserProfileData, Error, Partial<Omit<UserProfileData, "id" | "userId">>, {
+export declare function useUpdateProfile(): import('@tanstack/react-query').UseMutationResult<
+  UserProfileData,
+  Error,
+  Partial<Omit<UserProfileData, 'id' | 'userId'>>,
+  {
     previousProfile: UserProfileData | undefined;
-}>;
+  }
+>;
 /**
  * Hook to get user's weight unit preference
  *

@@ -22,7 +22,11 @@ import {
   type Purchase,
   type PurchaseError,
 } from 'react-native-iap';
-import { useIAPProducts, useIAPSubscription, useIAPPurchase } from '@giulio-leone/lib-stores/iap.store';
+import {
+  useIAPProducts,
+  useIAPSubscription,
+  useIAPPurchase,
+} from '@giulio-leone/lib-stores/iap.store';
 import { useSubscriptionStatus, usePurchaseProduct, useRestorePurchases } from './use-iap';
 import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@giulio-leone/constants';
 import type { ProductId } from '@giulio-leone/lib-stores/iap.store';
@@ -116,8 +120,10 @@ export function useIAP() {
 
       const mappedProducts = (fetchedProducts as unknown[])
         .map((product) => {
-          const productId = (product as any).productId ?? (product as any).sku;
-          const price = (product as any).price;
+          const productId =
+            (product as Record<string, unknown>).productId ??
+            (product as Record<string, unknown>).sku;
+          const price = (product as Record<string, unknown>).price;
           if (!productId || price === undefined || price === null) {
             return null;
           }
@@ -125,10 +131,10 @@ export function useIAP() {
           const normalized: IapCatalogProduct = {
             productId: String(productId),
             price: String(price),
-            currency: (product as any).currency ?? '',
-            localizedPrice: (product as any).localizedPrice,
-            title: (product as any).title || String(productId),
-            description: (product as any).description || '',
+            currency: (product as Record<string, unknown>).currency ?? '',
+            localizedPrice: (product as Record<string, unknown>).localizedPrice,
+            title: (product as Record<string, unknown>).title || String(productId),
+            description: (product as Record<string, unknown>).description || '',
           };
 
           return normalized;
@@ -163,14 +169,14 @@ export function useIAP() {
         setError(null);
 
         // Request purchase
-        await requestPurchase({ productId } as any);
+        await requestPurchase({ productId } as Record<string, unknown>);
 
         // Purchase update will be handled by purchaseUpdatedListener
         return true;
       } catch (err: unknown) {
         logger.error('Purchase failed', err);
         const error = err as PurchaseError;
-        const userCancelled = error.code === ('E_USER_CANCELLED' as any);
+        const userCancelled = error.code === ('E_USER_CANCELLED' as string);
 
         setError({
           code: error.code || 'PURCHASE_ERROR',
@@ -190,10 +196,13 @@ export function useIAP() {
 
       const transactionId = purchase.transactionId || '';
       const transactionReceipt =
-        ('transactionReceipt' in purchase ? (purchase as any).transactionReceipt : transactionId) ||
-        '';
+        ('transactionReceipt' in purchase
+          ? (purchase as Record<string, unknown>).transactionReceipt
+          : transactionId) || '';
       const purchaseToken =
-        'purchaseToken' in purchase ? (purchase as any).purchaseToken : undefined;
+        'purchaseToken' in purchase
+          ? (purchase as Record<string, unknown>).purchaseToken
+          : undefined;
 
       // Verify purchase with backend using mutation
       purchaseMutation({
@@ -259,12 +268,14 @@ export function useIAP() {
       const purchases = availablePurchases.map((purchase: Purchase) => ({
         receipt:
           'transactionReceipt' in purchase
-            ? (purchase as any).transactionReceipt
+            ? (purchase as Record<string, unknown>).transactionReceipt
             : purchase.transactionId,
         productId: purchase.productId as ProductId,
         platform: Platform.OS as 'ios' | 'android',
         purchaseToken:
-          'purchaseToken' in purchase ? String((purchase as any).purchaseToken || '') : undefined,
+          'purchaseToken' in purchase
+            ? String((purchase as Record<string, unknown>).purchaseToken || '')
+            : undefined,
       }));
 
       // Sync with backend using mutation

@@ -19,7 +19,6 @@ const LIST_CACHE_TTL_MS = 0;
 const EXERCISE_CACHE_TTL_MS = 1000 * 60 * 10; // 10 minuti
 const MAX_LIST_PAGE_SIZE = 100;
 
-
 const EXERCISE_INCLUDE = {
   exercise_translations: true,
   exercise_types: true, // Include per ottenere il nome
@@ -228,11 +227,11 @@ export class ExerciseService {
         select: EXERCISE_LIST_SELECT,
       });
 
-      const exerciseById = new Map(exercises.map((exercise: any) => [exercise.id, exercise]));
+      const exerciseById = new Map(exercises.map((exercise) => [exercise.id, exercise]));
       const localized = pageIds
-        .map((id: any) => exerciseById.get(id))
+        .map((id) => exerciseById.get(id))
         .filter((exercise): exercise is ExerciseListRow => Boolean(exercise))
-        .map((exercise: any) => this.mapListRowToLocalized(exercise, locale));
+        .map((exercise) => this.mapListRowToLocalized(exercise, locale));
 
       const result: ExerciseListResult = {
         data: localized,
@@ -258,7 +257,7 @@ export class ExerciseService {
       }),
     ]);
 
-    const data = exercises.map((exercise: any) => this.mapListRowToLocalized(exercise, locale));
+    const data = exercises.map((exercise) => this.mapListRowToLocalized(exercise, locale));
 
     const result: ExerciseListResult = {
       data,
@@ -286,10 +285,10 @@ export class ExerciseService {
       offset: (page - 1) * pageSize,
       filters,
     });
-    
+
     // Note: search() method returns just the paginated slice as LocalizedExercise[] without total count
     // This maintains backward compatibility with the existing method signature
-    const uniqueIds = Array.from(new Set(searchResults.map((row: any) => row.id)));
+    const uniqueIds = Array.from(new Set(searchResults.map((row) => row.id)));
     const pageIds = uniqueIds; // searchFullText now returns paginated results directly without extra duplicates
 
     if (!pageIds.length) {
@@ -302,12 +301,12 @@ export class ExerciseService {
       select: EXERCISE_LIST_SELECT,
     });
 
-    const exerciseById = new Map(exercises.map((exercise: any) => [exercise.id, exercise]));
+    const exerciseById = new Map(exercises.map((exercise) => [exercise.id, exercise]));
 
     return pageIds
-      .map((id: any) => exerciseById.get(id))
+      .map((id) => exerciseById.get(id))
       .filter((exercise): exercise is ExerciseListRow => Boolean(exercise))
-      .map((exercise: any) => this.mapListRowToLocalized(exercise, locale));
+      .map((exercise) => this.mapListRowToLocalized(exercise, locale));
   }
 
   static async getById(
@@ -433,7 +432,7 @@ export class ExerciseService {
       if (updateData.translations) {
         // Deduplicate translations by locale (keep first occurrence)
         const seenLocales = new Set<string>();
-        const uniqueTranslations = updateData.translations.filter((translation: any) => {
+        const uniqueTranslations = updateData.translations.filter((translation) => {
           const locale = translation.locale.toLowerCase();
           if (seenLocales.has(locale)) {
             logger.warn(
@@ -445,9 +444,9 @@ export class ExerciseService {
           return true;
         });
 
-        const locales = uniqueTranslations.map((translation: any) => translation.locale);
+        const locales = uniqueTranslations.map((translation) => translation.locale);
         await Promise.all(
-          uniqueTranslations.map((translation: any) =>
+          uniqueTranslations.map((translation) =>
             tx.exercise_translations.upsert({
               where: {
                 exerciseId_locale: {
@@ -660,9 +659,9 @@ export class ExerciseService {
     return Array.from(
       new Set(
         values
-          .filter((value: any) => Boolean(value))
-          .map((value: any) => value.trim().toLowerCase())
-          .filter((value: any) => value.length > 0)
+          .filter((value) => Boolean(value))
+          .map((value) => value.trim().toLowerCase())
+          .filter((value) => value.length > 0)
       )
     );
   }
@@ -676,29 +675,27 @@ export class ExerciseService {
     }
 
     const normalizedLocale = this.normalizeLocale(locale);
-    const exact = translations.find((translation: any) => translation.locale === normalizedLocale);
+    const exact = translations.find((translation) => translation.locale === normalizedLocale);
     if (exact) {
       return { translation: exact, fallbackLocale: null };
     }
 
     const [language] = normalizedLocale.split('-');
     if (!language) {
-      const english = translations.find(
-        (translation: any) => translation.locale === DEFAULT_LOCALE
-      );
+      const english = translations.find((translation) => translation.locale === DEFAULT_LOCALE);
       if (english) {
         return { translation: english, fallbackLocale: english.locale };
       }
       return { translation: null, fallbackLocale: null };
     }
-    const sameLanguage = translations.find((translation: any) =>
+    const sameLanguage = translations.find((translation) =>
       translation.locale.startsWith(language)
     );
     if (sameLanguage) {
       return { translation: sameLanguage, fallbackLocale: sameLanguage.locale };
     }
 
-    const english = translations.find((translation: any) => translation.locale === DEFAULT_LOCALE);
+    const english = translations.find((translation) => translation.locale === DEFAULT_LOCALE);
     if (english) {
       return { translation: english, fallbackLocale: english.locale };
     }
@@ -749,7 +746,7 @@ export class ExerciseService {
       fallbackLocale,
       translations: includeTranslations ? translations : undefined,
       muscles: exercise.exercise_muscles
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.muscleId, // ID per uso interno (admin form)
           name: entry.muscles?.name ?? entry.muscleId,
           slug: entry.muscles?.slug ?? entry.muscleId,
@@ -757,27 +754,27 @@ export class ExerciseService {
         }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       bodyParts: exercise.exercise_body_parts
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.bodyPartId, // ID per uso interno (admin form)
           name: entry.body_parts?.name ?? entry.bodyPartId,
           slug: entry.body_parts?.slug ?? entry.bodyPartId,
         }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       equipments: exercise.exercise_equipments
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.equipmentId, // ID per uso interno (admin form)
           name: entry.equipments?.name ?? entry.equipmentId,
           slug: entry.equipments?.slug ?? entry.equipmentId,
         }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       related: [
-        ...exercise.relatedFrom.map((relation: any) => ({
+        ...exercise.relatedFrom.map((relation) => ({
           id: relation.toId,
           slug: relation.exercises_exercise_relations_toIdToexercises?.slug ?? relation.toId,
           relation: relation.relation,
           direction: 'outbound' as const,
         })),
-        ...exercise.relatedTo.map((relation: any) => ({
+        ...exercise.relatedTo.map((relation) => ({
           id: relation.fromId,
           slug: relation.exercises_exercise_relations_fromIdToexercises?.slug ?? relation.fromId,
           relation: relation.relation,
@@ -831,7 +828,7 @@ export class ExerciseService {
       fallbackLocale,
       translations: translations,
       muscles: exercise.exercise_muscles
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.muscleId,
           name: entry.muscles?.name ?? entry.muscleId,
           slug: entry.muscles?.slug ?? entry.muscleId,
@@ -839,14 +836,14 @@ export class ExerciseService {
         }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       bodyParts: exercise.exercise_body_parts
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.bodyPartId,
           name: entry.body_parts?.name ?? entry.bodyPartId,
           slug: entry.body_parts?.slug ?? entry.bodyPartId,
         }))
         .sort((a, b) => a.name.localeCompare(b.name)),
       equipments: exercise.exercise_equipments
-        .map((entry: any) => ({
+        .map((entry) => ({
           id: entry.equipmentId,
           name: entry.equipments?.name ?? entry.equipmentId,
           slug: entry.equipments?.slug ?? entry.equipmentId,
@@ -858,7 +855,7 @@ export class ExerciseService {
 
   private static buildSnapshot(exercise: ExerciseWithRelations): ExerciseSnapshot {
     const translations = exercise.exercise_translations
-      .map((translation: any) => ({
+      .map((translation) => ({
         locale: translation.locale.toLowerCase(),
         name: translation.name,
         shortName: translation.shortName ?? null,
@@ -868,7 +865,7 @@ export class ExerciseService {
       .sort((a, b) => a.locale.localeCompare(b.locale));
 
     const translationMap: ExerciseSnapshot['translations'] = translations.reduce(
-      (acc: any, translation: any) => {
+      (acc, translation) => {
         acc[translation.locale] = {
           name: translation.name,
           shortName: translation.shortName,
@@ -894,7 +891,7 @@ export class ExerciseService {
       isUserGenerated: exercise.isUserGenerated,
       translations: translationMap,
       muscles: exercise.exercise_muscles
-        .map((muscle: any) => ({
+        .map((muscle) => ({
           id: muscle.muscleId,
           role: muscle.role,
         }))
@@ -906,13 +903,13 @@ export class ExerciseService {
           return a.role.localeCompare(b.role);
         }),
       bodyParts: exercise.exercise_body_parts
-        .map((bodyPart: any) => bodyPart.bodyPartId)
+        .map((bodyPart) => bodyPart.bodyPartId)
         .sort((a, b) => a.localeCompare(b)),
       equipments: exercise.exercise_equipments
-        .map((equipment: any) => equipment.equipmentId)
+        .map((equipment) => equipment.equipmentId)
         .sort((a, b) => a.localeCompare(b)),
       relatedFrom: exercise.relatedFrom
-        .map((relation: any) => ({
+        .map((relation) => ({
           toId: relation.toId,
           relation: relation.relation,
         }))
@@ -1036,7 +1033,6 @@ export class ExerciseService {
       return [];
     }
 
-
     // Use dynamic to_tsvector (like Food service) instead of indexed column
     // This is more reliable as it doesn't require a pre-populated column
     const preparedTerm = query.replace(/[:!&|']/g, ' ');
@@ -1133,7 +1129,7 @@ export class ExerciseService {
       this.normalizeTranslationInput.bind(this)
     );
     const seenLocales = new Set<string>();
-    const translations = normalizedTranslations.filter((translation: any) => {
+    const translations = normalizedTranslations.filter((translation) => {
       const locale = translation.locale.toLowerCase();
       if (seenLocales.has(locale)) {
         logger.warn(`[ExerciseService] Duplicate translation locale "${locale}" removed`);
@@ -1144,14 +1140,16 @@ export class ExerciseService {
     });
 
     const englishTranslation = translations.find(
-      (translation: any) => translation.locale === DEFAULT_LOCALE
+      (translation) => translation.locale === DEFAULT_LOCALE
     );
 
     if (!englishTranslation) {
       throw new Error('È richiesta una traduzione in inglese');
     }
 
-    const slug = payload.slug?.trim() || toSlug((englishTranslation as any).name);
+    const slug =
+      payload.slug?.trim() ||
+      toSlug((englishTranslation as Record<string, unknown>).name as string);
 
     const exerciseId = createId();
 
@@ -1182,7 +1180,7 @@ export class ExerciseService {
         createdById: options.userId ?? null,
         updatedAt: new Date(),
       },
-      translations: translations.map((translation: any) => ({
+      translations: translations.map((translation) => ({
         id: createId(),
         locale: translation.locale,
         name: translation.name,
@@ -1193,14 +1191,14 @@ export class ExerciseService {
       })),
       // NOTA: exerciseId NON deve essere incluso quando si usa createMany all'interno di create
       // Prisma lo gestisce automaticamente dalla relazione padre
-      muscles: payload.muscles.map((muscle: any) => ({
+      muscles: payload.muscles.map((muscle) => ({
         muscleId: muscle.id,
         role: muscle.role,
       })),
-      bodyParts: payload.bodyPartIds.map((bodyPartId: any) => ({
+      bodyParts: payload.bodyPartIds.map((bodyPartId) => ({
         bodyPartId,
       })),
-      equipments: (payload.equipmentIds ?? []).map((equipmentId: any) => ({
+      equipments: (payload.equipmentIds ?? []).map((equipmentId) => ({
         equipmentId,
       })),
       related: this.prepareRelatedRelations(exerciseId, payload.relatedExercises ?? []),
@@ -1261,9 +1259,9 @@ export class ExerciseService {
       exerciseUpdate.approvedAt =
         payload.approvalStatus === ExerciseApprovalStatus.APPROVED ? new Date() : null;
       if (payload.approvalStatus === ExerciseApprovalStatus.APPROVED && userId) {
-        (exerciseUpdate as any).approvedById = userId;
+        (exerciseUpdate as Record<string, unknown>).approvedById = userId;
       } else {
-        (exerciseUpdate as any).approvedById = null;
+        (exerciseUpdate as Record<string, unknown>).approvedById = null;
       }
     }
 
@@ -1272,16 +1270,16 @@ export class ExerciseService {
     return {
       exercise: hasExerciseUpdates ? exerciseUpdate : null,
       translations: payload.translations?.map(this.normalizeTranslationInput.bind(this)),
-      muscles: payload.muscles?.map((muscle: any) => ({
+      muscles: payload.muscles?.map((muscle) => ({
         exerciseId: existing.id,
         muscleId: muscle.id,
         role: muscle.role,
       })),
-      bodyParts: payload.bodyPartIds?.map((bodyPartId: any) => ({
+      bodyParts: payload.bodyPartIds?.map((bodyPartId) => ({
         exerciseId: existing.id,
         bodyPartId,
       })),
-      equipments: payload.equipmentIds?.map((equipmentId: any) => ({
+      equipments: payload.equipmentIds?.map((equipmentId) => ({
         exerciseId: existing.id,
         equipmentId,
       })),
@@ -1311,7 +1309,7 @@ export class ExerciseService {
       return [];
     }
 
-    const normalizedRelations = relations.map((relation: any) => ({
+    const normalizedRelations = relations.map((relation) => ({
       id: createId(),
       fromId: exerciseId,
       toId: relation.id,

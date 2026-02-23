@@ -1,14 +1,12 @@
 import type { Prisma } from '@prisma/client';
+import type { z } from 'zod';
 import { prisma } from '@giulio-leone/lib-core';
 import type {
   AIParseContext,
   ImportOptions,
   BaseImportResult,
 } from '@giulio-leone/lib-import-core';
-import {
-  BaseImportService,
-  parseWithVisionAI,
-} from '@giulio-leone/lib-import-core';
+import { BaseImportService, parseWithVisionAI } from '@giulio-leone/lib-import-core';
 import type {
   ImportedOneAgenda,
   ImportedProject,
@@ -26,12 +24,16 @@ export interface OneAgendaImportResult extends BaseImportResult {
 /**
  * Service for importing OneAgenda data (projects, tasks, habits).
  * Extends BaseImportService for standardized workflow.
- * 
+ *
  * TAIRaw = ImportedOneAgenda (what AI returns)
  * TParsed = ImportedOneAgenda (same, no transformation needed)
  * TResult = OneAgendaImportResult
  */
-export class OneAgendaImportService extends BaseImportService<ImportedOneAgenda, ImportedOneAgenda, OneAgendaImportResult> {
+export class OneAgendaImportService extends BaseImportService<
+  ImportedOneAgenda,
+  ImportedOneAgenda,
+  OneAgendaImportResult
+> {
   protected getLoggerName(): string {
     return 'OneAgendaImport';
   }
@@ -217,9 +219,13 @@ export function createOneAgendaAIContext(userId: string): AIParseContext<Importe
         contentBase64: content,
         mimeType,
         prompt,
-        schema: ImportedOneAgendaSchema as any,
+        schema: ImportedOneAgendaSchema as unknown as z.ZodSchema<ImportedOneAgenda>,
         userId,
-        fileType: mimeType.startsWith('image/') ? 'image' : mimeType === 'application/pdf' ? 'pdf' : 'document',
+        fileType: mimeType.startsWith('image/')
+          ? 'image'
+          : mimeType === 'application/pdf'
+            ? 'pdf'
+            : 'document',
       }),
   };
 }

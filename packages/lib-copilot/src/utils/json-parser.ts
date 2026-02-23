@@ -4,7 +4,7 @@
  */
 import { logger } from '@giulio-leone/lib-core';
 
-export function parseJsonResponse(text: string): any {
+export function parseJsonResponse(text: string): unknown {
   try {
     // Remove markdown code blocks if present
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();

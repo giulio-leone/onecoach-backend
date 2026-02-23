@@ -247,7 +247,7 @@ export async function getRatingTrends(
 
   // Group by date
   const grouped = new Map<string, { ratings: number[]; count: number }>();
-  ratings.forEach((rating: any) => {
+  ratings.forEach((rating) => {
     const dateKey = formatDateForGroup(rating.createdAt, groupBy);
     const existing = grouped.get(dateKey) || { ratings: [], count: 0 };
     existing.ratings.push(rating.rating);
@@ -265,7 +265,7 @@ export async function getRatingTrends(
     const group = grouped.get(dateKey);
     const avgRating =
       group && group.ratings.length > 0
-        ? group.ratings.reduce((sum: any, r: any) => sum + r, 0) / group.ratings.length
+        ? group.ratings.reduce((sum: number, r: number) => sum + r, 0) / group.ratings.length
         : null;
 
     result.push({
@@ -312,15 +312,17 @@ export async function getTopPlans(userId: string, limit: number = 5): Promise<To
   });
 
   // Calculate stats for each plan
-  const plansWithStats = plans.map((plan: any) => {
+  const plansWithStats = plans.map((plan) => {
     const sales = plan.plan_purchases.length;
     const revenue = plan.plan_purchases.reduce(
-      (sum: any, p: any) => sum + Number(p.coachCommission),
+      (sum: number, p: { coachCommission: unknown }) => sum + Number(p.coachCommission),
       0
     );
-    const ratings = plan.plan_ratings.map((r: any) => r.rating);
+    const ratings = plan.plan_ratings.map((r) => r.rating);
     const averageRating =
-      ratings.length > 0 ? ratings.reduce((sum: any, r: any) => sum + r, 0) / ratings.length : null;
+      ratings.length > 0
+        ? ratings.reduce((sum: number, r: number) => sum + r, 0) / ratings.length
+        : null;
 
     return {
       planId: plan.id,

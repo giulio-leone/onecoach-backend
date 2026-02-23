@@ -71,7 +71,7 @@ class MilestoneService {
     // Crea dipendenze se specificate
     if (input.dependencies && input.dependencies.length > 0) {
       await prisma.agenda_milestone_dependencies.createMany({
-        data: input.dependencies.map((blockerId: any) => ({
+        data: input.dependencies.map((blockerId) => ({
           blockedId: milestone.id,
           blockerId,
         })),
@@ -135,7 +135,7 @@ class MilestoneService {
       // Aggiungi nuove dipendenze
       if (input.dependencies.length > 0) {
         await prisma.agenda_milestone_dependencies.createMany({
-          data: input.dependencies.map((blockerId: any) => ({
+          data: input.dependencies.map((blockerId) => ({
             blockedId: milestoneId,
             blockerId,
           })),

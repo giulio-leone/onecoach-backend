@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { generateText, Output } from 'ai';
 import { getModelByTier, createCustomModel } from './utils/model-factory';
 import { AIProviderConfigService } from '@giulio-leone/lib-ai';
+import type { ProviderName } from '@giulio-leone/lib-ai';
 import { TOKEN_LIMITS } from '@giulio-leone/constants';
 
 interface ExtractionContext {
@@ -32,7 +33,7 @@ export async function extractContextFromMessage(
 
   // Usa un modello veloce per l'estrazione
   const modelConfig = getModelByTier('fast');
-  const apiKey = await AIProviderConfigService.getApiKey(modelConfig.provider as any);
+  const apiKey = await AIProviderConfigService.getApiKey(modelConfig.provider as ProviderName);
 
   if (!apiKey) {
     // Fallback se non c'è API key
@@ -91,7 +92,7 @@ Rispondi SOLO con un oggetto JSON valido nel formato:
       prompt,
       output: Output.object({ schema: extractionSchema }),
       temperature: 0.1, // Bassa temperatura per risultati più deterministici
-    } as any);
+    } as Parameters<typeof generateText>[0]);
 
     const extracted = result.output as ExtractionResult;
 

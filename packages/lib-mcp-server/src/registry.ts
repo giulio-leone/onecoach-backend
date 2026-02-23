@@ -456,28 +456,28 @@ class ToolRegistry {
    * Filter tools by category
    */
   getByCategory(category: ToolCategory): ToolRegistryEntry[] {
-    return this.getAll().filter((entry: any) => entry.metadata.category === category);
+    return this.getAll().filter((entry) => entry.metadata.category === category);
   }
 
   /**
    * Filter tools by tag
    */
   getByTag(tag: string): ToolRegistryEntry[] {
-    return this.getAll().filter((entry: any) => entry.metadata.tags.includes(tag));
+    return this.getAll().filter((entry) => entry.metadata.tags.includes(tag));
   }
 
   /**
    * Filter tools by complexity
    */
   getByComplexity(complexity: ToolMetadata['complexity']): ToolRegistryEntry[] {
-    return this.getAll().filter((entry: any) => entry.metadata.complexity === complexity);
+    return this.getAll().filter((entry) => entry.metadata.complexity === complexity);
   }
 
   /**
    * Filter tools by side effects
    */
   getBySideEffects(sideEffects: ToolMetadata['sideEffects']): ToolRegistryEntry[] {
-    return this.getAll().filter((entry: any) => entry.metadata.sideEffects === sideEffects);
+    return this.getAll().filter((entry) => entry.metadata.sideEffects === sideEffects);
   }
 
   /**
@@ -551,15 +551,15 @@ class ToolRegistry {
         count: data.count,
       })),
       byComplexity: {
-        simple: all.filter((e: any) => e.metadata.complexity === 'simple').length,
-        moderate: all.filter((e: any) => e.metadata.complexity === 'moderate').length,
-        complex: all.filter((e: any) => e.metadata.complexity === 'complex').length,
+        simple: all.filter((e) => e.metadata.complexity === 'simple').length,
+        moderate: all.filter((e) => e.metadata.complexity === 'moderate').length,
+        complex: all.filter((e) => e.metadata.complexity === 'complex').length,
       },
       bySideEffects: {
-        none: all.filter((e: any) => e.metadata.sideEffects === 'none').length,
-        read: all.filter((e: any) => e.metadata.sideEffects === 'read').length,
-        write: all.filter((e: any) => e.metadata.sideEffects === 'write').length,
-        delete: all.filter((e: any) => e.metadata.sideEffects === 'delete').length,
+        none: all.filter((e) => e.metadata.sideEffects === 'none').length,
+        read: all.filter((e) => e.metadata.sideEffects === 'read').length,
+        write: all.filter((e) => e.metadata.sideEffects === 'write').length,
+        delete: all.filter((e) => e.metadata.sideEffects === 'delete').length,
       },
     };
   }

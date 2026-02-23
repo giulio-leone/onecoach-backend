@@ -125,12 +125,12 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
 
     if (args.customStructure?.weeks && args.customStructure.weeks.length > 0) {
       // Use provided structure
-      weeks = args.customStructure.weeks.map((w: any) => ({
+      weeks = args.customStructure.weeks.map((w) => ({
         weekNumber: w.weekNumber,
         name: w.name ?? `Settimana ${w.weekNumber}`,
         isDeload: w.isDeload ?? false,
         days:
-          w.days?.map((d: any) => ({
+          w.days?.map((d) => ({
             dayNumber: d.dayNumber,
             name: d.name,
             targetMuscles: d.targetMuscles,
@@ -225,25 +225,31 @@ ${args.includeDeload ? '🔄 Include settimane di deload' : ''}
 // ============================================================================
 
 const workoutGetProgramSchema = z.object({
-  programId: z.string().optional().describe('Program ID to retrieve. Falls back to context.workout.programId if not provided.'),
+  programId: z
+    .string()
+    .optional()
+    .describe('Program ID to retrieve. Falls back to context.workout.programId if not provided.'),
 });
 
 type WorkoutGetProgramArgs = z.infer<typeof workoutGetProgramSchema>;
 
 export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
   name: 'workout_get_program',
-  description: 'Gets a workout program by ID with all details. The programId can be passed explicitly or will be taken from context.',
+  description:
+    'Gets a workout program by ID with all details. The programId can be passed explicitly or will be taken from context.',
   parameters: workoutGetProgramSchema,
   execute: async (args: WorkoutGetProgramArgs, context: McpContext) => {
     // Use args.programId if provided, otherwise fall back to context
     const programId = args.programId || context.workout?.programId;
-    
+
     if (!programId) {
-      throw new Error('programId is required - either pass it as argument or set it in context.workout.programId');
+      throw new Error(
+        'programId is required - either pass it as argument or set it in context.workout.programId'
+      );
     }
-    
+
     console.log('[workout_get_program] 📥 Fetching program:', programId);
-    
+
     const program = await prisma.workout_programs.findUnique({
       where: { id: programId },
     });
@@ -253,7 +259,7 @@ export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
     }
 
     const weeks = program.weeks as WorkoutWeek[];
-    
+
     console.log('[workout_get_program] ✅ Program found:', {
       id: program.id,
       name: program.name,
@@ -271,7 +277,7 @@ export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
 📌 Stato: ${program.status}
 
 **Struttura:**
-${weeks.map((w: any) => `• Settimana ${w.weekNumber}: ${w.days.length} giorni - ${w.days.map((d: any) => `Day ${d.dayNumber} (${d.dayTitle || d.dayName || 'Training'}): ${d.exercises?.length || 0} esercizi`).join(', ')}`).join('\n')}
+${weeks.map((w) => `• Settimana ${w.weekNumber}: ${w.days.length} giorni - ${w.days.map((d) => `Day ${d.dayNumber} (${d.dayTitle || d.dayName || 'Training'}): ${d.exercises?.length || 0} esercizi`).join(', ')}`).join('\n')}
 
 **NOTA:** L'oggetto 'program' completo è incluso nella response. Usalo con i tool granulari:
 - workout_granular_setgroup_update: per modificare serie/ripetizioni di un esercizio
@@ -318,7 +324,7 @@ export const workoutListProgramsTool: McpTool<WorkoutListProgramsArgs> = {
       programs.length > 0
         ? `📋 **${programs.length} Programmi**\n\n${programs
             .map(
-              (p: any) =>
+              (p) =>
                 `• **${p.name}** (${p.durationWeeks} sett.)\n  ${p.goals.join(', ')} | ${p.status}`
             )
             .join('\n\n')}`

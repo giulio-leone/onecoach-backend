@@ -241,7 +241,7 @@ export function useCopilotRouteSync(options: UseCopilotRouteSyncOptions = {}) {
         const nutritionCtx = extractNutritionContext(pathname);
         setNutritionContext({
           ...nutritionCtx,
-          ...(additionalContext as any),
+          ...(additionalContext as Record<string, unknown>),
         });
         break;
       }
@@ -250,7 +250,7 @@ export function useCopilotRouteSync(options: UseCopilotRouteSyncOptions = {}) {
         const workoutCtx = extractWorkoutContext(pathname);
         setWorkoutContext({
           ...workoutCtx,
-          ...(additionalContext as any),
+          ...(additionalContext as Record<string, unknown>),
         });
         break;
       }
@@ -259,7 +259,7 @@ export function useCopilotRouteSync(options: UseCopilotRouteSyncOptions = {}) {
         const exerciseCtx = extractExerciseContext(pathname);
         setExerciseContext({
           ...exerciseCtx,
-          ...(additionalContext as any),
+          ...(additionalContext as Record<string, unknown>),
         });
         break;
       }
@@ -268,7 +268,7 @@ export function useCopilotRouteSync(options: UseCopilotRouteSyncOptions = {}) {
         const agendaCtx = extractOneAgendaContext(pathname);
         setOneAgendaContext({
           ...agendaCtx,
-          ...(additionalContext as any),
+          ...(additionalContext as Record<string, unknown>),
         });
         break;
       }
@@ -277,7 +277,7 @@ export function useCopilotRouteSync(options: UseCopilotRouteSyncOptions = {}) {
         const marketplaceCtx = extractMarketplaceContext(pathname);
         setMarketplaceContext({
           ...marketplaceCtx,
-          ...(additionalContext as any),
+          ...(additionalContext as Record<string, unknown>),
         });
         break;
       }

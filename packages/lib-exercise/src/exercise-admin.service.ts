@@ -73,7 +73,10 @@ const exerciseImportExtension = z.object({
 // Intersezione: mantiene i campi obbligatori da createExerciseSchema (translations, muscles, bodyPartIds)
 // Nota: Zod intersection mantiene i requisiti più restrittivi, quindi i campi obbligatori da createExerciseSchema
 // rimangono obbligatori anche se sono opzionali in exerciseImportExtension
-const exerciseImportSchemaBase = z.intersection(createExerciseSchema as any, exerciseImportExtension);
+const exerciseImportSchemaBase = z.intersection(
+  createExerciseSchema as import('zod').ZodTypeAny,
+  exerciseImportExtension
+);
 
 // Validazione esplicita per assicurarsi che i campi obbligatori siano sempre presenti
 export const exerciseImportSchema = exerciseImportSchemaBase.superRefine((data, ctx) => {
@@ -136,7 +139,7 @@ export const exerciseAiPlanSchema = z.object({
     .array(
       z.object({
         slug: z.string().trim().min(1),
-        data: updateExerciseSchema as any,
+        data: updateExerciseSchema as import('zod').ZodTypeAny,
       })
     )
     .default([]),
@@ -273,8 +276,6 @@ interface ImportOptions {
   onProgress?: (current: number, total: number) => void;
 }
 
-
-
 export class ExerciseAdminService {
   /**
    * Esporta l'intero catalogo esercizi (opzionalmente includendo quelli non approvati)
@@ -288,7 +289,7 @@ export class ExerciseAdminService {
       orderBy: { createdAt: 'asc' },
     });
 
-    return exercises.map((exercise: any) => this.formatExportRecord(exercise));
+    return exercises.map((exercise) => this.formatExportRecord(exercise));
   }
 
   /**
@@ -313,7 +314,7 @@ export class ExerciseAdminService {
     }
 
     const normalizedRecords = await Promise.all(
-      records.map((record: any) => this.normalizeImportRecord(record, options.sharedContext))
+      records.map((record) => this.normalizeImportRecord(record, options.sharedContext))
     );
     const slugCache = new Map<string, string>();
 
@@ -410,8 +411,8 @@ export class ExerciseAdminService {
     }
 
     const legacyMuscleField =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (payload as any).muscleGroup ?? (payload as any).muscleGroups;
+      (payload as Record<string, unknown>).muscleGroup ??
+      (payload as Record<string, unknown>).muscleGroups;
     if (legacyMuscleField !== undefined) {
       throw new Error(
         'I campi legacy "muscleGroup" o "muscleGroups" non sono supportati. Fornisci "muscles": [{ id, role }] e "bodyPartIds".'
@@ -440,7 +441,7 @@ export class ExerciseAdminService {
       })
     );
 
-    const english = translations.find((translation: any) => translation.locale === DEFAULT_LOCALE);
+    const english = translations.find((translation) => translation.locale === DEFAULT_LOCALE);
     if (!english) {
       throw new Error("È necessaria una traduzione in inglese per importare l'esercizio");
     }
@@ -481,7 +482,7 @@ export class ExerciseAdminService {
     }
 
     // Muscoli: usa solo ID (obbligatorio)
-    const muscles = payload.muscles.map((muscle: any) => ({
+    const muscles = payload.muscles.map((muscle) => ({
       id: muscle.id, // ID è obbligatorio, non più opzionale
       role: muscle.role,
     }));
@@ -649,20 +650,20 @@ export class ExerciseAdminService {
       instructions: [...exercise.instructions],
       exerciseTips: [...exercise.exerciseTips],
       variations: [...exercise.variations],
-      translations: exercise.exercise_translations.map((translation: any) => ({
+      translations: exercise.exercise_translations.map((translation) => ({
         locale: translation.locale.toLowerCase(),
         name: translation.name,
         shortName: translation.shortName ?? null,
         description: translation.description ?? null,
         searchTerms: translation.searchTerms ?? [],
       })),
-      muscles: exercise.exercise_muscles.map((muscle: any) => ({
+      muscles: exercise.exercise_muscles.map((muscle) => ({
         id: muscle.muscleId,
         role: muscle.role,
       })),
-      bodyPartIds: exercise.exercise_body_parts.map((bodyPart: any) => bodyPart.bodyPartId),
-      equipmentIds: exercise.exercise_equipments.map((equipment: any) => equipment.equipmentId),
-      relatedExercises: exercise.relatedFrom.map((relation: any) => ({
+      bodyPartIds: exercise.exercise_body_parts.map((bodyPart) => bodyPart.bodyPartId),
+      equipmentIds: exercise.exercise_equipments.map((equipment) => equipment.equipmentId),
+      relatedExercises: exercise.relatedFrom.map((relation) => ({
         id: relation.toId,
         relation: relation.relation,
         direction: 'outbound' as const,

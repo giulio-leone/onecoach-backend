@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(): Promise<Response> {
   try {
-    const userOrError: any = await requireAuth();
+    const userOrError = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;

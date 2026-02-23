@@ -17,9 +17,22 @@ export type { WorkoutProgramResponse, WorkoutProgramsResponse } from './workout'
 export type { NutritionPlanResponse, NutritionPlansResponse } from './nutrition';
 export type { ExerciseResponse, ExercisesResponse, ExerciseListParams } from './exercise';
 export type { Food, FoodResponse, FoodsResponse, FoodListParams } from './food';
-export type { CoachProfileResponse, PublicCoachProfileResponse, CoachProfile, PublicCoachProfile, } from './coach';
+export type {
+  CoachProfileResponse,
+  PublicCoachProfileResponse,
+  CoachProfile,
+  PublicCoachProfile,
+} from './coach';
 export type { OneRepMaxResponse } from './profile';
-export type { AnalyticsOverviewParams, AnalyticsOverviewResponse, ChartDataParams, } from './analytics';
+export type {
+  AnalyticsOverviewParams,
+  AnalyticsOverviewResponse,
+  ChartDataParams,
+} from './analytics';
 export type { TemplateResponse, TemplatesResponse } from './templates';
-export type { MarketplacePlan, MarketplacePlansResponse, MarketplacePlanResponse, } from './marketplace';
+export type {
+  MarketplacePlan,
+  MarketplacePlansResponse,
+  MarketplacePlanResponse,
+} from './marketplace';
 //# sourceMappingURL=index.d.ts.map

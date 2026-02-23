@@ -89,11 +89,11 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
   // Local state
   const [input, setInputLocal] = useState('');
   const [conversationId, setConversationId] = useState<string | null>(initialConversationId);
-  
+
   // IMPORTANTE: Manteniamo stabile il conversationId durante una sessione attiva
   // per evitare reset dei messaggi quando viene creato un nuovo conversationId
   const stableConversationIdRef = useRef<string | null>(initialConversationId || null);
-  
+
   // Aggiorna stableConversationIdRef solo quando cambia da null a un valore (nuova conversazione)
   // ma non quando cambia da un valore a un altro (per evitare reset durante la sessione)
   useEffect(() => {
@@ -145,7 +145,7 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
   const aiInitialMessages = useMemo<UIMessage[]>(() => {
     if (!initialMessages.length) return [];
 
-    return initialMessages.map((m: any) => {
+    return initialMessages.map((m) => {
       // KISS: If message already has parts array with content, use it directly
       // This preserves tool-call/tool-result/reasoning parts from loaded conversations
       if (m.parts && Array.isArray(m.parts) && m.parts.length > 0) {
@@ -166,38 +166,35 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
   }, [initialMessages]);
 
   // Transport configuration with DefaultChatTransport - AI SDK v6 pattern
-  const applyConversationIdFromResponse = useCallback(
-    (response: Response) => {
-      const headerConversationId = response.headers.get('x-conversation-id');
-      if (!headerConversationId) return;
+  const applyConversationIdFromResponse = useCallback((response: Response) => {
+    const headerConversationId = response.headers.get('x-conversation-id');
+    if (!headerConversationId) return;
 
-      // IMPORTANTE: Non aggiorniamo il conversationId interno quando viene creato un nuovo ID
-      // durante una sessione attiva, per evitare reset dei messaggi
-      // Il nuovo ID viene gestito tramite il body della richiesta invece
-      setConversationId((prev) => {
-        if (prev === headerConversationId) {
-          return prev;
-        }
-        
-        // Se abbiamo già un conversationId (sessione attiva), non lo aggiorniamo
-        // per evitare reset dei messaggi. Il nuovo ID viene comunque propagato
-        // al livello superiore per la gestione della conversazione.
-        if (prev && prev !== headerConversationId) {
-          // Propaga l'ID al livello superiore ma mantieni quello interno stabile
-          callbacksRef.current.onConversationCreated?.(headerConversationId);
-          return prev; // Mantieni il conversationId stabile
-        }
-        
-        // Solo se non abbiamo un conversationId (nuova sessione), aggiorniamolo
+    // IMPORTANTE: Non aggiorniamo il conversationId interno quando viene creato un nuovo ID
+    // durante una sessione attiva, per evitare reset dei messaggi
+    // Il nuovo ID viene gestito tramite il body della richiesta invece
+    setConversationId((prev) => {
+      if (prev === headerConversationId) {
+        return prev;
+      }
+
+      // Se abbiamo già un conversationId (sessione attiva), non lo aggiorniamo
+      // per evitare reset dei messaggi. Il nuovo ID viene comunque propagato
+      // al livello superiore per la gestione della conversazione.
+      if (prev && prev !== headerConversationId) {
+        // Propaga l'ID al livello superiore ma mantieni quello interno stabile
         callbacksRef.current.onConversationCreated?.(headerConversationId);
-        return headerConversationId;
-      });
-    },
-    []
-  );
+        return prev; // Mantieni il conversationId stabile
+      }
+
+      // Solo se non abbiamo un conversationId (nuova sessione), aggiorniamolo
+      callbacksRef.current.onConversationCreated?.(headerConversationId);
+      return headerConversationId;
+    });
+  }, []);
 
   // IMPORTANTE: Il transport deve essere stabile per evitare reset dei messaggi
-  // Usiamo requestBodyRef per leggere il body corrente nel fetch invece di 
+  // Usiamo requestBodyRef per leggere il body corrente nel fetch invece di
   // ricreare il transport ogni volta che il body cambia
   const transport = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -215,7 +212,7 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
           ...currentBody,
         }),
       };
-      
+
       const response = await baseFetch(input as RequestInfo, modifiedInit as RequestInit);
       applyConversationIdFromResponse(response);
       return response;
@@ -230,13 +227,12 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
     });
   }, [api, applyConversationIdFromResponse]); // RIMOSSO requestBody dalle dipendenze
 
-
   // AI SDK v6 useChat - requires transport for request configuration
   // IMPORTANTE: Non passiamo l'id a useChat quando viene creato durante una sessione
   // perché useChat resetta i messaggi quando cambia l'id
   // L'ID viene gestito tramite il body della richiesta invece
   const stableIdRef = useRef<string | null>(initialConversationId || null);
-  
+
   // Nota: NON aggiorniamo stableIdRef quando viene creato un nuovo conversationId durante
   // la sessione (prev==null -> nuovo ID) per evitare che useChat resetti i messaggi.
   // Lo usiamo solo per l'initialConversationId (es. pagina aperta su conversazione esistente).
@@ -251,18 +247,18 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
       transport,
       experimental_throttle: 30, // 30ms = ~33 FPS
     };
-    
+
     // Pass id solo se è stabile (non cambia durante la sessione)
     // Questo evita che useChat resetti i messaggi quando viene creato un nuovo conversationId
     if (stableIdRef.current) {
       config.id = stableIdRef.current;
     }
-    
+
     // Only pass initialMessages if they exist
     if (aiInitialMessages.length > 0) {
       config.initialMessages = aiInitialMessages;
     }
-    
+
     return config;
   }, [transport, aiInitialMessages]);
 
@@ -289,9 +285,6 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
       callbacksRef.current.onError?.(aiError);
     }
   }, [aiError]);
-
-
-
 
   // Cast messages (they're compatible)
   const messages = aiMessages as UIMessage[];
@@ -384,13 +377,13 @@ export function useChatCore(options: UseChatCoreOptions = {}): UseChatCoreResult
 
   // Reload handler - re-send last user message
   const reload = useCallback(async () => {
-    const lastUserMessage = messages.filter((m: any) => m.role === 'user').pop();
+    const lastUserMessage = messages.filter((m) => m.role === 'user').pop();
     if (!lastUserMessage) {
       log('No user message to reload');
       return;
     }
 
-    const textPart = lastUserMessage.parts.find((p: any) => p.type === 'text');
+    const textPart = lastUserMessage.parts.find((p) => p.type === 'text');
     const text = textPart && 'text' in textPart ? (textPart as { text: string }).text : '';
 
     if (!text) {

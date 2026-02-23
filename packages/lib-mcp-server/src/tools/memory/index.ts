@@ -60,7 +60,12 @@ export const memoryGetTool: McpTool<MemoryGetArgs> = {
       historyLimit: args.historyLimit,
     });
 
-    const domainMemory = args.domain ? (memory as any)[args.domain as MemoryDomain] : null;
+    const domainMemory = args.domain
+      ? ((memory as Record<string, unknown>)[args.domain as MemoryDomain] as Record<
+          string,
+          unknown
+        > | null)
+      : null;
 
     return {
       content: [
@@ -77,9 +82,9 @@ History: ${domainMemory.history?.length || 0} items`
     : 'Nessun dato disponibile'
 }
 
-${domainMemory?.patterns?.length ? `\n**Pattern Identificati:**\n${domainMemory.patterns.map((p: any) => `- ${p.type}: ${p.description} (${(p.confidence * 100).toFixed(0)}%)`).join('\n')}` : ''}
+${domainMemory?.patterns?.length ? `\n**Pattern Identificati:**\n${(domainMemory.patterns as Array<{ type: string; description: string; confidence: number }>).map((p) => `- ${p.type}: ${p.description} (${(p.confidence * 100).toFixed(0)}%)`).join('\n')}` : ''}
 
-${domainMemory?.insights?.length ? `\n**Insights:**\n${domainMemory.insights.map((i: any) => `- ${i.category}: ${i.insight}`).join('\n')}` : ''}`
+${domainMemory?.insights?.length ? `\n**Insights:**\n${(domainMemory.insights as Array<{ category: string; insight: string }>).map((i) => `- ${i.category}: ${i.insight}`).join('\n')}` : ''}`
             : `📋 **Memoria Completa Utente**
 
 Usa questo contesto per personalizzare risposte e suggerimenti.`,
@@ -202,7 +207,9 @@ export const memoryDeletePreferenceTool: McpTool<MemoryDeletePreferenceArgs> = {
       domain: args.domain as MemoryDomain,
     });
 
-    const domainMemory = (memory as any)[args.domain as MemoryDomain];
+    const domainMemory = (memory as Record<string, unknown>)[args.domain as MemoryDomain] as
+      | Record<string, unknown>
+      | undefined;
     if (!domainMemory) {
       throw new Error(`No memory found for domain: ${args.domain}`);
     }
@@ -330,7 +337,12 @@ ${
   events.length > 0
     ? events
         .map(
-          (e: any) => `- **${e.title}** (${e.eventType})
+          (e: {
+            title: string;
+            eventType: string;
+            date: string;
+            description?: string;
+          }) => `- **${e.title}** (${e.eventType})
   Data: ${e.date}
   ${e.description ? `Descrizione: ${e.description}` : ''}`
         )
@@ -415,7 +427,13 @@ ${
   versions.length > 0
     ? versions
         .map(
-          (v: any) => `- Versione ${v.versionNumber} (${v.changeType})
+          (v: {
+            versionNumber: number;
+            changeType: string;
+            changeNote?: string;
+            createdAt: Date;
+            changedBy?: string;
+          }) => `- Versione ${v.versionNumber} (${v.changeType})
   ${v.changeNote ? `Note: ${v.changeNote}` : ''}
   Creato: ${v.createdAt.toISOString().split('T')[0]}
   Da: ${v.changedBy || 'sistema'}`
@@ -479,4 +497,4 @@ export const memoryTools = [
 
 import { arrayToToolRecord } from '../../utils/helpers';
 
-export const memoryToolsRecord = arrayToToolRecord(memoryTools as any);
+export const memoryToolsRecord = arrayToToolRecord(memoryTools as unknown as McpTool[]);

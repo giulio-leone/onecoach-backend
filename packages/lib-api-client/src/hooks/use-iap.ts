@@ -67,7 +67,7 @@ export function usePurchaseProduct() {
         // Update subscription status in store
         setSubscriptionStatus({
           isActive: response.subscription.isActive,
-          productId: response.subscription.productId as any,
+          productId: response.subscription.productId as string,
           expirationDate: response.subscription.expirationDate,
           isInTrialPeriod: response.subscription.isInTrial,
           willAutoRenew: response.subscription.willAutoRenew,

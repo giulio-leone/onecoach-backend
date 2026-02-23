@@ -2,15 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, requireAuth } from '@giulio-leone/lib-core';
 import { ExerciseService } from '@giulio-leone/lib-exercise/exercise.service';
 import { extractSearchParams } from '@giulio-leone/lib-shared/utils';
-import { exerciseDetailQuerySchema, updateExerciseSchema } from '@giulio-leone/schemas/exercise.schema';
+import {
+  exerciseDetailQuerySchema,
+  updateExerciseSchema,
+} from '@giulio-leone/schemas/exercise.schema';
 import { ExerciseApprovalStatus } from '@giulio-leone/types';
 import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }): Promise<Response> {
+export async function GET(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+): Promise<Response> {
   const { id } = await context.params;
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -52,9 +58,12 @@ export async function GET(_req: NextRequest, context: { params: Promise<{ id: st
   }
 }
 
-export async function PUT(_req: NextRequest, context: { params: Promise<{ id: string }> }): Promise<Response> {
+export async function PUT(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+): Promise<Response> {
   const { id } = await context.params;
-  const adminOrError: any = await requireAdmin();
+  const adminOrError = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;
@@ -87,9 +96,12 @@ export async function PUT(_req: NextRequest, context: { params: Promise<{ id: st
   }
 }
 
-export async function DELETE(_: NextRequest, context: { params: Promise<{ id: string }> }): Promise<Response> {
+export async function DELETE(
+  _: NextRequest,
+  context: { params: Promise<{ id: string }> }
+): Promise<Response> {
   const { id } = await context.params;
-  const adminOrError: any = await requireAdmin();
+  const adminOrError = await requireAdmin();
 
   if (adminOrError instanceof NextResponse) {
     return adminOrError;

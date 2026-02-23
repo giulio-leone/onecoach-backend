@@ -74,7 +74,10 @@ CHANGES FIELD MAPPING (for update_setgroup):
 | "rest 90 seconds" | {"rest": 90} |
 | "RPE 8" | {"rpe": 8} |`,
 
-  resolveEntity: async (programId: string, _context: McpContext): Promise<WorkoutProgramData | null> => {
+  resolveEntity: async (
+    programId: string,
+    _context: McpContext
+  ): Promise<WorkoutProgramData | null> => {
     console.log('[workout.tool] 📥 Fetching program:', programId);
 
     const existingProgram = await prisma.workout_programs.findUnique({
@@ -107,7 +110,11 @@ CHANGES FIELD MAPPING (for update_setgroup):
     return { weeks: normalized.weeks as WorkoutProgramData['weeks'] };
   },
 
-  saveEntity: async (programId: string, entity: WorkoutProgramData, _context: McpContext): Promise<void> => {
+  saveEntity: async (
+    programId: string,
+    entity: WorkoutProgramData,
+    _context: McpContext
+  ): Promise<void> => {
     console.log('[workout.tool] 💾 Saving program:', programId);
 
     await prisma.workout_programs.update({

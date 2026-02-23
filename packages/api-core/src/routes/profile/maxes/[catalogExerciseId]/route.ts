@@ -23,7 +23,7 @@ export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ catalogExerciseId: string }> }
 ): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -70,7 +70,7 @@ export async function DELETE(
   _req: NextRequest,
   context: { params: Promise<{ catalogExerciseId: string }> }
 ): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;

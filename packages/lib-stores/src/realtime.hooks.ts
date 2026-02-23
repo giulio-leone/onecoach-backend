@@ -475,7 +475,9 @@ export function useRealtimeSync<T extends { id: string | number }>({
       if (globalQueryClient) {
         globalQueryClient.setQueryData(queryKey, (oldData: T[] | undefined) => {
           if (!oldData) return [record];
-          return oldData.map((item: any) => (item.id === record.id ? record : item));
+          return oldData.map((item: { id: unknown; [key: string]: unknown }) =>
+            item.id === record.id ? record : item
+          );
         });
         onSynced?.('UPDATE', record);
       }
@@ -494,7 +496,9 @@ export function useRealtimeSync<T extends { id: string | number }>({
       if (globalQueryClient) {
         globalQueryClient.setQueryData(queryKey, (oldData: T[] | undefined) => {
           if (!oldData) return [];
-          return oldData.filter((item: any) => item.id !== record.id);
+          return oldData.filter(
+            (item: { id: unknown; [key: string]: unknown }) => item.id !== record.id
+          );
         });
         onSynced?.('DELETE', record);
       }
@@ -558,14 +562,14 @@ export function useRealtimeListSync<T extends { id: string | number }>({
   const handleInsert = useCallback(
     (rawRecord: Record<string, unknown>) => {
       const record = (transform ? transform(rawRecord) : rawRecord) as T;
-      
+
       queryClient.setQueryData(queryKey, (oldData: T[] | undefined) => {
         if (!oldData) return [record];
         // Evita duplicati
         if (oldData.some((item) => item.id === record.id)) return oldData;
         return [...oldData, record];
       });
-      
+
       logger.log('Synced INSERT', record.id);
       onSynced?.('INSERT', record);
     },

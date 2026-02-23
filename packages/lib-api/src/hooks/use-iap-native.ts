@@ -22,7 +22,11 @@ import {
   type Purchase,
   type PurchaseError,
 } from 'react-native-iap';
-import { useIAPProducts, useIAPSubscription, useIAPPurchase } from '@giulio-leone/lib-stores/iap.store';
+import {
+  useIAPProducts,
+  useIAPSubscription,
+  useIAPPurchase,
+} from '@giulio-leone/lib-stores/iap.store';
 import { useSubscriptionStatus, usePurchaseProduct, useRestorePurchases } from './use-iap';
 import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@giulio-leone/constants';
 import type { ProductId } from '@giulio-leone/lib-stores/iap.store';
@@ -107,20 +111,22 @@ export function useIAP() {
 
       const mappedProducts = fetchedProducts.map((product) => {
         const productId =
-          (product as any).productId ??
-          (product as any).productIdentifier ??
-          (product as any).sku ??
+          ((product as unknown as Record<string, unknown>).productId as string) ??
+          ((product as unknown as Record<string, unknown>).productIdentifier as string) ??
+          ((product as unknown as Record<string, unknown>).sku as string) ??
           '';
-        const rawPrice = (product as any).price ?? '';
+        const rawPrice = ((product as unknown as Record<string, unknown>).price as string) ?? '';
         const price = typeof rawPrice === 'string' ? rawPrice : String(rawPrice || '');
 
         return {
           productId: productId as ProductId,
           price,
-          currency: (product as any).currency ?? '',
-          localizedPrice: (product as any).localizedPrice ?? price,
-          title: (product as any).title ?? productId,
-          description: (product as any).description ?? '',
+          currency: ((product as unknown as Record<string, unknown>).currency as string) ?? '',
+          localizedPrice:
+            ((product as unknown as Record<string, unknown>).localizedPrice as string) ?? price,
+          title: ((product as unknown as Record<string, unknown>).title as string) ?? productId,
+          description:
+            ((product as unknown as Record<string, unknown>).description as string) ?? '',
           subscriptionPeriod: getSubscriptionPeriod(productId as ProductId),
         };
       });
@@ -144,14 +150,14 @@ export function useIAP() {
         setError(null);
 
         // Request purchase
-        await requestPurchase({ productId } as any);
+        await requestPurchase({ productId } as unknown as Parameters<typeof requestPurchase>[0]);
 
         // Purchase update will be handled by purchaseUpdatedListener
         return true;
       } catch (err: unknown) {
         logger.error('Purchase failed', err);
         const error = err as PurchaseError;
-        const userCancelled = error.code === ('E_USER_CANCELLED' as any);
+        const userCancelled = error.code === 'E_USER_CANCELLED';
 
         setError({
           code: error.code || 'PURCHASE_ERROR',
@@ -171,10 +177,13 @@ export function useIAP() {
 
       const transactionId = purchase.transactionId || '';
       const transactionReceipt =
-        ('transactionReceipt' in purchase ? (purchase as any).transactionReceipt : transactionId) ||
-        '';
+        ('transactionReceipt' in purchase
+          ? ((purchase as unknown as Record<string, unknown>).transactionReceipt as string)
+          : transactionId) || '';
       const purchaseToken =
-        'purchaseToken' in purchase ? (purchase as any).purchaseToken : undefined;
+        'purchaseToken' in purchase
+          ? ((purchase as unknown as Record<string, unknown>).purchaseToken as string)
+          : undefined;
 
       // Verify purchase with backend using mutation
       purchaseMutation({
@@ -239,13 +248,16 @@ export function useIAP() {
       // Map to PurchaseResult
       const purchases = availablePurchases.map((purchase) => {
         const receipt =
-          (purchase as any).transactionReceipt ??
-          (purchase as any).originalTransactionDate ??
+          ((purchase as unknown as Record<string, unknown>).transactionReceipt as string) ??
+          ((purchase as unknown as Record<string, unknown>).originalTransactionDate as string) ??
           purchase.transactionId ??
           '';
-        const productId = ((purchase as any).productId ?? '') as ProductId;
+        const productId = ((purchase as unknown as Record<string, unknown>).productId ??
+          '') as ProductId;
         const purchaseToken =
-          'purchaseToken' in purchase ? String((purchase as any).purchaseToken || '') : undefined;
+          'purchaseToken' in purchase
+            ? String((purchase as unknown as Record<string, unknown>).purchaseToken || '')
+            : undefined;
 
         return {
           receipt,

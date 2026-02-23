@@ -44,7 +44,7 @@ const profileSchema = z.object({
 
 export async function GET(): Promise<Response> {
   try {
-    const userOrError: any = await requireAuth();
+    const userOrError = await requireAuth();
 
     if (userOrError instanceof NextResponse) {
       return userOrError;
@@ -79,7 +79,10 @@ export async function GET(): Promise<Response> {
 
     if (userExists.status !== 'ACTIVE') {
       if (process.env.NODE_ENV === 'development') {
-        logger.error('[PROFILE GET] User is not ACTIVE:', { userId: userOrError.id, status: userExists.status });
+        logger.error('[PROFILE GET] User is not ACTIVE:', {
+          userId: userOrError.id,
+          status: userExists.status,
+        });
       }
       return NextResponse.json(
         { error: 'Account non attivo. Contatta il supporto.' },
@@ -132,7 +135,7 @@ export async function GET(): Promise<Response> {
 }
 
 export async function PUT(_req: Request): Promise<Response> {
-  const userOrError: any = await requireAuth();
+  const userOrError = await requireAuth();
 
   if (userOrError instanceof NextResponse) {
     return userOrError;
@@ -167,7 +170,10 @@ export async function PUT(_req: Request): Promise<Response> {
 
   if (userExists.status !== 'ACTIVE') {
     if (process.env.NODE_ENV === 'development') {
-      logger.error('[PROFILE PUT] User is not ACTIVE:', { userId: userOrError.id, status: userExists.status });
+      logger.error('[PROFILE PUT] User is not ACTIVE:', {
+        userId: userOrError.id,
+        status: userExists.status,
+      });
     }
     return NextResponse.json(
       { error: 'Account non attivo. Contatta il supporto.' },

@@ -308,7 +308,7 @@ class MarketplaceService implements IMarketplaceService {
     ]);
 
     // Map plans to contract format
-    const mappedPlans: ContractMarketplacePlanDetails[] = plans.map((plan: any) => ({
+    const mappedPlans: ContractMarketplacePlanDetails[] = plans.map((plan) => ({
       ...plan,
       coach: plan.coach
         ? {
@@ -435,7 +435,7 @@ class MarketplaceService implements IMarketplaceService {
           userId: data.userId,
           marketplacePlanId: data.marketplacePlanId,
         },
-      } as any,
+      } as Prisma.plan_ratingsWhereUniqueInput,
       update: {
         rating: data.rating,
         review: data.review,

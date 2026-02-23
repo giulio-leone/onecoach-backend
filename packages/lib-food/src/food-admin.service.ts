@@ -8,7 +8,11 @@
 
 import { prisma } from '@giulio-leone/lib-core';
 import { FoodService, normalizeFoodName } from './food.service';
-import { createFoodSchema, type CreateFoodInput, type UpdateFoodInput } from '@giulio-leone/schemas';
+import {
+  createFoodSchema,
+  type CreateFoodInput,
+  type UpdateFoodInput,
+} from '@giulio-leone/schemas';
 import { z } from 'zod';
 // import { FoodGenerationAgent, createAIAgentConfig, createAgentInstance } from '@giulio-leone/one-agent';
 // import { processBatchesInParallel } from '@giulio-leone/lib-shared/batch-processing';
@@ -16,8 +20,6 @@ import { z } from 'zod';
 
 // import { TOKEN_LIMITS } from '@giulio-leone/constants';
 // import { MODEL_CONSTANTS } from '@giulio-leone/lib-ai';
-
-
 
 /**
  * Schema per import payload (estende createFoodSchema)
@@ -115,7 +117,7 @@ export class FoodAdminService {
    * Genera alimenti usando FoodGenerationAgent (OneAgent SDK)
    * Usa parallel batch processing per migliori performance
    */
-// Circular Dependency: This method requires OneAgent which depends on lib-ai-agents which depends on lib-food.
+  // Circular Dependency: This method requires OneAgent which depends on lib-ai-agents which depends on lib-food.
   // It should be moved to the application layer or lib-ai-agents.
   /*
   static async generateFoodsWithAgent(options: {
@@ -213,7 +215,7 @@ export class FoodAdminService {
             needsRetry: false,
             retryCount: 0,
             maxRetries: 2,
-          } as any
+          } as Record<string, unknown>
         );
 
         const generatedFoods = (result.output?.foods || []) as GeneratedFood[];

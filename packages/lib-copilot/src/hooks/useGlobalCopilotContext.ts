@@ -16,10 +16,7 @@
 
 import { useEffect, useCallback } from 'react';
 import { usePathname, useParams } from 'next/navigation';
-import {
-  useCopilotActiveContextStore,
-  type ActiveDomain,
-} from '@giulio-leone/lib-stores';
+import { useCopilotActiveContextStore, type ActiveDomain } from '@giulio-leone/lib-stores';
 
 // ============================================================================
 // Route Pattern Detection
@@ -126,13 +123,23 @@ export function useGlobalCopilotContext(options: UseGlobalCopilotContextOptions 
     const detected = detectRouteContext(pathname, params);
 
     if (debug) {
-      console.log('[GlobalCopilotContext] Route detected:', detected, 'Current domain:', currentDomain);
+      console.log(
+        '[GlobalCopilotContext] Route detected:',
+        detected,
+        'Current domain:',
+        currentDomain
+      );
     }
 
     // If domain changed, update
     if (detected.domain !== currentDomain) {
       if (debug) {
-        console.log('[GlobalCopilotContext] Domain CHANGED from', currentDomain, 'to', detected.domain);
+        console.log(
+          '[GlobalCopilotContext] Domain CHANGED from',
+          currentDomain,
+          'to',
+          detected.domain
+        );
       }
       if (detected.domain === null) {
         clearContext();
@@ -147,27 +154,36 @@ export function useGlobalCopilotContext(options: UseGlobalCopilotContextOptions 
       case 'workout':
         if (detected.programId && detected.programId !== currentWorkout?.programId) {
           if (debug) {
-            console.log('[GlobalCopilotContext] Initializing workout context with programId:', detected.programId);
+            console.log(
+              '[GlobalCopilotContext] Initializing workout context with programId:',
+              detected.programId
+            );
           }
           // Initialize workout context with programId (program object will be set by page/provider)
-          initWorkoutContext(detected.programId, null as any);
+          initWorkoutContext(detected.programId, null as never);
         }
         break;
 
       case 'nutrition':
         if (detected.planId && detected.planId !== currentNutrition?.planId) {
           if (debug) {
-            console.log('[GlobalCopilotContext] Initializing nutrition context with planId:', detected.planId);
+            console.log(
+              '[GlobalCopilotContext] Initializing nutrition context with planId:',
+              detected.planId
+            );
           }
           // Initialize nutrition context with planId (plan object will be set by page/provider)
-          initNutritionContext(detected.planId, null as any);
+          initNutritionContext(detected.planId, null as never);
         }
         break;
 
       case 'oneagenda':
         if (detected.projectId && detected.projectId !== currentOneAgenda?.projectId) {
           if (debug) {
-            console.log('[GlobalCopilotContext] Initializing oneagenda context with projectId:', detected.projectId);
+            console.log(
+              '[GlobalCopilotContext] Initializing oneagenda context with projectId:',
+              detected.projectId
+            );
           }
           initOneAgendaContext(detected.projectId);
         }

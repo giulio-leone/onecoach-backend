@@ -8,19 +8,21 @@
  * Combines stats, credits, and activities
  */
 export declare function useDashboardData(): {
-    stats: {
+  stats:
+    | {
         workoutsThisWeek: number;
         workoutsThisMonth: number;
         caloriesTrackedToday: number;
         currentStreak: number;
         weightChange30Days: number;
         totalVolumeThisMonth: number;
-    } | undefined;
-    credits: import("..").CreditBalanceResponse | undefined;
-    activities: import("..").DashboardActivity[];
-    isLoading: boolean;
-    isError: boolean;
-    error: Error | null;
-    refetch: () => void;
+      }
+    | undefined;
+  credits: import('..').CreditBalanceResponse | undefined;
+  activities: import('..').DashboardActivity[];
+  isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
+  refetch: () => void;
 };
 //# sourceMappingURL=use-dashboard.d.ts.map

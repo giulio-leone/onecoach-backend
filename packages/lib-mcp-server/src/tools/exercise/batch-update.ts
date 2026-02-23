@@ -32,8 +32,12 @@ export const exerciseBatchUpdateTool: McpTool = {
           includeTranslations: true,
         });
         results.push({ success: true, id: item.id, data: updated });
-      } catch (error: any) {
-        results.push({ success: false, id: item.id, error: error.message });
+      } catch (error: unknown) {
+        results.push({
+          success: false,
+          id: item.id,
+          error: error instanceof Error ? error.message : String(error),
+        });
       }
     }
 

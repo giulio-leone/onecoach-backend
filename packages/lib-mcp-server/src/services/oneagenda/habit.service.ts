@@ -48,7 +48,7 @@ function calculateStreaks(logs: Array<{ date: Date; completed: boolean }>): {
 
   // Ordina i log per data decrescente
   const sortedLogs = [...logs]
-    .filter((l: any) => l.completed)
+    .filter((l) => l.completed)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   if (sortedLogs.length === 0) {
@@ -152,8 +152,8 @@ class HabitService {
       orderBy: { createdAt: 'desc' },
     });
 
-    return habits.map((habit: any) => {
-      const todayLog = habit.agenda_habit_logs.find((log: any) => {
+    return habits.map((habit) => {
+      const todayLog = habit.agenda_habit_logs.find((log) => {
         const logDate = new Date(log.date);
         logDate.setHours(0, 0, 0, 0);
         return logDate.getTime() === today.getTime() && log.completed;
@@ -211,7 +211,7 @@ class HabitService {
       },
     });
 
-    const todayLog = habit.agenda_habit_logs.find((log: any) => {
+    const todayLog = habit.agenda_habit_logs.find((log) => {
       const logDate = new Date(log.date);
       logDate.setHours(0, 0, 0, 0);
       return logDate.getTime() === today.getTime() && log.completed;
@@ -273,7 +273,7 @@ class HabitService {
       return null;
     }
 
-    const todayLog = habit.agenda_habit_logs.find((log: any) => {
+    const todayLog = habit.agenda_habit_logs.find((log) => {
       const logDate = new Date(log.date);
       logDate.setHours(0, 0, 0, 0);
       return logDate.getTime() === today.getTime();
@@ -315,7 +315,7 @@ class HabitService {
 
     if (!updatedHabit) return null;
 
-    const newTodayLog = updatedHabit.agenda_habit_logs.find((log: any) => {
+    const newTodayLog = updatedHabit.agenda_habit_logs.find((log) => {
       const logDate = new Date(log.date);
       logDate.setHours(0, 0, 0, 0);
       return logDate.getTime() === today.getTime() && log.completed;

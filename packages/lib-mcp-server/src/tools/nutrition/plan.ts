@@ -106,10 +106,10 @@ export const nutritionGeneratePlanTool: McpTool<NutritionGeneratePlanArgs> = {
     // Use provided meal distribution or create flexible structure for AI
     const mealsPerDayCount = mealsPerDay ?? 4;
     const mealNames =
-      providedMealDistribution?.map((m: any) => m.mealName) ??
+      providedMealDistribution?.map((m) => m.mealName) ??
       Array.from({ length: mealsPerDayCount }, (_, i) => `Pasto ${i + 1}`);
     const mealCalorieDistribution =
-      providedMealDistribution?.map((m: any) => m.caloriePercentage ?? 1 / mealsPerDayCount) ??
+      providedMealDistribution?.map((m) => m.caloriePercentage ?? 1 / mealsPerDayCount) ??
       Array(mealsPerDayCount).fill(1 / mealsPerDayCount);
 
     // Generate weeks structure (stored as JSON)
@@ -303,7 +303,7 @@ export const nutritionListPlansTool: McpTool<NutritionListPlansArgs> = {
 
     return createMcpTextResponse(
       plans.length > 0
-        ? `Trovati ${plans.length} piani:\n${plans.map((p: any) => `- ${p.name} (${p.status}) - ${p.durationWeeks} settimane`).join('\n')}`
+        ? `Trovati ${plans.length} piani:\n${plans.map((p) => `- ${p.name} (${p.status}) - ${p.durationWeeks} settimane`).join('\n')}`
         : 'Nessun piano trovato',
       { plans }
     );
