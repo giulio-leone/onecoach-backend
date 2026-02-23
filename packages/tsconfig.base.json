@@ -193,12 +193,6 @@
       "@giulio-leone/lib-coach/*": [
         "./packages/lib-coach/src/*"
       ],
-      "@giulio-leone/lib-planning": [
-        "./packages/lib-planning/src/index.ts"
-      ],
-      "@giulio-leone/lib-planning/*": [
-        "./packages/lib-planning/src/*"
-      ],
       "@giulio-leone/lib-visual-builder": [
         "./packages/lib-visual-builder/src/index.ts"
       ],
@@ -229,12 +223,6 @@
       "@giulio-leone/lib-stores/*": [
         "./packages/lib-stores/src/*"
       ],
-      "@giulio-leone/lib-config": [
-        "./packages/lib-config/src/index.ts"
-      ],
-      "@giulio-leone/lib-config/*": [
-        "./packages/lib-config/src/*"
-      ],
       "@giulio-leone/lib-design-system": [
         "../onecoach-ui/packages/lib-design-system/src/index.ts"
       ],
@@ -264,12 +252,6 @@
       ],
       "@giulio-leone/api-exercise/*": [
         "./packages/api-exercise/src/*"
-      ],
-      "@giulio-leone/api-food": [
-        "./packages/api-food/src/index.ts"
-      ],
-      "@giulio-leone/api-food/*": [
-        "./packages/api-food/src/*"
       ],
       "@giulio-leone/api-analytics": [
         "./packages/api-analytics/src/index.ts"
