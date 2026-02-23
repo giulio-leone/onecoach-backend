@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-marketplace",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Servizi marketplace (marketplace, coach, affiliate, promotion)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
