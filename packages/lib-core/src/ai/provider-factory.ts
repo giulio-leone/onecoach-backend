@@ -4,9 +4,6 @@ import { createAnthropic, type AnthropicProvider } from '@ai-sdk/anthropic';
 import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';
 import { createXai, type XaiProvider } from '@ai-sdk/xai';
 import { createMinimax, type MinimaxProvider } from 'vercel-minimax-ai-provider';
-import type { GeminiProvider } from '@onecoach/ai-sdk-provider-gemini-cli';
-// Note: ai-sdk-provider-gemini-cli uses native modules (node-pty) incompatible with Next.js bundling
-// Import is done dynamically in createGeminiCli to avoid build-time bundling
 import { getOpenRouterConfig, getAIProviderKey } from '../config/env';
 
 /** Gemini CLI thinkingLevel for Gemini 3 models */
@@ -21,8 +18,7 @@ export type AIProviderType =
   | 'anthropic'
   | 'google'
   | 'xai'
-  | 'minimax'
-  | 'gemini-cli';
+  | 'minimax';
 
 /**
  * Provider Configuration
@@ -115,31 +111,7 @@ export class AIProviderFactory {
   }
 
   /**
-   * Create a Gemini CLI provider
-   * Uses Gemini CLI OAuth (default) or API key authentication
-   * Requires: npm install -g @google/gemini-cli && gemini (for OAuth setup)
-   * @see https://ai-sdk.dev/providers/community-providers/gemini-cli
-   *
-   * NOTE: Uses dynamic import because gemini-cli-core has native node-pty dependencies
-   * that are incompatible with Next.js Turbopack bundling.
-   */
-  public static async createGeminiCli(config?: {
-    authType?: 'oauth-personal' | 'api-key';
-    apiKey?: string;
-    thinkingLevel?: GeminiThinkingLevel;
-  }): Promise<GeminiProvider> {
-    // Dynamic import to avoid Turbopack bundling native modules
-    const { createGeminiProvider } = await import('@onecoach/ai-sdk-provider-gemini-cli');
-    return createGeminiProvider({
-      authType: config?.authType ?? 'oauth-personal',
-      ...(config?.apiKey && { apiKey: config.apiKey }),
-    });
-  }
-
-  /**
    * Get a model instance from a provider
-   * Simplifies the logic found in various places: provider(modelName)
-   * NOTE: This method is async because gemini-cli uses dynamic imports
    */
   public static async getModel(
     providerName: AIProviderType,
@@ -167,18 +139,6 @@ export class AIProviderFactory {
         return this.createXAI(config?.apiKey).languageModel(modelName);
       case 'minimax':
         return this.createMiniMax(config?.apiKey).languageModel(modelName);
-      case 'gemini-cli': {
-        const provider = await this.createGeminiCli({
-          apiKey: config?.apiKey,
-          thinkingLevel: config?.thinkingLevel,
-        });
-        return provider.languageModel(
-          modelName,
-          config?.thinkingLevel
-            ? { thinkingConfig: { thinkingLevel: config.thinkingLevel } }
-            : undefined
-        ) as unknown;
-      }
       default:
         throw new Error(`Unsupported provider: ${providerName}`);
     }
