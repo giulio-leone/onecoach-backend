@@ -5,7 +5,7 @@
  * Permette aggiornamenti in tempo reale senza redeploy
  *
  * Principi: KISS, SOLID, DRY, YAGNI
- */import { logger } from '@giulio-leone/lib-core';
+ */import { logger } from '../logger.service';
 
 
 function logError(message: string, error: unknown) {

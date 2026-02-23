@@ -6,7 +6,7 @@
  * for improved performance.
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import { SimpleCache } from '@giulio-leone/lib-shared';
 
 const DEFAULT_LOCALE = 'en';

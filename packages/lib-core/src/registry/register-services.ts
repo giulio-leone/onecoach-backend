@@ -21,10 +21,10 @@ import {
   userProfileService,
   paymentService,
   onboardingService,
-} from '@giulio-leone/lib-core';
+} from '..';
 import { chatService } from '@giulio-leone/lib-ai';
 import { marketplaceService } from '@giulio-leone/lib-marketplace';
-import { coachService } from '@giulio-leone/lib-coach';
+import { coachService } from '../coach/coach.service';
 import type { IExerciseService, IFoodService, IAnalyticsService } from '@giulio-leone/contracts';
 import {
   getBodyMeasurementHistory,

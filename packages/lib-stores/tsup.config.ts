@@ -35,4 +35,15 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   shims: true,
+  external: [
+    /^@giulio-leone\//,
+    /^@onecoach\//,
+    /^@react-native/,
+    '@react-native-async-storage/async-storage',
+    'react-native',
+    /^react/,
+    /^next/,
+    'zustand',
+    /^zustand\//,
+  ],
 });

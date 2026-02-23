@@ -6,7 +6,8 @@
  * preventing inconsistencies from manual input or AI-generated variations.
  */
 
-import { prisma, logger } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
+import { logger } from '../logger.service';
 import { Prisma } from '@prisma/client';
 import { toSlug, createId, SimpleCache } from '@giulio-leone/lib-shared';
 const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour

@@ -5,7 +5,7 @@
  * Implements SOLID principles (SRP, DIP)
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import { Prisma } from '@prisma/client';
 import type {
   CoachVerificationStatus,

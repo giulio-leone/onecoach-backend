@@ -16,7 +16,7 @@ import {
   type UpdateExerciseInput,
   type ExerciseRelationInput,
 } from '@giulio-leone/schemas';
-import { validateExerciseTypeByName } from '@giulio-leone/lib-metadata';
+import { validateExerciseTypeByName } from '@giulio-leone/lib-core';
 
 import { z } from 'zod';
 type ExerciseApprovalStatus = 'APPROVED' | 'PENDING';

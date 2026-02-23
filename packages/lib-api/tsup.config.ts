@@ -26,6 +26,7 @@ export default defineConfig({
     '@tanstack/react-query',
     '@prisma/client',
     'react', 'react-native', 'react-native-health', 'expo-secure-store', '@react-native-async-storage/async-storage',
+    'react-native-iap', 'react-native-health-connect',
     'react-native',
     'next',
     'next-auth',

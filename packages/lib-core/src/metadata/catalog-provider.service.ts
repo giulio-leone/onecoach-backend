@@ -13,7 +13,8 @@
  * or server components.
  */
 
-import { prisma, logger } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
+import { logger } from '../logger.service';
 // Cache configuration for exercises (still useful for common exercises)
 const CACHE_TTL_MS = 1000 * 60 * 30; // 30 minutes
 let exerciseCatalogCache: ExerciseCatalogItem[] | null = null;

@@ -20,7 +20,7 @@ import {
   validateMusclesByName,
   validateBodyPartsByName,
   validateEquipmentByName,
-} from '@giulio-leone/lib-metadata';
+} from '@giulio-leone/lib-core';
 
 /**
  * Valid muscle names from the database catalog.

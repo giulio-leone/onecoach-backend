@@ -169,24 +169,6 @@
       "@giulio-leone/lib-marketplace/*": [
         "./packages/lib-marketplace/src/*"
       ],
-      "@giulio-leone/lib-metadata": [
-        "./packages/lib-metadata/src/index.ts"
-      ],
-      "@giulio-leone/lib-metadata/*": [
-        "./packages/lib-metadata/src/*"
-      ],
-      "@giulio-leone/lib-coach": [
-        "./packages/lib-coach/src/index.ts"
-      ],
-      "@giulio-leone/lib-coach/*": [
-        "./packages/lib-coach/src/*"
-      ],
-      "@giulio-leone/lib-vercel-admin": [
-        "./packages/lib-vercel-admin/src/index.ts"
-      ],
-      "@giulio-leone/lib-vercel-admin/*": [
-        "./packages/lib-vercel-admin/src/*"
-      ],
       "@giulio-leone/lib-api-client": [
         "./packages/lib-api-client/src/index.ts"
       ],

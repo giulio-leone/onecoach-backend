@@ -13,8 +13,8 @@
  * only executed server-side when called from API routes or server components.
  */
 
-import { prisma } from '@giulio-leone/lib-core';
-import { createId } from '@paralleldrive/cuid2';
+import { prisma } from '../prisma';
+import { createId } from '@giulio-leone/lib-shared';
 
 const DEFAULT_LOCALE = 'en';
 

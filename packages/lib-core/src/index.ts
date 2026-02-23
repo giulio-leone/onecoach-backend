@@ -47,3 +47,10 @@ export * from './versioning';
 export * from './rate-limit';
 export * from './create-import-route';
 export * from './supabase-client';
+
+// Merged from lib-coach
+export * from './coach';
+// Merged from lib-metadata
+export * from './metadata';
+// Merged from lib-vercel-admin
+export * from './vercel-admin';

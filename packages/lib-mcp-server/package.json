@@ -37,7 +37,6 @@
     "@giulio-leone/one-nutrition": "workspace:*",
     "@giulio-leone/one-workout": "workspace:*",
     "@giulio-leone/constants": "workspace:*",
-    "@giulio-leone/lib-metadata": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "@prisma/client": "^7.2.0"

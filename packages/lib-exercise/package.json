@@ -34,7 +34,6 @@
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
-    "@giulio-leone/lib-metadata": "workspace:*",
     "@giulio-leone/lib-api": "workspace:*",
     "fast-json-patch": "^3.1.1"
   },
