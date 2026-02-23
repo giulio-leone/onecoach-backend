@@ -235,18 +235,6 @@
       "@giulio-leone/one-agenda/*": [
         "../../one-agenda/src/*"
       ],
-      "@giulio-leone/oneagenda-core": [
-        "../../../packages/oneagenda-core/src/index.ts"
-      ],
-      "@giulio-leone/oneagenda-core/*": [
-        "../../../packages/oneagenda-core/src/*"
-      ],
-      "@giulio-leone/oneagenda-ui": [
-        "../../../packages/oneagenda-ui/src/index.ts"
-      ],
-      "@giulio-leone/oneagenda-ui/*": [
-        "../../../packages/oneagenda-ui/src/*"
-      ],
       "@giulio-leone/one-agent": [
         "../../one-agent/src/index.ts"
       ],
