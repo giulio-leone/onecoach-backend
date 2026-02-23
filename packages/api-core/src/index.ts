@@ -61,3 +61,12 @@ export { POST as healthSyncPOST } from './routes/health/sync/route';
 export { GET as iapSubscriptionStatusGET } from './routes/iap/subscription-status/route';
 export { POST as iapVerifyReceiptPOST } from './routes/iap/verify-receipt/route';
 export { POST as iapRestorePurchasesPOST } from './routes/iap/restore-purchases/route';
+
+// Food routes (merged from @giulio-leone/api-food)
+export * from './food';
+
+// Nutrition routes (merged from @giulio-leone/api-nutrition)
+export * from './nutrition';
+
+// Workout routes (merged from @giulio-leone/api-workout)
+export * from './workout';

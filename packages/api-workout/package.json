@@ -1,31 +1,7 @@
 {
   "name": "@giulio-leone/api-workout",
   "version": "0.1.0",
-  "description": "API routes per il dominio workout",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsup",
-    "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@giulio-leone/lib-registry": "workspace:*"
-  },
-  "peerDependencies": {
-    "next": ">=16.0.0"
-  },
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "sideEffects": false
+  "deprecated": "Merged into @giulio-leone/api-core/api-workout",
+  "description": "DEPRECATED - Use @giulio-leone/api-core instead",
+  "private": true
 }

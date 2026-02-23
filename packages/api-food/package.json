@@ -1,37 +1,7 @@
 {
   "name": "@giulio-leone/api-food",
   "version": "0.1.0",
-  "description": "API routes per il dominio alimenti",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.mjs",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "scripts": {
-    "type-check": "tsc --noEmit",
-    "build": "tsup"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "@giulio-leone/contracts": "workspace:*",
-    "@giulio-leone/lib-api": "workspace:*",
-    "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/lib-food": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
-    "@giulio-leone/one-agent": "workspace:*",
-    "@giulio-leone/schemas": "workspace:*",
-    "@giulio-leone/types": "workspace:*"
-  },
-  "sideEffects": false
+  "deprecated": "Merged into @giulio-leone/api-core/api-food",
+  "description": "DEPRECATED - Use @giulio-leone/api-core instead",
+  "private": true
 }
