@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-core",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Core services (auth, credit, subscription, prisma)",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
