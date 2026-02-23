@@ -146,7 +146,7 @@ export async function GET(request: NextRequest) {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       clients = clients.filter(
-        (client: any) =>
+        (client) =>
           client.name?.toLowerCase().includes(query) || client.email.toLowerCase().includes(query)
       );
     }

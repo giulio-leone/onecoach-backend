@@ -174,11 +174,11 @@ export class CatalogProviderService {
 
       const catalog: ExerciseCatalogItem[] = exercises.map((exercise: ExerciseWithRelations) => {
         const translation = exercise.exercise_translations[0];
-        const muscleGroups = exercise.exercise_muscles.map((em: any) => {
+        const muscleGroups = exercise.exercise_muscles.map((em) => {
           const muscleTrans = em.muscles.muscle_translations[0];
           return muscleTrans?.name || em.muscles.slug;
         });
-        const equipment = exercise.exercise_equipments.map((ee: any) => {
+        const equipment = exercise.exercise_equipments.map((ee) => {
           const eqTrans = ee.equipments.equipment_translations[0];
           return eqTrans?.name || ee.equipments.slug;
         });
@@ -217,7 +217,7 @@ export class CatalogProviderService {
   static formatExerciseCatalogForPrompt(exercises: ExerciseCatalogItem[]): string {
     if (exercises.length === 0) return '';
 
-    const lines = exercises.map((ex: any) => {
+    const lines = exercises.map((ex) => {
       const muscles = ex.muscleGroups.slice(0, 3).join(', '); // Limit to 3 main muscles
       const equip = ex.equipment.length > 0 ? ex.equipment.slice(0, 2).join(', ') : 'bodyweight';
       return `- ${ex.id}: ${ex.name} [${ex.category}] (${muscles}) - ${equip}`;
@@ -353,5 +353,4 @@ export class CatalogProviderService {
     exerciseCatalogCache = null;
     exerciseCacheTime = 0;
   }
-
 }

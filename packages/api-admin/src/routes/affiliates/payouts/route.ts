@@ -81,7 +81,7 @@ export async function GET(_req: Request) {
     >();
 
     // Filter out rewards without userId and group by user
-    const validRewards = rewards.filter((r: any) => r.userId !== null);
+    const validRewards = rewards.filter((r) => r.userId !== null);
     for (const reward of validRewards) {
       const key = reward.userId!;
       if (!payoutsByUser.has(key)) {

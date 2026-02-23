@@ -8,6 +8,7 @@
  */
 
 import { parseWithVisionAI } from '@giulio-leone/lib-import-core';
+import type { ZodSchema } from 'zod';
 import {
   ImportedBodyMeasurementsSchema,
   type ImportedBodyMeasurements,
@@ -117,7 +118,7 @@ export class BodyMeasurementsVisionService {
       contentBase64: imageBase64,
       mimeType,
       prompt: IMAGE_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema as any,
+      schema: ImportedBodyMeasurementsSchema as ZodSchema<ImportedBodyMeasurements>,
       userId,
       fileType: 'image',
     });
@@ -126,15 +127,12 @@ export class BodyMeasurementsVisionService {
   /**
    * Parse body measurements from PDF
    */
-  static async parsePDF(
-    pdfBase64: string,
-    userId: string
-  ): Promise<ImportedBodyMeasurements> {
+  static async parsePDF(pdfBase64: string, userId: string): Promise<ImportedBodyMeasurements> {
     return parseWithVisionAI<ImportedBodyMeasurements>({
       contentBase64: pdfBase64,
       mimeType: 'application/pdf',
       prompt: PDF_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema as any,
+      schema: ImportedBodyMeasurementsSchema as ZodSchema<ImportedBodyMeasurements>,
       userId,
       fileType: 'pdf',
     });
@@ -152,7 +150,7 @@ export class BodyMeasurementsVisionService {
       contentBase64: documentBase64,
       mimeType,
       prompt: DOCUMENT_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema as any,
+      schema: ImportedBodyMeasurementsSchema as ZodSchema<ImportedBodyMeasurements>,
       userId,
       fileType: 'document',
     });
@@ -170,7 +168,7 @@ export class BodyMeasurementsVisionService {
       contentBase64,
       mimeType,
       prompt: SPREADSHEET_EXTRACTION_PROMPT,
-      schema: ImportedBodyMeasurementsSchema as any,
+      schema: ImportedBodyMeasurementsSchema as ZodSchema<ImportedBodyMeasurements>,
       userId,
       fileType: 'spreadsheet',
     });
