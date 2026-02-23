@@ -24,8 +24,6 @@
       "@giulio-leone/contracts/*": ["../contracts/src/*"],
       "@giulio-leone/constants": ["../constants/src/index.ts"],
       "@giulio-leone/constants/*": ["../constants/src/*"],
-      "@giulio-leone/lib-config": ["../lib-config/src/index.ts"],
-      "@giulio-leone/lib-config/*": ["../lib-config/src/*"]
     }
   },
   "include": ["src"],
