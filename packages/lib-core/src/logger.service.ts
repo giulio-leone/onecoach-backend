@@ -3,7 +3,7 @@ import { Logger as SharedLogger, type LogLevel as SharedLogLevel } from '@giulio
 /**
  * @onecoach/lib-core
  * Standardized Logger Service
- * 
+ *
  * Re-exports and wraps the high-quality logger from lib-shared
  * to provide a stable API for core services.
  */
@@ -11,7 +11,7 @@ import { Logger as SharedLogger, type LogLevel as SharedLogLevel } from '@giulio
 export type LogLevel = SharedLogLevel;
 
 export interface LogMetadata {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface ILogger {
@@ -53,7 +53,7 @@ class LoggerService implements ILogger {
     // SharedLogger.child already handles prefix concatenation
     const childShared = this.inner.child(context);
     const wrapper = new LoggerService();
-    (wrapper as any).inner = childShared;
+    (wrapper as unknown as { inner: SharedLogger }).inner = childShared;
     return wrapper;
   }
 }

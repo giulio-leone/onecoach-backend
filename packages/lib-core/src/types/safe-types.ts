@@ -5,7 +5,6 @@
  * Following SOLID principles: Single Responsibility for type safety.
  */
 
-
 /**
  * Safe JSON value type for unknown JSON data.
  * Use this instead of `any` for JSON parsing/serialization.

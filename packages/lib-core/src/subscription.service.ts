@@ -9,7 +9,7 @@ import Stripe from 'stripe';
 import { createId } from '@paralleldrive/cuid2';
 import { SubscriptionPlan, SubscriptionStatus } from '@prisma/client';
 import { getSubscriptionPriceId, getCreditsFromPriceId } from '@giulio-leone/constants';
-import type { ISubscriptionService } from '@giulio-leone/contracts'; 
+import type { ISubscriptionService } from '@giulio-leone/contracts';
 import { logger } from './logger.service';
 import { creditService } from './credit.service';
 import { SetupIntentService } from './setup-intent.service';
@@ -21,8 +21,12 @@ import { prisma } from './prisma';
 // ----------------------------------------------------------------------------
 
 export interface IAffiliateService {
-  handlePostRegistration(params: { userId: string; referralCode: string; now: Date }): Promise<any>;
-  handleSubscriptionCancellation(params: { userId: string; occurredAt: Date }): Promise<any>;
+  handlePostRegistration(params: {
+    userId: string;
+    referralCode: string;
+    now: Date;
+  }): Promise<void>;
+  handleSubscriptionCancellation(params: { userId: string; occurredAt: Date }): Promise<void>;
   handleInvoicePaid(params: {
     userId: string;
     stripeInvoiceId: string;
@@ -30,24 +34,30 @@ export interface IAffiliateService {
     totalAmountCents: number;
     currency: string;
     occurredAt: Date;
-  }): Promise<any>;
-  ensureUserReferralCode?(userId: string, programId: string): Promise<any>;
+  }): Promise<void>;
+  ensureUserReferralCode?(userId: string, programId: string): Promise<void>;
 }
 
 export interface IPromotionService {
-  getPromotionByCode(code: string): Promise<any>;
+  getPromotionByCode(
+    code: string
+  ): Promise<{ id: string; type: string; bonusCredits?: number } | null>;
   applyBonusCredits(promotionId: string, userId: string): Promise<void>;
 }
 
 export interface IOpenRouterSubkeyService {
-  createSubkey(params: { userId: string; credits: number; paymentIntentId: string }): Promise<any>;
-  saveSubkeyToDb(data: any, tx?: any): Promise<void>;
+  createSubkey(params: {
+    userId: string;
+    credits: number;
+    paymentIntentId: string;
+  }): Promise<{ keyLabel: string; keyHash: string; limit: number }>;
+  saveSubkeyToDb(data: Record<string, unknown>, tx?: unknown): Promise<void>;
   revokeSubkey(keyLabel: string): Promise<void>;
 }
 
 export interface IMarketplaceService {
-  createPurchase(data: any): Promise<any>;
-  updatePurchaseStatus(purchaseId: string, status: string): Promise<any>;
+  createPurchase(data: Record<string, unknown>): Promise<{ id: string }>;
+  updatePurchaseStatus(purchaseId: string, status: string): Promise<void>;
 }
 
 export interface SubscriptionDependencies {
@@ -359,7 +369,9 @@ export class SubscriptionService implements ISubscriptionService {
         stripeSubscriptionId: subscription.id,
         stripeCustomerId: subscription.customer as string,
         stripePriceId: subscription.items.data[0]?.price.id ?? '',
-        currentPeriodStart: new Date((subscription.items.data[0]?.current_period_start ?? 0) * 1000),
+        currentPeriodStart: new Date(
+          (subscription.items.data[0]?.current_period_start ?? 0) * 1000
+        ),
         currentPeriodEnd: new Date((subscription.items.data[0]?.current_period_end ?? 0) * 1000),
         updatedAt: new Date(),
       },
@@ -410,7 +422,9 @@ export class SubscriptionService implements ISubscriptionService {
         where: { id: dbSubscription.id },
         data: {
           status: newStatus,
-          currentPeriodStart: new Date((subscription.items.data[0]?.current_period_start ?? 0) * 1000),
+          currentPeriodStart: new Date(
+            (subscription.items.data[0]?.current_period_start ?? 0) * 1000
+          ),
           currentPeriodEnd: new Date((subscription.items.data[0]?.current_period_end ?? 0) * 1000),
           cancelAtPeriodEnd: subscription.cancel_at_period_end,
           updatedAt: new Date(),
@@ -455,7 +469,7 @@ export class SubscriptionService implements ISubscriptionService {
 
   private async handleInvoicePaid(invoice: Stripe.Invoice) {
     const sub = invoice.parent?.subscription_details?.subscription;
-    const subscriptionId = typeof sub === 'string' ? sub : sub?.id ?? null;
+    const subscriptionId = typeof sub === 'string' ? sub : (sub?.id ?? null);
     if (!subscriptionId) return;
     const subscription = await prisma.subscriptions.findFirst({
       where: { stripeSubscriptionId: subscriptionId },
@@ -487,7 +501,8 @@ export class SubscriptionService implements ISubscriptionService {
   }
 
   private async handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-    const subscriptionId = (invoice as any).subscription as string | null;
+    const sub = invoice.parent?.subscription_details?.subscription;
+    const subscriptionId = typeof sub === 'string' ? sub : (sub?.id ?? null);
     if (!subscriptionId) return;
     await prisma.subscriptions.updateMany({
       where: { stripeSubscriptionId: subscriptionId },
@@ -578,7 +593,10 @@ export class SubscriptionService implements ISubscriptionService {
   private async handlePaymentRefunded(refundData: Stripe.PaymentIntent, eventId: string) {
     const userId = refundData.metadata?.userId;
     if (!userId) {
-      logger.warn('[Subscription] Refund without userId', { eventId, paymentIntentId: refundData.id });
+      logger.warn('[Subscription] Refund without userId', {
+        eventId,
+        paymentIntentId: refundData.id,
+      });
       return;
     }
 
@@ -663,7 +681,7 @@ export class SubscriptionService implements ISubscriptionService {
     }
 
     // Find or create purchase record
-    let purchase = await prisma.plan_purchases.findFirst({
+    let purchase: { id: string } | null = await prisma.plan_purchases.findFirst({
       where: {
         userId,
         marketplacePlanId,

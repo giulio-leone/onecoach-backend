@@ -1,7 +1,11 @@
 /**
  * Auth Guards
  *
- * Guards per proteggere API routes e verificare autorizzazioni
+ * Guards per proteggere API routes e verificare autorizzazioni.
+ *
+ * Prefer `requireAuthOrThrow` / `requireAdminOrThrow` in API routes
+ * for cleaner code — they throw `AuthError` which the caller can
+ * catch and convert to a NextResponse.
  */
 
 import { NextResponse } from 'next/server';
@@ -9,6 +13,84 @@ import { getCurrentUser } from './session';
 import { isAdminRole, isSuperAdminRole } from './roles';
 
 import { logger } from '@giulio-leone/lib-shared';
+
+/**
+ * Structured auth error — throw instead of returning NextResponse
+ * from auth guards. Catch in route handlers to produce proper responses.
+ */
+export class AuthError extends Error {
+  constructor(
+    message: string,
+    public readonly status: 401 | 403 = 401
+  ) {
+    super(message);
+    this.name = 'AuthError';
+  }
+
+  /** Convert to NextResponse for API routes */
+  toResponse(): NextResponse {
+    return NextResponse.json({ error: this.message }, { status: this.status });
+  }
+}
+
+/**
+ * Require authenticated user — throws AuthError on failure.
+ * Use in API routes for clean, boilerplate-free auth:
+ *
+ * ```ts
+ * const user = await requireAuthOrThrow();
+ * // user is guaranteed to be AuthenticatedUser
+ * ```
+ */
+export async function requireAuthOrThrow() {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new AuthError('Non autenticato', 401);
+  }
+
+  if (!user.id || typeof user.id !== 'string') {
+    logger.error('[requireAuthOrThrow] User object senza ID valido:', user);
+    throw new AuthError('Errore di autenticazione: sessione non valida', 401);
+  }
+
+  return user;
+}
+
+/**
+ * Require admin user — throws AuthError on failure.
+ */
+export async function requireAdminOrThrow() {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new AuthError('Non autenticato', 401);
+  }
+
+  if (!isAdminRole(user.role)) {
+    throw new AuthError('Accesso negato - Richiesti privilegi admin', 403);
+  }
+
+  return user;
+}
+
+/**
+ * Require super admin user — throws AuthError on failure.
+ */
+export async function requireSuperAdminOrThrow() {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new AuthError('Non autenticato', 401);
+  }
+
+  if (!isSuperAdminRole(user.role)) {
+    throw new AuthError('Accesso negato - Richiesti privilegi super admin', 403);
+  }
+
+  return user;
+}
+
 /**
  * Guard per verificare autenticazione
  * Ritorna user se autenticato, altrimenti NextResponse con errore 401

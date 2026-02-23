@@ -7,6 +7,8 @@ export default defineConfig({
     'react-query/index': 'src/react-query/index.ts',
     'hooks/index': 'src/hooks/index.ts',
     habits: 'src/habits.ts',
+    'error-handler': 'src/error-handler.ts',
+    'error-handler.native': 'src/error-handler.native.ts',
     'error-handler/core': 'src/error-handler/core.ts',
     projects: 'src/projects.ts',
     'queries/exercise.queries': 'src/queries/exercise.queries.ts',

@@ -488,9 +488,7 @@ export class UserMemoryService {
           : [],
       insights:
         options.includeInsights !== false
-          ? domainMemory.insights.filter(
-              (i) => !i.expiresAt || new Date(i.expiresAt) > new Date()
-            )
+          ? domainMemory.insights.filter((i) => !i.expiresAt || new Date(i.expiresAt) > new Date())
           : [],
       lastUpdated: domainMemory.lastUpdated,
     };

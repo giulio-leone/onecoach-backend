@@ -8,7 +8,6 @@ import { prisma } from './prisma';
 import { PolicyStatus, PolicyType, type Prisma } from '@prisma/client';
 import type { policies, policy_history } from '@prisma/client';
 
-
 export interface CreatePolicyParams {
   slug: string;
   type: PolicyType;

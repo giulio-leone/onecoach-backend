@@ -120,7 +120,7 @@ type NextAuthReturn = ReturnType<typeof NextAuth>;
  */
 function createCustomPrismaAdapter(): Adapter {
   const p = getPrisma();
-  
+
   return {
     async createUser(data) {
       const user = await p.users.create({

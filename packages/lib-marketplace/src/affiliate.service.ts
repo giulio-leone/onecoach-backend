@@ -1,5 +1,20 @@
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma, Prisma, creditService } from '@giulio-leone/lib-core';
+import {
+  AffiliateRewardStatus,
+  AffiliateRewardType,
+  ReferralAttributionStatus,
+} from '@prisma/client';
 import { logger } from '@giulio-leone/lib-shared';
+
+const log = logger.child('AffiliateService');
+const affiliateLogger = {
+  logRegistration: (data: any) => log.info('Affiliate registration', data),
+  logSubscription: (data: any) => log.info('Affiliate subscription', data),
+  logRewardReleased: (data: any) => log.info('Affiliate reward released', data),
+  logPayoutApproved: (data: any) => log.info('Affiliate payout approved', data),
+  logError: (data: any) => log.error('Affiliate error', data),
+  error: (data: any) => log.error('Affiliate error', data), // Alias for compatibility
+};
 // Utility locale per generare codici senza dipendenze esterne
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 function generateCode(length: number): string {
@@ -10,16 +25,6 @@ function generateCode(length: number): string {
   }
   return out;
 }
-import {
-  AffiliateRewardStatus,
-  AffiliateRewardType,
-  Prisma,
-  ReferralAttributionStatus,
-} from '@prisma/client';
-import { CreditService } from '@giulio-leone/lib-core';
-import { affiliateLogger } from './affiliate-logger.service';
-
-const creditService = new CreditService();
 
 const REFERRAL_CODE_LENGTH = 10;
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
@@ -258,7 +263,7 @@ export class AffiliateService {
           {
             level: attribution.level,
             amount: commissionAmount,
-            userId: attribution.referrerUserId ?? '',
+            userId: attribution.referrerUserId,
           },
         ],
       });
@@ -285,7 +290,7 @@ export class AffiliateService {
     }
 
     await Promise.all(
-      attributions.map((attribution: any) =>
+      attributions.map((attribution) =>
         prisma.referral_attributions.update({
           where: { id: attribution.id },
           data: {
@@ -333,7 +338,7 @@ export class AffiliateService {
       if (reward.creditAmount && reward.creditAmount > 0) {
         try {
           await creditService.addCredits({
-            userId: reward.userId ?? '',
+            userId: reward.userId || '',
             amount: Number(reward.creditAmount),
             type: 'ADMIN_ADJUSTMENT',
             description: `Crediti referral livello ${reward.level}`,
@@ -346,16 +351,16 @@ export class AffiliateService {
 
           affiliateLogger.logRewardReleased({
             rewardId: reward.id,
-            userId: reward.userId ?? '',
+            userId: reward.userId,
             type: 'REGISTRATION_CREDIT',
             level: reward.level,
             credits: Number(reward.creditAmount),
           });
-        } catch (_error: unknown) {
+        } catch (error: unknown) {
           affiliateLogger.logError({
             event: 'reward.credit.failed',
-            error: _error instanceof Error ? _error : new Error('Unknown error'),
-            userId: reward.userId ?? undefined,
+            error: error instanceof Error ? error : new Error('Unknown error'),
+            userId: reward.userId,
             metadata: {
               rewardId: reward.id,
               creditAmount: reward.creditAmount,
@@ -368,7 +373,7 @@ export class AffiliateService {
 
     // Aggiornare status di tutti i reward a CLEARED
     await prisma.affiliate_rewards.updateMany({
-      where: { id: { in: rewards.map((reward: any) => reward.id) } },
+      where: { id: { in: rewards.map((reward) => reward.id) } },
       data: {
         status: AffiliateRewardStatus.CLEARED,
         readyAt: referenceDate,
@@ -410,12 +415,8 @@ export class AffiliateService {
       return;
     }
 
-    if (!code.userId) {
-      throw new Error('Referral code has no associated user');
-    }
-
     const referralChain = await this.buildReferralChain({
-      startingCode: { id: code.id, userId: code.userId },
+      startingCode: { ...code, userId: code.userId || '' },
       program,
     });
 
@@ -484,7 +485,7 @@ export class AffiliateService {
       affiliateLogger.logRegistration({
         userId: referralChain[0]?.referrerUserId || '',
         referralCode: referralCode,
-        rewardIds: createdRewards.map((r: any) => r.id),
+        rewardIds: createdRewards.map((r) => r.id),
         credits: program.registrationCredit,
       });
     }
@@ -499,28 +500,6 @@ export class AffiliateService {
     let currentCodeId = params.startingCode.id;
     let currentUserId: string | null = params.startingCode.userId;
 
-    // OPTIMIZATION: Pre-load all potential parent attributions in a single query
-    // instead of making N queries in a while loop
-    // We load all active level-1 attributions for this program and build a lookup map
-    const allPotentialParents = await prisma.referral_attributions.findMany({
-      where: {
-        programId: params.program.id,
-        level: 1,
-        status: ReferralAttributionStatus.ACTIVE,
-      },
-      orderBy: { attributedAt: 'desc' },
-    });
-
-    // Build lookup map: referredUserId -> most recent attribution
-    const parentAttributionByReferredUser = new Map<string, (typeof allPotentialParents)[number]>();
-    for (const attr of allPotentialParents) {
-      // Skip if referredUserId is null, and only keep the first (most recent due to orderBy)
-      if (attr.referredUserId && !parentAttributionByReferredUser.has(attr.referredUserId)) {
-        parentAttributionByReferredUser.set(attr.referredUserId, attr);
-      }
-    }
-
-    // Build chain using in-memory lookup instead of N database queries
     while (currentUserId && currentLevel <= params.program.maxLevels) {
       chain.push({
         level: currentLevel,
@@ -528,7 +507,16 @@ export class AffiliateService {
         referralCodeId: currentCodeId,
       });
 
-      const parentAttribution = parentAttributionByReferredUser.get(currentUserId);
+      const parentAttribution: Prisma.referral_attributionsGetPayload<{}> | null =
+        await prisma.referral_attributions.findFirst({
+          where: {
+            programId: params.program.id,
+            referredUserId: currentUserId,
+            level: 1,
+            status: ReferralAttributionStatus.ACTIVE,
+          },
+          orderBy: { attributedAt: 'desc' },
+        });
 
       if (!parentAttribution) {
         break;
@@ -604,17 +592,12 @@ export class AffiliateService {
     });
 
     const getAmount = (status: string) => {
-      const reward = rewards.find((r: any) => r.status === status);
-      const currencyAmount = reward?._sum.currencyAmount;
-      const creditAmount = reward?._sum.creditAmount;
+      const reward = rewards.find((r) => r.status === status);
       return {
-        currencyAmount: currencyAmount ? Number(currencyAmount) : 0,
-        creditAmount: creditAmount ? Number(creditAmount) : 0,
+        currencyAmount: reward?._sum.currencyAmount || 0,
+        creditAmount: reward?._sum.creditAmount || 0,
       };
     };
-
-    const clearedAmount = getAmount('CLEARED');
-    const pendingAmount = getAmount('PENDING');
 
     return {
       totalRewards,
@@ -622,13 +605,9 @@ export class AffiliateService {
       clearedRewards,
       cancelledRewards,
       totalAttributions,
-      totalReferrals: totalAttributions,
-      totalEarnings: clearedAmount.currencyAmount,
-      pendingEarnings: pendingAmount.currencyAmount,
-      clearedEarnings: clearedAmount.currencyAmount,
       amounts: {
-        pending: pendingAmount,
-        cleared: clearedAmount,
+        pending: getAmount('PENDING'),
+        cleared: getAmount('CLEARED'),
         cancelled: getAmount('CANCELLED'),
       },
     };
@@ -661,21 +640,21 @@ export class AffiliateService {
     // Create audit log
     await prisma.payout_audit_log.create({
       data: {
-        userId: reward.userId ?? '',
+        userId: reward.userId,
         rewardIds: [payoutId],
         action: 'APPROVED',
         amount: reward.currencyAmount,
-        currencyCode: reward.currencyCode ?? 'EUR',
+        currencyCode: reward.currencyCode,
         performedBy: adminUserId,
         notes,
       },
     });
 
     affiliateLogger.logPayoutApproved({
-      userId: reward.userId ?? '',
+      userId: reward.userId,
       rewardIds: [payoutId],
       totalAmount: Number(reward.currencyAmount),
-      currency: reward.currencyCode ?? 'EUR',
+      currency: reward.currencyCode || 'EUR',
       approvedBy: adminUserId,
     });
 
@@ -718,7 +697,7 @@ export class AffiliateService {
       },
     });
 
-    logger.warn('[AFFILIATE] Payout rejected', {
+    log.warn('[AFFILIATE] Payout rejected', {
       payoutId,
       userId: reward.userId,
       adminUserId,
@@ -766,7 +745,7 @@ export class AffiliateService {
       },
     });
 
-    logger.warn('[AFFILIATE] Payout marked as paid', {
+    log.warn('[AFFILIATE] Payout marked as paid', {
       payoutId,
       userId: reward.userId,
       adminUserId,

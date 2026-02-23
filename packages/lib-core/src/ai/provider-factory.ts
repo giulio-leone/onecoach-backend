@@ -1,9 +1,10 @@
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
-import { createOpenAI } from '@ai-sdk/openai';
-import { createAnthropic } from '@ai-sdk/anthropic';
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { createXai } from '@ai-sdk/xai';
-import { createMinimax } from 'vercel-minimax-ai-provider';
+import { createOpenRouter, type OpenRouterProvider } from '@openrouter/ai-sdk-provider';
+import { createOpenAI, type OpenAIProvider } from '@ai-sdk/openai';
+import { createAnthropic, type AnthropicProvider } from '@ai-sdk/anthropic';
+import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';
+import { createXai, type XaiProvider } from '@ai-sdk/xai';
+import { createMinimax, type MinimaxProvider } from 'vercel-minimax-ai-provider';
+import type { GeminiProvider } from '@onecoach/ai-sdk-provider-gemini-cli';
 // Note: ai-sdk-provider-gemini-cli uses native modules (node-pty) incompatible with Next.js bundling
 // Import is done dynamically in createGeminiCli to avoid build-time bundling
 import { getOpenRouterConfig, getAIProviderKey } from '../config/env';
@@ -14,7 +15,14 @@ export type GeminiThinkingLevel = 'minimal' | 'low' | 'medium' | 'high';
 /**
  * AI Provider Types
  */
-export type AIProviderType = 'openrouter' | 'openai' | 'anthropic' | 'google' | 'xai' | 'minimax' | 'gemini-cli';
+export type AIProviderType =
+  | 'openrouter'
+  | 'openai'
+  | 'anthropic'
+  | 'google'
+  | 'xai'
+  | 'minimax'
+  | 'gemini-cli';
 
 /**
  * Provider Configuration
@@ -29,7 +37,7 @@ export interface ProviderConfig {
 
 /**
  * AIProviderFactory
- * 
+ *
  * Centralized factory for creating AI SDK 6 providers.
  * Merges the most up-to-date logic from one-agent and lib-ai-agents.
  */
@@ -37,19 +45,23 @@ export class AIProviderFactory {
   /**
    * Create an OpenRouter provider with standard attribution headers
    */
-  public static createOpenRouter(config?: Partial<ProviderConfig> & { preferredProvider?: string | null }) {
+  public static createOpenRouter(
+    config?: Partial<ProviderConfig> & { preferredProvider?: string | null }
+  ) {
     const envConfig = getOpenRouterConfig();
     const apiKey = config?.apiKey || envConfig.apiKey;
-    
+
     if (!apiKey) {
-      throw new Error('OpenRouter API key is missing. Please set OPENROUTER_API_KEY environment variable.');
+      throw new Error(
+        'OpenRouter API key is missing. Please set OPENROUTER_API_KEY environment variable.'
+      );
     }
 
     // NOTE: Provider routing (order, allowFallbacks) should be passed at request time
     // via providerOptions.openrouter.provider, NOT at factory level.
     // See: https://openrouter.ai/docs/features/provider-routing
     // The buildProviderOptions utility handles this correctly.
-    return (createOpenRouter as any)({
+    return createOpenRouter({
       apiKey,
       baseURL: config?.baseUrl || envConfig.baseUrl,
       headers: {
@@ -62,40 +74,40 @@ export class AIProviderFactory {
   /**
    * Create an OpenAI provider
    */
-  public static createOpenAI(apiKey?: string): any {
+  public static createOpenAI(apiKey?: string): OpenAIProvider {
     const key = apiKey || getAIProviderKey('openai');
-    return (createOpenAI as any)({ apiKey: key });
+    return createOpenAI({ apiKey: key });
   }
 
   /**
    * Create an Anthropic provider
    */
-  public static createAnthropic(apiKey?: string): any {
+  public static createAnthropic(apiKey?: string): AnthropicProvider {
     const key = apiKey || getAIProviderKey('anthropic');
-    return (createAnthropic as any)({ apiKey: key });
+    return createAnthropic({ apiKey: key });
   }
 
   /**
    * Create a Google provider
    */
-  public static createGoogle(apiKey?: string): any {
+  public static createGoogle(apiKey?: string): GoogleGenerativeAIProvider {
     const key = apiKey || getAIProviderKey('google');
-    return (createGoogleGenerativeAI as any)({ apiKey: key });
+    return createGoogleGenerativeAI({ apiKey: key });
   }
 
   /**
    * Create an xAI provider
    */
-  public static createXAI(apiKey?: string): any {
+  public static createXAI(apiKey?: string): XaiProvider {
     const key = apiKey || getAIProviderKey('xai');
-    return (createXai as any)({ apiKey: key });
+    return createXai({ apiKey: key });
   }
 
   /**
    * Create a MiniMax provider using official vercel-minimax-ai-provider
    * https://github.com/MiniMax-AI/vercel-minimax-ai-provider
    */
-  public static createMiniMax(apiKey?: string): any {
+  public static createMiniMax(apiKey?: string): MinimaxProvider {
     const key = apiKey || getAIProviderKey('minimax');
     // Official provider uses Anthropic-compatible API by default
     // which provides better support for advanced features
@@ -107,7 +119,7 @@ export class AIProviderFactory {
    * Uses Gemini CLI OAuth (default) or API key authentication
    * Requires: npm install -g @google/gemini-cli && gemini (for OAuth setup)
    * @see https://ai-sdk.dev/providers/community-providers/gemini-cli
-   * 
+   *
    * NOTE: Uses dynamic import because gemini-cli-core has native node-pty dependencies
    * that are incompatible with Next.js Turbopack bundling.
    */
@@ -115,7 +127,7 @@ export class AIProviderFactory {
     authType?: 'oauth-personal' | 'api-key';
     apiKey?: string;
     thinkingLevel?: GeminiThinkingLevel;
-  }): Promise<any> {
+  }): Promise<GeminiProvider> {
     // Dynamic import to avoid Turbopack bundling native modules
     const { createGeminiProvider } = await import('@onecoach/ai-sdk-provider-gemini-cli');
     return createGeminiProvider({
@@ -140,22 +152,30 @@ export class AIProviderFactory {
   ) {
     switch (providerName) {
       case 'openrouter':
-        return (this.createOpenRouter({ apiKey: config?.apiKey, preferredProvider: config?.preferredProvider }) as any)(modelName);
+        return this.createOpenRouter({
+          apiKey: config?.apiKey,
+          preferredProvider: config?.preferredProvider,
+        }).languageModel(modelName);
       case 'openai':
-        return (this.createOpenAI(config?.apiKey) as any)(modelName);
+        return this.createOpenAI(config?.apiKey).languageModel(modelName);
       case 'anthropic':
-        return (this.createAnthropic(config?.apiKey) as any)(modelName);
+        return this.createAnthropic(config?.apiKey).languageModel(modelName);
       case 'google':
-        return (this.createGoogle(config?.apiKey) as any)(modelName);
+        return this.createGoogle(config?.apiKey).languageModel(modelName);
       case 'xai':
-        return (this.createXAI(config?.apiKey) as any)(modelName);
+        return this.createXAI(config?.apiKey).languageModel(modelName);
       case 'minimax':
-        return (this.createMiniMax(config?.apiKey) as any)(modelName);
+        return this.createMiniMax(config?.apiKey).languageModel(modelName);
       case 'gemini-cli': {
-        const provider = await this.createGeminiCli({ apiKey: config?.apiKey, thinkingLevel: config?.thinkingLevel });
-        return provider(
+        const provider = await this.createGeminiCli({
+          apiKey: config?.apiKey,
+          thinkingLevel: config?.thinkingLevel,
+        });
+        return provider.languageModel(
           modelName,
-          config?.thinkingLevel ? { thinkingConfig: { thinkingLevel: config.thinkingLevel } } : undefined
+          config?.thinkingLevel
+            ? { thinkingConfig: { thinkingLevel: config.thinkingLevel } }
+            : undefined
         );
       }
       default:

@@ -11,4 +11,6 @@ export * from './config';
 export * from './admin-seed';
 export * from './admin-utils';
 export * from './roles';
+export * from './access-control';
 export * as NativeSession from './session.native';
+export * from './supabase-token';

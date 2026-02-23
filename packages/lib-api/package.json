@@ -41,6 +41,16 @@
       "import": "./dist/habits.mjs",
       "require": "./dist/habits.js"
     },
+    "./error-handler": {
+      "types": "./dist/error-handler.d.ts",
+      "import": "./dist/error-handler.mjs",
+      "require": "./dist/error-handler.js"
+    },
+    "./error-handler.native": {
+      "types": "./dist/error-handler.native.d.ts",
+      "import": "./dist/error-handler.native.mjs",
+      "require": "./dist/error-handler.native.js"
+    },
     "./error-handler/core": {
       "types": "./dist/error-handler/core.d.ts",
       "import": "./dist/error-handler/core.mjs",

@@ -20,6 +20,7 @@ export * from './credit.service';
 export { creditService } from './credit.service';
 export * from './subscription.service';
 export { subscriptionService } from './subscription.service';
+export { initSubscriptionService } from './subscription-init';
 export * from './auth';
 export * from './user-profile.service';
 export { userProfileService } from './user-profile.service';
@@ -43,3 +44,16 @@ export * from './types/safe-types';
 export * from './ai/provider-factory';
 export * from './config/env';
 export * from './versioning';
+export * from './rate-limit';
+export * from './create-import-route';
+export * from './supabase-client';
+
+// Core services
+export * from './services/user/user-profile.service';
+export * from './services/user/onboarding.service';
+export * from './services/user/onboarding-profile.service';
+export * from './services/admin/ai-generation.service';
+export * from './services/subscription/subscription.service';
+export * from './services/subscription/init';
+export * from './services/analytics/analytics.service';
+export * from './services/config/ai-framework-config.service';

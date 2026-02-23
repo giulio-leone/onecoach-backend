@@ -12,3 +12,7 @@ export * from './promotion.service';
 export * from './payout-audit.service';
 export * from './payout-profile.service';
 export * from './cart.service';
+
+// Marketplace services
+export * from './affiliate.service';
+export * from './promotion.service';

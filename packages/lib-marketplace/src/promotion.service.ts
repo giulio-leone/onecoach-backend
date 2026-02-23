@@ -1,3 +1,10 @@
+import { prisma, getStripe, createId, creditService } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-shared';
+
+import { Prisma, PromotionType, DiscountType } from '@prisma/client';
+
+const log = logger.child('PromotionService');
+
 /**
  * Promotion Service
  *
@@ -5,15 +12,6 @@
  * Segue principi KISS, SOLID, DRY
  */
 
-import { prisma } from '@giulio-leone/lib-core';
-import { getStripe } from '@giulio-leone/lib-core/stripe';
-import { creditService } from '@giulio-leone/lib-core/credit.service';
-import { createId } from '@giulio-leone/lib-shared';
-import type { PromotionType, DiscountType } from '@prisma/client';
-import { Prisma } from '@prisma/client';
-import type Stripe from 'stripe';
-
-import { logger } from '@giulio-leone/lib-core';
 export interface CreatePromotionParams {
   code: string;
   type: PromotionType;
@@ -116,7 +114,15 @@ export class PromotionService {
       if (type === 'STRIPE_COUPON' && !stripeCouponId) {
         try {
           const stripe = getStripe();
-          const couponParams: Stripe.CouponCreateParams = {
+          const couponParams: {
+            name: string;
+            id: string;
+            percent_off?: number;
+            amount_off?: number;
+            currency?: string;
+            max_redemptions?: number;
+            redeem_by?: number;
+          } = {
             name: code.toUpperCase().trim(),
             id: `promo_${code
               .toUpperCase()
@@ -127,7 +133,7 @@ export class PromotionService {
           if (discountType === 'PERCENTAGE') {
             couponParams.percent_off = discountValue;
           } else if (discountValue !== undefined) {
-            couponParams.amount_off = Math.round(discountValue);
+            couponParams.amount_off = Math.round(discountValue); // centesimi
             couponParams.currency = 'eur';
           }
 
@@ -142,14 +148,13 @@ export class PromotionService {
           const coupon = await stripe.coupons.create(couponParams);
           finalStripeCouponId = coupon.id;
 
-          logger.warn('[Promotion] Stripe coupon created', {
+          log.warn('[Promotion] Stripe coupon created', {
             code,
             couponId: finalStripeCouponId,
           });
         } catch (error: unknown) {
-          logger.error('[Promotion] Error creating Stripe coupon', {
+          log.error('[Promotion] Error creating Stripe coupon', error, {
             code,
-            error: error instanceof Error ? error.message : 'Unknown',
           });
           throw new Error(
             `Errore creazione coupon Stripe: ${error instanceof Error ? error.message : 'Unknown'}`
@@ -336,7 +341,7 @@ export class PromotionService {
       });
     });
 
-    logger.warn('[Promotion] Bonus credits applied', {
+    log.warn('[Promotion] Bonus credits applied', {
       promotionId,
       userId,
       bonusCredits: promotion.bonusCredits,
@@ -364,7 +369,7 @@ export class PromotionService {
     });
 
     if (existing) {
-      logger.warn('[Promotion] Use already recorded (idempotency)', {
+      log.warn('[Promotion] Use already recorded (idempotency)', {
         promotionId,
         userId,
         existingId: existing.id,
@@ -379,12 +384,12 @@ export class PromotionService {
         userId,
         paymentId,
         stripeCheckoutSessionId,
-        metadata: (metadata ?? undefined) as Prisma.InputJsonValue | undefined,
+        metadata: metadata as Prisma.InputJsonValue,
         appliedAt: new Date(),
       },
     });
 
-    logger.warn('[Promotion] Use recorded', {
+    log.warn('[Promotion] Use recorded', {
       promotionId,
       userId,
       paymentId,

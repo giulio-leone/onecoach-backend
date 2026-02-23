@@ -56,11 +56,13 @@ export async function seedAffiliate(prisma: PrismaClient, adminUserId: string) {
 
   // Referral code admin (best effort)
   try {
-    const { AffiliateService } = (await import(
-      '@onecoach/lib-marketplace/affiliate.service'
-    )) as any;
-    if (AffiliateService?.ensureUserReferralCode) {
-      await AffiliateService.ensureUserReferralCode(adminUserId, program.id);
+    const module = (await import('@onecoach/lib-marketplace/affiliate.service')) as {
+      AffiliateService?: {
+        ensureUserReferralCode?: (userId: string, programId: string) => Promise<void>;
+      };
+    };
+    if (module.AffiliateService?.ensureUserReferralCode) {
+      await module.AffiliateService.ensureUserReferralCode(adminUserId, program.id);
     }
   } catch (_error: unknown) {}
 

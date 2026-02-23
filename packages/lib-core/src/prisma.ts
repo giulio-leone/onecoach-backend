@@ -176,7 +176,7 @@ export function getPrisma(): PrismaClient {
 /**
  * Prisma client getter - LAZY initialization.
  * Uses a getter function to defer client creation until first access.
- * 
+ *
  * @example
  * import { prisma } from '@onecoach/lib-core';
  * const users = await prisma.users.findMany(); // Client created here
@@ -210,4 +210,3 @@ export async function disconnectPrisma() {
 // Re-export Prisma types so consumers don't need @prisma/client dependency
 export { Prisma } from '@prisma/client';
 export type { PrismaClient } from '@prisma/client';
-

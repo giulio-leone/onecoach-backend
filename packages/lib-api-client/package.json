@@ -62,6 +62,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
+    "@giulio-leone/lib-api": "workspace:*",
     "@tanstack/react-query": "^5.90.20"
   },
   "peerDependencies": {

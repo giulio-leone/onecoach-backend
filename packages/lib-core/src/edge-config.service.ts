@@ -177,7 +177,11 @@ export async function setEdgeConfigValues(
     await patchEdgeConfigItems(
       configId,
       authToken,
-      items.map((item: { key: string; value: unknown }) => ({ operation: 'update', key: item.key, value: item.value }))
+      items.map((item: { key: string; value: unknown }) => ({
+        operation: 'update',
+        key: item.key,
+        value: item.value,
+      }))
     );
     return { success: true };
   } catch (error: unknown) {
