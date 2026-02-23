@@ -21,9 +21,7 @@
     "type-check": "tsc --noEmit",
     "build": "tsup"
   },
-  "dependencies": {
-    "zod": "4.3.6"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@giulio-leone/contracts": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",

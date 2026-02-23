@@ -42,12 +42,9 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@giulio-leone/lib-ai": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/lib-import-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/one-workout": "workspace:*",
-    "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/contracts": "workspace:*"
   },
   "peerDependencies": {

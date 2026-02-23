@@ -58,9 +58,7 @@
     "@giulio-leone/contracts": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
-    "@giulio-leone/schemas": "workspace:*",
-    "stripe": "^17.0.0",
-    "zod": "^3.23.8"
+    "stripe": "^17.0.0"
   },
   "peerDependencies": {
     "@giulio-leone/types": "workspace:*",
