@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-api-client",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "API client (core, hooks, queries, react-query) per web e native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
