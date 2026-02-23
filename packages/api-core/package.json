@@ -1,7 +1,7 @@
 {
   "name": "@giulio-leone/api-core",
-  "version": "0.3.0",
-  "description": "Unified API routes package \u2014 core, admin, analytics, chat, coach, exercise, food, nutrition, oneagenda, workout",
+  "version": "0.4.0",
+  "description": "Unified API routes package — core, admin, analytics, chat, coach, exercise, food, nutrition, oneagenda, workout",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
