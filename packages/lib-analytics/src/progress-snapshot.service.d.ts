@@ -102,7 +102,7 @@ export declare function generateSnapshotsForAllUsers(date: Date): Promise<{
     total: number;
     successful: number;
     failed: number;
-    errors: any[];
+    errors: unknown[];
 }>;
 /**
  * Generate missing snapshots for a user within a date range.

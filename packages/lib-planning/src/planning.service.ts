@@ -585,7 +585,7 @@ export class PlanningServiceV2 {
       orderBy: { createdAt: 'desc' },
     });
 
-    return dbPlans.map((p: any) => this.mapDbPlanToInterface(p));
+    return dbPlans.map((p: DbPlan) => this.mapDbPlanToInterface(p));
   }
 
   // ============================================================================

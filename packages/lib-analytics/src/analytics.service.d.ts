@@ -21,9 +21,9 @@ export declare function getStrengthProgress(userId: string, exerciseId: string, 
     endWeight: number;
     percentChange: number;
     records: {
-        date: any;
+        date: Date;
         weight: number;
-        reps: any;
+        reps: number;
         volume: number;
     }[];
 } | null>;
