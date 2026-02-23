@@ -1,0 +1,441 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "baseUrl": "..",
+    "paths": {
+      "@giulio-leone/constants": [
+        "../onecoach-constants/src/index.ts"
+      ],
+      "@giulio-leone/constants/*": [
+        "../onecoach-constants/src/*"
+      ],
+      "@giulio-leone/schemas": [
+        "../onecoach-schemas/src/index.ts"
+      ],
+      "@giulio-leone/schemas/*": [
+        "../onecoach-schemas/src/*"
+      ],
+      "@giulio-leone/contracts": [
+        "../onecoach-shared/packages/contracts/src/index.ts"
+      ],
+      "@giulio-leone/contracts/*": [
+        "../onecoach-shared/packages/contracts/src/*"
+      ],
+      "@giulio-leone/lib-core": [
+        "./packages/lib-core/src/index.ts"
+      ],
+      "@giulio-leone/lib-core/*": [
+        "./packages/lib-core/src/*"
+      ],
+      "@giulio-leone/lib-shared": [
+        "../onecoach-shared/packages/lib-shared/src/index.ts"
+      ],
+      "@giulio-leone/lib-shared/*": [
+        "../onecoach-shared/packages/lib-shared/src/*"
+      ],
+      "@giulio-leone/lib-shared/utils/*": [
+        "../onecoach-shared/packages/lib-shared/src/utils/*"
+      ],
+      "@giulio-leone/lib-shared/utils/logger": [
+        "../onecoach-shared/packages/lib-shared/src/utils/logger/index.ts"
+      ],
+      "@giulio-leone/lib-registry": [
+        "./packages/lib-registry/src/index.ts"
+      ],
+      "@giulio-leone/lib-registry/*": [
+        "./packages/lib-registry/src/*"
+      ],
+      "@giulio-leone/lib-nutrition": [
+        "../one-nutrition/src/index.ts"
+      ],
+      "@giulio-leone/lib-nutrition/*": [
+        "../one-nutrition/src/*"
+      ],
+      "@giulio-leone/one-nutrition": [
+        "../one-nutrition/src/index.ts"
+      ],
+      "@giulio-leone/one-nutrition/*": [
+        "../one-nutrition/src/*"
+      ],
+      "@giulio-leone/one-nutrition/plan-transform": [
+        "../one-nutrition/src/core/transformers/plan-transform.ts"
+      ],
+      "@giulio-leone/lib-nutrition/plan-sync": [
+        "../one-nutrition/src/core/helpers/plan-sync.ts"
+      ],
+      "@giulio-leone/lib-nutrition/template-helpers": [
+        "../one-nutrition/src/core/helpers/template-helpers.ts"
+      ],
+      "@giulio-leone/lib-workout": [
+        "../one-workout/src/index.ts"
+      ],
+      "@giulio-leone/lib-workout/*": [
+        "../one-workout/src/*"
+      ],
+      "@giulio-leone/one-workout": [
+        "../one-workout/src/index.ts"
+      ],
+      "@giulio-leone/one-workout/*": [
+        "../one-workout/src/*"
+      ],
+      "@giulio-leone/one-workout/program-transform": [
+        "../one-workout/src/core/transformers/program-transform.ts"
+      ],
+      "@giulio-leone/one-workout/program-server-transform": [
+        "../one-workout/src/core/transformers/program-server-transform.ts"
+      ],
+      "@giulio-leone/one-workout/normalizers/workout-normalizer": [
+        "../one-workout/src/core/normalizers/workout-normalizer.ts"
+      ],
+      "@giulio-leone/one-workout/weight-calculator": [
+        "../one-workout/src/core/calculators/weight-calculator.ts"
+      ],
+      "@giulio-leone/lib-workout/intensity-calculator": [
+        "../one-workout/src/core/calculators/intensity-calculator.ts"
+      ],
+      "@giulio-leone/lib-workout/weight-calculator": [
+        "../one-workout/src/core/workout-weight-calculator.service.ts"
+      ],
+      "@giulio-leone/lib-workout/program-transform": [
+        "./packages/lib-workout/src/core/transformers/program-transform.ts"
+      ],
+      "@giulio-leone/lib-workout/utils/progression-calculator": [
+        "./packages/lib-workout/src/core/calculators/progression-calculator.ts"
+      ],
+      "@giulio-leone/lib-workout/program-server-transform": [
+        "./packages/lib-workout/src/core/transformers/program-server-transform.ts"
+      ],
+      "@giulio-leone/lib-workout/normalizers/workout-normalizer": [
+        "./packages/lib-workout/src/core/normalizers/workout-normalizer.ts"
+      ],
+      "ai": [
+        "./node_modules/ai/dist/index.d.ts"
+      ],
+      "ai/*": [
+        "./node_modules/ai/dist/*"
+      ],
+      "@giulio-leone/lib-exercise": [
+        "./packages/lib-exercise/src/index.ts"
+      ],
+      "@giulio-leone/lib-exercise/*": [
+        "./packages/lib-exercise/src/*"
+      ],
+      "@giulio-leone/lib-food": [
+        "./packages/lib-food/src/index.ts"
+      ],
+      "@giulio-leone/lib-food/*": [
+        "./packages/lib-food/src/*"
+      ],
+      "@giulio-leone/lib-analytics": [
+        "./packages/lib-analytics/src/index.ts"
+      ],
+      "@giulio-leone/lib-analytics/*": [
+        "./packages/lib-analytics/src/*"
+      ],
+      "@giulio-leone/lib-api": [
+        "./packages/lib-api/src/index.ts"
+      ],
+      "@giulio-leone/lib-api/*": [
+        "./packages/lib-api/src/*"
+      ],
+      "@giulio-leone/lib-ai": [
+        "../lib-ai/src/index.ts"
+      ],
+      "@giulio-leone/lib-ai/*": [
+        "../lib-ai/src/*"
+      ],
+      "@giulio-leone/lib-import-core": [
+        "./packages/lib-import-core/src/index.ts"
+      ],
+      "@giulio-leone/lib-import-core/*": [
+        "./packages/lib-import-core/src/*"
+      ],
+      "@giulio-leone/lib-marketplace": [
+        "./packages/lib-marketplace/src/index.ts"
+      ],
+      "@giulio-leone/lib-marketplace/*": [
+        "./packages/lib-marketplace/src/*"
+      ],
+      "@giulio-leone/lib-metadata": [
+        "./packages/lib-metadata/src/index.ts"
+      ],
+      "@giulio-leone/lib-metadata/*": [
+        "./packages/lib-metadata/src/*"
+      ],
+      "@giulio-leone/lib-coach": [
+        "./packages/lib-coach/src/index.ts"
+      ],
+      "@giulio-leone/lib-coach/*": [
+        "./packages/lib-coach/src/*"
+      ],
+      "@giulio-leone/lib-visual-builder": [
+        "./packages/lib-visual-builder/src/index.ts"
+      ],
+      "@giulio-leone/lib-visual-builder/*": [
+        "./packages/lib-visual-builder/src/*"
+      ],
+      "@giulio-leone/lib-vercel-admin": [
+        "./packages/lib-vercel-admin/src/index.ts"
+      ],
+      "@giulio-leone/lib-vercel-admin/*": [
+        "./packages/lib-vercel-admin/src/*"
+      ],
+      "@giulio-leone/lib-api-client": [
+        "./packages/lib-api-client/src/index.ts"
+      ],
+      "@giulio-leone/lib-api-client/*": [
+        "./packages/lib-api-client/src/*"
+      ],
+      "@giulio-leone/lib-copilot": [
+        "./packages/lib-copilot/src/index.ts"
+      ],
+      "@giulio-leone/lib-copilot/*": [
+        "./packages/lib-copilot/src/*"
+      ],
+      "@giulio-leone/lib-stores": [
+        "./packages/lib-stores/src/index.ts"
+      ],
+      "@giulio-leone/lib-stores/*": [
+        "./packages/lib-stores/src/*"
+      ],
+      "@giulio-leone/lib-design-system": [
+        "../onecoach-ui/packages/lib-design-system/src/index.ts"
+      ],
+      "@giulio-leone/lib-design-system/*": [
+        "../onecoach-ui/packages/lib-design-system/src/*"
+      ],
+      "design-system": [
+        "../onecoach-ui/packages/design-system/src/index.ts"
+      ],
+      "design-system/*": [
+        "../onecoach-ui/packages/design-system/src/*"
+      ],
+      "hooks": [
+        "../onecoach-ui/packages/hooks/src/index.ts"
+      ],
+      "hooks/*": [
+        "../onecoach-ui/packages/hooks/src/*"
+      ],
+      "ui": [
+        "../onecoach-ui/packages/ui/src/index.ts"
+      ],
+      "ui/*": [
+        "../onecoach-ui/packages/ui/src/*"
+      ],
+      "@giulio-leone/api-exercise": [
+        "./packages/api-exercise/src/index.ts"
+      ],
+      "@giulio-leone/api-exercise/*": [
+        "./packages/api-exercise/src/*"
+      ],
+      "@giulio-leone/api-analytics": [
+        "./packages/api-analytics/src/index.ts"
+      ],
+      "@giulio-leone/api-analytics/*": [
+        "./packages/api-analytics/src/*"
+      ],
+      "@giulio-leone/api-core": [
+        "./packages/api-core/src/index.ts"
+      ],
+      "@giulio-leone/api-core/*": [
+        "./packages/api-core/src/*"
+      ],
+      "@giulio-leone/api-coach": [
+        "./packages/api-coach/src/index.ts"
+      ],
+      "@giulio-leone/api-coach/*": [
+        "./packages/api-coach/src/*"
+      ],
+      "@giulio-leone/api-chat": [
+        "./packages/api-chat/src/index.ts"
+      ],
+      "@giulio-leone/api-chat/*": [
+        "./packages/api-chat/src/*"
+      ],
+      "@giulio-leone/api-oneagenda": [
+        "./packages/api-oneagenda/src/index.ts"
+      ],
+      "@giulio-leone/api-oneagenda/*": [
+        "./packages/api-oneagenda/src/*"
+      ],
+      "@giulio-leone/api-admin": [
+        "./packages/api-admin/src/index.ts"
+      ],
+      "@giulio-leone/api-admin/*": [
+        "./packages/api-admin/src/*"
+      ],
+      "@giulio-leone/one-agenda": [
+        "../../one-agenda/src/index.ts"
+      ],
+      "@giulio-leone/one-agenda/*": [
+        "../../one-agenda/src/*"
+      ],
+      "@giulio-leone/oneagenda-core": [
+        "../../../packages/oneagenda-core/src/index.ts"
+      ],
+      "@giulio-leone/oneagenda-core/*": [
+        "../../../packages/oneagenda-core/src/*"
+      ],
+      "@giulio-leone/oneagenda-ui": [
+        "../../../packages/oneagenda-ui/src/index.ts"
+      ],
+      "@giulio-leone/oneagenda-ui/*": [
+        "../../../packages/oneagenda-ui/src/*"
+      ],
+      "@giulio-leone/one-agent": [
+        "../../one-agent/src/index.ts"
+      ],
+      "@giulio-leone/one-agent/*": [
+        "../../one-agent/src/*"
+      ],
+      "@giulio-leone/types": [
+        "../onecoach-types/src/index.ts"
+      ],
+      "@giulio-leone/types/*": [
+        "../onecoach-types/src/*"
+      ],
+      "@giulio-leone/features/analytics": [
+        "./packages/features/analytics/index.ts"
+      ],
+      "@giulio-leone/features/analytics/*": [
+        "./packages/features/analytics/*"
+      ],
+      "@giulio-leone/features/affiliates": [
+        "./packages/app/src/features/affiliates/index.ts"
+      ],
+      "@giulio-leone/features/affiliates/*": [
+        "./packages/app/src/features/affiliates/*"
+      ],
+      "@giulio-leone/features/marketplace": [
+        "./packages/app/src/features/marketplace/index.ts"
+      ],
+      "@giulio-leone/features/marketplace/*": [
+        "./packages/app/src/features/marketplace/*"
+      ],
+      "@giulio-leone/features/nutrition": [
+        "./packages/app/src/features/nutrition/index.ts"
+      ],
+      "@giulio-leone/features/nutrition/*": [
+        "./packages/app/src/features/nutrition/*"
+      ],
+      "@giulio-leone/features/nutrition/hooks": [
+        "./packages/features/nutrition/hooks/index.ts"
+      ],
+      "@giulio-leone/features/workout": [
+        "./packages/features/workout/index.ts"
+      ],
+      "@giulio-leone/features/workout/*": [
+        "./packages/features/workout/*"
+      ],
+      "@giulio-leone/features/workout/hooks": [
+        "./packages/features/workout/hooks/index.ts"
+      ],
+      "@giulio-leone/features/workouts": [
+        "./packages/app/src/features/workouts/index.ts"
+      ],
+      "@giulio-leone/features/workouts/*": [
+        "./packages/app/src/features/workouts/*"
+      ],
+      "@giulio-leone/features/calendar": [
+        "./packages/app/src/features/calendar/index.ts"
+      ],
+      "@giulio-leone/features/calendar/*": [
+        "./packages/app/src/features/calendar/*"
+      ],
+      "@giulio-leone/features/onboarding": [
+        "./packages/app/src/features/onboarding/index.ts"
+      ],
+      "@giulio-leone/features/onboarding/*": [
+        "./packages/app/src/features/onboarding/*"
+      ],
+      "@giulio-leone/features/chat": [
+        "./packages/app/src/features/chat/index.ts"
+      ],
+      "@giulio-leone/features/chat/*": [
+        "./packages/app/src/features/chat/*"
+      ],
+      "@giulio-leone/features/oneagenda": [
+        "./packages/app/src/features/oneagenda/index.ts"
+      ],
+      "@giulio-leone/features/oneagenda/*": [
+        "./packages/app/src/features/oneagenda/*"
+      ],
+      "@giulio-leone/features/profile": [
+        "./packages/app/src/features/profile/index.ts"
+      ],
+      "@giulio-leone/features/profile/*": [
+        "./packages/app/src/features/profile/*"
+      ],
+      "@giulio-leone/app/features/projects": [
+        "./packages/app/src/features/projects/index.ts"
+      ],
+      "@giulio-leone/app/features/projects/*": [
+        "./packages/app/src/features/projects/*"
+      ],
+      "@/*": [
+        "../../../apps/next/*"
+      ],
+      "app/*": [
+        "./packages/app/src/*"
+      ],
+      "@giulio-leone/types/nutrition": [
+        "../onecoach-types/src/nutrition.types.ts"
+      ],
+      "@giulio-leone/types/analytics": [
+        "../onecoach-types/src/analytics.types.ts"
+      ],
+      "@giulio-leone/types/ai": [
+        "../onecoach-types/src/ai.types.ts"
+      ],
+      "@giulio-leone/types/chat": [
+        "../onecoach-types/src/chat.types.ts"
+      ],
+      "@giulio-leone/types/core": [
+        "../onecoach-types/src/core.types.ts"
+      ],
+      "@giulio-leone/types/domain": [
+        "../onecoach-types/src/domain.types.ts"
+      ],
+      "@giulio-leone/types/database": [
+        "../onecoach-types/src/database.types.ts"
+      ],
+      "@giulio-leone/types/flight": [
+        "../onecoach-types/src/flight.types.ts"
+      ],
+      "@giulio-leone/types/ui": [
+        "../onecoach-types/src/ui.types.ts"
+      ],
+      "@giulio-leone/types/workout": [
+        "../onecoach-types/src/workout/index.ts"
+      ]
+    },
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noImplicitAny": false
+  }
+}

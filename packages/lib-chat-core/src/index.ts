@@ -83,5 +83,14 @@ export * from './conversation.service';
 
 // Chat agent & hooks
 export * from './agent';
-export * from './types/chat-agent';
+export {
+  type AISDKMessagePart,
+  type AISDKMessage,
+  type ChatRequestMessage,
+  type LegacyMessage,
+  type UseCoachChatOptions,
+  type CoachChatResult,
+  type ChatRequestBody,
+  type ChatResponseHeaders,
+} from './types/chat-agent';
 export * from './hooks/use-chat';

@@ -141,22 +141,22 @@ export abstract class BaseApiClient {
 
       if (!response.ok) {
         throw new ApiError(
-          (finalResponse.data as Record<string, unknown>)?.error ||
+          String((finalResponse.data as Record<string, unknown>)?.error ||
             (finalResponse.data as Record<string, unknown>)?.message ||
-            `API Error: ${response.statusText}`,
+            `API Error: ${response.statusText}`),
           response.status,
           finalResponse.data,
           config
         );
       }
 
-      return finalResponse.data;
+      return finalResponse.data as T;
     } catch (error: unknown) {
       // Apply error interceptors
       for (const interceptor of this.responseInterceptors) {
         if (interceptor.onError) {
           try {
-            return await interceptor.onError(error as ApiError);
+            return await interceptor.onError(error as ApiError) as T;
           } catch (e: unknown) {
             // If interceptor doesn't handle it, continue to next
           }

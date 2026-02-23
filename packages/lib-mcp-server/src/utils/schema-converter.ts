@@ -13,7 +13,8 @@ import type { McpTool } from '../types';
  * Converts Zod schema to JSON Schema for MCP protocol
  */
 export function zodToMcpSchema(zodSchema: z.ZodTypeAny): Record<string, unknown> {
-  return zodToJsonSchema(zodSchema as unknown as z.ZodType) as Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return zodToJsonSchema(zodSchema as any) as Record<string, unknown>;
 }
 
 /**

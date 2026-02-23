@@ -29,8 +29,8 @@ export const useNavigationStateStore = create<NavigationState>()(
           }));
         },
 
-        getState: (key) => {
-          return get().states[key];
+        getState: <T>(key: string): T | undefined => {
+          return get().states[key] as T | undefined;
         },
 
         clearState: (key) => {

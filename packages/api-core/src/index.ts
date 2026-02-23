@@ -66,7 +66,7 @@ export { POST as iapRestorePurchasesPOST } from './routes/iap/restore-purchases/
 export * from './food';
 
 // Nutrition routes (merged from @giulio-leone/api-nutrition)
-export * from './nutrition';
+export { GET as nutritionGET, POST as nutritionPOST } from './nutrition';
 
 // Workout routes (merged from @giulio-leone/api-workout)
-export * from './workout';
+export { GET as workoutGET, POST as workoutPOST } from './workout';

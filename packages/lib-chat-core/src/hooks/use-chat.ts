@@ -14,15 +14,17 @@
 
 import { useChat } from '@ai-sdk/react';
 import type {
-  AISDKMessage,
-  AISDKMessagePart,
   ChatStatus,
-  CoachChatResult,
-  LegacyMessage,
   MessagePart,
   UIMessage,
-  UseCoachChatOptions,
 } from '../types';
+import type {
+  AISDKMessage,
+  AISDKMessagePart,
+  CoachChatResult,
+  LegacyMessage,
+  UseCoachChatOptions,
+} from '../types/chat-agent';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { logger } from '@giulio-leone/lib-shared';

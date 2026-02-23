@@ -6,7 +6,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { logger as baseLogger } from '@giulio-leone/lib-shared';
-import { requireAuth } from '@giulio-leone/lib-core';
+import { requireAuth } from './auth';
 import { logError, mapErrorToApiResponse } from '@giulio-leone/lib-shared';
 import type { AuthenticatedUser } from '@giulio-leone/types/core';
 import { randomUUID } from 'crypto';

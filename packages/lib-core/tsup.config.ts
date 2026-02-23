@@ -45,7 +45,7 @@ export default defineConfig({
     'versioning/create-versioning-actions': 'src/versioning/create-versioning-actions.ts',
   },
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: { tsconfig: 'tsconfig.build.json' },
   clean: true,
   treeshake: true,
   sourcemap: true,

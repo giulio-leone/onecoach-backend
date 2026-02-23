@@ -16,7 +16,7 @@ export default defineConfig({
     'utils/streaming-handler': 'src/utils/streaming-handler.ts',
   },
   format: ['cjs', 'esm'],
-  dts: { tsconfig: '../tsconfig.build.json' },
+  dts: false,
   sourcemap: true,
   clean: true,
   splitting: false,

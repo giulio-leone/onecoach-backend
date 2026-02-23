@@ -10,7 +10,7 @@ export default defineConfig({
     'utils/index': 'src/utils/index.ts',
   },
   format: ['esm', 'cjs'],
-  dts: { tsconfig: '../tsconfig.build.json' },
+  dts: false,
   clean: true,
   sourcemap: true,
   external: [

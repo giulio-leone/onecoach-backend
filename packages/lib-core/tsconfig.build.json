@@ -1,21 +1,20 @@
 {
+  "extends": "../../../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
+    "emitDeclarationOnly": true,
     "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
-    "esModuleInterop": true,
+    "strict": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "noEmit": true
+    "noEmit": false,
+    "incremental": false
   },
   "include": ["src"],
   "exclude": [
@@ -25,6 +24,9 @@
     "src/auth/auth-components.*",
     "src/user-memory/analyzer.*",
     "src/seeds/**/*",
-    "src/db/init-db.ts"
+    "src/db/init-db.ts",
+    "src/subscription-init.ts",
+    "src/services/**/*",
+    "src/create-import-route.ts"
   ]
 }

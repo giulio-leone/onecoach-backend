@@ -152,7 +152,7 @@ class TaskService {
       where: { parentId: { in: taskIds } },
       orderBy: { order: 'asc' },
     });
-    const subTaskMap = subTasks.reduce<Record<string, unknown[]>>((acc, st) => {
+    const subTaskMap = subTasks.reduce<Record<string, typeof subTasks>>((acc, st) => {
       if (!st.parentId) return acc;
       const parentId = st.parentId;
       acc[parentId] = acc[parentId] || [];

@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 const importRequestSchema = z.object({
   items: z.preprocess(
     (value) => (Array.isArray(value) ? value : value ? [value] : []),
-    z.array(exerciseImportSchema as z.ZodType)
+    z.array(exerciseImportSchema as unknown as z.ZodType)
   ),
   autoApprove: z.boolean().optional(),
   mergeExisting: z.boolean().optional(),

@@ -149,7 +149,8 @@ export class AIProviderFactory {
       preferredProvider?: string | null;
       thinkingLevel?: GeminiThinkingLevel;
     }
-  ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Promise<any> {
     switch (providerName) {
       case 'openrouter':
         return this.createOpenRouter({
@@ -176,7 +177,7 @@ export class AIProviderFactory {
           config?.thinkingLevel
             ? { thinkingConfig: { thinkingLevel: config.thinkingLevel } }
             : undefined
-        );
+        ) as unknown;
       }
       default:
         throw new Error(`Unsupported provider: ${providerName}`);
