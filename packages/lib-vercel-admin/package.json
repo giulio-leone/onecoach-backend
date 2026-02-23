@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-vercel-admin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Servizi per gestione Vercel admin (credentials, env vars)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

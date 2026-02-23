@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-analytics",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Servizi per il dominio analytics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

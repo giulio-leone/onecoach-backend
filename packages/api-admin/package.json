@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/api-admin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "API routes per admin (users, feature-flags, policies, invitations, metadata, affiliates, promotions, config, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
