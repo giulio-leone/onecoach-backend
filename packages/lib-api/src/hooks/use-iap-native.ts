@@ -28,7 +28,7 @@ import {
   useIAPPurchase,
 } from '@giulio-leone/lib-stores/iap.store';
 import { useSubscriptionStatus, usePurchaseProduct, useRestorePurchases } from './use-iap';
-import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@giulio-leone/constants';
+import { ALL_PRODUCT_IDS, PRODUCT_TO_PLAN_MAP } from '@giulio-leone/lib-shared';
 import type { ProductId } from '@giulio-leone/lib-stores/iap.store';
 import { logger } from '@giulio-leone/lib-shared';
 

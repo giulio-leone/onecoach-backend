@@ -8,7 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import type { PromotionValidationResult } from '@giulio-leone/lib-marketplace';
+import type { PromotionValidationResult } from '@giulio-leone/lib-core';
 
 interface UsePromoCodeValidationOptions {
   code: string;

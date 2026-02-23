@@ -4,7 +4,7 @@
  * Manages onboarding progress and wizard state
  * Replaces OnboardingContext with a simpler solution
  */
-import type { OnboardingProgress } from '@giulio-leone/constants';
+import type { OnboardingProgress } from '@giulio-leone/lib-shared';
 export type { OnboardingProgress };
 /**
  * Onboarding step completion

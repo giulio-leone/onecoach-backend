@@ -1,8 +1,8 @@
-import { subscriptionService } from '@giulio-leone/lib-core';
-import { AffiliateService } from '@giulio-leone/lib-marketplace';
-import { PromotionService } from '@giulio-leone/lib-marketplace';
+import { subscriptionService } from './subscription.service';
+import { AffiliateService } from './marketplace/affiliate.service';
+import { PromotionService } from './marketplace/promotion.service';
 import { OpenRouterSubkeyService } from '@giulio-leone/lib-ai';
-import { marketplaceService } from '@giulio-leone/lib-marketplace';
+import { marketplaceService } from './marketplace/marketplace.service';
 
 /**
  * Initializes SubscriptionService with its external dependencies.

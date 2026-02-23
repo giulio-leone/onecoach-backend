@@ -69,7 +69,6 @@
   "peerDependencies": {
     "react": "^18.3.1",
     "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/lib-marketplace": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-stores": "workspace:*",
     "@giulio-leone/types": "workspace:*"

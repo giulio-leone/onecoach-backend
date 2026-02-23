@@ -1,4 +1,5 @@
-import { prisma, Prisma, creditService } from '@giulio-leone/lib-core';
+import { prisma, Prisma } from '../prisma';
+import { creditService } from '../credit.service';
 import {
   AffiliateRewardStatus,
   AffiliateRewardType,

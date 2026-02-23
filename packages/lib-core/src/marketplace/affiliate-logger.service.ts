@@ -4,7 +4,7 @@
  * Servizio per logging strutturato di eventi affiliate
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import { logger } from '@giulio-leone/lib-shared';
 
 interface AffiliateEvent {

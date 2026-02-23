@@ -83,7 +83,6 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@giulio-leone/constants": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-stores": "workspace:*",
     "@tanstack/react-query": "^5.90.20"

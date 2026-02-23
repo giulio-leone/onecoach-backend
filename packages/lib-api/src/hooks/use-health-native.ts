@@ -34,7 +34,7 @@ import {
   HEALTH_DATA_TYPES,
   DEFAULT_SYNC_DAYS,
   HEALTH_STORAGE_KEYS,
-} from '@giulio-leone/constants';
+} from '@giulio-leone/lib-shared';
 import { logger } from '@giulio-leone/lib-shared';
 import { getErrorMessage } from '@giulio-leone/lib-shared';
 

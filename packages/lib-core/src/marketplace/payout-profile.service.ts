@@ -1,4 +1,4 @@
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 
 export class PayoutProfileService {
   static async getProfile(userId: string) {

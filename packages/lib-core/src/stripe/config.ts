@@ -9,7 +9,7 @@ import {
   CREDIT_PACK_OPTIONS,
   getCreditPackPriceId,
   getCreditPackPricing,
-} from '@giulio-leone/constants';
+} from '@giulio-leone/lib-shared';
 
 /**
  * Piani abbonamento

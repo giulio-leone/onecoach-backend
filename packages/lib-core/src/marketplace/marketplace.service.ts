@@ -6,7 +6,7 @@
  */
 
 import { Prisma } from '@prisma/client';
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import type {
   MarketplacePlanType,
   PurchaseStatus,

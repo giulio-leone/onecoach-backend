@@ -1,4 +1,7 @@
-import { prisma, getStripe, createId, creditService } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
+import { getStripe } from '../stripe';
+import { createId } from '@paralleldrive/cuid2';
+import { creditService } from '../credit.service';
 import { logger } from '@giulio-leone/lib-shared';
 
 import { Prisma, PromotionType, DiscountType } from '@prisma/client';

@@ -56,3 +56,6 @@ export * from './metadata';
 export * from './vercel-admin';
 // Merged from lib-analytics
 export * from './analytics';
+
+// Marketplace services (merged from lib-marketplace)
+export * from './marketplace';

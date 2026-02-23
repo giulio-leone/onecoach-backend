@@ -8,7 +8,7 @@
 import Stripe from 'stripe';
 import { createId } from '@paralleldrive/cuid2';
 import { SubscriptionPlan, SubscriptionStatus } from '@prisma/client';
-import { getSubscriptionPriceId, getCreditsFromPriceId } from '@giulio-leone/constants';
+import { getSubscriptionPriceId, getCreditsFromPriceId } from '@giulio-leone/lib-shared';
 import type { ISubscriptionService } from '@giulio-leone/lib-shared';
 import { logger } from './logger.service';
 import { creditService } from './credit.service';

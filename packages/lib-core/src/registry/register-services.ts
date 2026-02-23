@@ -23,7 +23,7 @@ import {
   onboardingService,
 } from '..';
 import { chatService } from '@giulio-leone/lib-ai';
-import { marketplaceService } from '@giulio-leone/lib-marketplace';
+import { marketplaceService } from '../marketplace/marketplace.service';
 import { coachService } from '../coach/coach.service';
 import type { IExerciseService, IFoodService, IAnalyticsService } from '@giulio-leone/lib-shared';
 import {

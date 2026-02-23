@@ -9,7 +9,7 @@
 
 import { BaseImportService } from '@giulio-leone/lib-shared/import-core';
 import type { ImportOptions, BaseImportResult } from '@giulio-leone/lib-shared/import-core';
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../../prisma';
 import type { ImportedBodyMeasurements, ImportedMeasurement } from '../schemas/imported-body-measurements.schema';
 
 export interface BodyMeasurementsImportResult extends BaseImportResult {
