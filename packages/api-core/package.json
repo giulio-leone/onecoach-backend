@@ -1,7 +1,7 @@
 {
   "name": "@giulio-leone/api-core",
   "version": "0.3.0",
-  "description": "API routes per il dominio core (auth, profile, onboarding, payments, subscriptions, credits, invitations, policies, health, iap)",
+  "description": "Unified API routes package \u2014 core, admin, analytics, chat, coach, exercise, food, nutrition, oneagenda, workout",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -21,6 +21,30 @@
     "./workout": {
       "types": "./src/workout/index.ts",
       "default": "./src/workout/index.ts"
+    },
+    "./admin": {
+      "types": "./src/admin/index.ts",
+      "default": "./src/admin/index.ts"
+    },
+    "./analytics": {
+      "types": "./src/analytics/index.ts",
+      "default": "./src/analytics/index.ts"
+    },
+    "./chat": {
+      "types": "./src/chat/index.ts",
+      "default": "./src/chat/index.ts"
+    },
+    "./coach": {
+      "types": "./src/coach/index.ts",
+      "default": "./src/coach/index.ts"
+    },
+    "./exercise": {
+      "types": "./src/exercise/index.ts",
+      "default": "./src/exercise/index.ts"
+    },
+    "./oneagenda": {
+      "types": "./src/oneagenda/index.ts",
+      "default": "./src/oneagenda/index.ts"
     }
   },
   "files": [
@@ -48,7 +72,17 @@
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "next": ">=16.0.0",
-    "next-auth": "5.0.0-beta.30"
+    "next-auth": "5.0.0-beta.30",
+    "@giulio-leone/lib-ai": "workspace:*",
+    "@giulio-leone/lib-analytics": "workspace:*",
+    "@giulio-leone/lib-chat-core": "workspace:*",
+    "@giulio-leone/lib-coach": "workspace:*",
+    "@giulio-leone/lib-exercise": "workspace:*",
+    "@giulio-leone/lib-metadata": "workspace:*",
+    "@giulio-leone/lib-vercel-admin": "workspace:*",
+    "@giulio-leone/oneagenda-core": "workspace:*",
+    "@giulio-leone/oneagenda-ui": "workspace:*",
+    "@prisma/client": ">=5.0.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",

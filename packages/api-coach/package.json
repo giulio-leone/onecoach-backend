@@ -35,5 +35,6 @@
     "@prisma/client": "^5.0.0",
     "next": "^16.0.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "private": true
 }

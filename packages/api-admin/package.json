@@ -40,5 +40,6 @@
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "private": true
 }
