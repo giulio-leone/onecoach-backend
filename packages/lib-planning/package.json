@@ -1,34 +1,7 @@
 {
   "name": "@giulio-leone/lib-planning",
   "version": "0.1.0",
-  "description": "Servizi per il dominio planning",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "type-check": "tsc --noEmit",
-    "build": "tsup"
-  },
-  "dependencies": {
-    "@prisma/client": "^7.2.0"
-  },
-  "peerDependencies": {
-    "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/contracts": "workspace:*",
-    "@giulio-leone/schemas": "workspace:*",
-    "@giulio-leone/types": "workspace:*"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "sideEffects": false
+  "deprecated": "Merged into @giulio-leone/one-agenda",
+  "description": "DEPRECATED - Use @giulio-leone/one-agenda instead",
+  "private": true
 }

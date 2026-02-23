@@ -7,7 +7,7 @@
  * @module lib-mcp-server/tools/workout/workout.tool
  */
 
-import { createAgenticTool } from '@giulio-leone/lib-copilot-framework';
+import { createAgenticTool } from '@giulio-leone/lib-copilot/framework';
 import { prisma } from '@giulio-leone/lib-core';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import { normalizeWorkoutProgram } from './program-normalizer';

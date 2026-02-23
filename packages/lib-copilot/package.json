@@ -9,6 +9,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
+    },
+    "./framework": {
+      "types": "./src/framework/index.ts",
+      "default": "./src/framework/index.ts"
     }
   },
   "files": [
@@ -19,6 +23,7 @@
     "build": "tsup"
   },
   "dependencies": {
+    "ai": "6.0.77",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.562.0"
   },
@@ -29,9 +34,12 @@
     "@giulio-leone/lib-design-system": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-stores": "workspace:*",
+    "@giulio-leone/one-nutrition": "workspace:*",
+    "@giulio-leone/one-workout": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
-    "@prisma/client": "*"
+    "@prisma/client": "*",
+    "zod": "^4.0.0"
   },
   "sideEffects": false,
   "publishConfig": {
