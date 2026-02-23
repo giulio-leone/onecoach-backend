@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/api-oneagenda",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "API routes per oneagenda (goals, tasks, schedule, insights, calendar)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

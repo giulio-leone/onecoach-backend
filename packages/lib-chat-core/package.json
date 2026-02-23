@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-chat-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Core condiviso per Chat e Copilot - SSOT, AI SDK v6, Supabase Realtime",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

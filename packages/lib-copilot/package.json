@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-copilot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Copilot context builders per AI agents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

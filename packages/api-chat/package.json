@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/api-chat",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "API routes per chat, conversations, copilot e agents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
