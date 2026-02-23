@@ -5,7 +5,7 @@
  * Implements SOLID principles (SRP)
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 
 export type Period = '7d' | '30d' | '90d' | '1y';
 

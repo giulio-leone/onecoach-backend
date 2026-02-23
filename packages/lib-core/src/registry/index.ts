@@ -19,7 +19,7 @@ import type {
   IChatService,
   IMarketplaceService,
   ICoachService,
-} from '@giulio-leone/contracts';
+} from '@giulio-leone/lib-shared';
 
 /**
  * Service registry type

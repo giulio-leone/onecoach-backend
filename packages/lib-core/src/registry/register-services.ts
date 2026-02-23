@@ -14,7 +14,7 @@ import { nutritionService } from '@giulio-leone/one-nutrition';
 import { workoutService } from '@giulio-leone/one-workout';
 import { exerciseService } from '@giulio-leone/lib-exercise';
 import { foodService } from '@giulio-leone/lib-food';
-import { analyticsService } from '@giulio-leone/lib-analytics';
+import { analyticsService } from '../analytics/analytics.service';
 import {
   creditService,
   subscriptionService,
@@ -25,11 +25,11 @@ import {
 import { chatService } from '@giulio-leone/lib-ai';
 import { marketplaceService } from '@giulio-leone/lib-marketplace';
 import { coachService } from '../coach/coach.service';
-import type { IExerciseService, IFoodService, IAnalyticsService } from '@giulio-leone/contracts';
+import type { IExerciseService, IFoodService, IAnalyticsService } from '@giulio-leone/lib-shared';
 import {
   getBodyMeasurementHistory,
   createBodyMeasurement as createBodyMeasurementFn,
-} from '@giulio-leone/lib-analytics';
+} from '../analytics/body-measurements.service';
 
 /**
  * Wrapper per ExerciseService che implementa IExerciseService

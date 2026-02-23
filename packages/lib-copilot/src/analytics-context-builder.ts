@@ -6,7 +6,7 @@
 
 import { prisma } from '@giulio-leone/lib-core';
 import type { CopilotContext } from './types';
-import { getLatestBodyMeasurement } from '@giulio-leone/lib-analytics';
+import { getLatestBodyMeasurement } from '@giulio-leone/lib-core';
 import { getLatestProgressSnapshot } from '@giulio-leone/lib-analytics/progress-snapshot.service';
 
 /**

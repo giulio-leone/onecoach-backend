@@ -6,12 +6,12 @@
  * Follows SOLID principles with single responsibility.
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import { getExerciseSets } from '@giulio-leone/one-workout';
 import type { Exercise } from '@giulio-leone/types/core';
 import { Prisma } from '@prisma/client';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '../logger.service';
 // ============================================
 // SNAPSHOT GENERATION
 // ============================================

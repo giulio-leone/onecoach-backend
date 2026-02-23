@@ -40,12 +40,6 @@
       "@giulio-leone/schemas/*": [
         "../onecoach-schemas/src/*"
       ],
-      "@giulio-leone/contracts": [
-        "../onecoach-shared/packages/contracts/src/index.ts"
-      ],
-      "@giulio-leone/contracts/*": [
-        "../onecoach-shared/packages/contracts/src/*"
-      ],
       "@giulio-leone/lib-core": [
         "./packages/lib-core/src/index.ts"
       ],
@@ -144,12 +138,6 @@
       ],
       "@giulio-leone/lib-food/*": [
         "./packages/lib-food/src/*"
-      ],
-      "@giulio-leone/lib-analytics": [
-        "./packages/lib-analytics/src/index.ts"
-      ],
-      "@giulio-leone/lib-analytics/*": [
-        "./packages/lib-analytics/src/*"
       ],
       "@giulio-leone/lib-api": [
         "./packages/lib-api/src/index.ts"

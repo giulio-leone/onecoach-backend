@@ -7,7 +7,7 @@
 
 import 'server-only';
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import { getExerciseSets } from '@giulio-leone/one-workout';
 import type {
   UserAnalyticsReport,

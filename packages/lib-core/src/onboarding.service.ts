@@ -7,7 +7,7 @@
 
 import { prisma } from './prisma';
 import { createId } from '@giulio-leone/lib-shared/id-generator';
-import type { IOnboardingService } from '@giulio-leone/contracts';
+import type { IOnboardingService } from '@giulio-leone/lib-shared';
 import type { OnboardingProgress, StepCompletionInput } from '@giulio-leone/types';
 import type { Prisma } from '@prisma/client';
 

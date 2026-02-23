@@ -7,7 +7,7 @@
 
 import 'server-only';
 
-import { prisma } from '@giulio-leone/lib-core';
+import { prisma } from '../prisma';
 import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 import { Prisma } from '@prisma/client';
 

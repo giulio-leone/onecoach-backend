@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "@giulio-leone/constants": "workspace:*",
-    "@giulio-leone/contracts": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "stripe": "^17.0.0"

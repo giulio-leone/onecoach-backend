@@ -434,7 +434,6 @@
     "@ai-sdk/xai": "3.0.3",
     "@auth/prisma-adapter": "^2.11.1",
     "@giulio-leone/constants": "workspace:*",
-    "@giulio-leone/contracts": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "@openrouter/ai-sdk-provider": "6.0.0-alpha.1",

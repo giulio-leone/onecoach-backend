@@ -8,7 +8,7 @@
 import { prisma } from './prisma';
 import type { Prisma } from '@prisma/client';
 import type { TransactionType } from '@prisma/client';
-import type { ICreditService } from '@giulio-leone/contracts';
+import type { ICreditService } from '@giulio-leone/lib-shared';
 
 /**
  * Implementazione Credit Service

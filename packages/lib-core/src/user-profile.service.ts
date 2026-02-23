@@ -7,7 +7,7 @@
 
 import { prisma } from './prisma';
 import type { user_profiles } from '@prisma/client';
-import type { IUserProfileService, UserProfileInput } from '@giulio-leone/contracts';
+import type { IUserProfileService, UserProfileInput } from '@giulio-leone/lib-shared';
 import { createId } from '@giulio-leone/lib-shared/id-generator';
 
 import { logger } from '@giulio-leone/lib-shared';

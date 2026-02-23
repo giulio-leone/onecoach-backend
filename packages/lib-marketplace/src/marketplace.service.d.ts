@@ -5,7 +5,7 @@
  * Implements SOLID principles (SRP, DIP)
  */
 import type { MarketplacePlanType, PurchaseStatus, marketplace_plans, plan_purchases, plan_ratings } from '@prisma/client';
-import type { MarketplacePlanDetails as ContractMarketplacePlanDetails } from '@giulio-leone/contracts';
+import type { MarketplacePlanDetails as ContractMarketplacePlanDetails } from '@giulio-leone/lib-shared';
 /**
  * Interface for Marketplace Service
  */

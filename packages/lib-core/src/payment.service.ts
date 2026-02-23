@@ -12,7 +12,7 @@ import type {
   IPaymentService,
   CreatePaymentIntentParams,
   ConfirmPaymentIntentParams,
-} from '@giulio-leone/contracts';
+} from '@giulio-leone/lib-shared';
 
 /**
  * Payment Service
