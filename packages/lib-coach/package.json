@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-coach",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Servizi per il dominio coach",
   "type": "module",
   "main": "./dist/index.js",

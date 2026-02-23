@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-config",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "deprecated": "Merged into @giulio-leone/lib-core/config",
   "description": "DEPRECATED - Use @giulio-leone/lib-core/config/env instead",
   "private": true
