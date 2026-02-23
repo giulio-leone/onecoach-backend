@@ -1,7 +1,0 @@
-{
-  "name": "@giulio-leone/lib-planning",
-  "version": "0.6.0",
-  "deprecated": "Merged into @giulio-leone/one-agenda",
-  "description": "DEPRECATED - Use @giulio-leone/one-agenda instead",
-  "private": true
-}

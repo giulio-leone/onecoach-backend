@@ -64,12 +64,6 @@
       "@giulio-leone/lib-shared/utils/logger": [
         "../onecoach-shared/packages/lib-shared/src/utils/logger/index.ts"
       ],
-      "@giulio-leone/lib-registry": [
-        "./packages/lib-registry/src/index.ts"
-      ],
-      "@giulio-leone/lib-registry/*": [
-        "./packages/lib-registry/src/*"
-      ],
       "@giulio-leone/lib-nutrition": [
         "../one-nutrition/src/index.ts"
       ],
