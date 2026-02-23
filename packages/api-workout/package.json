@@ -1,7 +1,0 @@
-{
-  "name": "@giulio-leone/api-workout",
-  "version": "0.5.0",
-  "deprecated": "Merged into @giulio-leone/api-core/api-workout",
-  "description": "DEPRECATED - Use @giulio-leone/api-core instead",
-  "private": true
-}

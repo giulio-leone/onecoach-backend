@@ -247,47 +247,11 @@
       "ui/*": [
         "../onecoach-ui/packages/ui/src/*"
       ],
-      "@giulio-leone/api-exercise": [
-        "./packages/api-exercise/src/index.ts"
-      ],
-      "@giulio-leone/api-exercise/*": [
-        "./packages/api-exercise/src/*"
-      ],
-      "@giulio-leone/api-analytics": [
-        "./packages/api-analytics/src/index.ts"
-      ],
-      "@giulio-leone/api-analytics/*": [
-        "./packages/api-analytics/src/*"
-      ],
       "@giulio-leone/api-core": [
         "./packages/api-core/src/index.ts"
       ],
       "@giulio-leone/api-core/*": [
         "./packages/api-core/src/*"
-      ],
-      "@giulio-leone/api-coach": [
-        "./packages/api-coach/src/index.ts"
-      ],
-      "@giulio-leone/api-coach/*": [
-        "./packages/api-coach/src/*"
-      ],
-      "@giulio-leone/api-chat": [
-        "./packages/api-chat/src/index.ts"
-      ],
-      "@giulio-leone/api-chat/*": [
-        "./packages/api-chat/src/*"
-      ],
-      "@giulio-leone/api-oneagenda": [
-        "./packages/api-oneagenda/src/index.ts"
-      ],
-      "@giulio-leone/api-oneagenda/*": [
-        "./packages/api-oneagenda/src/*"
-      ],
-      "@giulio-leone/api-admin": [
-        "./packages/api-admin/src/index.ts"
-      ],
-      "@giulio-leone/api-admin/*": [
-        "./packages/api-admin/src/*"
       ],
       "@giulio-leone/one-agenda": [
         "../../one-agenda/src/index.ts"

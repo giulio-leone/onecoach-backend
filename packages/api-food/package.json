@@ -1,7 +1,0 @@
-{
-  "name": "@giulio-leone/api-food",
-  "version": "0.5.0",
-  "deprecated": "Merged into @giulio-leone/api-core/api-food",
-  "description": "DEPRECATED - Use @giulio-leone/api-core instead",
-  "private": true
-}
