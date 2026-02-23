@@ -20,35 +20,35 @@ export const workoutApi = {
    * Get all workout programs
    */
   async getAll(): Promise<WorkoutProgramsResponse> {
-    return apiClient.get<WorkoutProgramsResponse>('/api/workout');
+    return apiClient.get<WorkoutProgramsResponse>('/api/workouts');
   },
 
   /**
    * Get workout program by ID
    */
   async getById(id: string): Promise<WorkoutProgramResponse> {
-    return apiClient.get<WorkoutProgramResponse>(`/api/workout/${id}`);
+    return apiClient.get<WorkoutProgramResponse>(`/api/workouts/${id}`);
   },
 
   /**
    * Create workout program
    */
   async create(data: unknown): Promise<WorkoutProgramResponse> {
-    return apiClient.post<WorkoutProgramResponse>('/api/workout', data);
+    return apiClient.post<WorkoutProgramResponse>('/api/workouts', data);
   },
 
   /**
    * Update workout program
    */
   async update(id: string, data: unknown): Promise<WorkoutProgramResponse> {
-    return apiClient.put<WorkoutProgramResponse>(`/api/workout/${id}`, data);
+    return apiClient.put<WorkoutProgramResponse>(`/api/workouts/${id}`, data);
   },
 
   /**
    * Delete workout program
    */
   async delete(id: string): Promise<void> {
-    return apiClient.delete(`/api/workout/${id}`);
+    return apiClient.delete(`/api/workouts/${id}`);
   },
 
   /**

@@ -365,7 +365,7 @@ export function useUnifiedChat(options: UseUnifiedChatOptions = {}): UseUnifiedC
       
       // Fetch and update workout if active
       if (ctx.workout?.programId) {
-        fetch(`/api/workout/${ctx.workout.programId}`)
+        fetch(`/api/workouts/${ctx.workout.programId}`)
           .then((res) => res.ok ? res.json() : null)
           .then((data) => {
             if (data?.program) {

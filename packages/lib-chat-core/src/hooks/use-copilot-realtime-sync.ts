@@ -83,7 +83,7 @@ export interface UseCopilotRealtimeSyncConfig<T> {
  * useCopilotRealtimeSync<WorkoutProgram>({
  *   table: 'workout_programs',
  *   recordId: programId,
- *   fetchFn: () => fetch(`/api/workout/${programId}`).then(r => r.json()).then(d => d.program),
+ *   fetchFn: () => fetch(`/api/workouts/${programId}`).then(r => r.json()).then(d => d.program),
  *   updateStore: (store, data) => store.updateWorkoutProgram(data),
  * });
  * ```
@@ -220,7 +220,7 @@ export function useWorkoutCopilotRealtimeSync(config: {
     
     // SLOW PATH fallback: Fetch full data if transform fails
     fetchFn: async () => {
-      const response = await fetch(`/api/workout/${config.programId}`);
+      const response = await fetch(`/api/workouts/${config.programId}`);
       if (!response.ok) throw new Error('Failed to fetch');
       const data = await response.json();
       return data.program;
