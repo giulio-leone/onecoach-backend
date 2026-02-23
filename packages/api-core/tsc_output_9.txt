@@ -1,6 +1,0 @@
-
-> @onecoach/api-core@0.0.0 type-check
-> tsc --noEmit
-
-tsconfig.json(40,5): error TS6310: Referenced project '/Users/giulioleone/Sviluppo/CoachOne/packages/lib-shared' may not disable emit.
-tsconfig.json(52,5): error TS6310: Referenced project '/Users/giulioleone/Sviluppo/CoachOne/packages/lib-exercise' may not disable emit.

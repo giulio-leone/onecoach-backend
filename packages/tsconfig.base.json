@@ -229,12 +229,6 @@
       "ui/*": [
         "../onecoach-ui/packages/ui/src/*"
       ],
-      "@giulio-leone/api-core": [
-        "./packages/api-core/src/index.ts"
-      ],
-      "@giulio-leone/api-core/*": [
-        "./packages/api-core/src/*"
-      ],
       "@giulio-leone/one-agenda": [
         "../../one-agenda/src/index.ts"
       ],

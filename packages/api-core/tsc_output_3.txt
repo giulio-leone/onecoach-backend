@@ -1,5 +1,0 @@
-
-> @onecoach/api-core@0.0.0 type-check
-> tsc --noEmit
-
-tsconfig.json(26,5): error TS6306: Referenced project '/Users/giulioleone/Sviluppo/CoachOne/packages/lib-core' must have setting "composite": true.
