@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-import-core",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Core utilities condivisi per i flussi di import AI multi-dominio",
   "publishConfig": {

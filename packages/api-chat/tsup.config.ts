@@ -6,7 +6,7 @@ export default defineConfig({
     'routes/index': 'src/routes/chat/route.ts',
   },
   format: ['esm', 'cjs'],
-  dts: true,
+  dts: false,
   splitting: false,
   sourcemap: false,
   clean: true,

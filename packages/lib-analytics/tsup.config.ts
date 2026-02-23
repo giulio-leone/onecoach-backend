@@ -9,7 +9,7 @@ export default defineConfig({
     'progress-snapshot.service': 'src/progress-snapshot.service.ts',
   },
   format: ['esm', 'cjs'],
-  dts: { tsconfig: '../tsconfig.build.json' },
+  dts: false,
   sourcemap: true,
   clean: true,
   outDir: 'dist',

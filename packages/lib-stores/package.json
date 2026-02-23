@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-stores",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Zustand stores per web e native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

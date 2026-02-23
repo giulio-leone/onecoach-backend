@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-registry",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Service registry per dependency injection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

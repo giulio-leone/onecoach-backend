@@ -6,7 +6,7 @@ export default defineConfig({
     schemas: 'src/schemas/index.ts',
   },
   format: ['cjs', 'esm'],
-  dts: { tsconfig: '../tsconfig.build.json' },
+  dts: false,
   sourcemap: true,
   clean: true,
   splitting: false,

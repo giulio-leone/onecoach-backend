@@ -12,7 +12,7 @@ export default defineConfig({
     native: 'src/native.ts',
   },
   format: ['cjs', 'esm'],
-  dts: { tsconfig: '../tsconfig.build.json' },
+  dts: false,
   splitting: false,
   sourcemap: true,
   clean: true,
