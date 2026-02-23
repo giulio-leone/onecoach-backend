@@ -51,7 +51,8 @@
     "next-auth": "5.0.0-beta.30"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "sideEffects": false
 }

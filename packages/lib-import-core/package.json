@@ -5,7 +5,7 @@
   "description": "Core utilities condivisi per i flussi di import AI multi-dominio",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
-    "access": "public"
+    "access": "restricted"
   },
   "files": [
     "dist"

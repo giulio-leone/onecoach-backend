@@ -19,7 +19,8 @@
     "build": "tsup"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "dependencies": {},
   "peerDependencies": {
