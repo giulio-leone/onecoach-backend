@@ -12,8 +12,8 @@
 import { registerService } from './index';
 import { nutritionService } from '@giulio-leone/one-nutrition';
 import { workoutService } from '@giulio-leone/one-workout';
-import { exerciseService } from '@giulio-leone/lib-exercise';
-import { foodService } from '@giulio-leone/lib-food';
+import { exerciseService } from '@giulio-leone/one-workout';
+import { foodService } from '@giulio-leone/one-nutrition';
 import { analyticsService } from '../analytics/analytics.service';
 import {
   creditService,

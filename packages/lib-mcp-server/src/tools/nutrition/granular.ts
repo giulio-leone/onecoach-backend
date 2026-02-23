@@ -10,7 +10,7 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { prisma, type Prisma } from '@giulio-leone/lib-core';
-import { fuzzyMatch, successResult } from '@giulio-leone/lib-copilot/framework';
+import { fuzzyMatch, successResult } from '@giulio-leone/one-agent';
 
 // =====================================================
 // Type Definitions (Mirrors day-meal.ts)

@@ -127,18 +127,6 @@
       "ai/*": [
         "./node_modules/ai/dist/*"
       ],
-      "@giulio-leone/lib-exercise": [
-        "./packages/lib-exercise/src/index.ts"
-      ],
-      "@giulio-leone/lib-exercise/*": [
-        "./packages/lib-exercise/src/*"
-      ],
-      "@giulio-leone/lib-food": [
-        "./packages/lib-food/src/index.ts"
-      ],
-      "@giulio-leone/lib-food/*": [
-        "./packages/lib-food/src/*"
-      ],
       "@giulio-leone/lib-api": [
         "./packages/lib-api/src/index.ts"
       ],
@@ -162,12 +150,6 @@
       ],
       "@giulio-leone/lib-api-client/*": [
         "./packages/lib-api-client/src/*"
-      ],
-      "@giulio-leone/lib-copilot": [
-        "./packages/lib-copilot/src/index.ts"
-      ],
-      "@giulio-leone/lib-copilot/*": [
-        "./packages/lib-copilot/src/*"
       ],
       "@giulio-leone/lib-stores": [
         "./packages/lib-stores/src/index.ts"

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { ExerciseAdminService } from '@giulio-leone/lib-exercise';
+import { ExerciseAdminService } from '@giulio-leone/one-workout';
 import { createExerciseSchema } from '@giulio-leone/schemas';
 
 // We need to add approvalStatus which is in ExerciseImportPayload but not createExerciseSchema

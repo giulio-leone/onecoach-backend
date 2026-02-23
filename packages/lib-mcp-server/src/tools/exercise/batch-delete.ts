@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { exerciseService } from '@giulio-leone/lib-exercise';
+import { exerciseService } from '@giulio-leone/one-workout';
 
 import { logger } from '@giulio-leone/lib-core';
 const batchDeleteParameters = z.object({

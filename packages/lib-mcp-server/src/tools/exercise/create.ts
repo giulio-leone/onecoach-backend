@@ -13,7 +13,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { exerciseService } from '@giulio-leone/lib-exercise';
+import { exerciseService } from '@giulio-leone/one-workout';
 import { MuscleRole } from '@prisma/client';
 import {
   validateExerciseTypeByName,
