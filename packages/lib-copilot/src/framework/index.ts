@@ -1,11 +1,11 @@
 /**
- * @giulio-leone/lib-copilot-framework
+ * @giulio-leone/lib-copilot/framework
  *
  * Copilot Framework - Agentic tool factories and utilities for AI-driven operations.
  *
  * @example
  * ```typescript
- * import { createAgenticTool, createCrudTool, McpTool, McpContext } from '@giulio-leone/lib-copilot-framework';
+ * import { createAgenticTool, createCrudTool, McpTool, McpContext } from '@giulio-leone/lib-copilot/framework';
  *
  * const myTool = createAgenticTool({
  *   name: 'my_tool',
