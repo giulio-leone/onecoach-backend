@@ -18,7 +18,7 @@ export * from './utils/dialog-global';
 export * from './sidebar.store';
 export * from './workout-builder.store';
 
-// Theme exports from @giulio-leone/lib-theme (single source of truth)
+// Theme exports from @giulio-leone/lib-shared/theme (single source of truth)
 export {
   useTheme,
   useSystemThemeSync,
@@ -29,14 +29,14 @@ export {
   cn,
   darkModeClasses,
   THEME_STORAGE_KEY,
-} from '@giulio-leone/lib-theme';
+} from '@giulio-leone/lib-shared/theme';
 
 export type {
   ThemePreference,
   ResolvedTheme,
   ThemeColors,
   ThemeProviderProps,
-} from '@giulio-leone/lib-theme';
+} from '@giulio-leone/lib-shared/theme';
 
 export {
   useHealthStore,
@@ -89,7 +89,7 @@ export type { AuthState, AuthActions, AuthStore, User } from './auth.store';
 export { useAdminStore } from './admin.store';
 export type { ExerciseFilters, FoodFilters, AdminState } from './admin.store';
 
-// AI Settings Store (types are generic - canonical types in @giulio-leone/ui-admin)
+// AI Settings Store (types are generic - canonical types in @giulio-leone/ui/admin)
 export {
   useAISettingsStore,
   selectActiveSection,

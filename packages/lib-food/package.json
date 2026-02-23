@@ -35,7 +35,6 @@
     "@giulio-leone/constants": "workspace:*",
     "@giulio-leone/lib-api": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/lib-import-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*"

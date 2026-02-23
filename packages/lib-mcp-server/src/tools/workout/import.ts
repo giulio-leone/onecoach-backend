@@ -17,7 +17,7 @@ import {
   SUPPORTED_MIME_TYPES,
   WorkoutVisionService as VisionService,
 } from '@giulio-leone/one-workout';
-import type { ImportProgress } from '@giulio-leone/lib-import-core';
+import type { ImportProgress } from '@giulio-leone/lib-shared/import-core';
 import { type ImportedWorkoutProgram } from '@giulio-leone/schemas';
 import { randomUUID } from 'crypto';
 

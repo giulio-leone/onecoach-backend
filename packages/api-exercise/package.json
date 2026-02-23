@@ -26,7 +26,6 @@
     "@giulio-leone/lib-api": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-exercise": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
     "@giulio-leone/one-agent": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/lib-metadata": "workspace:*",

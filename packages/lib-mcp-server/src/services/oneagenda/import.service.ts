@@ -5,8 +5,8 @@ import type {
   AIParseContext,
   ImportOptions,
   BaseImportResult,
-} from '@giulio-leone/lib-import-core';
-import { BaseImportService, parseWithVisionAI } from '@giulio-leone/lib-import-core';
+} from '@giulio-leone/lib-shared/import-core';
+import { BaseImportService, parseWithVisionAI } from '@giulio-leone/lib-shared/import-core';
 import type {
   ImportedOneAgenda,
   ImportedProject,

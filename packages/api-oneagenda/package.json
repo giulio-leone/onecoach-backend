@@ -26,7 +26,6 @@
   "peerDependencies": {
     "@giulio-leone/contracts": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
     "@giulio-leone/oneagenda-core": "workspace:*",
     "@giulio-leone/oneagenda-ui": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",

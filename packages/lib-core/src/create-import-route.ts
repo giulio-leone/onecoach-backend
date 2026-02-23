@@ -19,7 +19,7 @@ import {
   type ImportProgress,
   type BaseImportResult,
   type ImportContext,
-} from '@giulio-leone/lib-import-core';
+} from '@giulio-leone/lib-shared/import-core';
 
 // ==================== TYPES ====================
 

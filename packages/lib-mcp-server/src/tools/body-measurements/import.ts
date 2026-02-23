@@ -11,7 +11,7 @@ import type { McpTool } from '../../types';
 import {
   BodyMeasurementsImportService,
   BodyMeasurementsVisionService,
-} from '@giulio-leone/lib-body-measurements';
+} from '@giulio-leone/lib-core/body-measurements';
 import {
   ImportFileSchema,
   ImportOptionsSchema,
@@ -20,8 +20,8 @@ import {
   type ImportProgress,
   type AIParseContext,
   type ImportFile,
-} from '@giulio-leone/lib-import-core';
-import type { ImportedBodyMeasurements } from '@giulio-leone/lib-body-measurements';
+} from '@giulio-leone/lib-shared/import-core';
+import type { ImportedBodyMeasurements } from '@giulio-leone/lib-core/body-measurements';
 import { randomUUID } from 'crypto';
 
 import { logger } from '@giulio-leone/lib-core';

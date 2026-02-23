@@ -14,7 +14,7 @@ export default defineConfig({
     '@giulio-leone/lib-food',
     '@giulio-leone/lib-marketplace',
     '@giulio-leone/lib-metadata',
-    '@giulio-leone/lib-registry',
+    '@giulio-leone/lib-core/registry',
     '@giulio-leone/lib-vercel-admin',
     '@giulio-leone/schemas',
     '@giulio-leone/types',

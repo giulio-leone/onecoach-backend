@@ -29,7 +29,6 @@
     "@giulio-leone/lib-food": "workspace:*",
     "@giulio-leone/lib-marketplace": "workspace:*",
     "@giulio-leone/lib-metadata": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
     "@giulio-leone/lib-vercel-admin": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",

@@ -3,7 +3,7 @@ import type {
   ImportFile,
   ImportOptions,
   ImportProgress,
-} from '@giulio-leone/lib-import-core';
+} from '@giulio-leone/lib-shared/import-core';
 
 export type NutritionImportResult = {
   success: boolean;

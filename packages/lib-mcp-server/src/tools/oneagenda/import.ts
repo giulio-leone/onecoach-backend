@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { IMPORT_LIMITS } from '@giulio-leone/lib-import-core';
+import { IMPORT_LIMITS } from '@giulio-leone/lib-shared/import-core';
 import { randomUUID } from 'crypto';
 import { OneAgendaImportService, createOneAgendaAIContext } from '../../services/oneagenda';
 

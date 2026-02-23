@@ -29,7 +29,6 @@
     "@giulio-leone/lib-coach": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-marketplace": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "@prisma/client": "^5.0.0",

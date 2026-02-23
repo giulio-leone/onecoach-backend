@@ -54,7 +54,6 @@
     "@giulio-leone/constants": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
-    "@giulio-leone/lib-theme": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "@prisma/client": "*"
   },

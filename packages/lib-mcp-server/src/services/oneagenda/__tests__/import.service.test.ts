@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { OneAgendaImportService } from '../import.service';
-import type { AIParseContext } from '@giulio-leone/lib-import-core';
+import type { AIParseContext } from '@giulio-leone/lib-shared/import-core';
 import type { ImportedOneAgenda } from '../imported-oneagenda.schema';
 
 vi.mock('@giulio-leone/lib-core', () => ({

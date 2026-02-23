@@ -4,7 +4,7 @@
  * API routes per il dominio workout
  */
 
-import { getService } from '@giulio-leone/lib-registry';
+import { getService } from '@giulio-leone/lib-core/registry';
 import type { NextRequest } from 'next/server';
 
 /**

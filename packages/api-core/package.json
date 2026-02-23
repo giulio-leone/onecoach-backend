@@ -64,7 +64,6 @@
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-food": "workspace:*",
     "@giulio-leone/lib-marketplace": "workspace:*",
-    "@giulio-leone/lib-registry": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/one-agent": "workspace:*",
     "@giulio-leone/one-nutrition": "workspace:*",

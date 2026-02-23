@@ -409,6 +409,18 @@
         "types": "./dist/versioning/index.d.cts",
         "default": "./dist/versioning/index.cjs"
       }
+    },
+    "./body-measurements": {
+      "types": "./src/body-measurements/index.ts",
+      "default": "./src/body-measurements/index.ts"
+    },
+    "./registry": {
+      "types": "./src/registry/index.ts",
+      "default": "./src/registry/index.ts"
+    },
+    "./registry/register-services": {
+      "types": "./src/registry/register-services.ts",
+      "default": "./src/registry/register-services.ts"
     }
   },
   "scripts": {

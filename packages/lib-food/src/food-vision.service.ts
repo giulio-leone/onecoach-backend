@@ -7,7 +7,7 @@
  * @module lib-food/food-vision
  */
 
-import { parseWithVisionAI } from '@giulio-leone/lib-import-core';
+import { parseWithVisionAI } from '@giulio-leone/lib-shared/import-core';
 import { z } from 'zod';
 import type { LabelExtractionResult, DishSegmentationResult } from '@giulio-leone/types';
 

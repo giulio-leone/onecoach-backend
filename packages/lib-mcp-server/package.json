@@ -30,14 +30,12 @@
     "ai": "6.0.77"
   },
   "peerDependencies": {
-    "@giulio-leone/lib-body-measurements": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-exercise": "workspace:*",
     "@giulio-leone/lib-food": "workspace:*",
     "@giulio-leone/one-nutrition": "workspace:*",
     "@giulio-leone/one-workout": "workspace:*",
-    "@giulio-leone/lib-import-core": "workspace:*",
     "@giulio-leone/constants": "workspace:*",
     "@giulio-leone/lib-metadata": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",

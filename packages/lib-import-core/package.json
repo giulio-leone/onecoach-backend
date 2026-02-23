@@ -42,5 +42,6 @@
     "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "private": true
 }
