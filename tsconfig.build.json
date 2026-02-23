@@ -163,12 +163,6 @@
       "@giulio-leone/lib-ai/*": [
         "../lib-ai/src/*"
       ],
-      "@giulio-leone/lib-import-core": [
-        "./packages/lib-import-core/src/index.ts"
-      ],
-      "@giulio-leone/lib-import-core/*": [
-        "./packages/lib-import-core/src/*"
-      ],
       "@giulio-leone/lib-marketplace": [
         "./packages/lib-marketplace/src/index.ts"
       ],
@@ -186,12 +180,6 @@
       ],
       "@giulio-leone/lib-coach/*": [
         "./packages/lib-coach/src/*"
-      ],
-      "@giulio-leone/lib-visual-builder": [
-        "./packages/lib-visual-builder/src/index.ts"
-      ],
-      "@giulio-leone/lib-visual-builder/*": [
-        "./packages/lib-visual-builder/src/*"
       ],
       "@giulio-leone/lib-vercel-admin": [
         "./packages/lib-vercel-admin/src/index.ts"
