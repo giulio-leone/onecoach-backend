@@ -10,7 +10,7 @@
 
 import { NextResponse } from 'next/server';
 import { getCurrentUser } from './session';
-import { isAdminRole, isSuperAdminRole } from './roles';
+import { isAdminRole, isCoachRole, isSuperAdminRole } from './roles';
 
 import { logger } from '@giulio-leone/lib-shared';
 
@@ -86,6 +86,23 @@ export async function requireSuperAdminOrThrow() {
 
   if (!isSuperAdminRole(user.role)) {
     throw new AuthError('Accesso negato - Richiesti privilegi super admin', 403);
+  }
+
+  return user;
+}
+
+/**
+ * Require coach (or higher) user — throws AuthError on failure.
+ */
+export async function requireCoachOrThrow() {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new AuthError('Non autenticato', 401);
+  }
+
+  if (!isCoachRole(user.role)) {
+    throw new AuthError('Accesso negato - Richiesti privilegi coach', 403);
   }
 
   return user;
