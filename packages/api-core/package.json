@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/api-core",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Unified API routes package — core, admin, analytics, chat, coach, exercise, food, nutrition, oneagenda, workout",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
