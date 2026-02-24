@@ -256,3 +256,19 @@ export function useDeleteBodyMeasurement() {
     },
   });
 }
+
+/**
+ * Hook to get body measurements history, sorted ascending for charts
+ *
+ * @param limit - Max number of entries to return (default 30)
+ * @returns Sorted measurements slice, loading state, and error
+ */
+export function useBodyMeasurementsHistory(limit = 30) {
+  const { data, isLoading, error } = useBodyMeasurements();
+
+  const sorted = [...(data ?? [])]
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .slice(-limit);
+
+  return { data: sorted, isLoading, error };
+}

@@ -11,12 +11,14 @@ import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import {
   WorkoutImportService,
+  WorkoutVisionService as VisionService,
+} from '@giulio-leone/one-workout';
+import {
   ImportFileSchema,
   ImportOptionsSchema,
   IMPORT_LIMITS,
   SUPPORTED_MIME_TYPES,
-  WorkoutVisionService as VisionService,
-} from '@giulio-leone/one-workout';
+} from '@giulio-leone/schemas';
 import type { ImportProgress } from '@giulio-leone/lib-shared/import-core';
 import { type ImportedWorkoutProgram } from '@giulio-leone/schemas';
 import { randomUUID } from 'crypto';
