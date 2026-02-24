@@ -9,19 +9,17 @@
  * i servizi per implementare direttamente i contratti.
  */
 
-import { registerService } from './index';
+import { registerService } from './service-registry';
 import { nutritionService } from '@giulio-leone/one-nutrition';
 import { workoutService } from '@giulio-leone/one-workout';
 import { exerciseService } from '@giulio-leone/one-workout';
 import { foodService } from '@giulio-leone/one-nutrition';
 import { analyticsService } from '../analytics/analytics.service';
-import {
-  creditService,
-  subscriptionService,
-  userProfileService,
-  paymentService,
-  onboardingService,
-} from '..';
+import { creditService } from '../credit.service';
+import { subscriptionService } from '../subscription.service';
+import { userProfileService } from '../user-profile.service';
+import { paymentService } from '../payment.service';
+import { onboardingService } from '../onboarding.service';
 import { chatService } from '@giulio-leone/lib-ai';
 import { marketplaceService } from '../marketplace/marketplace.service';
 import { coachService } from '../coach/coach.service';
