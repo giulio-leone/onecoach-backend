@@ -12,5 +12,6 @@ export * from './admin-seed';
 export * from './admin-utils';
 export * from './roles';
 export * from './access-control';
-export * as NativeSession from './session.native';
+// NativeSession is only imported directly in React Native (Expo) context
+// Do not re-export here — it pulls in expo-secure-store / async-storage
 export * from './supabase-token';

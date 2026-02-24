@@ -11,9 +11,14 @@
 // Note: 'server-only' import removed due to Turbopack bundler issues
 // This file is inherently server-only due to Node.js dependencies (pg, @prisma/client)
 
-import { PrismaClient } from '@prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-import { Pool } from 'pg';
+// Dynamic require to prevent Turbopack from statically tracing into pg/prisma
+// Node.js builtins (dns, net, tls, fs). We use eval to completely hide the require
+// from Turbopack's static analysis.
+// eslint-disable-next-line no-eval
+const _require = typeof globalThis.require === 'function' ? globalThis.require : eval('require');
+const { PrismaClient } = _require('@prisma/client') as typeof import('@prisma/client');
+const { PrismaPg } = _require('@prisma/adapter-pg') as typeof import('@prisma/adapter-pg');
+const { Pool } = _require('pg') as typeof import('pg');
 
 import { logger } from './logger.service';
 const globalForPrisma = globalThis as unknown as {
@@ -208,5 +213,7 @@ export async function disconnectPrisma() {
 }
 
 // Re-export Prisma types so consumers don't need @prisma/client dependency
-export { Prisma } from '@prisma/client';
 export type { PrismaClient } from '@prisma/client';
+// eslint-disable-next-line no-eval
+const { Prisma: _Prisma } = (typeof globalThis.require === 'function' ? globalThis.require : eval('require'))('@prisma/client') as typeof import('@prisma/client');
+export const Prisma = _Prisma;
