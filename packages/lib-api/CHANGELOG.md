@@ -1,4 +1,4 @@
-# @giulio-leone/lib-api
+# @giulio-leone/lib-api-client
 
 ## 0.1.1
 
@@ -8,6 +8,8 @@
 
 - Updated dependencies []:
   - @giulio-leone/types@0.2.1
-  - @giulio-leone/constants@0.1.1
+  - @giulio-leone/lib-core@0.1.1
   - @giulio-leone/lib-shared@0.1.2
   - @giulio-leone/lib-stores@0.1.1
+  - @giulio-leone/lib-api@0.1.1
+  - @giulio-leone/lib-marketplace@0.1.1

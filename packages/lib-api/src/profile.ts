@@ -10,6 +10,12 @@ export interface OneRepMaxResponse {
   maxes: unknown[];
 }
 
+export interface UpsertOneRepMaxRequest {
+  catalogExerciseId: string;
+  oneRepMax: number;
+  notes?: string | null;
+}
+
 export const profileApi = {
   /**
    * Get user one rep maxes
@@ -21,14 +27,15 @@ export const profileApi = {
   /**
    * Upsert one rep max
    */
-  async upsertOneRepMax(data: unknown): Promise<{ max: unknown }> {
+  async upsertOneRepMax(data: UpsertOneRepMaxRequest): Promise<{ max: unknown }> {
     return apiClient.post<{ max: unknown }>('/api/profile/maxes', data);
   },
 
   /**
    * Delete one rep max
+   * @param catalogExerciseId - ID dell'esercizio nel catalogo
    */
-  async deleteOneRepMax(exerciseId: string): Promise<void> {
-    return apiClient.delete(`/api/profile/maxes/${exerciseId}`);
+  async deleteOneRepMax(catalogExerciseId: string): Promise<void> {
+    return apiClient.delete(`/api/profile/maxes/${catalogExerciseId}`);
   },
 };

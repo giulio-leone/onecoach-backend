@@ -8,7 +8,7 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-import { useAuth } from '@onecoach/lib-api-client/hooks';
+import { useAuth } from '@giulio-leone/lib-api/hooks';
 
 /**
  * Loading state component for auth

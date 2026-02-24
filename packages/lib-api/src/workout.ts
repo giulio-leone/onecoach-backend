@@ -5,7 +5,7 @@
  */
 
 import { apiClient } from './client';
-import type { WorkoutProgram } from '@giulio-leone/types';
+import type { WorkoutProgram } from '@giulio-leone/types/workout';
 
 export interface WorkoutProgramResponse {
   program: WorkoutProgram;
@@ -41,7 +41,7 @@ export const workoutApi = {
    * Update workout program
    */
   async update(id: string, data: unknown): Promise<WorkoutProgramResponse> {
-    return apiClient.put<WorkoutProgramResponse>(`/api/workouts/${id}`, data);
+    return apiClient.patch<WorkoutProgramResponse>(`/api/workouts/${id}`, data);
   },
 
   /**
@@ -49,6 +49,13 @@ export const workoutApi = {
    */
   async delete(id: string): Promise<void> {
     return apiClient.delete(`/api/workouts/${id}`);
+  },
+
+  /**
+   * Duplicate workout program
+   */
+  async duplicate(id: string): Promise<WorkoutProgramResponse> {
+    return apiClient.post<WorkoutProgramResponse>(`/api/workouts/${id}/duplicate`, {});
   },
 
   /**

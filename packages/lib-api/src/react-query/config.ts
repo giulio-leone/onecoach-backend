@@ -25,9 +25,6 @@ export const defaultQueryOptions: QueryClientConfig['defaultOptions'] = {
 
 /**
  * Create QueryClient configuration
- *
- * @param options - Optional additional configuration
- * @returns QueryClientConfig
  */
 export function createQueryClientConfig(options?: Partial<QueryClientConfig>): QueryClientConfig {
   return {

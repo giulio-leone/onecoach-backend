@@ -4,7 +4,7 @@
  * Standardized query keys and query functions for user profile queries
  */
 
-import type { ActivityLevel, Sex, WeightUnit, DietType } from '@giulio-leone/types';
+import type { ActivityLevel, Sex, WeightUnit, DietType } from '@prisma/client';
 
 /**
  * User profile data type
@@ -16,6 +16,7 @@ export interface UserProfileData {
   sex: Sex | null;
   heightCm: number | null;
   weightKg: number | null;
+  weightIncrement?: number | null;
   weightUnit: WeightUnit;
   activityLevel: ActivityLevel | null;
   trainingFrequency: number | null;
@@ -25,6 +26,24 @@ export interface UserProfileData {
   equipment: string[];
   dietaryRestrictions: string[];
   dietaryPreferences: string[];
+  // Body composition
+  bodyFat: number | null;
+  muscleMass: number | null;
+  visceralFat: number | null;
+  waterPercentage: number | null;
+  boneMass: number | null;
+  metabolicAge: number | null;
+  bmr: number | null;
+  // Circumferences (cm)
+  chest: number | null;
+  waist: number | null;
+  hips: number | null;
+  thigh: number | null;
+  arm: number | null;
+  calf: number | null;
+  neck: number | null;
+  shoulders: number | null;
+  
   dietType: DietType | null;
   healthNotes: string | null;
   name?: string | null;
@@ -110,6 +129,24 @@ export const profileQueries = {
       dietaryPreferences: data.dietaryPreferences ?? [],
       dietType: data.dietType ?? null,
       healthNotes: data.healthNotes ?? null,
+      // Body composition
+      bodyFat: data.bodyFat ?? null,
+      muscleMass: data.muscleMass ?? null,
+      visceralFat: data.visceralFat ?? null,
+      waterPercentage: data.waterPercentage ?? null,
+      boneMass: data.boneMass ?? null,
+      metabolicAge: data.metabolicAge ?? null,
+      bmr: data.bmr ?? null,
+      // Circumferences
+      chest: data.chest ?? null,
+      waist: data.waist ?? null,
+      hips: data.hips ?? null,
+      thigh: data.thigh ?? null,
+      arm: data.arm ?? null,
+      calf: data.calf ?? null,
+      neck: data.neck ?? null,
+      shoulders: data.shoulders ?? null,
+      // User info
       name: data.user?.name ?? null,
       email: data.user?.email ?? null,
       photoUrl: data.user?.image ?? null,
@@ -154,6 +191,27 @@ export const profileQueries = {
       dietaryPreferences: updated.dietaryPreferences ?? [],
       dietType: updated.dietType ?? null,
       healthNotes: updated.healthNotes ?? null,
+      // Body composition
+      bodyFat: updated.bodyFat ?? null,
+      muscleMass: updated.muscleMass ?? null,
+      visceralFat: updated.visceralFat ?? null,
+      waterPercentage: updated.waterPercentage ?? null,
+      boneMass: updated.boneMass ?? null,
+      metabolicAge: updated.metabolicAge ?? null,
+      bmr: updated.bmr ?? null,
+      // Circumferences
+      chest: updated.chest ?? null,
+      waist: updated.waist ?? null,
+      hips: updated.hips ?? null,
+      thigh: updated.thigh ?? null,
+      arm: updated.arm ?? null,
+      calf: updated.calf ?? null,
+      neck: updated.neck ?? null,
+      shoulders: updated.shoulders ?? null,
+      // User info
+      name: updated.name ?? null,
+      email: updated.email ?? null,
+      photoUrl: updated.photoUrl ?? null,
     };
   },
 };

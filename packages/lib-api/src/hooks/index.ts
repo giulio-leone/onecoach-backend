@@ -3,6 +3,7 @@
  */
 
 export * from './use-auth';
+export * from './use-guards';
 export * from './use-auth-unified';
 export * from './use-coach';
 export * from './use-fetch';
@@ -18,7 +19,12 @@ export * from './use-body-measurements';
 export * from './use-oneagenda';
 export * from './use-health';
 export * from './use-iap';
-export * from './use-health-native';
-export * from './use-iap-native';
+// Native-only hooks - not exported for web builds
+// export * from './use-health-native';
+// export * from './use-iap-native';
 export * from './use-marketplace';
 export * from './use-promo-code-validation';
+export * from './use-affiliate';
+export * from './use-analytics';
+export * from './use-projects';
+export * from './use-direct-messaging';

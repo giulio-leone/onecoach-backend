@@ -133,12 +133,6 @@
       "@giulio-leone/lib-ai/*": [
         "../lib-ai/src/*"
       ],
-      "@giulio-leone/lib-api-client": [
-        "./packages/lib-api-client/src/index.ts"
-      ],
-      "@giulio-leone/lib-api-client/*": [
-        "./packages/lib-api-client/src/*"
-      ],
       "@giulio-leone/lib-stores": [
         "./packages/lib-stores/src/index.ts"
       ],

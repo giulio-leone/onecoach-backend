@@ -5,7 +5,7 @@
  */
 
 import { apiClient } from './client';
-import type { NutritionPlan } from '@giulio-leone/types';
+import type { NutritionPlan } from '@giulio-leone/types/nutrition';
 
 export interface NutritionPlanResponse {
   plan: NutritionPlan;
@@ -52,6 +52,13 @@ export const nutritionApi = {
   },
 
   /**
+   * Duplicate nutrition plan
+   */
+  async duplicate(id: string): Promise<NutritionPlanResponse> {
+    return apiClient.post<NutritionPlanResponse>(`/api/nutrition/${id}/duplicate`, {});
+  },
+
+  /**
    * Get nutrition plan versions
    */
   async getVersions(id: string): Promise<{ versions: unknown[] }> {
@@ -63,7 +70,7 @@ export const nutritionApi = {
    */
   async createDayLog(
     planId: string,
-    data: { weekNumber: number; dayNumber: number }
+    data: { weekNumber: number; dayNumber: number; date?: string | Date }
   ): Promise<{ log: unknown }> {
     return apiClient.post<{ log: unknown }>(`/api/nutrition/${planId}/logs`, data);
   },

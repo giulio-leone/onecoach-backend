@@ -5,25 +5,16 @@
  */
 
 import type { PublicCoachProfileResponse } from '../coach';
-import type { MarketplacePlanType } from '@giulio-leone/types';
-
-/**
- * MarketplacePlanCardProps - aligned with CoachPlanCardProps in UI
- */
-export interface MarketplacePlanCardProps {
+// MarketplacePlanCardProps type - using inline type for now
+type MarketplacePlanCardProps = {
   id: string;
-  title: string;
+  name: string;
   description: string;
   planType: MarketplacePlanType;
-  coverImage?: string | null;
-  price: number;
-  currency: string;
   isPublished: boolean;
-  totalPurchases: number;
-  averageRating: number | null;
-  totalReviews: number;
-  createdAt: Date | string;
-}
+  [key: string]: unknown;
+};
+import type { MarketplacePlanType } from '@giulio-leone/types/database';
 
 export interface CoachDashboardPlansFilters {
   planType?: MarketplacePlanType;

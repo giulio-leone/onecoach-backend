@@ -4,7 +4,7 @@
  * Standardized query keys and query functions for onboarding queries
  */
 
-import type { OnboardingProgress } from '@giulio-leone/lib-stores/onboarding.store';
+import type { OnboardingProgress } from '@giulio-leone/lib-stores';
 
 /**
  * Onboarding API response

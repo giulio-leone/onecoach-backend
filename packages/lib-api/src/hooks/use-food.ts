@@ -7,32 +7,22 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { foodApi, type FoodsResponse } from '../food';
+import { foodApi } from '../food';
 import { foodKeys, foodQueries } from '../queries/food.queries';
 import type { FoodListParams } from '../food';
 
 /**
  * Hook to get all foods with optional filters
  * Optimized for admin panel with longer cache
- * IMPORTANT: Quando cambiano i params (es. page), React Query rifa automaticamente il fetch
- * perché la queryKey cambia. Non usare refetchOnMount: false per evitare problemi di paginazione.
  */
-export function useFoods(params?: FoodListParams, initialData?: FoodsResponse) {
+export function useFoods(params?: FoodListParams) {
   return useQuery({
     queryKey: foodKeys.list(params),
     queryFn: () => foodQueries.list(params),
-    // IMPORTANTE: initialData viene usato solo se non ci sono dati in cache per questa queryKey
-    // Quando cambia la pagina, la queryKey cambia, quindi React Query fa un nuovo fetch
-    initialData: initialData,
-    // IMPORTANTE: placeholderData invece di initialData potrebbe essere meglio per la paginazione,
-    // ma usiamo initialData per la prima pagina e lasciamo che React Query faccia il fetch per le altre
     staleTime: 10 * 60 * 1000, // 10 minutes for admin
     gcTime: 30 * 60 * 1000, // 30 minutes cache
     refetchOnWindowFocus: false,
-    // refetchOnMount: true di default - quando cambia la queryKey (es. page), rifa il fetch
-    // Questo è fondamentale per la paginazione: ogni pagina ha una queryKey diversa
-    // IMPORTANTE: Quando cambia la queryKey, React Query crea una nuova query e fa il fetch
-    // anche se i dati sono "freschi" (staleTime). Questo garantisce che la paginazione funzioni correttamente.
+    refetchOnMount: false, // Don't refetch if data exists in cache
   });
 }
 
@@ -107,35 +97,6 @@ export function useUpdateFoodWithAI() {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: foodKeys.lists() });
       queryClient.invalidateQueries({ queryKey: foodKeys.detail(variables.id) });
-    },
-  });
-}
-
-/**
- * Hook for batch operations (delete, update)
- *
- * NOTA: Non usa optimistic updates perché il realtime (Zustand) aggiorna
- * automaticamente il cache React Query quando le modifiche arrivano dal database.
- * Il realtime è gestito globalmente tramite useRealtimeSubscription che usa
- * useRealtimeStore (Zustand) per una singola subscription condivisa.
- */
-export function useBatchFoodOperations() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({
-      action,
-      ids,
-      data,
-    }: {
-      action: 'delete' | 'update';
-      ids: string[];
-      data?: Record<string, unknown>;
-    }) => foodApi.batch(action, ids, data),
-    onSuccess: () => {
-      // Il realtime aggiornerà automaticamente il cache, ma invalidiamo
-      // per sicurezza in caso di problemi di sincronizzazione
-      queryClient.invalidateQueries({ queryKey: foodKeys.lists() });
     },
   });
 }

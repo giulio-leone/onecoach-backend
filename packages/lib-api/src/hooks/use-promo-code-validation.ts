@@ -8,18 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-type PromotionValidationResult = {
-  valid: boolean;
-  promotion?: {
-    id?: string;
-    code?: string;
-    discountType?: string;
-    discountValue?: number;
-    expiresAt?: string | null;
-    [key: string]: unknown;
-  };
-  error?: string;
-};
+import type { PromotionValidationResult } from '@giulio-leone/lib-core';
 
 interface UsePromoCodeValidationOptions {
   code: string;

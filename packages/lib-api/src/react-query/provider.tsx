@@ -39,8 +39,7 @@ function isDevEnvironment(): boolean {
 }
 
 // Componente per i devtools che viene caricato solo lato client
-function Devtools({
-  client }: { client?: QueryClient }) {
+function Devtools({ client }: { client?: QueryClient }) {
   const [DevtoolsComponent, setDevtoolsComponent] = useState<ComponentType<{
     initialIsOpen?: boolean;
     client?: QueryClient;
@@ -69,12 +68,8 @@ function Devtools({
           // Usa Function constructor per evitare che il bundler risolva l'import
           const loadDevtools = new Function('return import("@tanstack/react-query-devtools")');
           loadDevtools()
-            .then((mod: unknown) => {
-              const Devtools = (mod as { ReactQueryDevtools?: typeof DevtoolsComponent })
-                .ReactQueryDevtools;
-              if (Devtools) {
-                setDevtoolsComponent(() => Devtools);
-              }
+            .then((mod: { ReactQueryDevtools: React.ComponentType<Record<string, unknown>> }) => {
+              setDevtoolsComponent(() => mod.ReactQueryDevtools);
               setIsReady(true);
             })
             .catch(() => {

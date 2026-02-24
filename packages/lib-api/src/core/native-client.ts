@@ -6,7 +6,12 @@
 
 import { BaseApiClient } from './base-client';
 import type { RequestOptions } from './types';
-import { NativeSession } from '@giulio-leone/lib-core';
+import {
+  getAccessToken,
+  getRefreshToken,
+  updateAccessToken,
+  clearSession,
+} from '@giulio-leone/lib-core/auth/session.native';
 
 export class NativeApiClient extends BaseApiClient {
   private refreshPromise: Promise<void> | null = null;
@@ -16,7 +21,7 @@ export class NativeApiClient extends BaseApiClient {
   }
 
   protected async getAuthToken(): Promise<string | null> {
-    return await NativeSession.getAccessToken();
+    return await getAccessToken();
   }
 
   protected async saveAuthToken(_token: string): Promise<void> {
@@ -36,7 +41,7 @@ export class NativeApiClient extends BaseApiClient {
 
     this.refreshPromise = (async () => {
       try {
-        const refreshToken = await NativeSession.getRefreshToken();
+        const refreshToken = await getRefreshToken();
         if (!refreshToken) {
           throw new Error('No refresh token available');
         }
@@ -56,7 +61,7 @@ export class NativeApiClient extends BaseApiClient {
         const data = await response.json();
         const expiresAt = Date.now() + data.expiresIn * 1000;
 
-        await NativeSession.updateAccessToken(data.accessToken, expiresAt);
+        await updateAccessToken(data.accessToken, expiresAt);
       } finally {
         this.refreshPromise = null;
       }
@@ -79,7 +84,7 @@ export class NativeApiClient extends BaseApiClient {
           return this.request<T>(endpoint, options);
         } catch (refreshError: unknown) {
           // Refresh failed, clear session and throw
-          await NativeSession.clearSession();
+          await clearSession();
           throw new ApiError('Session expired', 401);
         }
       }

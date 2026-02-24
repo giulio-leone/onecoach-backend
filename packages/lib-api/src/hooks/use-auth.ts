@@ -10,10 +10,10 @@ import { useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession, signOut as nextAuthSignOut } from 'next-auth/react';
 import { authKeys, authQueries } from '../queries/auth.queries';
-import { useAuthStore } from '@giulio-leone/lib-stores/auth';
+import { useAuthStore } from '@giulio-leone/lib-stores/auth.store';
 import type { RefreshTokenRequest } from '../queries/auth.queries';
-import type { User } from '@giulio-leone/lib-stores/auth';
-import { normalizeRole, roleSatisfies } from '@giulio-leone/lib-core';
+import type { User } from '@giulio-leone/lib-stores/auth.store';
+import { normalizeRole, roleSatisfies } from '@giulio-leone/lib-core/auth/roles';
 
 /**
  * Hook to sync NextAuth session with Zustand store
@@ -38,7 +38,7 @@ export function useSyncAuth() {
         role?: string;
         image?: string;
       };
-      const normalizedRole = (normalizeRole(sessionUser.role) ?? 'USER') as User['role'];
+      const normalizedRole = normalizeRole(sessionUser.role) ?? 'USER';
 
       // Convert NextAuth session user to Zustand User type
       const user: User = {
@@ -77,7 +77,7 @@ export function useMe() {
     data: user,
     isLoading: isLoading || status === 'loading',
     error: null,
-    refetch: () => {}, // No-op, sync happens automatically
+    refetch: () => { }, // No-op, sync happens automatically
   };
 }
 

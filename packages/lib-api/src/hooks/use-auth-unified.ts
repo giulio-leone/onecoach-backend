@@ -14,9 +14,9 @@
 'use client';
 
 import { useSyncAuth } from './use-auth';
-import { useAuthStore } from '@giulio-leone/lib-stores/auth';
-import type { User } from '@giulio-leone/lib-stores/auth';
-import { isAdminRole, isCoachRole, normalizeRole, roleSatisfies } from '@giulio-leone/lib-core';
+import { useAuthStore } from '@giulio-leone/lib-stores';
+import type { User } from '@giulio-leone/lib-stores';
+import { isAdminRole, isCoachRole, normalizeRole, roleSatisfies } from '@giulio-leone/lib-core/auth/roles';
 
 /**
  * Unified auth hook return type

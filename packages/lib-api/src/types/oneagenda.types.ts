@@ -1,3 +1,5 @@
+import type { Task as BaseTask } from '@giulio-leone/types/domain';
+
 export enum TaskPriority {
   CRITICAL = 'CRITICAL',
   HIGH = 'HIGH',
@@ -13,17 +15,9 @@ export enum TaskStatus {
   CANCELLED = 'CANCELLED',
 }
 
-export type Task = {
-  id: string;
-  title?: string;
-  description?: string;
-  status: TaskStatus;
-  priority: TaskPriority;
+export type Task = BaseTask & {
   tags?: string[];
   goalId?: string;
-  milestoneId?: string;
-  createdAt?: string;
-  updatedAt?: string;
   [key: string]: unknown;
 };
 

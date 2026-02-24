@@ -20,9 +20,8 @@ export interface ExerciseResponse {
   exercise: Exercise;
 }
 
-// Generico per supportare sia Exercise che LocalizedExercise
-export interface ExercisesResponse<T extends Exercise = Exercise> {
-  data: T[];
+export interface ExercisesResponse {
+  data: Exercise[];
   total?: number;
   page?: number;
   pageSize?: number;

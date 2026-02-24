@@ -14,7 +14,7 @@ import {
   type CreateBodyMeasurementInput,
   type UpdateBodyMeasurementInput,
 } from '../queries/body-measurements.queries';
-import type { BodyMeasurement } from '@giulio-leone/types';
+import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 
 /**
  * Hook to get body measurements list

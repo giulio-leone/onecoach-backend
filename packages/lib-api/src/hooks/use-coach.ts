@@ -12,11 +12,7 @@ import {
   coachQueries,
   type CoachDashboardPlansFilters,
   type CoachClientsFilters,
-  type MarketplacePlanCardProps,
 } from '../queries/coach.queries';
-
-// Re-export types for consumer convenience
-export type { CoachDashboardPlansFilters, CoachClientsFilters, MarketplacePlanCardProps };
 
 /**
  * Hook to get public coach profile

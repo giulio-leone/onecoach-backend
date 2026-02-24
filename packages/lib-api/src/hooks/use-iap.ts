@@ -14,8 +14,8 @@ import {
   type VerifyReceiptRequest,
   type RestorePurchasesRequest,
 } from '../queries/iap.queries';
-import { useIAPStore } from '@giulio-leone/lib-stores/iap.store';
-import { getErrorMessage } from '@giulio-leone/lib-shared';
+import { useIAPStore } from '@giulio-leone/lib-stores';
+import { getErrorMessage } from '../utils/error';
 
 /**
  * Hook to get subscription status
@@ -55,7 +55,6 @@ export function usePurchaseProduct() {
   const setPurchaseState = useIAPStore((state) => state.setPurchaseState);
   const setError = useIAPStore((state) => state.setError);
   const setSubscriptionStatus = useIAPStore((state) => state.setSubscriptionStatus);
-
   return useMutation({
     mutationFn: (request: VerifyReceiptRequest) => iapQueries.verifyReceipt(request),
     onMutate: () => {
@@ -68,7 +67,7 @@ export function usePurchaseProduct() {
         // Update subscription status in store
         setSubscriptionStatus({
           isActive: response.subscription.isActive,
-          productId: response.subscription.productId as ProductId,
+          productId: response.subscription.productId as string,
           expirationDate: response.subscription.expirationDate,
           isInTrialPeriod: response.subscription.isInTrial,
           willAutoRenew: response.subscription.willAutoRenew,

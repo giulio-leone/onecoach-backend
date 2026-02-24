@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Health Native Hooks
  *
@@ -24,6 +22,8 @@ import {
   useHealthSync,
   useHealthSummary,
   type HealthSummary,
+  type HealthPermissions,
+  type SyncStatus,
 } from '@giulio-leone/lib-stores/health.store';
 import { useSyncHealthData, useHealthSummaryQuery } from './use-health';
 import { useAuthStore } from '@giulio-leone/lib-stores/auth.store';
@@ -94,20 +94,17 @@ export function useHealth() {
   const initializeHealthKit = async () => {
     try {
       if (Platform.OS === 'ios') {
-        AppleHealthKit.initHealthKit(
-          APPLE_HEALTH_PERMISSIONS as unknown as Parameters<typeof AppleHealthKit.initHealthKit>[0],
-          (error) => {
-            if (error) {
-              logger.error('HealthKit initialization error', error);
-              store.setIsAvailable(false);
-            } else {
-              logger.info('HealthKit initialized successfully');
-              store.setIsAvailable(true);
-              store.setPlatform('ios');
-              checkPermissions();
-            }
+        AppleHealthKit.initHealthKit(APPLE_HEALTH_PERMISSIONS as never, (error) => {
+          if (error) {
+            logger.error('HealthKit initialization error', error);
+            store.setIsAvailable(false);
+          } else {
+            logger.info('HealthKit initialized successfully');
+            store.setIsAvailable(true);
+            store.setPlatform('ios');
+            checkPermissions();
           }
-        );
+        });
       } else if (Platform.OS === 'android') {
         const status = await getSdkStatus();
         if (status === SdkAvailabilityStatus.SDK_AVAILABLE) {
@@ -137,7 +134,7 @@ export function useHealth() {
       }
 
       if (lastSyncStr) {
-        setSyncStatus((prev) => ({
+        setSyncStatus((prev: SyncStatus) => ({
           ...prev,
           lastSyncTime: new Date(lastSyncStr),
         }));
@@ -165,9 +162,7 @@ export function useHealth() {
         perms.weight = true;
         perms.workout = true;
       } else if (Platform.OS === 'android') {
-        const granted = await requestPermission(
-          ANDROID_HEALTH_PERMISSIONS as unknown as Parameters<typeof requestPermission>[0]
-        );
+        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as never);
         const hasPermission = Array.isArray(granted) && granted.length > 0;
         perms.steps = hasPermission;
         perms.heartRate = hasPermission;
@@ -176,7 +171,7 @@ export function useHealth() {
         perms.workout = hasPermission;
       }
 
-      store.setPermissions(perms);
+      store.setPermissions(perms as HealthPermissions);
       await AsyncStorage.setItem(HEALTH_STORAGE_KEYS.PERMISSIONS_GRANTED, JSON.stringify(perms));
     } catch (error: unknown) {
       logger.error('Error checking permissions', error);
@@ -186,9 +181,7 @@ export function useHealth() {
   const requestPermissions = async (): Promise<boolean> => {
     try {
       if (Platform.OS === 'android') {
-        const granted = await requestPermission(
-          ANDROID_HEALTH_PERMISSIONS as unknown as Parameters<typeof requestPermission>[0]
-        );
+        const granted = await requestPermission(ANDROID_HEALTH_PERMISSIONS as never);
         if (Array.isArray(granted) && granted.length > 0) {
           await checkPermissions();
           return true;
@@ -226,7 +219,7 @@ export function useHealth() {
       return;
     }
 
-    setSyncStatus((prev) => ({ ...prev, isSyncing: true, syncError: null }));
+    setSyncStatus((prev: SyncStatus) => ({ ...prev, isSyncing: true, syncError: null }));
 
     try {
       const endDate = new Date();
@@ -256,7 +249,7 @@ export function useHealth() {
     } catch (error: unknown) {
       const errorMessage = getErrorMessage(error);
       logger.error('Health sync error', error, { errorMessage });
-      setSyncStatus((prev) => ({
+      setSyncStatus((prev: SyncStatus) => ({
         ...prev,
         isSyncing: false,
         syncError: errorMessage,

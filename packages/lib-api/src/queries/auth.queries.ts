@@ -4,7 +4,7 @@
  * Standardized query keys and query functions for authentication
  */
 
-import type { User } from '@giulio-leone/lib-stores/auth.store';
+import type { User } from '@giulio-leone/lib-stores';
 
 import { logger } from '@giulio-leone/lib-core';
 /**

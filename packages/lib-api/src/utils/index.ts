@@ -6,3 +6,4 @@
 
 export * from './streaming-handler';
 export * from './generation-handler';
+export * from './error';
