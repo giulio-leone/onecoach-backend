@@ -19,6 +19,7 @@ export const nutritionKeys = {
   versions: (id: string) => [...nutritionKeys.detail(id), 'versions'] as const,
   logs: () => [...nutritionKeys.all, 'logs'] as const,
   log: (logId: string) => [...nutritionKeys.logs(), logId] as const,
+  dayLogs: (planId: string) => [...nutritionKeys.detail(planId), 'day-logs'] as const,
 } as const;
 
 /**

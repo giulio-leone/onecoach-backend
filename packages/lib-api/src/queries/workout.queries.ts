@@ -13,7 +13,7 @@ import type { WorkoutProgramResponse, WorkoutProgramsResponse } from '../workout
 export const workoutKeys = {
   all: ['workouts'] as const,
   lists: () => [...workoutKeys.all, 'list'] as const,
-  list: (filters?: Record<string, unknown>) => [...workoutKeys.lists(), filters] as const,
+  list: (filters?: Record<string, unknown>) => [...workoutKeys.lists(), { filters }] as const,
   details: () => [...workoutKeys.all, 'detail'] as const,
   detail: (id: string) => [...workoutKeys.details(), id] as const,
   sessions: () => [...workoutKeys.all, 'sessions'] as const,
