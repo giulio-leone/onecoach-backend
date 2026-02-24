@@ -20,7 +20,7 @@ export * from './credit.service';
 export { creditService } from './credit.service';
 export * from './subscription.service';
 export { subscriptionService } from './subscription.service';
-// Note: subscription-init exports are available via separate entry point (circular dep bootstrap)
+export { initSubscriptionService } from './subscription-init';
 export * from './auth';
 export * from './user-profile.service';
 export { userProfileService } from './user-profile.service';
@@ -42,6 +42,7 @@ export * from './direct-messaging.service';
 export * from './logger.service';
 export * from './types/safe-types';
 export * from './ai/provider-factory';
+export * from './ai-generation.service';
 export * from './config/env';
 export * from './versioning';
 export * from './rate-limit';

@@ -5,8 +5,6 @@
  * Follows SOLID principles with single responsibility.
  */
 
-import 'server-only';
-
 import { prisma } from '../prisma';
 import { getExerciseSets } from '@giulio-leone/one-workout';
 import type {

@@ -5,8 +5,6 @@
  * Follows SOLID principles with single responsibility.
  */
 
-import 'server-only';
-
 import { prisma } from '../prisma';
 import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 import { Prisma } from '@prisma/client';
