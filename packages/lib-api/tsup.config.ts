@@ -10,6 +10,7 @@ export default defineConfig({
     'queries/index': 'src/queries/index.ts',
     memory: 'src/memory.ts',
     native: 'src/native.ts',
+    'server/index': 'src/server/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: false,

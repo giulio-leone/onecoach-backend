@@ -52,6 +52,11 @@
       "types": "./dist/native.d.ts",
       "import": "./dist/native.mjs",
       "require": "./dist/native.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js"
     }
   },
   "scripts": {
@@ -70,7 +75,9 @@
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-stores": "workspace:*",
-    "@giulio-leone/types": "workspace:*"
+    "@giulio-leone/types": "workspace:*",
+    "next": ">=14",
+    "zod": ">=3"
   },
   "peerDependenciesMeta": {
     "@giulio-leone/lib-core": {
@@ -87,6 +94,12 @@
     },
     "@giulio-leone/types": {
       "optional": false
+    },
+    "next": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
     }
   },
   "sideEffects": false,
