@@ -10,7 +10,13 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { prisma, type Prisma } from '@giulio-leone/lib-core';
-import { fuzzyMatch, successResult } from '@giulio-leone/one-agent';
+function fuzzyMatch(a: string, b: string): boolean {
+  return a.toLowerCase().includes(b.toLowerCase()) || b.toLowerCase().includes(a.toLowerCase());
+}
+
+function successResult(message: string, data?: unknown) {
+  return { content: [{ type: 'text' as const, text: message }], data };
+}
 
 // =====================================================
 // Type Definitions (Mirrors day-meal.ts)

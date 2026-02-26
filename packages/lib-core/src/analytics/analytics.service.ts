@@ -6,7 +6,16 @@
  */
 
 import { prisma } from '../prisma';
-import { getExerciseSets } from '@giulio-leone/one-workout';
+
+// Lazy import to break circular dep: lib-core → one-workout → lib-core
+let _getExerciseSets: ((exercise: { setGroups?: unknown[] }) => unknown[]) | null = null;
+async function loadGetExerciseSets() {
+  if (!_getExerciseSets) {
+    const mod = await import('@giulio-leone/one-workout');
+    _getExerciseSets = mod.getExerciseSets as typeof _getExerciseSets;
+  }
+  return _getExerciseSets!;
+}
 import type {
   UserAnalyticsReport,
   AnalyticsChartData,
@@ -177,6 +186,8 @@ export async function getWorkoutVolumeTimeSeries(
     orderBy: { startedAt: 'asc' },
   });
 
+  const getExerciseSets = await loadGetExerciseSets();
+
   return sessions.map((session) => {
     const exercises = toExerciseArrayTyped(session.exercises);
     // SSOT: usa getExerciseSets() invece di exercise.sets
@@ -262,6 +273,7 @@ export async function calculateWorkoutMetrics(userId: string, startDate: Date, e
 
   const completedSessions = sessions.filter((s) => s.completedAt !== null);
 
+  const getExerciseSets = await loadGetExerciseSets();
   const totalVolume = completedSessions.reduce((sum: number, session) => {
     const exercises = toExerciseArrayTyped(session.exercises);
     // SSOT: usa getExerciseSets() invece di exercise.sets

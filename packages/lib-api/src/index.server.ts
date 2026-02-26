@@ -8,6 +8,8 @@
  *   import { nutritionApi } from '@giulio-leone/lib-api/server'
  */
 
+// Export server route utilities (withRoute, validateBody, getDbClient)
+export * from './server';
 // Export client
 export * from './client';
 // Export APIs explicitly

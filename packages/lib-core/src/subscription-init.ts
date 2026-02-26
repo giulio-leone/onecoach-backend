@@ -1,14 +1,14 @@
 import { subscriptionService } from './subscription.service';
 import { AffiliateService } from './marketplace/affiliate.service';
 import { PromotionService } from './marketplace/promotion.service';
-import { OpenRouterSubkeyService } from '@giulio-leone/lib-ai';
 import { marketplaceService } from './marketplace/marketplace.service';
 
 /**
  * Initializes SubscriptionService with its external dependencies.
- * This pattern avoids circular dependencies between lib-core, lib-marketplace, and lib-ai.
+ * Uses dynamic import for lib-ai to break circular dep: lib-core → lib-ai → lib-core.
  */
-export function initSubscriptionService() {
+export async function initSubscriptionService() {
+  const { OpenRouterSubkeyService } = await import('@giulio-leone/lib-ai');
   subscriptionService.setDependencies({
     affiliateService: AffiliateService,
     promotionService: PromotionService,

@@ -7,7 +7,16 @@
  */
 
 import { prisma } from '../prisma';
-import { getExerciseSets } from '@giulio-leone/one-workout';
+
+// Lazy import to break circular dep: lib-core → one-workout → lib-core
+let _getExerciseSets: ((exercise: { setGroups?: unknown[] }) => unknown[]) | null = null;
+async function loadGetExerciseSets() {
+  if (!_getExerciseSets) {
+    const mod = await import('@giulio-leone/one-workout');
+    _getExerciseSets = mod.getExerciseSets as typeof _getExerciseSets;
+  }
+  return _getExerciseSets!;
+}
 import type { Exercise } from '@giulio-leone/types/core';
 import { Prisma } from '@prisma/client';
 
@@ -66,6 +75,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   });
 
   // Calculate average volume (SSOT: usa getExerciseSets)
+  const getExerciseSets = await loadGetExerciseSets();
   let totalVolume = 0;
   completedSessions30d.forEach((session) => {
     const exercises = session.exercises as Exercise[];

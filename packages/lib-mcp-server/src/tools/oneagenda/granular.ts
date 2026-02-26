@@ -10,7 +10,9 @@
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { prisma, type Prisma } from '@giulio-leone/lib-core';
-import { successResult } from '@giulio-leone/one-agent';
+function successResult(message: string, data?: unknown) {
+  return { content: [{ type: 'text' as const, text: message }], data };
+}
 
 // =====================================================
 // Schema Definitions

@@ -8,8 +8,22 @@
  */
 
 import { z } from 'zod';
-import type { AgenticActionHandler } from '@giulio-leone/one-agent';
-import { generateId } from '@giulio-leone/one-agent';
+/** Action handler interface for agentic tool framework */
+export interface AgenticActionHandler<T> {
+  description: string;
+  targetSchema: z.ZodTypeAny;
+  changesSchema?: z.ZodTypeAny;
+  newDataSchema?: z.ZodTypeAny;
+  execute: (
+    entity: T,
+    params: { target: unknown; changes?: unknown; newData?: unknown },
+    context?: unknown
+  ) => T | Promise<T>;
+}
+
+function generateId(prefix: string): string {
+  return `${prefix}_${crypto.randomUUID()}`;
+}
 
 // =====================================================
 // Types

@@ -7,12 +7,68 @@
  * @module lib-mcp-server/tools/workout/workout.tool
  */
 
-import { createAgenticTool } from '@giulio-leone/one-agent';
+import { z } from 'zod';
 import { prisma } from '@giulio-leone/lib-core';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import { normalizeWorkoutProgram } from './program-normalizer';
-import { workoutActions, type WorkoutProgramData } from './workout.actions';
-import type { McpContext } from '../../types';
+import { workoutActions, type WorkoutProgramData, type AgenticActionHandler } from './workout.actions';
+import type { McpTool, McpContext } from '../../types';
+
+/** Factory that builds an McpTool from domain-specific action handlers */
+function createAgenticTool<TEntity>(config: {
+  name: string;
+  domain: string;
+  entityIdField: string;
+  description: string;
+  resolveEntity: (id: string, context: McpContext) => Promise<TEntity | null>;
+  saveEntity: (id: string, entity: TEntity, context: McpContext) => Promise<void>;
+  actions: Record<string, AgenticActionHandler<TEntity>>;
+  validateEntity?: (entity: TEntity) => boolean | string;
+}): McpTool {
+  const actionNames = Object.keys(config.actions) as [string, ...string[]];
+
+  const parametersSchema = z
+    .object({
+      action: z.enum(actionNames).describe('Action to perform'),
+      target: z.record(z.unknown()).optional().describe('Target specifier'),
+      changes: z.record(z.unknown()).optional().describe('Changes to apply'),
+      newData: z.record(z.unknown()).optional().describe('New data to add'),
+    })
+    .passthrough();
+
+  return {
+    name: config.name,
+    description: config.description,
+    parameters: parametersSchema,
+    execute: async (args: Record<string, unknown>, context: McpContext) => {
+      const entityId = args[config.entityIdField] as string;
+      const { action, target, changes, newData } = args as {
+        action: string;
+        target?: unknown;
+        changes?: unknown;
+        newData?: unknown;
+      };
+
+      const entity = await config.resolveEntity(entityId, context);
+      if (!entity) throw new Error(`${config.domain} entity not found: ${entityId}`);
+
+      const handler = config.actions[action];
+      if (!handler) throw new Error(`Unknown action: ${action}`);
+
+      const result = await handler.execute(entity, { target: target || {}, changes, newData }, context);
+
+      if (config.validateEntity) {
+        const validation = config.validateEntity(result);
+        if (validation !== true) {
+          throw new Error(typeof validation === 'string' ? validation : 'Validation failed');
+        }
+      }
+
+      await config.saveEntity(entityId, result, context);
+      return { content: [{ type: 'text' as const, text: `${action} applied successfully` }] };
+    },
+  } as McpTool;
+}
 
 // =====================================================
 // Tool Configuration
