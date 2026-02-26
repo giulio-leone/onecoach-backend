@@ -1,5 +1,5 @@
 /**
- * @onecoach/lib-core
+ * @giulio-leone/lib-core
  *
  * Servizi core (auth, credit, subscription, prisma, profile, payment, onboarding)
  * Implementa contratti da @giulio-leone/contracts

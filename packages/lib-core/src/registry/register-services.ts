@@ -1,26 +1,18 @@
 /**
  * Service Registration
  *
- * Registra tutte le implementazioni dei servizi nel registry
- *
- * NOTE: exerciseService e foodService sono classi statiche (typeof Class),
- * ma i contratti richiedono istanze (IExerciseService/IFoodService).
- * Il cast `as` è necessario finché non si refactorizzano
- * i servizi per implementare direttamente i contratti.
+ * Registra tutte le implementazioni dei servizi nel registry.
+ * Uses dynamic imports for external packages (one-nutrition, one-workout, lib-food, lib-ai)
+ * to avoid circular dependency: lib-core ↔ lib-food/one-nutrition/one-workout/lib-ai
  */
 
 import { registerService } from './service-registry';
-import { nutritionService } from '@giulio-leone/one-nutrition';
-import { workoutService } from '@giulio-leone/one-workout';
-import { exerciseService } from '@giulio-leone/one-workout';
-import { foodService } from '@giulio-leone/one-nutrition';
 import { analyticsService } from '../analytics/analytics.service';
 import { creditService } from '../credit.service';
 import { subscriptionService } from '../subscription.service';
 import { userProfileService } from '../user-profile.service';
 import { paymentService } from '../payment.service';
 import { onboardingService } from '../onboarding.service';
-import { chatService } from '@giulio-leone/lib-ai';
 import { marketplaceService } from '../marketplace/marketplace.service';
 import { coachService } from '../coach/coach.service';
 import type { IExerciseService, IFoodService, IAnalyticsService } from '@giulio-leone/lib-shared';
@@ -30,35 +22,18 @@ import {
 } from '../analytics/body-measurements.service';
 
 /**
- * Wrapper per ExerciseService che implementa IExerciseService
- * TODO: Refactor ExerciseService per restituire Exercise invece di LocalizedExercise
- * e implementare direttamente IExerciseService
- */
-const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
-
-/**
- * Wrapper per FoodService che implementa IFoodService
- * TODO: Refactor FoodService per essere un'istanza invece di una classe statica
- * e implementare direttamente IFoodService (aggiungere delete e matchByBarcode)
- */
-const foodServiceAdapter = foodService as unknown as IFoodService;
-
-/**
  * Wrapper per analyticsService che implementa IAnalyticsService
  * Combina funzioni da analytics.service e body-measurements.service
- * TODO: Implementare getUserGoals e createUserGoal
  */
 const analyticsServiceAdapter: IAnalyticsService = {
   ...analyticsService,
   async getUserAnalytics(userId) {
-    // Calculate date range (last 30 days)
     const endDate = new Date();
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 30);
     return await analyticsService.generateAnalyticsReport(userId, startDate, endDate);
   },
   async getChartData(userId, chartType, period) {
-    // Calculate date range based on period
     const endDate = new Date();
     const startDate = new Date();
     const days = period === '7d' ? 7 : period === '30d' ? 30 : period === '90d' ? 90 : 365;
@@ -103,10 +78,25 @@ const analyticsServiceAdapter: IAnalyticsService = {
 };
 
 /**
- * Registra tutti i servizi nel registry
- * Chiamare questa funzione all'avvio dell'applicazione
+ * Registra tutti i servizi nel registry.
+ * Dynamic imports break circular: lib-core ↔ one-nutrition/one-workout/lib-food/lib-ai
  */
-export function registerAllServices(): void {
+export async function registerAllServices(): Promise<void> {
+  const [
+    { nutritionService },
+    { workoutService, exerciseService },
+    { foodService },
+    { chatService },
+  ] = await Promise.all([
+    import('@giulio-leone/one-nutrition'),
+    import('@giulio-leone/one-workout'),
+    import('@giulio-leone/lib-food'),
+    import('@giulio-leone/lib-ai'),
+  ]);
+
+  const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
+  const foodServiceAdapter = foodService as unknown as IFoodService;
+
   registerService('nutrition', nutritionService);
   registerService('workout', workoutService);
   registerService('exercise', exerciseServiceAdapter);

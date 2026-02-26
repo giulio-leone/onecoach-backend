@@ -1,7 +1,7 @@
 import { Logger as SharedLogger, type LogLevel as SharedLogLevel } from '@giulio-leone/lib-shared';
 
 /**
- * @onecoach/lib-core
+ * @giulio-leone/lib-core
  * Standardized Logger Service
  *
  * Re-exports and wraps the high-quality logger from lib-shared

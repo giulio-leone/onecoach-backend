@@ -1,5 +1,5 @@
 import type { McpTool, McpContext } from '../../types';
-import { foodService } from '@giulio-leone/one-nutrition';
+import { foodService } from '@giulio-leone/lib-food';
 import { createFoodSchema } from '@giulio-leone/schemas';
 
 import { logger } from '@giulio-leone/lib-core';

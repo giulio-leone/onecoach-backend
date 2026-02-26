@@ -183,7 +183,7 @@ export function getPrisma(): PrismaClient {
  * Uses a getter function to defer client creation until first access.
  *
  * @example
- * import { prisma } from '@onecoach/lib-core';
+ * import { prisma } from '@giulio-leone/lib-core';
  * const users = await prisma.users.findMany(); // Client created here
  */
 export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
