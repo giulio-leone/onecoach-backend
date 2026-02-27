@@ -49,12 +49,16 @@ class LoggerService implements ILogger {
     this.inner.error(message, error, metadata);
   }
 
+  private static fromSharedLogger(shared: SharedLogger): LoggerService {
+    const instance = new LoggerService('');
+    instance.inner = shared;
+    return instance;
+  }
+
   child(context: string): ILogger {
     // SharedLogger.child already handles prefix concatenation
     const childShared = this.inner.child(context);
-    const wrapper = new LoggerService();
-    (wrapper as unknown as { inner: SharedLogger }).inner = childShared;
-    return wrapper;
+    return LoggerService.fromSharedLogger(childShared);
   }
 }
 

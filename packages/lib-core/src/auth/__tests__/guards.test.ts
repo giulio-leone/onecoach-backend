@@ -64,8 +64,8 @@ describe('AuthError', () => {
 
   it('toResponse() returns a NextResponse with correct body and status', () => {
     const err = new AuthError('no access', 403);
-    const res = err.toResponse() as unknown as { _body: { error: string }; status: number };
-    expect(res._body).toEqual({ error: 'no access' });
+    const res = err.toResponse() as Record<string, unknown>;
+    expect((res._body as { error: string }).error).toBe('no access');
     expect(res.status).toBe(403);
   });
 });
@@ -97,7 +97,8 @@ describe('requireAuthOrThrow', () => {
 
   it('throws 401 AuthError when user id is not a string', async () => {
     mockedGetCurrentUser.mockResolvedValue(
-      makeUser({ id: 123 as unknown as string })
+      // @ts-expect-error intentionally testing non-string id
+      makeUser({ id: 123 })
     );
 
     await expect(requireAuthOrThrow()).rejects.toThrow(AuthError);

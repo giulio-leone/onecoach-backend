@@ -497,4 +497,4 @@ export const memoryTools = [
 
 import { arrayToToolRecord } from '../../utils/helpers';
 
-export const memoryToolsRecord = arrayToToolRecord(memoryTools as unknown as McpTool[]);
+export const memoryToolsRecord = arrayToToolRecord(memoryTools);

@@ -219,7 +219,7 @@ export function createOneAgendaAIContext(userId: string): AIParseContext<Importe
         contentBase64: content,
         mimeType,
         prompt,
-        schema: ImportedOneAgendaSchema as unknown as z.ZodSchema<ImportedOneAgenda>,
+        schema: ImportedOneAgendaSchema,
         userId,
         fileType: mimeType.startsWith('image/')
           ? 'image'

@@ -109,7 +109,7 @@ Examples:
         if (changes?.title) updateData.title = changes.title;
         if (changes?.description) updateData.description = changes.description;
         if (changes?.status)
-          updateData.status = changes.status as unknown as typeof updateData.status; // Cast needed as enum might differ slightly or be safe
+          updateData.status = changes.status as typeof updateData.status; // Safe: Zod enum values match Prisma enum
         if (changes?.dueDate) updateData.endDate = changes.dueDate;
         if (changes?.color) updateData.color = changes.color;
 
@@ -142,9 +142,9 @@ Examples:
         if (changes?.title) updateData.title = changes.title;
         if (changes?.description) updateData.description = changes.description;
         if (changes?.status)
-          updateData.status = changes.status as unknown as typeof updateData.status;
+          updateData.status = changes.status as typeof updateData.status;
         if (changes?.priority)
-          updateData.priority = changes.priority as unknown as typeof updateData.priority;
+          updateData.priority = changes.priority as typeof updateData.priority;
         if (changes?.dueDate) updateData.dueDate = changes.dueDate;
 
         await prisma.agenda_tasks.update({

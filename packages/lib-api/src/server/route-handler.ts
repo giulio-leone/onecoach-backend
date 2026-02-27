@@ -54,7 +54,7 @@ export function withRoute(handler: RouteHandler, options: RouteOptions = {}) {
 
   return async (req: NextRequest, context?: { params?: Promise<Record<string, string>> }) => {
     try {
-      let user: AuthenticatedUser = null as unknown as AuthenticatedUser;
+      let user: AuthenticatedUser | null = null;
 
       if (auth === 'admin') {
         user = await requireAdminOrThrow();
@@ -66,7 +66,7 @@ export function withRoute(handler: RouteHandler, options: RouteOptions = {}) {
 
       const params = (context?.params ? await context.params : {}) as Record<string, string>;
 
-      return await handler({ user, _user: user, admin: user, req, _req: req, request: req, _request: req, params, _params: params });
+      return await handler({ user: user!, _user: user!, admin: user!, req, _req: req, request: req, _request: req, params, _params: params });
     } catch (error: unknown) {
       return handleRouteError(error, tag);
     }

@@ -89,6 +89,6 @@ export async function safeHandleMemoryEvent(
  * Uses generic type to preserve tool-specific types while allowing
  * conversion to base McpTool interface
  */
-export function arrayToToolRecord<T extends McpTool>(tools: T[]): Record<string, McpTool> {
+export function arrayToToolRecord<T extends McpTool>(tools: readonly T[]): Record<string, McpTool> {
   return Object.fromEntries(tools.map((tool) => [tool.name, tool])) as Record<string, McpTool>;
 }

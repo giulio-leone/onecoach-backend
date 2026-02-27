@@ -80,26 +80,26 @@ export const foodImportSchema = foodImportSchemaBase.superRefine((data, ctx) => 
 });
 
 // ── Prisma food item with relations (inline type) ───────────────────
-interface PrismaFoodWithRelations {
+type PrismaFoodWithRelations = {
   id: string;
   name: string;
   nameNormalized: string;
   barcode: string | null;
-  macrosPer100g: unknown;
-  servingSize: unknown;
+  macrosPer100g: Prisma.JsonValue;
+  servingSize: Prisma.Decimal;
   unit: string;
   imageUrl: string | null;
   brandId: string | null;
-  mainMacro: unknown;
-  proteinPct: unknown;
-  carbPct: unknown;
-  fatPct: unknown;
-  metadata: unknown;
+  mainMacro: Prisma.JsonValue;
+  proteinPct: Prisma.Decimal;
+  carbPct: Prisma.Decimal;
+  fatPct: Prisma.Decimal;
+  metadata: Prisma.JsonValue | null;
   createdAt: Date;
   updatedAt: Date;
   food_item_translations?: Array<{
     name: string;
-    description: string | null;
+    description: string;
   }>;
   brand?: { name: string } | null;
   categories?: Array<{
@@ -109,7 +109,7 @@ interface PrismaFoodWithRelations {
       slug: string;
     } | null;
   }>;
-}
+};
 
 export class FoodService {
   /**
@@ -128,7 +128,7 @@ export class FoodService {
       },
     });
     if (!food) return null;
-    return this.mapToFoodItem(food as unknown as PrismaFoodWithRelations);
+    return this.mapToFoodItem(food);
   }
 
   /**
@@ -146,7 +146,7 @@ export class FoodService {
         categories: { include: { food_categories: true } },
       },
     });
-    return foods.map((f) => this.mapToFoodItem(f as unknown as PrismaFoodWithRelations));
+    return foods.map((f) => this.mapToFoodItem(f));
   }
 
   /**
@@ -165,7 +165,7 @@ export class FoodService {
         categories: { include: { food_categories: true } },
       },
     });
-    return foods.map((f) => this.mapToFoodItem(f as unknown as PrismaFoodWithRelations));
+    return foods.map((f) => this.mapToFoodItem(f));
   }
 
   /**
@@ -194,7 +194,7 @@ export class FoodService {
       prisma.food_items.count(),
     ]);
 
-    const items = foods.map((f) => this.mapToFoodItem(f as unknown as PrismaFoodWithRelations));
+    const items = foods.map((f) => this.mapToFoodItem(f));
     return { data: items, total, page, pageSize };
   }
 
@@ -226,11 +226,12 @@ export class FoodService {
       orderBy: { createdAt: 'desc' },
     });
 
+    type FoodEntry = (typeof foods)[number];
     const foodMap = new Map(foods.map((f) => [f.id, f]));
     return searchResults
       .map((r) => foodMap.get(r.id))
-      .filter((f): f is NonNullable<typeof f> => f !== undefined)
-      .map((f) => this.mapToFoodItem(f as unknown as PrismaFoodWithRelations));
+      .filter((f): f is FoodEntry => f !== undefined)
+      .map((f) => this.mapToFoodItem(f));
   }
 
   /**
@@ -313,7 +314,7 @@ export class FoodService {
       },
     });
 
-    return this.mapToFoodItem(food as unknown as PrismaFoodWithRelations);
+    return this.mapToFoodItem(food);
   }
 
   /**
@@ -394,7 +395,7 @@ export class FoodService {
       },
     });
 
-    return this.mapToFoodItem(food as unknown as PrismaFoodWithRelations);
+    return this.mapToFoodItem(food);
   }
 
   /**
@@ -464,7 +465,7 @@ export class FoodService {
     for (const food of foods) {
       map.set(
         food.nameNormalized,
-        this.mapToFoodItem(food as unknown as PrismaFoodWithRelations),
+        this.mapToFoodItem(food),
       );
     }
     return map;
@@ -481,7 +482,7 @@ export class FoodService {
       },
     });
     if (!food) return null;
-    return this.mapToFoodItem(food as unknown as PrismaFoodWithRelations);
+    return this.mapToFoodItem(food);
   }
 
   /**
@@ -555,7 +556,7 @@ export class FoodService {
       name: translation?.name || food.name,
       nameNormalized: food.nameNormalized,
       barcode: food.barcode || undefined,
-      macrosPer100g: food.macrosPer100g as MacrosPer100g,
+      macrosPer100g: food.macrosPer100g as unknown as MacrosPer100g,
       servingSize: food.servingSize ? Number(food.servingSize) : 0,
       unit: food.unit,
       imageUrl: food.imageUrl || undefined,

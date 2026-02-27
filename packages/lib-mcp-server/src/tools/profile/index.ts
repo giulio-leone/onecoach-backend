@@ -11,7 +11,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { userProfileService, prisma } from '@giulio-leone/lib-core';
+import { userProfileService, prisma, type Prisma } from '@giulio-leone/lib-core';
 import { createId } from '@giulio-leone/lib-shared';
 
 // ============================================================================
@@ -465,7 +465,7 @@ export const goalCreateTool: McpTool<GoalCreateArgs> = {
         id: createId(),
         userId: context.userId,
         type: args.type,
-        target: args.target as unknown as Prisma.JsonValue,
+        target: args.target as Prisma.InputJsonValue,
         deadline: args.deadline ? new Date(args.deadline) : null,
         startDate: new Date(args.startDate),
         status: 'ACTIVE',
@@ -569,7 +569,7 @@ export const goalUpdateTool: McpTool<GoalUpdateArgs> = {
 
     const updateData: Record<string, unknown> = {};
     if (args.type !== undefined) updateData.type = args.type;
-    if (args.target !== undefined) updateData.target = args.target as unknown as Prisma.JsonValue;
+    if (args.target !== undefined) updateData.target = args.target as Prisma.InputJsonValue;
     if (args.deadline !== undefined)
       updateData.deadline = args.deadline ? new Date(args.deadline) : null;
     if (args.status !== undefined) updateData.status = args.status;
@@ -657,4 +657,4 @@ export const profileTools = [
 
 import { arrayToToolRecord } from '../../utils/helpers';
 
-export const profileToolsRecord = arrayToToolRecord(profileTools as unknown as McpTool[]);
+export const profileToolsRecord = arrayToToolRecord(profileTools);

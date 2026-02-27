@@ -27,7 +27,7 @@ type PrismaDelegate = {
 
 /** Access a Prisma model delegate dynamically by table name */
 function getDelegate(tableName: string): PrismaDelegate {
-  return (prisma as unknown as Record<string, PrismaDelegate>)[tableName];
+  return (prisma as Record<string, unknown>)[tableName] as PrismaDelegate;
 }
 
 export type VersioningConfig<T> = {
