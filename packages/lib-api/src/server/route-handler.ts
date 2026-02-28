@@ -81,7 +81,14 @@ export async function validateBody<T>(
   req: NextRequest | Request,
   schema: ZodSchema<T>
 ): Promise<{ data: T } | { error: NextResponse }> {
-  const body = await req.json();
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return {
+      error: NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 }),
+    };
+  }
   const result = schema.safeParse(body);
 
   if (!result.success) {
