@@ -23,6 +23,7 @@
     "dist",
     "src/auth/guards-client.*",
     "src/auth/auth-components.*",
+    "src/auth/session.native.ts",
     "src/user-memory/analyzer.*",
     "src/seeds/**/*",
     "src/db/init-db.ts"

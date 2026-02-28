@@ -46,6 +46,9 @@
       "@giulio-leone/lib-shared/*": [
         "../onecoach-shared/packages/lib-shared/src/*"
       ],
+      "@giulio-leone/lib-shared/core-types": [
+        "../onecoach-shared/packages/lib-shared/src/utils/error/core-types.ts"
+      ],
       "@giulio-leone/lib-shared/utils/*": [
         "../onecoach-shared/packages/lib-shared/src/utils/*"
       ],

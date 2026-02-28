@@ -10,6 +10,11 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "src/error-handler.native.ts",
+    "src/native.ts",
+    "src/hooks/use-health-native.ts",
+    "src/hooks/use-iap-native.ts",
+    "src/core/native-client.ts"
   ]
 }
