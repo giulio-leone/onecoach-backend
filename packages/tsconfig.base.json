@@ -264,6 +264,15 @@
       ],
       "app/*": [
         "./packages/app/src/*"
+      ],
+      "@giulio-leone/contracts": [
+        "../onecoach-shared/packages/lib-shared/src/contracts/index.ts"
+      ],
+      "@giulio-leone/one-agent/framework": [
+        "../one-agent/src/framework/index.ts"
+      ],
+      "@giulio-leone/schemas/exercise": [
+        "../onecoach-schemas/src/exercise/input.schemas.ts"
       ]
     }
   }
