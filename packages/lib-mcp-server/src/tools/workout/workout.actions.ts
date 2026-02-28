@@ -519,7 +519,7 @@ export const addExerciseAction: AgenticActionHandler<WorkoutProgramData> = {
       id: payload.id || generateId('ex'),
       name: exerciseName,
       catalogExerciseId,
-      setGroups: payload.setGroups.map((sg) => {
+      setGroups: payload.setGroups.map((sg: any) => {
         const baseReps = sg.baseSet?.reps ?? exerciseRepRange.reps ?? 10;
         const baseRepsMax = sg.baseSet?.repsMax ?? exerciseRepRange.repsMax;
         const count = sg.count || 3;
@@ -651,11 +651,11 @@ export const addSupersetAction: AgenticActionHandler<WorkoutProgramData> = {
     if (!day) throw new Error(`Day ${dayIndex} not found`);
 
     // Build exercises with setGroups
-    const supersetExercises = payload.exercises.map((ex) => ({
+    const supersetExercises = payload.exercises.map((ex: any) => ({
       id: generateId('ex'),
       name: ex.name,
       catalogExerciseId: ex.catalogExerciseId || '',
-      setGroups: (ex.setGroups || [{ count: 3 }]).map((sg) => ({
+      setGroups: (ex.setGroups || [{ count: 3 }]).map((sg: any) => ({
         id: generateId('sg'),
         count: sg.count || 3,
         baseSet: { reps: sg.baseSet?.reps ?? 10, rest: sg.baseSet?.rest ?? 0 },
@@ -739,7 +739,7 @@ export const addCircuitAction: AgenticActionHandler<WorkoutProgramData> = {
       type: 'circuit' as const,
       id: generateId('cir'),
       name: payload.name,
-      exercises: payload.exercises.map((ex) => ({
+      exercises: payload.exercises.map((ex: any) => ({
         name: ex.name,
         reps: ex.reps,
         duration: ex.duration,
@@ -803,7 +803,7 @@ export const addWarmupAction: AgenticActionHandler<WorkoutProgramData> = {
       id: generateId('wup'),
       name: payload.name || 'Riscaldamento',
       durationMinutes: payload.durationMinutes ?? 10,
-      exercises: payload.exercises.map((ex) => ({
+      exercises: payload.exercises.map((ex: any) => ({
         name: ex.name,
         duration: ex.duration,
         reps: ex.reps,

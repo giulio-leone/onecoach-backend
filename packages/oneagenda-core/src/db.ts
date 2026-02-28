@@ -49,7 +49,7 @@ class OneAgendaDB {
       where: { id, userId },
       include: {
         milestones: true,
-      },
+      } as any,
     });
   }
 
@@ -65,7 +65,7 @@ class OneAgendaDB {
         targetDate: data.targetDate ? new Date(data.targetDate) : null,
         status: 'ACTIVE',
         percentComplete: 0,
-        context: data.metadata ?? {},
+        context: (data.metadata ?? {}) as any,
       },
     });
   }
@@ -99,7 +99,7 @@ class OneAgendaDB {
     });
 
     if (options?.summary) {
-      return tasks.map((t) => ({
+      return tasks.map((t: any) => ({
         id: t.id,
         title: t.title,
         status: t.status,
@@ -132,12 +132,12 @@ class OneAgendaDB {
         title: data.title,
         description: data.description,
         dueDate: data.dueDate ? new Date(data.dueDate) : null,
-        priority: data.priority ?? 'MEDIUM',
-        status: data.status ?? 'TODO',
+        priority: (data.priority ?? 'MEDIUM') as any,
+        status: (data.status ?? 'TODO') as any,
         estimatedMinutes: data.estimatedMinutes,
         goalId: data.goalId,
         projectId: data.projectId,
-        metadata: data.metadata ?? {},
+        metadata: (data.metadata ?? {}) as any,
       },
     });
   }
@@ -158,12 +158,12 @@ class OneAgendaDB {
         ...(data.dueDate !== undefined && {
           dueDate: data.dueDate ? new Date(data.dueDate) : null,
         }),
-        ...(data.priority !== undefined && { priority: data.priority }),
-        ...(data.status !== undefined && { status: data.status }),
+        ...(data.priority !== undefined && { priority: data.priority as any }),
+        ...(data.status !== undefined && { status: data.status as any }),
         ...(data.estimatedMinutes !== undefined && {
           estimatedMinutes: data.estimatedMinutes,
         }),
-        ...(data.metadata !== undefined && { metadata: data.metadata }),
+        ...(data.metadata !== undefined && { metadata: data.metadata as any }),
       },
     });
   }

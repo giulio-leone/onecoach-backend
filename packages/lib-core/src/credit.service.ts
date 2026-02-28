@@ -50,7 +50,7 @@ export class CreditService implements ICreditService {
       return false;
     }
 
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       const updatedUser = await tx.users.update({
         where: { id: params.userId },
         data: {
@@ -83,7 +83,7 @@ export class CreditService implements ICreditService {
     description: string;
     metadata?: Record<string, unknown>;
   }): Promise<void> {
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       const updatedUser = await tx.users.update({
         where: { id: params.userId },
         data: {
@@ -134,7 +134,7 @@ export class CreditService implements ICreditService {
       },
     });
 
-    return transactions.filter((t): t is typeof t & { userId: string } => t.userId !== null);
+    return transactions.filter((t: any): t is typeof t & { userId: string } => t.userId !== null);
   }
 
   async getCreditStats(userId: string): Promise<{

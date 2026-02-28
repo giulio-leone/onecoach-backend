@@ -40,7 +40,7 @@ interface LiveSessionFromContext {
 }
 
 function getLiveSessionFromContext(context: McpContext): LiveSessionFromContext | null {
-  const liveSession = (context as Record<string, unknown>)?.liveSession;
+  const liveSession = (context as Record<string, unknown>)?.liveSession as LiveSessionFromContext | null | undefined;
 
   logger.debug('[LiveCoaching] 📥 Context received:', {
     hasLiveSession: !!liveSession,
@@ -52,7 +52,7 @@ function getLiveSessionFromContext(context: McpContext): LiveSessionFromContext 
   });
 
   if (!liveSession?.sessionId) return null;
-  return liveSession;
+  return liveSession as LiveSessionFromContext;
 }
 
 // =====================================================

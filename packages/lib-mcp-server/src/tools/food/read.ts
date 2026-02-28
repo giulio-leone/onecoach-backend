@@ -30,7 +30,7 @@ export const foodReadTool: McpTool = {
         limit: args.pageSize,
         page: args.page,
         locale: 'it', // Defaulting to Italian as per FoodService default
-      });
+      } as any);
     }
 
     return await foodService.list({

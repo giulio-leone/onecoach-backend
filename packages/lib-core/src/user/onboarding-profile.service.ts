@@ -14,7 +14,7 @@ export async function saveOnboardingProfile(
 ): Promise<void> {
   const { name, age, sex, heightCm, weightKg } = profileData;
 
-  await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx: any) => {
     if (name) {
       await tx.users.update({
         where: { id: userId },

@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 /**
  * MCP Profile Tools
  *
@@ -11,7 +12,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { userProfileService, prisma, type Prisma } from '@giulio-leone/lib-core';
+import { userProfileService, prisma } from '@giulio-leone/lib-core';
 import { createId } from '@giulio-leone/lib-shared';
 
 // ============================================================================
@@ -38,7 +39,7 @@ export const profileGetTool: McpTool<ProfileGetArgs> = {
 
     const profile = await userProfileService.getSerialized(context.userId);
 
-    const result: Record<string, unknown> = { profile };
+    const result: Record<string, any> = { profile };
 
     if (args.includeMeasurements) {
       const measurements = await prisma.body_measurements.findMany({
@@ -315,7 +316,7 @@ Grasso corporeo: ${measurement.bodyFat ?? 'N/A'}%`
           type: 'text',
           text: `📏 **Misurazioni Corporee** (${measurements.length} trovate)
 
-${measurements.length > 0 ? measurements.map((m) => `- ${m.date.toISOString().split('T')[0]}: ${m.weight ?? 'N/A'} kg`).join('\n') : 'Nessuna misurazione trovata'}`,
+${measurements.length > 0 ? measurements.map((m: any) => `- ${m.date.toISOString().split('T')[0]}: ${m.weight ?? 'N/A'} kg`).join('\n') : 'Nessuna misurazione trovata'}`,
         },
       ],
       measurements,
@@ -530,7 +531,7 @@ export const goalGetTool: McpTool<GoalGetArgs> = {
           type: 'text',
           text: `🎯 **Obiettivi** (${goals.length} trovati)
 
-${goals.length > 0 ? goals.map((g) => `- ${g.type} (${g.status}) - Inizio: ${g.startDate.toISOString().split('T')[0]}`).join('\n') : 'Nessun obiettivo trovato'}`,
+${goals.length > 0 ? goals.map((g: any) => `- ${g.type} (${g.status}) - Inizio: ${g.startDate.toISOString().split('T')[0]}`).join('\n') : 'Nessun obiettivo trovato'}`,
         },
       ],
       goals,

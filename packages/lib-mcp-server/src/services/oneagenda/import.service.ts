@@ -1,5 +1,4 @@
 import type { Prisma } from '@prisma/client';
-import type { z } from 'zod';
 import { prisma } from '@giulio-leone/lib-core';
 import type {
   AIParseContext,

@@ -66,8 +66,8 @@ async function resolveEquipmentIds(
 
   for (const eq of equipment) {
     const translation =
-      eq.equipment_translations.find((t) => t.locale === locale) ||
-      eq.equipment_translations.find((t) => t.locale === DEFAULT_LOCALE) ||
+      eq.equipment_translations.find((t: any) => t.locale === locale) ||
+      eq.equipment_translations.find((t: any) => t.locale === DEFAULT_LOCALE) ||
       null;
 
     result[eq.id] = {
@@ -108,8 +108,8 @@ async function resolveMuscleIds(
 
   for (const muscle of muscles) {
     const translation =
-      muscle.muscle_translations.find((t) => t.locale === locale) ||
-      muscle.muscle_translations.find((t) => t.locale === DEFAULT_LOCALE) ||
+      muscle.muscle_translations.find((t: any) => t.locale === locale) ||
+      muscle.muscle_translations.find((t: any) => t.locale === DEFAULT_LOCALE) ||
       null;
 
     result[muscle.id] = {
@@ -150,8 +150,8 @@ async function resolveBodyPartIds(
 
   for (const bp of bodyParts) {
     const translation =
-      bp.body_part_translations.find((t) => t.locale === locale) ||
-      bp.body_part_translations.find((t) => t.locale === DEFAULT_LOCALE) ||
+      bp.body_part_translations.find((t: any) => t.locale === locale) ||
+      bp.body_part_translations.find((t: any) => t.locale === DEFAULT_LOCALE) ||
       null;
 
     result[bp.id] = {
@@ -192,8 +192,8 @@ async function resolveExerciseTypeIds(
 
   for (const et of exerciseTypes) {
     const translation =
-      et.exercise_type_translations.find((t) => t.locale === locale) ||
-      et.exercise_type_translations.find((t) => t.locale === DEFAULT_LOCALE) ||
+      et.exercise_type_translations.find((t: any) => t.locale === locale) ||
+      et.exercise_type_translations.find((t: any) => t.locale === DEFAULT_LOCALE) ||
       null;
 
     result[et.id] = {

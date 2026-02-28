@@ -110,7 +110,7 @@ export function useBodyMeasurementsRealtime({
         bodyMeasurementsKeys.list(userId),
         (old) => {
           if (!old) return [measurement];
-          return old.map((m) => (m.id === measurement.id ? measurement : m));
+          return old.map((m: any) => (m.id === measurement.id ? measurement : m));
         }
       );
 
@@ -130,7 +130,7 @@ export function useBodyMeasurementsRealtime({
         bodyMeasurementsKeys.list(userId),
         (old) => {
           if (!old) return [];
-          return old.filter((m) => m.id !== measurementId);
+          return old.filter((m: any) => m.id !== measurementId);
         }
       );
 

@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 /**
  * MCP Nutrition Day & Meal Tools
  *
@@ -8,7 +9,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, type Prisma } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -63,7 +64,7 @@ function parseWeeks(weeksJson: Prisma.JsonValue): Week[] {
   if (!weeksJson || !Array.isArray(weeksJson)) {
     return [];
   }
-  return weeksJson as Week[];
+  return weeksJson as unknown as Week[];
 }
 
 // Helper to serialize weeks for Prisma
@@ -93,13 +94,13 @@ export const nutritionGetDayTool: McpTool = {
     }
 
     const weeks = parseWeeks(plan.weeks);
-    const week = weeks.find((w) => w.weekNumber === args.weekNumber);
+    const week = weeks.find((w: any) => w.weekNumber === args.weekNumber);
 
     if (!week) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
     }
 
-    const day = week.days.find((d) => d.dayNumber === args.dayNumber);
+    const day = week.days.find((d: any) => d.dayNumber === args.dayNumber);
 
     if (!day) {
       throw new Error(`Giorno ${args.dayNumber} non trovato`);
@@ -114,7 +115,7 @@ export const nutritionGetDayTool: McpTool = {
 🍽️ **Pasti:** ${day.meals.length}
 📊 **Target:** ${day.totalCalories} kcal
 
-${day.meals.map((m) => `- ${m.time} ${m.name}: ${m.targetCalories} kcal`).join('\n')}`,
+${day.meals.map((m: any) => `- ${m.time} ${m.name}: ${m.targetCalories} kcal`).join('\n')}`,
         },
       ],
       day,
@@ -160,7 +161,7 @@ export const nutritionUpdateDayTool: McpTool = {
     if (args.calorieAdjustment) {
       day.totalCalories += args.calorieAdjustment;
       const adjustmentFactor = day.totalCalories / (day.totalCalories - args.calorieAdjustment);
-      day.meals.forEach((meal) => {
+      day.meals.forEach((meal: any) => {
         meal.targetCalories = Math.round(meal.targetCalories * adjustmentFactor);
       });
     }
@@ -208,12 +209,12 @@ export const nutritionCopyDayTool: McpTool = {
 
     const weeks = parseWeeks(plan.weeks);
 
-    const sourceWeekObj = weeks.find((w) => w.weekNumber === args.sourceWeek);
+    const sourceWeekObj = weeks.find((w: any) => w.weekNumber === args.sourceWeek);
     if (!sourceWeekObj) {
       throw new Error(`Settimana sorgente ${args.sourceWeek} non trovata`);
     }
 
-    const sourceDay = sourceWeekObj.days.find((d) => d.dayNumber === args.sourceDay);
+    const sourceDay = sourceWeekObj.days.find((d: any) => d.dayNumber === args.sourceDay);
     if (!sourceDay) {
       throw new Error(`Giorno sorgente ${args.sourceDay} non trovato`);
     }
@@ -280,26 +281,25 @@ export const nutritionGetMealTool: McpTool = {
     }
 
     const weeks = parseWeeks(plan.weeks);
-    const week = weeks.find((w) => w.weekNumber === args.weekNumber);
+    const week = weeks.find((w: any) => w.weekNumber === args.weekNumber);
 
     if (!week) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
     }
 
-    const day = week.days.find((d) => d.dayNumber === args.dayNumber);
+    const day = week.days.find((d: any) => d.dayNumber === args.dayNumber);
 
     if (!day) {
       throw new Error(`Giorno ${args.dayNumber} non trovato`);
     }
 
-    const meal = day.meals.find((m) => m.name.toLowerCase() === args.mealName.toLowerCase());
+    const meal = day.meals.find((m: any) => m.name.toLowerCase() === args.mealName.toLowerCase());
 
     if (!meal) {
       throw new Error(`Pasto "${args.mealName}" non trovato`);
     }
 
-    const totalMacros = meal.foods.reduce(
-      (acc, f) => ({
+    const totalMacros = meal.foods.reduce((acc: any, f: any) => ({
         calories: acc.calories + f.macros.calories,
         protein: acc.protein + f.macros.protein,
         carbs: acc.carbs + f.macros.carbs,
@@ -318,7 +318,7 @@ export const nutritionGetMealTool: McpTool = {
 📊 **Attuale:** ${totalMacros.calories} kcal | P: ${totalMacros.protein}g | C: ${totalMacros.carbs}g | F: ${totalMacros.fat}g
 
 🥗 **Alimenti (${meal.foods.length}):**
-${meal.foods.map((f) => `- ${f.name}: ${f.quantity}${f.unit} (${f.macros.calories} kcal)`).join('\n') || 'Nessun alimento'}`,
+${meal.foods.map((f: any) => `- ${f.name}: ${f.quantity}${f.unit} (${f.macros.calories} kcal)`).join('\n') || 'Nessun alimento'}`,
         },
       ],
       meal,
@@ -517,19 +517,19 @@ export const nutritionSwapMealTool: McpTool = {
     }
 
     const weeks = parseWeeks(plan.weeks);
-    const week = weeks.find((w) => w.weekNumber === args.weekNumber);
+    const week = weeks.find((w: any) => w.weekNumber === args.weekNumber);
 
     if (!week) {
       throw new Error(`Settimana ${args.weekNumber} non trovata`);
     }
 
-    const day = week.days.find((d) => d.dayNumber === args.dayNumber);
+    const day = week.days.find((d: any) => d.dayNumber === args.dayNumber);
 
     if (!day) {
       throw new Error(`Giorno ${args.dayNumber} non trovato`);
     }
 
-    const meal = day.meals.find((m) => m.name.toLowerCase() === args.mealName.toLowerCase());
+    const meal = day.meals.find((m: any) => m.name.toLowerCase() === args.mealName.toLowerCase());
 
     if (!meal) {
       throw new Error(`Pasto "${args.mealName}" non trovato`);
@@ -558,7 +558,7 @@ export const nutritionSwapMealTool: McpTool = {
 
 ${
   alternatives
-    .map((a) => {
+    .map((a: any) => {
       const macros = a.macrosPer100g as { calories: number } | null;
       return `- ${a.name}: ${macros?.calories ?? 0} kcal/100g`;
     })
@@ -608,7 +608,7 @@ export const nutritionSearchFoodTool: McpTool = {
           text:
             foods.length > 0
               ? `🔍 Trovati ${foods.length} alimenti per "${args.query}":\n\n${foods
-                  .map((f) => {
+                  .map((f: any) => {
                     const macros = f.macrosPer100g as {
                       calories: number;
                       protein: number;

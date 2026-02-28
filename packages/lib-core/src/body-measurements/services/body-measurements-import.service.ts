@@ -40,7 +40,7 @@ export class BodyMeasurementsImportService extends BaseImportService<ImportedBod
     // e.g. sort by date, validate logical ranges (weight > 0)
     // Here we mainly filter out invalid entries
 
-    const validMeasurements = parsed.measurements.filter((m) => {
+    const validMeasurements = parsed.measurements.filter((m: any) => {
       // Basic sanity checks
       if (!m.date) return false;
       const hasMetric = m.weight || m.bodyFat || m.chest || m.waist || m.hips; // Must have at least one metric

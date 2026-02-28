@@ -77,7 +77,7 @@ export function getServerEnv(): ServerEnv {
 
   if (!result.success) {
     const formatted = result.error.issues
-      .map((i) => `  ${i.path.join('.')}: ${i.message}`)
+      .map((i: any) => `  ${i.path.join('.')}: ${i.message}`)
       .join('\n');
     throw new Error(`❌ Invalid environment variables:\n${formatted}`);
   }

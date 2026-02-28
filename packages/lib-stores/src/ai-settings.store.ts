@@ -94,7 +94,7 @@ export const useAISettingsStore = create<AISettingsState>()(
 
       updateModel: (id, data) =>
         set((state) => ({
-          models: state.models.map((m) => {
+          models: state.models.map((m: any) => {
             if (m.id === id) return { ...m, ...data };
             // If setting as default, unset others
             if (data.isDefault) return { ...m, isDefault: false };
@@ -106,7 +106,7 @@ export const useAISettingsStore = create<AISettingsState>()(
 
       updateFeature: (id, data) =>
         set((state) => ({
-          featureConfigs: state.featureConfigs.map((f) =>
+          featureConfigs: state.featureConfigs.map((f: any) =>
             f.id === id ? { ...f, ...data } : f
           ),
         })),
@@ -115,17 +115,16 @@ export const useAISettingsStore = create<AISettingsState>()(
 
       updateModelAccess: (modelId, role, canSelect, models) =>
         set((state) => {
-          const existing = state.modelAccess.find(
-            (a) => a.modelId === modelId && a.role === role
+          const existing = state.modelAccess.find((a: any) => a.modelId === modelId && a.role === role
           );
           if (existing) {
             return {
-              modelAccess: state.modelAccess.map((a) =>
+              modelAccess: state.modelAccess.map((a: any) =>
                 a.id === existing.id ? { ...a, canSelect } : a
               ),
             };
           }
-          const modelName = models.find((m) => m.id === modelId)?.displayName || '';
+          const modelName = models.find((m: any) => m.id === modelId)?.displayName || '';
           return {
             modelAccess: [
               ...state.modelAccess,

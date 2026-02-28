@@ -12,7 +12,7 @@ let _getExerciseSets: ((exercise: { setGroups?: unknown[] }) => unknown[]) | nul
 async function loadGetExerciseSets() {
   if (!_getExerciseSets) {
     const mod = await import('@giulio-leone/one-workout');
-    _getExerciseSets = mod.getExerciseSets as typeof _getExerciseSets;
+    _getExerciseSets = mod.getExerciseSets as unknown as typeof _getExerciseSets;
   }
   return _getExerciseSets!;
 }
@@ -132,8 +132,8 @@ export async function getBodyMetricsTimeSeries(
   });
 
   return measurements
-    .filter((m) => m[metric] !== null)
-    .map((m) => ({
+    .filter((m: any) => m[metric] !== null)
+    .map((m: any) => ({
       date: m.date,
       value: Number(m[metric]),
     }));
@@ -188,7 +188,7 @@ export async function getWorkoutVolumeTimeSeries(
 
   const getExerciseSets = await loadGetExerciseSets();
 
-  return sessions.map((session) => {
+  return sessions.map((session: any) => {
     const exercises = toExerciseArrayTyped(session.exercises);
     // SSOT: usa getExerciseSets() invece di exercise.sets
     const totalVolume = exercises.reduce((sum: number, exercise) => {
@@ -196,7 +196,7 @@ export async function getWorkoutVolumeTimeSeries(
       const exerciseVolume = sets.reduce((setSum: number, set) => {
         return (
           setSum +
-          calculateSetVolume({ ...set, weight: set.weight ?? 0 } as Parameters<
+          calculateSetVolume({ ...(set as Record<string, unknown>), weight: (set as Record<string, unknown>).weight ?? 0 } as Parameters<
             typeof calculateSetVolume
           >[0])
         );
@@ -250,7 +250,7 @@ export async function getStrengthProgress(
     startWeight: startMax,
     endWeight: endMax,
     percentChange,
-    records: records.map((r) => ({
+    records: records.map((r: any) => ({
       date: r.date,
       weight: Number(r.weight),
       reps: r.reps,
@@ -271,10 +271,10 @@ export async function calculateWorkoutMetrics(userId: string, startDate: Date, e
     },
   });
 
-  const completedSessions = sessions.filter((s) => s.completedAt !== null);
+  const completedSessions = sessions.filter((s: any) => s.completedAt !== null);
 
   const getExerciseSets = await loadGetExerciseSets();
-  const totalVolume = completedSessions.reduce((sum: number, session) => {
+  const totalVolume = completedSessions.reduce((sum: number, session: any) => {
     const exercises = toExerciseArrayTyped(session.exercises);
     // SSOT: usa getExerciseSets() invece di exercise.sets
     const sessionVolume = exercises.reduce((exSum: number, exercise) => {
@@ -282,7 +282,7 @@ export async function calculateWorkoutMetrics(userId: string, startDate: Date, e
       const exerciseVolume = sets.reduce((setSum: number, set) => {
         return (
           setSum +
-          calculateSetVolume({ ...set, weight: set.weight ?? 0 } as Parameters<
+          calculateSetVolume({ ...(set as Record<string, unknown>), weight: (set as Record<string, unknown>).weight ?? 0 } as Parameters<
             typeof calculateSetVolume
           >[0])
         );
@@ -343,7 +343,7 @@ export async function calculateNutritionAdherence(
   };
   // Calculate average macros
   const totals = logs.reduce(
-    (sum: MacroTotals, log) => {
+    (sum: MacroTotals, log: any) => {
       const actualMacros = toMacros(log.actualDailyMacros);
       return {
         calories: sum.calories + actualMacros.calories,
@@ -403,8 +403,8 @@ export async function getNutritionMacrosTimeSeries(
   });
 
   return logs
-    .filter((log) => log.actualDailyMacros !== null)
-    .map((log) => {
+    .filter((log: any) => log.actualDailyMacros !== null)
+    .map((log: any) => {
       const macros = log.actualDailyMacros as Record<string, unknown> | null;
       if (!macros || typeof macros !== 'object') {
         return { date: log.date, value: 0 };
@@ -460,7 +460,7 @@ export async function generateAnalyticsReport(
   // Group by exercise and calculate gains
   type PerformanceRecord = (typeof performanceRecords)[number];
   const exerciseMap = new Map<string, PerformanceRecord[]>();
-  performanceRecords.forEach((record) => {
+  performanceRecords.forEach((record: any) => {
     if (!exerciseMap.has(record.exerciseId)) {
       exerciseMap.set(record.exerciseId, []);
     }
@@ -499,14 +499,14 @@ export async function generateAnalyticsReport(
 
   // Lookup nome esercizio dalle traduzioni (locale it), fallback exerciseId
   if (strengthGains.length > 0) {
-    const exerciseIds = strengthGains.map((g) => g.exerciseId);
+    const exerciseIds = strengthGains.map((g: any) => g.exerciseId);
     const translations = await prisma.exercise_translations.findMany({
       where: { exerciseId: { in: exerciseIds }, locale: 'it' },
       select: { exerciseId: true, name: true },
     });
-    const nameMap = new Map(translations.map((t) => [t.exerciseId, t.name] as const));
+    const nameMap = new Map(translations.map((t: any) => [t.exerciseId, t.name] as const));
     for (const g of strengthGains) {
-      g.exerciseName = nameMap.get(g.exerciseId) || g.exerciseId;
+      g.exerciseName = (nameMap.get(g.exerciseId) as unknown as string) || g.exerciseId;
     }
   }
 
@@ -524,7 +524,7 @@ export async function generateAnalyticsReport(
 
   type MacroSum = { calories: number; protein: number; carbs: number; fats: number };
   const avgMacros = nutritionLogs.reduce(
-    (sum: MacroSum, log) => {
+    (sum: MacroSum, log: any) => {
       const macros = log.actualDailyMacros as Record<string, number> | null;
       if (macros && typeof macros === 'object') {
         return {
@@ -549,7 +549,7 @@ export async function generateAnalyticsReport(
   let calorieVariance: Array<{ date: string; target: number; actual: number; variance: number }> =
     [];
   if (nutritionLogs.length > 0) {
-    const planIds = Array.from(new Set(nutritionLogs.map((l) => l.planId).filter(Boolean)));
+    const planIds = Array.from(new Set(nutritionLogs.map((l: any) => l.planId).filter(Boolean)));
     const plans = planIds.length
       ? await prisma.nutrition_plans.findMany({ where: { id: { in: planIds } } })
       : [];
@@ -560,8 +560,8 @@ export async function generateAnalyticsReport(
     }
 
     calorieVariance = nutritionLogs
-      .filter((log) => log.actualDailyMacros)
-      .map((log) => {
+      .filter((log: any) => log.actualDailyMacros)
+      .map((log: any) => {
         const target = planTargetMap.get(log.planId)?.calories ?? 0;
         const actual = (log.actualDailyMacros as Record<string, number> | null)?.calories ?? 0;
         const variance = target > 0 ? ((actual - target) / target) * 100 : 0;
@@ -581,7 +581,7 @@ export async function generateAnalyticsReport(
   );
   // Considera giorni unici con almeno un log
   const uniqueLoggedDays = new Set(
-    nutritionLogs.map((l) => new Date(l.date.toDateString()).toISOString())
+    nutritionLogs.map((l: any) => new Date(l.date.toDateString()).toISOString())
   );
   const adherenceRate = (uniqueLoggedDays.size / totalDaysInPeriod) * 100;
 
@@ -598,7 +598,7 @@ export async function generateAnalyticsReport(
   };
   if (userPlans.length > 0) {
     // Preferisci un piano con status ACTIVE, altrimenti il più recente
-    const activePlan = userPlans.find((p) => p.status === 'ACTIVE') ?? userPlans[0]!;
+    const activePlan = userPlans.find((p: any) => p.status === 'ACTIVE') ?? userPlans[0]!;
     const targetMacros = activePlan.targetMacros;
     if (targetMacros) {
       targetForVariance = toMacros(targetMacros as Prisma.JsonValue);
@@ -630,8 +630,8 @@ export async function generateAnalyticsReport(
     where: { userId },
   });
 
-  const activeGoals = goals.filter((g) => g.status === 'ACTIVE').map(toUserGoal);
-  const completedGoals = goals.filter((g) => g.status === 'COMPLETED').map(toUserGoal);
+  const activeGoals = goals.filter((g: any) => g.status === 'ACTIVE').map(toUserGoal);
+  const completedGoals = goals.filter((g: any) => g.status === 'COMPLETED').map(toUserGoal);
 
   return {
     userId,
@@ -741,7 +741,7 @@ export async function createUserGoal(
   };
 
   const progressLogs: Prisma.InputJsonValue[] =
-    goal.progressLogs?.map((log) => ({
+    goal.progressLogs?.map((log: any) => ({
       date: log.date instanceof Date ? log.date.toISOString() : log.date,
       value: log.value,
       notes: log.notes ?? null,

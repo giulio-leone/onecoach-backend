@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 /**
  * MCP Athlete & Coach Tools
  *
@@ -9,7 +10,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, type Prisma } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { arrayToToolRecord } from '../../utils/helpers';
 
 // ============================================================================
@@ -65,8 +66,7 @@ export const athleteListTool: McpTool<AthleteListParams> = {
           text:
             athletes.length > 0
               ? `Trovati ${athletes.length} atleti:\n${athletes
-                  .map(
-                    (a) =>
+                  .map((a: any) =>
                       `- ${a.name ?? 'N/A'} (${a.email}) - ${a.status === 'ACTIVE' ? '🟢' : '🔴'} ${a.status}`
                   )
                   .join('\n')}`
@@ -232,7 +232,7 @@ export const athleteGetMaxesTool: McpTool<AthleteGetMaxesParams> = {
           text:
             maxes.length > 0
               ? `💪 **Massimali:**\n${maxes
-                  .map((m) => `- Exercise ${m.exerciseId}: ${m.oneRepMax}kg 1RM`)
+                  .map((m: any) => `- Exercise ${m.exerciseId}: ${m.oneRepMax}kg 1RM`)
                   .join('\n')}`
               : 'Nessun massimale registrato',
         },

@@ -1,6 +1,6 @@
 {
   "name": "@giulio-leone/lib-food",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "Servizi per il dominio alimenti",
   "type": "module",
   "main": "dist/index.js",

@@ -77,7 +77,7 @@ export const analyticsAthleteOverviewTool: McpTool<AnalyticsAthleteOverviewParam
     }
 
     // Sessions with completedAt are considered completed
-    const completedWorkouts = workoutSessions.filter((s) => s.completedAt !== null).length;
+    const completedWorkouts = workoutSessions.filter((s: any) => s.completedAt !== null).length;
     const workoutCompletionRate =
       workoutSessions.length > 0
         ? Math.round((completedWorkouts / workoutSessions.length) * 100)

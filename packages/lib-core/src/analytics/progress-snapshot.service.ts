@@ -13,11 +13,11 @@ let _getExerciseSets: ((exercise: { setGroups?: unknown[] }) => unknown[]) | nul
 async function loadGetExerciseSets() {
   if (!_getExerciseSets) {
     const mod = await import('@giulio-leone/one-workout');
-    _getExerciseSets = mod.getExerciseSets as typeof _getExerciseSets;
+    _getExerciseSets = mod.getExerciseSets as unknown as typeof _getExerciseSets;
   }
   return _getExerciseSets!;
 }
-import type { Exercise } from '@giulio-leone/types/core';
+import type { Exercise } from '@giulio-leone/types/workout';
 import { Prisma } from '@prisma/client';
 
 import { logger } from '../logger.service';
@@ -77,11 +77,11 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   // Calculate average volume (SSOT: usa getExerciseSets)
   const getExerciseSets = await loadGetExerciseSets();
   let totalVolume = 0;
-  completedSessions30d.forEach((session) => {
+  completedSessions30d.forEach((session: any) => {
     const exercises = session.exercises as Exercise[];
     exercises.forEach((exercise: Exercise) => {
       const sets = getExerciseSets(exercise);
-      sets.forEach((set) => {
+      sets.forEach((set: any) => {
         if (set.done && set.repsDone && set.weightDone) {
           totalVolume += set.repsDone * set.weightDone;
         }
@@ -107,7 +107,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   // Group by exercise and calculate progress
   type PerformanceRecord = (typeof performanceRecords)[number];
   const exerciseMap = new Map<string, PerformanceRecord[]>();
-  performanceRecords.forEach((record) => {
+  performanceRecords.forEach((record: any) => {
     if (!exerciseMap.has(record.exerciseId)) {
       exerciseMap.set(record.exerciseId, []);
     }
@@ -173,7 +173,7 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
   let totalCarbs = 0;
   let totalFats = 0;
 
-  nutritionLogsWithMacros.forEach((log) => {
+  nutritionLogsWithMacros.forEach((log: any) => {
     const macros = log.actualDailyMacros as Record<string, number> | null;
     if (macros) {
       totalCalories += macros.calories || 0;
@@ -239,8 +239,8 @@ export async function generateProgressSnapshot(userId: string, date: Date) {
     avgCarbs: new Prisma.Decimal(avgCarbs),
     avgFats: new Prisma.Decimal(avgFats),
     adherenceRate: new Prisma.Decimal(adherenceRate),
-    activeGoals: activeGoals.map((g) => g.id),
-    completedGoals: completedGoals.map((g) => g.id),
+    activeGoals: activeGoals.map((g: any) => g.id),
+    completedGoals: completedGoals.map((g: any) => g.id),
   };
 
   const snapshot = existingSnapshot
@@ -312,7 +312,7 @@ export async function generateSnapshotsForAllUsers(date: Date) {
   });
 
   const results = await Promise.allSettled(
-    users.map((user) => generateProgressSnapshot(user.id, date))
+    users.map((user: any) => generateProgressSnapshot(user.id, date))
   );
 
   const successful = results.filter(

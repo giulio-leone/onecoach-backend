@@ -83,7 +83,7 @@ export const useBodyMeasurementsStore = create<BodyMeasurementsStore>((set) => (
 
   handleRealtimeUpdate: (measurement) => {
     set((state) => {
-      const newMeasurements = state.measurements.map((m) =>
+      const newMeasurements = state.measurements.map((m: any) =>
         m.id === measurement.id ? measurement : m
       );
       const { sorted, latest } = processAndSort(newMeasurements);
@@ -93,7 +93,7 @@ export const useBodyMeasurementsStore = create<BodyMeasurementsStore>((set) => (
 
   handleRealtimeDelete: (measurementId) => {
     set((state) => {
-      const newMeasurements = state.measurements.filter((m) => m.id !== measurementId);
+      const newMeasurements = state.measurements.filter((m: any) => m.id !== measurementId);
       const { sorted, latest } = processAndSort(newMeasurements);
       return { measurements: sorted, latest };
     });

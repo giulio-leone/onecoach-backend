@@ -582,7 +582,7 @@ export function useRealtimeListSync<T extends { id: string | number }>({
 
       queryClient.setQueryData(queryKey, (oldData: T[] | undefined) => {
         if (!oldData) return [record];
-        return oldData.map((item) => (item.id === record.id ? record : item));
+        return oldData.map((item: any) => (item.id === record.id ? record : item));
       });
 
       logger.log('Synced UPDATE', record.id);
@@ -597,7 +597,7 @@ export function useRealtimeListSync<T extends { id: string | number }>({
 
       queryClient.setQueryData(queryKey, (oldData: T[] | undefined) => {
         if (!oldData) return [];
-        return oldData.filter((item) => item.id !== record.id);
+        return oldData.filter((item: any) => item.id !== record.id);
       });
 
       logger.log('Synced DELETE', record.id);

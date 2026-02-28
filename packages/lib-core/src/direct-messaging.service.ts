@@ -202,11 +202,11 @@ class DirectMessagingService implements IDirectMessagingService {
     });
 
     // Batch calculate unread counts in a single query
-    const conversationIds = conversations.map((c) => c.id);
+    const conversationIds = conversations.map((c: any) => c.id);
     const unreadCounts = await this.batchGetUnreadCounts(conversationIds, userId);
 
     // Map unread counts to conversations
-    return conversations.map((conv) => ({
+    return conversations.map((conv: any) => ({
       ...conv,
       unreadCount: unreadCounts.get(conv.id) ?? 0,
       lastMessage: conv.messages[0] || null,
@@ -280,7 +280,7 @@ class DirectMessagingService implements IDirectMessagingService {
     isImportant = false
   ): Promise<direct_messages> {
     // Create message and update conversation in transaction
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // Create message
       const message = await tx.direct_messages.create({
         data: {
@@ -341,7 +341,7 @@ class DirectMessagingService implements IDirectMessagingService {
     });
 
     // Map to include isRead flag
-    return messages.map((msg) => ({
+    return messages.map((msg: any) => ({
       ...msg,
       isRead: msg.reads.length > 0,
     })) as DirectMessageWithSender[];

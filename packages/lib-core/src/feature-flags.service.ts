@@ -251,12 +251,12 @@ export async function getFlagMetricsAggregated(flagKey: string) {
   });
 
   const totalEvents = metrics.length;
-  const enabledCount = metrics.filter((m) => m.event === 'ENABLED').length;
-  const disabledCount = metrics.filter((m) => m.event === 'DISABLED').length;
-  const evaluatedCount = metrics.filter((m) => m.event === 'EVALUATED').length;
-  const errorCount = metrics.filter((m) => m.event === 'ERROR').length;
+  const enabledCount = metrics.filter((m: any) => m.event === 'ENABLED').length;
+  const disabledCount = metrics.filter((m: any) => m.event === 'DISABLED').length;
+  const evaluatedCount = metrics.filter((m: any) => m.event === 'EVALUATED').length;
+  const errorCount = metrics.filter((m: any) => m.event === 'ERROR').length;
 
-  const uniqueUsers = new Set(metrics.filter((m) => m.userId).map((m) => m.userId)).size;
+  const uniqueUsers = new Set(metrics.filter((m: any) => m.userId).map((m: any) => m.userId)).size;
 
   return {
     totalEvents,
@@ -329,7 +329,7 @@ export async function getFlagAverageRating(flagKey: string): Promise<number | nu
     return null;
   }
 
-  const sum = feedback.reduce((acc, f) => acc + f.rating, 0);
+  const sum = feedback.reduce((acc: any, f: any) => acc + f.rating, 0);
   return sum / feedback.length;
 }
 

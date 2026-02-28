@@ -22,8 +22,8 @@ const { Pool } = _require('pg') as typeof import('pg');
 
 import { logger } from './logger.service';
 const globalForPrisma = globalThis as unknown as {
-  prisma_updated: PrismaClient | undefined;
-  pool: Pool | undefined;
+  prisma_updated: InstanceType<typeof PrismaClient> | undefined;
+  pool: InstanceType<typeof Pool> | undefined;
   prismaInitLogged?: boolean;
 };
 
@@ -82,7 +82,7 @@ function normalizeDatabaseUrl(url: string): string {
 }
 
 // Lazy getter per Prisma Client
-function getPrismaClient(): PrismaClient {
+function getPrismaClient(): InstanceType<typeof PrismaClient> {
   ensureDatabaseUrl();
 
   if (!globalForPrisma.prisma_updated) {
@@ -103,6 +103,30 @@ function getPrismaClient(): PrismaClient {
     const defaultPoolSize = isServerless ? 2 : 10;
     const connectionTimeoutMillis = Number(process.env.PG_CONNECTION_TIMEOUT_MS ?? 30000);
     const idleTimeoutMillis = Number(process.env.PG_IDLE_TIMEOUT_MS ?? 30000);
+    const dbHost = (() => {
+      try {
+        return new URL(dbUrl).hostname.toLowerCase();
+      } catch {
+        return '';
+      }
+    })();
+    const isLocalDatabase = ['localhost', '127.0.0.1', '::1', 'postgres'].includes(dbHost);
+    const sslRequiredByUrl =
+      /(?:^|[?&])sslmode=require(?:&|$)/i.test(rawDbUrl) || /(?:^|[?&])ssl=(?:1|true)(?:&|$)/i.test(rawDbUrl);
+    const sslDisabledByUrl =
+      /(?:^|[?&])sslmode=disable(?:&|$)/i.test(rawDbUrl) || /(?:^|[?&])ssl=(?:0|false)(?:&|$)/i.test(rawDbUrl);
+    const sslConfig =
+      process.env.PGSSL === 'disable'
+        ? false
+        : process.env.PGSSL === 'require'
+          ? { rejectUnauthorized: false }
+          : sslDisabledByUrl
+            ? false
+            : sslRequiredByUrl
+              ? { rejectUnauthorized: false }
+              : isLocalDatabase
+                ? false
+                : { rejectUnauthorized: false };
 
     // Log connection pool info only once per process (avoid spam during hot reloads)
     if (process.env.NODE_ENV === 'development' && !globalForPrisma.prismaInitLogged) {
@@ -121,8 +145,8 @@ function getPrismaClient(): PrismaClient {
       new Pool({
         connectionString: dbUrl,
         // Per certificati self-signed (Supabase/Vercel), rejectUnauthorized: false
-        // Il parametro sslmode=require nell'URL è sufficiente, ma questo è un fallback
-        ssl: process.env.PGSSL === 'disable' ? false : { rejectUnauthorized: false },
+        // In locale (localhost/postgres) SSL viene disabilitato di default.
+        ssl: sslConfig,
         max: Number(process.env.PG_POOL_MAX ?? defaultPoolSize),
         // Timeout configurazioni per evitare "pool checkout timeout"
         connectionTimeoutMillis,
@@ -165,13 +189,13 @@ function getPrismaClient(): PrismaClient {
 // 3. I model accessors (es. 'generation_states') sono getters sul prototype
 
 // Singleton cache nel modulo
-let _prismaInstance: PrismaClient | undefined;
+let _prismaInstance: InstanceType<typeof PrismaClient> | undefined;
 
 /**
  * Get the singleton PrismaClient instance.
  * Creates the client on first call, then reuses it.
  */
-export function getPrisma(): PrismaClient {
+export function getPrisma(): InstanceType<typeof PrismaClient> {
   if (!_prismaInstance) {
     _prismaInstance = getPrismaClient();
   }
@@ -186,7 +210,7 @@ export function getPrisma(): PrismaClient {
  * import { prisma } from '@giulio-leone/lib-core';
  * const users = await prisma.users.findMany(); // Client created here
  */
-export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
+export const prisma: InstanceType<typeof PrismaClient> = new Proxy({} as InstanceType<typeof PrismaClient>, {
   get(_target, prop) {
     const client = getPrisma();
     const value = (client as unknown as Record<string | symbol, unknown>)[prop];

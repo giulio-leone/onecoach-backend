@@ -1,5 +1,17 @@
 # @giulio-leone/lib-core
 
+## 0.15.2
+
+### Patch Changes
+
+- 4cab47c: chore: prepare publish pipeline — verify all packages
+  - Add `files: ["dist"]` to @giulio-leone/core and @giulio-leone/lib-core
+  - Verify all 14 publishable @giulio-leone packages have correct publishConfig
+  - Confirm changeset config and GitHub Actions workflow are ready
+
+- Updated dependencies [4cab47c]
+  - @giulio-leone/lib-shared@0.14.1
+
 ## 0.1.1
 
 ### Patch Changes

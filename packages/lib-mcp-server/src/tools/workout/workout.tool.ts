@@ -30,9 +30,9 @@ function createAgenticTool<TEntity>(config: {
   const parametersSchema = z
     .object({
       action: z.enum(actionNames).describe('Action to perform'),
-      target: z.record(z.unknown()).optional().describe('Target specifier'),
-      changes: z.record(z.unknown()).optional().describe('Changes to apply'),
-      newData: z.record(z.unknown()).optional().describe('New data to add'),
+      target: z.record(z.string(), z.unknown()).optional().describe('Target specifier'),
+      changes: z.record(z.string(), z.unknown()).optional().describe('Changes to apply'),
+      newData: z.record(z.string(), z.unknown()).optional().describe('New data to add'),
     })
     .passthrough();
 
@@ -163,7 +163,7 @@ CHANGES FIELD MAPPING (for update_setgroup):
 
     console.log('[workout.tool] ✅ Loaded program with', normalized.weeks.length, 'weeks');
 
-    return { weeks: normalized.weeks as WorkoutProgramData['weeks'] };
+    return { weeks: normalized.weeks as unknown as WorkoutProgramData['weeks'] };
   },
 
   saveEntity: async (

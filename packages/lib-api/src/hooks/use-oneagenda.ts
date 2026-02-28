@@ -77,7 +77,7 @@ export function useUpdateTaskStatus() {
       if (previousTasks) {
         queryClient.setQueryData<Task[]>(
           oneagendaKeys.tasks.list(),
-          previousTasks.map((task) => (task.id === id ? { ...task, status } : task))
+          previousTasks.map((task: any) => (task.id === id ? { ...task, status } : task))
         );
       }
 
@@ -117,7 +117,7 @@ export function useDeleteTask() {
       if (previousTasks) {
         queryClient.setQueryData<Task[]>(
           oneagendaKeys.tasks.list(),
-          previousTasks.filter((task) => task.id !== id)
+          previousTasks.filter((task: any) => task.id !== id)
         );
       }
 
@@ -196,7 +196,7 @@ export function useDeleteGoal() {
       if (previousGoals) {
         queryClient.setQueryData<Goal[]>(
           oneagendaKeys.goals.list(),
-          previousGoals.filter((goal) => goal.id !== id)
+          previousGoals.filter((goal: any) => goal.id !== id)
         );
       }
 

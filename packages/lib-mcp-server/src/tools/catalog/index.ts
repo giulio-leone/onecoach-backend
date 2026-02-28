@@ -93,11 +93,11 @@ Returns matching exercises with their IDs and names.`,
       return {
         success: true,
         found: deduped.length,
-        exercises: deduped.map((e) => ({
+        exercises: deduped.map((e: any) => ({
           catalogExerciseId: e.exerciseId, // This ID is needed to add the exercise
           name: e.name,
-          muscles: e.exercises.exercise_muscles.map((m) => m.muscles.name),
-          equipment: e.exercises.exercise_equipments.map((eq) => eq.equipments.name),
+          muscles: e.exercises.exercise_muscles.map((m: any) => m.muscles.name),
+          equipment: e.exercises.exercise_equipments.map((eq: any) => eq.equipments.name),
         })),
       };
     } catch (error) {
@@ -163,7 +163,7 @@ Returns matching foods with their IDs, names, and macros.`,
       return {
         success: true,
         found: foods.length,
-        foods: foods.map((f) => {
+        foods: foods.map((f: any) => {
           const macros = f.macrosPer100g as {
             protein?: number;
             carbs?: number;

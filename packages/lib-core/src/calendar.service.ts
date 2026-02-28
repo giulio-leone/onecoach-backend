@@ -143,8 +143,8 @@ export async function getDayPlan(userId: string, date: Date | string): Promise<D
     date: targetDate,
     nutritionAssignments: mapped.filter((a: CalendarAssignment) => a.planType === 'NUTRITION'),
     workoutAssignments: mapped.filter((a: CalendarAssignment) => a.planType === 'WORKOUT'),
-    hasNutrition: mapped.some((a) => a.planType === 'NUTRITION'),
-    hasWorkout: mapped.some((a) => a.planType === 'WORKOUT'),
+    hasNutrition: mapped.some((a: any) => a.planType === 'NUTRITION'),
+    hasWorkout: mapped.some((a: any) => a.planType === 'WORKOUT'),
   };
 }
 
@@ -196,7 +196,7 @@ export async function createCalendarAssignmentRange(
 
   // Use transaction with deleteMany + createMany for better performance
   // This is more efficient than N individual upserts
-  const assignments = await prisma.$transaction(async (tx) => {
+  const assignments = await prisma.$transaction(async (tx: any) => {
     // First, delete any existing assignments for this range
     await tx.calendar_assignments.deleteMany({
       where: {

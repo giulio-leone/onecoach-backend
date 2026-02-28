@@ -29,8 +29,8 @@ export const bodyMeasurementsListTool: McpTool<z.infer<typeof listParams>> = {
     if (!userId) throw new Error('User ID required');
 
     const where: Record<string, unknown> = { userId };
-    if (args.startDate) where.date = { ...where.date, gte: new Date(args.startDate) };
-    if (args.endDate) where.date = { ...where.date, lte: new Date(args.endDate) };
+    if (args.startDate) where.date = { ...(where.date as Record<string, unknown>), gte: new Date(args.startDate) };
+    if (args.endDate) where.date = { ...(where.date as Record<string, unknown>), lte: new Date(args.endDate) };
 
     const [items, total] = await Promise.all([
       prisma.body_measurements.findMany({

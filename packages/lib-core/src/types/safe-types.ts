@@ -106,6 +106,10 @@ export function getErrorStack(error: unknown): string | undefined {
 export interface ExerciseCatalogItem {
   id: string;
   name: string;
+  muscleGroups: string[];
+  equipment: string[];
+  difficulty: string;
+  category: string;
 }
 
 /**

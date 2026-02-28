@@ -200,7 +200,7 @@ The tool handles ID resolution automatically. Do NOT use database IDs directly.`
     }
 
     // Resolve muscle names → IDs
-    const muscleNames = args.muscles.map((m) => m.name);
+    const muscleNames = args.muscles.map((m: any) => m.name);
     const muscleIds = await validateMusclesByName(muscleNames);
 
     if (muscleIds.length !== muscleNames.length) {

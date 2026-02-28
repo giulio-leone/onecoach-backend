@@ -309,7 +309,7 @@ export const useCopilotStore = create<CopilotState>()(
       models: [],
       selectedModelId: null,
       setModels: (models) => {
-        const defaultModel = models.find((m) => m.isDefault);
+        const defaultModel = models.find((m: any) => m.isDefault);
         set({
           models,
           selectedModelId: defaultModel?.id || models[0]?.id || null,
@@ -453,7 +453,7 @@ export const selectCopilotWidth = (state: CopilotState) => state.width;
 export const selectCopilotFeatures = (state: CopilotState) => state.features;
 export const selectCopilotModels = (state: CopilotState) => state.models;
 export const selectCopilotSelectedModel = (state: CopilotState) =>
-  state.models.find((m) => m.id === state.selectedModelId) || null;
+  state.models.find((m: any) => m.id === state.selectedModelId) || null;
 export const selectCopilotDisplayMode = (state: CopilotState) => state.displayMode;
 export const selectCopilotIsResizing = (state: CopilotState) => state.isResizing;
 

@@ -51,8 +51,7 @@ export const workoutApplyProgressionTool: McpTool<ApplyProgressionParams> = {
 
     // 1. Group exercises to find the target
     const groups = WorkoutProgressionService.groupExercises(normalizedProgram);
-    const targetGroup = groups.find(
-      (g) =>
+    const targetGroup = groups.find((g: any) =>
         g.name.toLowerCase().includes(targetExerciseName.toLowerCase()) ||
         g.exerciseId.toLowerCase().includes(targetExerciseName.toLowerCase())
     );
@@ -115,8 +114,7 @@ export const workoutGranularUpdateTool: McpTool<GranularUpdateParams> = {
 
     // 1. Group to find occurrences
     const groups = WorkoutProgressionService.groupExercises(normalizedProgram);
-    const targetGroup = groups.find(
-      (g) =>
+    const targetGroup = groups.find((g: any) =>
         g.name.toLowerCase().includes(targetExerciseName.toLowerCase()) ||
         g.exerciseId.toLowerCase().includes(targetExerciseName.toLowerCase())
     );
@@ -126,8 +124,7 @@ export const workoutGranularUpdateTool: McpTool<GranularUpdateParams> = {
     }
 
     // 2. Find specific occurrence index
-    const occurrence = targetGroup.occurrences.find(
-      (o) => o.weekNumber === weekNumber && o.dayNumber === dayNumber
+    const occurrence = targetGroup.occurrences.find((o: any) => o.weekNumber === weekNumber && o.dayNumber === dayNumber
     );
 
     if (!occurrence) {
@@ -157,7 +154,7 @@ export const workoutGranularUpdateTool: McpTool<GranularUpdateParams> = {
     const { sets, ...setData } = modifications;
     if (Object.keys(setData).length > 0) {
       group.baseSet = { ...group.baseSet, ...setData };
-      group.sets = (group.sets ?? []).map((s) => ({ ...s, ...setData }));
+      group.sets = (group.sets ?? []).map((s: any) => ({ ...s, ...setData }));
     }
 
     // 4. Apply

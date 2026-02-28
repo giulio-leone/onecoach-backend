@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 /**
  * MCP Workout Program Tools
  *
@@ -14,7 +15,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, Prisma } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import {
   createMcpTextResponse,
@@ -125,12 +126,12 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
 
     if (args.customStructure?.weeks && args.customStructure.weeks.length > 0) {
       // Use provided structure
-      weeks = args.customStructure.weeks.map((w) => ({
+      weeks = args.customStructure.weeks.map((w: any) => ({
         weekNumber: w.weekNumber,
         name: w.name ?? `Settimana ${w.weekNumber}`,
         isDeload: w.isDeload ?? false,
         days:
-          w.days?.map((d) => ({
+          w.days?.map((d: any) => ({
             dayNumber: d.dayNumber,
             name: d.name,
             targetMuscles: d.targetMuscles,
@@ -258,7 +259,7 @@ export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
       throw new Error('Programma non trovato');
     }
 
-    const weeks = program.weeks as WorkoutWeek[];
+    const weeks = program.weeks as unknown as WorkoutWeek[];
 
     console.log('[workout_get_program] ✅ Program found:', {
       id: program.id,
@@ -277,7 +278,7 @@ export const workoutGetProgramTool: McpTool<WorkoutGetProgramArgs> = {
 📌 Stato: ${program.status}
 
 **Struttura:**
-${weeks.map((w) => `• Settimana ${w.weekNumber}: ${w.days.length} giorni - ${w.days.map((d) => `Day ${d.dayNumber} (${d.dayTitle || d.dayName || 'Training'}): ${d.exercises?.length || 0} esercizi`).join(', ')}`).join('\n')}
+${weeks.map((w: any) => `• Settimana ${w.weekNumber}: ${w.days.length} giorni - ${w.days.map((d: any) => `Day ${d.dayNumber} (${d.dayTitle || d.dayName || 'Training'}): ${d.exercises?.length || 0} esercizi`).join(', ')}`).join('\n')}
 
 **NOTA:** L'oggetto 'program' completo è incluso nella response. Usalo con i tool granulari:
 - workout_granular_setgroup_update: per modificare serie/ripetizioni di un esercizio
@@ -323,8 +324,7 @@ export const workoutListProgramsTool: McpTool<WorkoutListProgramsArgs> = {
     return createMcpTextResponse(
       programs.length > 0
         ? `📋 **${programs.length} Programmi**\n\n${programs
-            .map(
-              (p) =>
+            .map((p: any) =>
                 `• **${p.name}** (${p.durationWeeks} sett.)\n  ${p.goals.join(', ')} | ${p.status}`
             )
             .join('\n\n')}`

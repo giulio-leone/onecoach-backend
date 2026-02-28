@@ -94,11 +94,11 @@ export class IntelligentAssistantService {
     const taskList = tasks as Array<Record<string, unknown>>;
     const goalList = goals as Array<Record<string, unknown>>;
 
-    const completed = taskList.filter((t) => t.status === 'DONE').length;
+    const completed = taskList.filter((t: any) => t.status === 'DONE').length;
     const total = taskList.length;
     const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-    const goalProgress = goalList.map((g) => ({
+    const goalProgress = goalList.map((g: any) => ({
       id: g.id,
       title: g.title,
       percentComplete: g.percentComplete ?? 0,
@@ -110,8 +110,8 @@ export class IntelligentAssistantService {
       tasks: {
         total,
         completed,
-        inProgress: taskList.filter((t) => t.status === 'IN_PROGRESS').length,
-        blocked: taskList.filter((t) => t.status === 'BLOCKED').length,
+        inProgress: taskList.filter((t: any) => t.status === 'IN_PROGRESS').length,
+        blocked: taskList.filter((t: any) => t.status === 'BLOCKED').length,
         completionRate,
       },
       goals: goalProgress,

@@ -144,7 +144,7 @@ export const useMaxesStore = create<MaxesStore>()(
       // Data management
       setMaxes: (maxes) => {
         const maxesMap = new Map<string, Max>();
-        maxes.forEach((max) => {
+        maxes.forEach((max: any) => {
           maxesMap.set(max.exerciseId, max);
         });
         set({ maxes: maxesMap, error: null });

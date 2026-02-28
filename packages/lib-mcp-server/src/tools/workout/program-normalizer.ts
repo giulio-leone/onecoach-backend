@@ -55,7 +55,7 @@ export function normalizeWorkoutProgram(program: WorkoutProgramLike): WorkoutPro
     description: program.description,
     difficulty,
     durationWeeks: program.durationWeeks,
-    weeks: program.weeks,
+    weeks: program.weeks as WorkoutProgram['weeks'],
     goals: program.goals,
   };
 }

@@ -318,8 +318,8 @@ Examples:
       dayC = 0,
       dayF = 0;
 
-    day.meals.forEach((m) => {
-      m.foods.forEach((f) => {
+    day.meals.forEach((m: any) => {
+      m.foods.forEach((f: any) => {
         dayCals += f.macros.calories;
         dayP += f.macros.protein;
         dayC += f.macros.carbs;

@@ -16,7 +16,7 @@ function toChunk(text: string): McpTextChunk {
 
 function serializeError(error: unknown): { message: string; code?: number } {
   if (error instanceof ZodError) {
-    const issues = error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+    const issues = error.issues.map((issue: any) => `${issue.path.join('.')}: ${issue.message}`);
     return {
       message: `Parametri non validi: ${issues.join('; ')}`,
       code: -32602, // Invalid params (JSON-RPC)

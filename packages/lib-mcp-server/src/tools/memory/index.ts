@@ -63,7 +63,7 @@ export const memoryGetTool: McpTool<MemoryGetArgs> = {
     const domainMemory = args.domain
       ? ((memory as Record<string, unknown>)[args.domain as MemoryDomain] as Record<
           string,
-          unknown
+          any
         > | null)
       : null;
 
@@ -82,9 +82,9 @@ History: ${domainMemory.history?.length || 0} items`
     : 'Nessun dato disponibile'
 }
 
-${domainMemory?.patterns?.length ? `\n**Pattern Identificati:**\n${(domainMemory.patterns as Array<{ type: string; description: string; confidence: number }>).map((p) => `- ${p.type}: ${p.description} (${(p.confidence * 100).toFixed(0)}%)`).join('\n')}` : ''}
+${domainMemory?.patterns?.length ? `\n**Pattern Identificati:**\n${(domainMemory.patterns as Array<{ type: string; description: string; confidence: number }>).map((p: any) => `- ${p.type}: ${p.description} (${(p.confidence * 100).toFixed(0)}%)`).join('\n')}` : ''}
 
-${domainMemory?.insights?.length ? `\n**Insights:**\n${(domainMemory.insights as Array<{ category: string; insight: string }>).map((i) => `- ${i.category}: ${i.insight}`).join('\n')}` : ''}`
+${domainMemory?.insights?.length ? `\n**Insights:**\n${(domainMemory.insights as Array<{ category: string; insight: string }>).map((i: any) => `- ${i.category}: ${i.insight}`).join('\n')}` : ''}`
             : `📋 **Memoria Completa Utente**
 
 Usa questo contesto per personalizzare risposte e suggerimenti.`,
@@ -214,7 +214,7 @@ export const memoryDeletePreferenceTool: McpTool<MemoryDeletePreferenceArgs> = {
       throw new Error(`No memory found for domain: ${args.domain}`);
     }
 
-    const updatedPreferences = { ...domainMemory.preferences };
+    const updatedPreferences = { ...(domainMemory.preferences as Record<string, unknown>) };
     delete updatedPreferences[args.preferenceKey];
 
     await userMemoryService.updateMemory(context.userId, {
@@ -427,13 +427,7 @@ ${
   versions.length > 0
     ? versions
         .map(
-          (v: {
-            versionNumber: number;
-            changeType: string;
-            changeNote?: string;
-            createdAt: Date;
-            changedBy?: string;
-          }) => `- Versione ${v.versionNumber} (${v.changeType})
+          (v) => `- Versione ${v.versionNumber} (${v.changeType})
   ${v.changeNote ? `Note: ${v.changeNote}` : ''}
   Creato: ${v.createdAt.toISOString().split('T')[0]}
   Da: ${v.changedBy || 'sistema'}`

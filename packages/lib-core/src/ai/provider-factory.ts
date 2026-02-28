@@ -1,4 +1,4 @@
-import { createOpenRouter, type OpenRouterProvider } from '@openrouter/ai-sdk-provider';
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { createOpenAI, type OpenAIProvider } from '@ai-sdk/openai';
 import { createAnthropic, type AnthropicProvider } from '@ai-sdk/anthropic';
 import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';

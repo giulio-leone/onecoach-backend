@@ -119,7 +119,7 @@ export function useIAP() {
       };
 
       const mappedProducts = (fetchedProducts as unknown[])
-        .map((product) => {
+        .map((product: any) => {
           const productId =
             (product as Record<string, unknown>).productId ??
             (product as Record<string, unknown>).sku;
@@ -140,7 +140,7 @@ export function useIAP() {
           return normalized;
         })
         .filter((p): p is IapCatalogProduct => p !== null)
-        .map((product) => ({
+        .map((product: any) => ({
           productId: product.productId as ProductId,
           price: product.price,
           currency: product.currency,

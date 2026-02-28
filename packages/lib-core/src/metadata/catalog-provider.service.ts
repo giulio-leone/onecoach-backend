@@ -15,6 +15,7 @@
 
 import { prisma } from '../prisma';
 import { logger } from '../logger.service';
+import type { ExerciseCatalogItem } from '../types/safe-types';
 // Cache configuration for exercises (still useful for common exercises)
 const CACHE_TTL_MS = 1000 * 60 * 30; // 30 minutes
 let exerciseCatalogCache: ExerciseCatalogItem[] | null = null;
@@ -23,15 +24,6 @@ let exerciseCacheTime = 0;
 // Exercise catalog configuration
 const DEFAULT_LOCALE = 'en';
 const MAX_EXERCISE_CATALOG = 200; // Exercises are finite and well-defined
-
-export interface ExerciseCatalogItem {
-  id: string;
-  name: string;
-  muscleGroups: string[];
-  equipment: string[];
-  difficulty: string;
-  category: string;
-}
 
 export class CatalogProviderService {
   // ============================================================================
@@ -175,11 +167,11 @@ export class CatalogProviderService {
 
       const catalog: ExerciseCatalogItem[] = exercises.map((exercise: ExerciseWithRelations) => {
         const translation = exercise.exercise_translations[0];
-        const muscleGroups = exercise.exercise_muscles.map((em) => {
+        const muscleGroups = exercise.exercise_muscles.map((em: any) => {
           const muscleTrans = em.muscles.muscle_translations[0];
           return muscleTrans?.name || em.muscles.slug;
         });
-        const equipment = exercise.exercise_equipments.map((ee) => {
+        const equipment = exercise.exercise_equipments.map((ee: any) => {
           const eqTrans = ee.equipments.equipment_translations[0];
           return eqTrans?.name || ee.equipments.slug;
         });
@@ -218,7 +210,7 @@ export class CatalogProviderService {
   static formatExerciseCatalogForPrompt(exercises: ExerciseCatalogItem[]): string {
     if (exercises.length === 0) return '';
 
-    const lines = exercises.map((ex) => {
+    const lines = exercises.map((ex: any) => {
       const muscles = ex.muscleGroups.slice(0, 3).join(', '); // Limit to 3 main muscles
       const equip = ex.equipment.length > 0 ? ex.equipment.slice(0, 2).join(', ') : 'bodyweight';
       return `- ${ex.id}: ${ex.name} [${ex.category}] (${muscles}) - ${equip}`;

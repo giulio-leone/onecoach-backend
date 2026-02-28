@@ -1,4 +1,5 @@
 import { subscriptionService } from './subscription.service';
+import type { IOpenRouterSubkeyService, IAffiliateService, IPromotionService } from './subscription.service';
 import { AffiliateService } from './marketplace/affiliate.service';
 import { PromotionService } from './marketplace/promotion.service';
 import { marketplaceService } from './marketplace/marketplace.service';
@@ -10,9 +11,9 @@ import { marketplaceService } from './marketplace/marketplace.service';
 export async function initSubscriptionService() {
   const { OpenRouterSubkeyService } = await import('@giulio-leone/lib-ai');
   subscriptionService.setDependencies({
-    affiliateService: AffiliateService,
-    promotionService: PromotionService,
-    openRouterSubkeyService: OpenRouterSubkeyService,
-    marketplaceService: marketplaceService,
+    affiliateService: AffiliateService as unknown as IAffiliateService,
+    promotionService: PromotionService as unknown as IPromotionService,
+    openRouterSubkeyService: OpenRouterSubkeyService as unknown as IOpenRouterSubkeyService,
+    marketplaceService: marketplaceService as any,
   });
 }

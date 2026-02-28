@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 /**
  * MCP Tools: Granular OneAgenda Management
  *
@@ -9,7 +10,7 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma, type Prisma } from '@giulio-leone/lib-core';
+import { prisma } from '@giulio-leone/lib-core';
 function successResult(message: string, data?: unknown) {
   return { content: [{ type: 'text' as const, text: message }], data };
 }

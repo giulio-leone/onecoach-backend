@@ -94,8 +94,8 @@ export async function registerAllServices(): Promise<void> {
     import('@giulio-leone/lib-ai'),
   ]);
 
-  const exerciseServiceAdapter = exerciseService as IExerciseService;
-  const foodServiceAdapter = foodService as IFoodService;
+  const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
+  const foodServiceAdapter = foodService as unknown as IFoodService;
 
   registerService('nutrition', nutritionService);
   registerService('workout', workoutService);

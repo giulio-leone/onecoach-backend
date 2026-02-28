@@ -115,29 +115,29 @@ export const toolsList: McpTool[] = Object.values(allTools);
  * Tool categories for discovery
  */
 export const toolCategories = {
-  food: Object.keys(foodTools).filter((k) => {
+  food: Object.keys(foodTools).filter((k: any) => {
     const v = (foodTools as Record<string, unknown>)[k];
     return typeof v === 'object' && v !== null && 'execute' in v;
   }),
-  exercise: Object.keys(exerciseTools).filter((k) => {
+  exercise: Object.keys(exerciseTools).filter((k: any) => {
     const v = (exerciseTools as Record<string, unknown>)[k];
     return typeof v === 'object' && v !== null && 'execute' in v;
   }),
   workout: [
-    ...Object.keys(workoutTools).filter((k) => {
+    ...Object.keys(workoutTools).filter((k: any) => {
       const v = (workoutTools as Record<string, unknown>)[k];
       return typeof v === 'object' && v !== null && 'execute' in v && !Array.isArray(v);
     }),
     ...Object.keys(workoutProgramToolsRecord),
     ...Object.keys(workoutExerciseToolsRecord),
   ],
-  oneagenda: oneagendaToolsList.map((t) => t.name),
+  oneagenda: oneagendaToolsList.map((t: any) => t.name),
   nutrition: [
-    ...nutritionPlanTools.map((t) => t.name),
-    ...nutritionDayMealTools.map((t) => t.name),
-    ...nutritionTrackingTools.map((t) => t.name),
+    ...nutritionPlanTools.map((t: any) => t.name),
+    ...nutritionDayMealTools.map((t: any) => t.name),
+    ...nutritionTrackingTools.map((t: any) => t.name),
   ],
-  athlete: athleteTools.map((t) => t.name),
-  marketplace: marketplaceTools.map((t) => t.name),
-  analytics: analyticsTools.map((t) => t.name),
+  athlete: athleteTools.map((t: any) => t.name),
+  marketplace: marketplaceTools.map((t: any) => t.name),
+  analytics: analyticsTools.map((t: any) => t.name),
 };

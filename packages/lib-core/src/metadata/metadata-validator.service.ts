@@ -35,12 +35,11 @@ function findBestMatch(
   const normalized = normalizeName(searchName);
 
   // Exact match
-  const exact = candidates.find((c) => normalizeName(c.name) === normalized);
+  const exact = candidates.find((c: any) => normalizeName(c.name) === normalized);
   if (exact) return exact.id;
 
   // Contains match (fuzzy)
-  const contains = candidates.find(
-    (c) => normalizeName(c.name).includes(normalized) || normalized.includes(normalizeName(c.name))
+  const contains = candidates.find((c: any) => normalizeName(c.name).includes(normalized) || normalized.includes(normalizeName(c.name))
   );
   if (contains) return contains.id;
 
@@ -80,7 +79,7 @@ export async function validateEquipmentByName(names: string[]): Promise<string[]
 
   // Build a map for quick lookup
   const nameToIdMap = new Map<string, string>();
-  allEquipment.forEach((eq) => {
+  allEquipment.forEach((eq: any) => {
     nameToIdMap.set(normalizeName(eq.name), eq.id);
   });
 
@@ -98,7 +97,7 @@ export async function validateEquipmentByName(names: string[]): Promise<string[]
     },
   });
 
-  translations.forEach((trans) => {
+  translations.forEach((trans: any) => {
     nameToIdMap.set(normalizeName(trans.name), trans.equipments.id);
   });
 
@@ -120,7 +119,7 @@ export async function validateEquipmentByName(names: string[]): Promise<string[]
           },
         });
         id = newEquipment.id;
-        nameToIdCache.set(`equipment:${normalized}`, id);
+        nameToIdCache.set(`equipment:${normalized}`, id ?? '');
       } catch (error: unknown) {
         // Handle unique constraint violation (race condition)
         if (
@@ -141,7 +140,7 @@ export async function validateEquipmentByName(names: string[]): Promise<string[]
           });
           if (existing) {
             id = existing.id;
-            nameToIdCache.set(`equipment:${normalized}`, id);
+            nameToIdCache.set(`equipment:${normalized}`, id ?? '');
           } else {
             throw error;
           }
@@ -154,7 +153,7 @@ export async function validateEquipmentByName(names: string[]): Promise<string[]
       nameToIdCache.set(`equipment:${normalized}`, id);
     }
 
-    ids.push(id);
+    ids.push(id ?? '');
   }
 
   // Cache individual mappings
@@ -198,7 +197,7 @@ export async function validateMusclesByName(names: string[]): Promise<string[]> 
   });
 
   const nameToIdMap = new Map<string, string>();
-  allMuscles.forEach((m) => {
+  allMuscles.forEach((m: any) => {
     nameToIdMap.set(normalizeName(m.name), m.id);
   });
 
@@ -215,7 +214,7 @@ export async function validateMusclesByName(names: string[]): Promise<string[]> 
     },
   });
 
-  translations.forEach((trans) => {
+  translations.forEach((trans: any) => {
     nameToIdMap.set(normalizeName(trans.name), trans.muscles.id);
   });
 
@@ -236,7 +235,7 @@ export async function validateMusclesByName(names: string[]): Promise<string[]> 
           },
         });
         id = newMuscle.id;
-        nameToIdCache.set(`muscle:${normalized}`, id);
+        nameToIdCache.set(`muscle:${normalized}`, id ?? '');
       } catch (error: unknown) {
         // Handle unique constraint violation (race condition)
         if (
@@ -257,7 +256,7 @@ export async function validateMusclesByName(names: string[]): Promise<string[]> 
           });
           if (existing) {
             id = existing.id;
-            nameToIdCache.set(`muscle:${normalized}`, id);
+            nameToIdCache.set(`muscle:${normalized}`, id ?? '');
           } else {
             throw error;
           }
@@ -269,7 +268,7 @@ export async function validateMusclesByName(names: string[]): Promise<string[]> 
       nameToIdCache.set(`muscle:${normalized}`, id);
     }
 
-    ids.push(id);
+    ids.push(id ?? '');
   }
   return ids;
 }
@@ -303,7 +302,7 @@ export async function validateBodyPartsByName(names: string[]): Promise<string[]
   });
 
   const nameToIdMap = new Map<string, string>();
-  allBodyParts.forEach((bp) => {
+  allBodyParts.forEach((bp: any) => {
     nameToIdMap.set(normalizeName(bp.name), bp.id);
   });
 
@@ -320,7 +319,7 @@ export async function validateBodyPartsByName(names: string[]): Promise<string[]
     },
   });
 
-  translations.forEach((trans) => {
+  translations.forEach((trans: any) => {
     nameToIdMap.set(normalizeName(trans.name), trans.body_parts.id);
   });
 
@@ -341,7 +340,7 @@ export async function validateBodyPartsByName(names: string[]): Promise<string[]
           },
         });
         id = newBodyPart.id;
-        nameToIdCache.set(`bodypart:${normalized}`, id);
+        nameToIdCache.set(`bodypart:${normalized}`, id ?? '');
       } catch (error: unknown) {
         // Handle unique constraint violation (race condition)
         if (
@@ -362,7 +361,7 @@ export async function validateBodyPartsByName(names: string[]): Promise<string[]
           });
           if (existing) {
             id = existing.id;
-            nameToIdCache.set(`bodypart:${normalized}`, id);
+            nameToIdCache.set(`bodypart:${normalized}`, id ?? '');
           } else {
             throw error;
           }
@@ -374,7 +373,7 @@ export async function validateBodyPartsByName(names: string[]): Promise<string[]
       nameToIdCache.set(`bodypart:${normalized}`, id);
     }
 
-    ids.push(id);
+    ids.push(id ?? '');
   }
 
   // Cache individual mappings

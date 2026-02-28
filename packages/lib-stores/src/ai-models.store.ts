@@ -115,7 +115,7 @@ export const selectSelectedModelId = (state: AIModelsStore) => state.selectedMod
 /** Get the full selected model object */
 export const selectSelectedModel = (state: AIModelsStore): AIModel | null => {
     if (!state.selectedModelId) return null;
-    return state.models.find((m) => m.id === state.selectedModelId) ?? null;
+    return state.models.find((m: any) => m.id === state.selectedModelId) ?? null;
 };
 
 /**

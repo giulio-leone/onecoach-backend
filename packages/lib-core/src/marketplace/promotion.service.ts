@@ -110,7 +110,7 @@ export class PromotionService {
     }
 
     // Transazione atomica: crea promo + coupon Stripe se necessario
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: any) => {
       let finalStripeCouponId = stripeCouponId;
 
       // Se STRIPE_COUPON e non fornito stripeCouponId, crea coupon Stripe
@@ -311,7 +311,7 @@ export class PromotionService {
     }
 
     // Transazione atomica: accredita crediti + registra uso
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       // Accredita crediti
       if (!promotion.bonusCredits) {
         throw new Error('Promozione non ha crediti bonus configurati');

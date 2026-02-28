@@ -582,14 +582,14 @@ export const getAgendaDashboardTool: McpTool = {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const dueTodayTasks = tasks.filter((t) => {
+    const dueTodayTasks = tasks.filter((t: any) => {
       if (!t.dueDate) return false;
       const taskDate = new Date(t.dueDate);
       taskDate.setHours(0, 0, 0, 0);
       return taskDate.getTime() === today.getTime() && t.status !== 'COMPLETED';
     });
 
-    const overdueTasks = tasks.filter((t) => {
+    const overdueTasks = tasks.filter((t: any) => {
       if (!t.dueDate || t.status === 'COMPLETED') return false;
       const taskDate = new Date(t.dueDate);
       taskDate.setHours(0, 0, 0, 0);
@@ -599,11 +599,11 @@ export const getAgendaDashboardTool: McpTool = {
     const summary = {
       projects: {
         total: projects.length,
-        active: projects.filter((p) => p.status === 'ACTIVE').length,
+        active: projects.filter((p: any) => p.status === 'ACTIVE').length,
       },
       habits: {
         total: habits.length,
-        completedToday: habits.filter((h) => h.completedToday).length,
+        completedToday: habits.filter((h: any) => h.completedToday).length,
       },
       tasks: {
         total: tasks.length,

@@ -93,7 +93,7 @@ class TaskService {
     // Crea dipendenze se specificate
     if (input.dependencies && input.dependencies.length > 0) {
       await prisma.agenda_task_dependencies.createMany({
-        data: input.dependencies.map((blockerId) => ({
+        data: input.dependencies.map((blockerId: any) => ({
           blockedId: task.id,
           blockerId,
         })),
@@ -127,7 +127,7 @@ class TaskService {
       where: { userId },
       select: { id: true },
     });
-    const projectIds = userProjects.map((p) => p.id);
+    const projectIds = userProjects.map((p: any) => p.id);
 
     interface WhereClause {
       projectId: { in: string[] } | string;
@@ -147,7 +147,7 @@ class TaskService {
       orderBy: { order: 'asc' },
     });
 
-    const taskIds = tasks.map((t) => t.id);
+    const taskIds = tasks.map((t: any) => t.id);
     const subTasks = await prisma.agenda_tasks.findMany({
       where: { parentId: { in: taskIds } },
       orderBy: { order: 'asc' },
@@ -160,7 +160,7 @@ class TaskService {
       return acc;
     }, {});
 
-    return tasks.map((task) => ({
+    return tasks.map((task: any) => ({
       id: task.id,
       title: task.title,
       description: task.description,
@@ -172,7 +172,7 @@ class TaskService {
       projectId: task.projectId,
       milestoneId: task.milestoneId,
       parentId: task.parentId,
-      subTasks: (subTaskMap[task.id] || []).map((st) => ({
+      subTasks: (subTaskMap[task.id] || []).map((st: any) => ({
         id: st.id,
         title: st.title,
         status: st.status,
@@ -234,7 +234,7 @@ class TaskService {
       // Aggiungi nuove dipendenze
       if (input.dependencies.length > 0) {
         await prisma.agenda_task_dependencies.createMany({
-          data: input.dependencies.map((blockerId) => ({
+          data: input.dependencies.map((blockerId: any) => ({
             blockedId: taskId,
             blockerId,
           })),
@@ -316,7 +316,7 @@ class TaskService {
 
     // Aggiorna l'ordine di tutti i task
     await prisma.$transaction(
-      tasks.map((task) =>
+      tasks.map((task: any) =>
         prisma.agenda_tasks.update({
           where: { id: task.id },
           data: { order: task.order },

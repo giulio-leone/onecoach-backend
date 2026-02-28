@@ -27,7 +27,7 @@ type PrismaDelegate = {
 
 /** Access a Prisma model delegate dynamically by table name */
 function getDelegate(tableName: string): PrismaDelegate {
-  return (prisma as Record<string, unknown>)[tableName] as PrismaDelegate;
+  return (prisma as unknown as Record<string, unknown>)[tableName] as PrismaDelegate;
 }
 
 export type VersioningConfig<T> = {
@@ -92,7 +92,7 @@ export async function saveVersion<T>(
 
       if (toDelete.length > 0) {
         await getDelegate(config.tableName).deleteMany({
-          where: { id: { in: toDelete.map((v) => v.id as string) } },
+          where: { id: { in: toDelete.map((v: any) => v.id as string) } },
         });
       }
     }

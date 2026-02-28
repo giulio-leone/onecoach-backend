@@ -2,7 +2,7 @@ import { prisma } from '@giulio-leone/lib-core';
 import { Prisma } from '@prisma/client';
 import { createId } from '@giulio-leone/lib-shared/id-generator';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
-import { SUPPORTED_FOOD_LOCALES } from '@giulio-leone/constants';
+import { SUPPORTED_FOOD_LOCALES } from '@giulio-leone/lib-shared';
 import { createFoodSchema } from '@giulio-leone/schemas';
 
 import { normalizeFoodName } from './utils';
@@ -146,7 +146,7 @@ export class FoodService {
         categories: { include: { food_categories: true } },
       },
     });
-    return foods.map((f) => this.mapToFoodItem(f));
+    return foods.map((f: any) => this.mapToFoodItem(f));
   }
 
   /**
@@ -165,7 +165,7 @@ export class FoodService {
         categories: { include: { food_categories: true } },
       },
     });
-    return foods.map((f) => this.mapToFoodItem(f));
+    return foods.map((f: any) => this.mapToFoodItem(f));
   }
 
   /**
@@ -194,7 +194,7 @@ export class FoodService {
       prisma.food_items.count(),
     ]);
 
-    const items = foods.map((f) => this.mapToFoodItem(f));
+    const items = foods.map((f: any) => this.mapToFoodItem(f));
     return { data: items, total, page, pageSize };
   }
 
@@ -217,7 +217,7 @@ export class FoodService {
       return [];
     }
 
-    const foodIds = searchResults.map((r) => r.id);
+    const foodIds = searchResults.map((r: any) => r.id);
     const foods = await prisma.food_items.findMany({
       where: { id: { in: foodIds } },
       include: {
@@ -227,11 +227,11 @@ export class FoodService {
     });
 
     type FoodEntry = (typeof foods)[number];
-    const foodMap = new Map(foods.map((f) => [f.id, f]));
+    const foodMap = new Map(foods.map((f: any) => [f.id, f]));
     return searchResults
-      .map((r) => foodMap.get(r.id))
+      .map((r: any) => foodMap.get(r.id))
       .filter((f): f is FoodEntry => f !== undefined)
-      .map((f) => this.mapToFoodItem(f));
+      .map((f: any) => this.mapToFoodItem(f));
   }
 
   /**
@@ -279,7 +279,7 @@ export class FoodService {
         macrosPer100g: toPrismaJsonValue(data.macrosPer100g),
         servingSize: data.servingSize,
         unit: data.unit || 'g',
-        metadata: data.metadata,
+        metadata: data.metadata ? (data.metadata as unknown as import('@prisma/client').Prisma.InputJsonValue) : undefined,
         imageUrl: data.imageUrl,
         brandId: resolvedBrandId || null,
         mainMacro: toPrismaJsonValue(mainMacro),
@@ -298,7 +298,7 @@ export class FoodService {
           ? {
               categories: {
                 createMany: {
-                  data: data.categoryIds.map((cid) => ({
+                  data: data.categoryIds.map((cid: any) => ({
                     categoryId: String(cid),
                   })),
                   skipDuplicates: true,
@@ -379,7 +379,7 @@ export class FoodService {
               categories: {
                 deleteMany: {},
                 createMany: {
-                  data: data.categoryIds.map((cid) => ({
+                  data: data.categoryIds.map((cid: any) => ({
                     categoryId: String(cid),
                   })),
                   skipDuplicates: true,
@@ -573,7 +573,7 @@ export class FoodService {
         food.categories.length > 0
           ? {
               categories: food.categories
-                .map((fc) => {
+                .map((fc: any) => {
                   const category = fc.food_categories;
                   return category
                     ? { id: category.id, name: category.name, slug: category.slug }

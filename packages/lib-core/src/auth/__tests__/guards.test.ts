@@ -64,7 +64,7 @@ describe('AuthError', () => {
 
   it('toResponse() returns a NextResponse with correct body and status', () => {
     const err = new AuthError('no access', 403);
-    const res = err.toResponse() as Record<string, unknown>;
+    const res = err.toResponse() as unknown as Record<string, unknown>;
     expect((res._body as { error: string }).error).toBe('no access');
     expect(res.status).toBe(403);
   });

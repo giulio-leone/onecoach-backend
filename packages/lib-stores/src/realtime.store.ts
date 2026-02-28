@@ -194,7 +194,7 @@ export const useRealtimeStore = create<RealtimeStore>()(
         const { client, subscriptions } = get();
 
         // Chiudi tutti i canali
-        subscriptions.forEach((sub) => {
+        subscriptions.forEach((sub: any) => {
           client?.removeChannel(sub.channel);
         });
 
@@ -266,9 +266,9 @@ export const useRealtimeStore = create<RealtimeStore>()(
                 const sub = get().subscriptions.get(channelKey);
                 if (!sub) return;
 
-                sub.listeners.forEach((l) => {
+                sub.listeners.forEach((l: any) => {
                   try {
-                    const typedPayload = payload as RealtimePayload<T>;
+                    const typedPayload = payload as unknown as RealtimePayload<T>;
                     switch (typedPayload.eventType) {
                       case 'INSERT':
                         (l as RealtimeListener<T>).onInsert?.(typedPayload.new);
@@ -322,7 +322,7 @@ export const useRealtimeStore = create<RealtimeStore>()(
 
                 // Notifica errore a tutti i listener senza propagare eccezioni
                 const sub = get().subscriptions.get(channelKey);
-                sub?.listeners.forEach((l) => {
+                sub?.listeners.forEach((l: any) => {
                   try {
                     l.onError?.(error);
                   } catch (listenerError) {

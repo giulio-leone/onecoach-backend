@@ -242,7 +242,7 @@ export class UserMemoryService {
       take: limit,
     });
 
-    return versions.map((v) => ({
+    return versions.map((v: any) => ({
       id: v.id,
       versionNumber: v.versionNumber,
       memory: v.memory as UserMemory,
@@ -401,7 +401,7 @@ export class UserMemoryService {
         relevantInsights.push(...domainMemory.insights);
 
         // Generate recommendations from patterns
-        domainMemory.patterns.forEach((pattern) => {
+        domainMemory.patterns.forEach((pattern: any) => {
           const suggestions = pattern.suggestions ?? [];
           suggestions.forEach((suggestion: string, index: number) => {
             recommendations.push({
@@ -414,7 +414,7 @@ export class UserMemoryService {
       }
     } else {
       // Cross-domain patterns and insights
-      Object.values(memory).forEach((domainMemory) => {
+      Object.values(memory).forEach((domainMemory: any) => {
         if (domainMemory) {
           relevantPatterns.push(...domainMemory.patterns);
           relevantInsights.push(...domainMemory.insights);
@@ -474,8 +474,7 @@ export class UserMemoryService {
       preferences: domainMemory.preferences,
       patterns:
         options.includePatterns !== false
-          ? domainMemory.patterns.filter(
-              (p) =>
+          ? domainMemory.patterns.filter((p: any) =>
                 !options.patternConfidenceThreshold ||
                 p.confidence >= options.patternConfidenceThreshold
             )
@@ -488,7 +487,7 @@ export class UserMemoryService {
           : [],
       insights:
         options.includeInsights !== false
-          ? domainMemory.insights.filter((i) => !i.expiresAt || new Date(i.expiresAt) > new Date())
+          ? domainMemory.insights.filter((i: any) => !i.expiresAt || new Date(i.expiresAt) > new Date())
           : [],
       lastUpdated: domainMemory.lastUpdated,
     };

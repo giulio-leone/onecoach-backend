@@ -55,7 +55,7 @@ export interface IOpenRouterSubkeyService {
   revokeSubkey(keyLabel: string): Promise<void>;
 }
 
-export interface IMarketplaceService {
+interface IMarketplaceService {
   createPurchase(data: Record<string, unknown>): Promise<{ id: string }>;
   updatePurchaseStatus(purchaseId: string, status: string): Promise<void>;
 }
@@ -457,8 +457,8 @@ export class SubscriptionService implements ISubscriptionService {
 
     await Promise.all(
       dbSubscriptions
-        .filter((sub) => sub.userId && this.deps.affiliateService)
-        .map((sub) =>
+        .filter((sub: any) => sub.userId && this.deps.affiliateService)
+        .map((sub: any) =>
           this.deps.affiliateService!.handleSubscriptionCancellation({
             userId: sub.userId!,
             occurredAt: new Date(),
@@ -533,7 +533,7 @@ export class SubscriptionService implements ISubscriptionService {
     }
 
     if (credits > 0) {
-      await prisma.$transaction(async (tx) => {
+      await prisma.$transaction(async (tx: any) => {
         // Create OpenRouter subkey for credits purchase
         if (this.deps.openRouterSubkeyService) {
           try {

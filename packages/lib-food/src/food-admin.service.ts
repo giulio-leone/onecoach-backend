@@ -34,7 +34,7 @@ export class FoodAdminService {
     }
 
     const normalizedRecords = await Promise.all(
-      records.map((record) => this.normalizeImportRecord(record)),
+      records.map((record: any) => this.normalizeImportRecord(record)),
     );
 
     const nameCache = new Map<string, string>();
@@ -111,7 +111,7 @@ export class FoodAdminService {
         where: { id: { in: payload.categoryIds } },
         select: { id: true },
       });
-      validatedCategoryIds = existingCategories.map((c) => c.id);
+      validatedCategoryIds = existingCategories.map((c: any) => c.id);
     }
 
     const brandName = payload.brandName?.trim() || 'Generic';

@@ -125,9 +125,9 @@ class ProjectService {
       orderBy: { createdAt: 'desc' },
     });
 
-    return projects.map((p) => {
+    return projects.map((p: any) => {
       const totalTasks = p.tasks.length;
-      const completedTasks = p.tasks.filter((t) => t.status === 'COMPLETED').length;
+      const completedTasks = p.tasks.filter((t: any) => t.status === 'COMPLETED').length;
       const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
       return {
@@ -142,7 +142,7 @@ class ProjectService {
         progress,
         taskCount: totalTasks,
         completedTaskCount: completedTasks,
-        milestones: p.agenda_milestones.map((m) => ({
+        milestones: p.agenda_milestones.map((m: any) => ({
           id: m.id,
           title: m.name,
           description: m.description,
@@ -150,7 +150,7 @@ class ProjectService {
           dueDate: m.dueDate,
           order: m.order,
         })),
-        tasks: p.tasks.map((t) => ({
+        tasks: p.tasks.map((t: any) => ({
           id: t.id,
           title: t.title,
           description: t.description,
@@ -187,7 +187,7 @@ class ProjectService {
 
     const p = project as Record<string, unknown> & typeof project;
     const totalTasks = p.tasks.length;
-    const completedTasks = p.tasks.filter((t) => t.status === 'COMPLETED').length;
+    const completedTasks = p.tasks.filter((t: any) => t.status === 'COMPLETED').length;
     const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
     return {
@@ -202,7 +202,7 @@ class ProjectService {
       progress,
       taskCount: totalTasks,
       completedTaskCount: completedTasks,
-      milestones: p.agenda_milestones.map((m) => ({
+      milestones: p.agenda_milestones.map((m: any) => ({
         id: m.id,
         title: m.name,
         description: m.description,
@@ -210,7 +210,7 @@ class ProjectService {
         dueDate: m.dueDate,
         order: m.order,
       })),
-      tasks: p.tasks.map((t) => ({
+      tasks: p.tasks.map((t: any) => ({
         id: t.id,
         title: t.title,
         description: t.description,
@@ -264,7 +264,7 @@ class ProjectService {
 
     const p = project as Record<string, unknown> & typeof project;
     const totalTasks = p.tasks.length;
-    const completedTasks = p.tasks.filter((t) => t.status === 'COMPLETED').length;
+    const completedTasks = p.tasks.filter((t: any) => t.status === 'COMPLETED').length;
     const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
     return {
@@ -279,7 +279,7 @@ class ProjectService {
       progress,
       taskCount: totalTasks,
       completedTaskCount: completedTasks,
-      milestones: p.agenda_milestones.map((m) => ({
+      milestones: p.agenda_milestones.map((m: any) => ({
         id: m.id,
         title: m.name,
         description: m.description,
@@ -287,7 +287,7 @@ class ProjectService {
         dueDate: m.dueDate,
         order: m.order,
       })),
-      tasks: p.tasks.map((t) => ({
+      tasks: p.tasks.map((t: any) => ({
         id: t.id,
         title: t.title,
         description: t.description,

@@ -129,7 +129,7 @@ export class InvitationService {
 
     const invitationId = validation.invitation.id;
 
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
       // 1. Increment usage count atomically
       const updatedInvitation = await tx.invitations.update({
         where: { id: invitationId },

@@ -176,8 +176,7 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
   // Lookup helpers for AI
   findExerciseByName: (name: string) => {
     const normalizedName = name.toLowerCase().trim();
-    return get().exercises.find(
-      (e) =>
+    return get().exercises.find((e: any) =>
         e.name.toLowerCase() === normalizedName ||
         e.nameIt?.toLowerCase() === normalizedName
     );
@@ -185,8 +184,7 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
 
   findFoodByName: (name: string) => {
     const normalizedName = name.toLowerCase().trim();
-    return get().foods.find(
-      (f) =>
+    return get().foods.find((f: any) =>
         f.name.toLowerCase() === normalizedName ||
         f.nameIt?.toLowerCase() === normalizedName
     );
@@ -195,12 +193,11 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
   searchExercises: (query: string, limit = 10) => {
     const normalizedQuery = query.toLowerCase().trim();
     return get()
-      .exercises.filter(
-        (e) =>
+      .exercises.filter((e: any) =>
           e.name.toLowerCase().includes(normalizedQuery) ||
           e.nameIt?.toLowerCase().includes(normalizedQuery) ||
-          e.muscleGroups.some((m) => m.toLowerCase().includes(normalizedQuery)) ||
-          e.equipment.some((eq) => eq.toLowerCase().includes(normalizedQuery))
+          e.muscleGroups.some((m: any) => m.toLowerCase().includes(normalizedQuery)) ||
+          e.equipment.some((eq: any) => eq.toLowerCase().includes(normalizedQuery))
       )
       .slice(0, limit);
   },
@@ -208,8 +205,7 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
   searchFoods: (query: string, limit = 10) => {
     const normalizedQuery = query.toLowerCase().trim();
     return get()
-      .foods.filter(
-        (f) =>
+      .foods.filter((f: any) =>
           f.name.toLowerCase().includes(normalizedQuery) ||
           f.nameIt?.toLowerCase().includes(normalizedQuery) ||
           f.category?.toLowerCase().includes(normalizedQuery)
@@ -242,12 +238,12 @@ export function getCatalogForAI(): {
   const state = useCatalogStore.getState();
   
   return {
-    exercises: state.exercises.map((e) => ({
+    exercises: state.exercises.map((e: any) => ({
       id: e.id,
       name: e.name,
       muscles: e.muscleGroups,
     })),
-    foods: state.foods.map((f) => ({
+    foods: state.foods.map((f: any) => ({
       id: f.id,
       name: f.name,
     })),

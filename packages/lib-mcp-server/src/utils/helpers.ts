@@ -90,5 +90,5 @@ export async function safeHandleMemoryEvent(
  * conversion to base McpTool interface
  */
 export function arrayToToolRecord<T extends McpTool>(tools: readonly T[]): Record<string, McpTool> {
-  return Object.fromEntries(tools.map((tool) => [tool.name, tool])) as Record<string, McpTool>;
+  return Object.fromEntries(tools.map((tool: any) => [tool.name, tool])) as Record<string, McpTool>;
 }

@@ -180,7 +180,7 @@ export const bodyMeasurementsCompareTool: McpTool<z.infer<typeof compareParams>>
     const comparison: Record<string, unknown> = {};
     const diffs: Record<string, unknown> = {};
 
-    numericKeys.forEach((key) => {
+    numericKeys.forEach((key: any) => {
       const valA = Number(entryA[key as keyof typeof entryA]) || 0;
       const valB = Number(entryB[key as keyof typeof entryB]) || 0;
       if (valA || valB) {
@@ -196,9 +196,9 @@ export const bodyMeasurementsCompareTool: McpTool<z.infer<typeof compareParams>>
           text: `⚖️ **Comparison**
 ${args.dateA} vs ${args.dateB}
 
-Weight: ${entryA.weight} -> ${entryB.weight} (${diffs.weight > 0 ? '+' : ''}${diffs.weight})
-Body Fat: ${entryA.bodyFat}% -> ${entryB.bodyFat}% (${diffs.bodyFat > 0 ? '+' : ''}${diffs.bodyFat}%)
-Muscle: ${entryA.muscleMass} -> ${entryB.muscleMass} (${diffs.muscleMass > 0 ? '+' : ''}${diffs.muscleMass})`,
+Weight: ${entryA.weight} -> ${entryB.weight} (${(diffs as any).weight > 0 ? '+' : ''}${(diffs as any).weight})
+Body Fat: ${entryA.bodyFat}% -> ${entryB.bodyFat}% (${(diffs as any).bodyFat > 0 ? '+' : ''}${(diffs as any).bodyFat}%)
+Muscle: ${entryA.muscleMass} -> ${entryB.muscleMass} (${(diffs as any).muscleMass > 0 ? '+' : ''}${(diffs as any).muscleMass})`,
         },
       ],
       comparison,

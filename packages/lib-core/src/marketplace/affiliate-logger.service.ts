@@ -80,7 +80,7 @@ class AffiliateLogger {
         invoiceId: params.invoiceId,
         subscriptionId: params.subscriptionId,
         commissionCount: params.commissionRewards?.length || 0,
-        commissions: params.commissionRewards?.map((c) => ({
+        commissions: params.commissionRewards?.map((c: any) => ({
           level: c.level,
           amount: c.amount,
           userId: c.userId,

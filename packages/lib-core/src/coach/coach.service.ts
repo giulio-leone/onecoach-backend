@@ -250,17 +250,16 @@ class CoachService implements ICoachService {
     });
 
     // Calculate total sales
-    const totalSales = plans.reduce(
-      (sum, plan) => sum + plan.plan_purchases.length,
+    const totalSales = plans.reduce((sum: any, plan: any) => sum + plan.plan_purchases.length,
       0
     );
 
     // Calculate average rating and total reviews
-    const allRatings = plans.flatMap((plan) => plan.plan_ratings);
+    const allRatings = plans.flatMap((plan: any) => plan.plan_ratings);
     const totalReviews = allRatings.length;
     const averageRating =
       totalReviews > 0
-        ? allRatings.reduce((sum, r) => sum + r.rating, 0) / totalReviews
+        ? allRatings.reduce((sum: any, r: any) => sum + r.rating, 0) / totalReviews
         : null;
 
     // Update coach profile

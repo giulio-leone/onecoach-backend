@@ -1,4 +1,5 @@
-import { prisma, Prisma } from '../prisma';
+import { prisma } from '../prisma';
+import { Prisma } from '@prisma/client';
 import { creditService } from '../credit.service';
 import {
   AffiliateRewardStatus,
@@ -217,8 +218,7 @@ export class AffiliateService {
         continue;
       }
 
-      const levelConfig = program.affiliate_program_levels.find(
-        (level) => level.level === attribution.level
+      const levelConfig = program.affiliate_program_levels.find((level: any) => level.level === attribution.level
       );
       const commissionRateDecimal = levelConfig?.commissionRate ?? program.baseCommissionRate;
       const numericRate = Number(commissionRateDecimal);
@@ -291,7 +291,7 @@ export class AffiliateService {
     }
 
     await Promise.all(
-      attributions.map((attribution) =>
+      attributions.map((attribution: any) =>
         prisma.referral_attributions.update({
           where: { id: attribution.id },
           data: {
@@ -330,7 +330,7 @@ export class AffiliateService {
       return 0;
     }
 
-    const creditRewards = rewards.filter((r) => r.type === AffiliateRewardType.REGISTRATION_CREDIT);
+    const creditRewards = rewards.filter((r: any) => r.type === AffiliateRewardType.REGISTRATION_CREDIT);
 
     // Accreditare crediti per reward REGISTRATION_CREDIT
     for (const reward of creditRewards) {
@@ -372,7 +372,7 @@ export class AffiliateService {
 
     // Aggiornare status di tutti i reward a CLEARED
     await prisma.affiliate_rewards.updateMany({
-      where: { id: { in: rewards.map((reward) => reward.id) } },
+      where: { id: { in: rewards.map((reward: any) => reward.id) } },
       data: {
         status: AffiliateRewardStatus.CLEARED,
         readyAt: referenceDate,
@@ -422,7 +422,7 @@ export class AffiliateService {
     const pendingUntil = new Date(now.getTime() + program.rewardPendingDays * DAY_IN_MS);
     const createdAttributionIds: string[] = [];
 
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: any) => {
       let parentAttributionId: string | undefined;
 
       for (const chainItem of referralChain) {
@@ -442,8 +442,7 @@ export class AffiliateService {
 
         createdAttributionIds.push(attribution.id);
 
-        const levelConfig = program.affiliate_program_levels.find(
-          (level) => level.level === chainItem.level
+        const levelConfig = program.affiliate_program_levels.find((level: any) => level.level === chainItem.level
         );
 
         const creditReward =
@@ -484,7 +483,7 @@ export class AffiliateService {
       affiliateLogger.logRegistration({
         userId: referralChain[0]?.referrerUserId || '',
         referralCode: referralCode,
-        rewardIds: createdRewards.map((r) => r.id),
+        rewardIds: createdRewards.map((r: any) => r.id),
         credits: program.registrationCredit,
       });
     }
@@ -591,7 +590,7 @@ export class AffiliateService {
     });
 
     const getAmount = (status: string) => {
-      const reward = rewards.find((r) => r.status === status);
+      const reward = rewards.find((r: any) => r.status === status);
       return {
         currencyAmount: reward?._sum.currencyAmount || 0,
         creditAmount: reward?._sum.creditAmount || 0,

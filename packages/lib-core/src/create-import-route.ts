@@ -152,7 +152,7 @@ export function createImportRoute<
       const logContext = {
         requestId,
         userId: user.id,
-        files: files.map((file) => ({
+        files: files.map((file: any) => ({
           name: file.name,
           size: file.size,
           mimeType: file.mimeType,

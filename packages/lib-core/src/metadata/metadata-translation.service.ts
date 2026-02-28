@@ -45,7 +45,7 @@ export function getLocalizedName(
   }
 
   // Create a lookup map for O(1) access
-  const translationMap = new Map(entity.translations.map((t) => [t.locale, t.name]));
+  const translationMap = new Map(entity.translations.map((t: any) => [t.locale, t.name]));
 
   // Try exact locale match
   if (translationMap.has(locale)) {
@@ -90,7 +90,7 @@ export async function getExerciseTypesWithTranslations(locale?: string) {
     },
   });
 
-  return types.map((type) => {
+  return types.map((type: any) => {
     const translations = type.exercise_type_translations;
     const localizedName = locale
       ? getLocalizedName({ name: type.name, translations }, locale)
@@ -127,7 +127,7 @@ export async function getMusclesWithTranslations(locale?: string) {
       },
     });
 
-    return muscles.map((muscle) => {
+    return muscles.map((muscle: any) => {
       const translations = muscle.muscle_translations;
       const localizedName = locale
         ? getLocalizedName({ name: muscle.name, translations }, locale)
@@ -166,7 +166,7 @@ export async function getBodyPartsWithTranslations(locale?: string) {
     },
   });
 
-  return bodyParts.map((bodyPart) => {
+  return bodyParts.map((bodyPart: any) => {
     const translations = bodyPart.body_part_translations;
     const localizedName = locale
       ? getLocalizedName({ name: bodyPart.name, translations }, locale)
@@ -202,7 +202,7 @@ export async function getEquipmentWithTranslations(locale?: string) {
     },
   });
 
-  return equipment.map((equip) => {
+  return equipment.map((equip: any) => {
     const translations = equip.equipment_translations;
     const localizedName = locale
       ? getLocalizedName({ name: equip.name, translations }, locale)
@@ -239,7 +239,7 @@ export async function getWorkoutGoalsWithTranslations(locale?: string) {
       },
     });
 
-    return goals.map((goal) => {
+    return goals.map((goal: any) => {
       const translations = goal.workout_goal_translations;
       const localizedName = locale
         ? getLocalizedName({ name: goal.name, translations }, locale)
@@ -463,7 +463,7 @@ export async function convertWorkoutGoalNamesToIds(values: string[]): Promise<st
 
     // Converti i nomi in ID
     const convertedIds = names
-      .map((name) => {
+      .map((name: any) => {
         const normalizedName = name.toUpperCase();
         return nameToIdMap.get(normalizedName);
       })

@@ -50,7 +50,7 @@ function similarityScore(a: string, b: string): number {
 
   const aWords = aNorm.split(/\s+/);
   const bWords = bNorm.split(/\s+/);
-  const matchingWords = aWords.filter((w) => bWords.some((bw) => bw.includes(w) || w.includes(bw)));
+  const matchingWords = aWords.filter((w: any) => bWords.some((bw) => bw.includes(w) || w.includes(bw)));
 
   if (matchingWords.length > 0) {
     return 50 + (matchingWords.length / Math.max(aWords.length, bWords.length)) * 30;

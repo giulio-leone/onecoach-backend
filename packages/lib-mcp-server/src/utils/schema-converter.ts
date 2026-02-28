@@ -25,7 +25,7 @@ export function toolsToMcpFormat(tools: McpTool[]): Array<{
   description: string;
   inputSchema: Record<string, unknown>;
 }> {
-  return tools.map((tool) => ({
+  return tools.map((tool: any) => ({
     name: tool.name,
     description: tool.description,
     inputSchema: zodToMcpSchema(tool.parameters),
