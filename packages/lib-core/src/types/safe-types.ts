@@ -44,10 +44,10 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 
 /**
  * Type guard for Error objects.
+ * @deprecated Import from '@giulio-leone/lib-shared' instead (SSOT: lib-shared/utils/error/core)
  */
-export function isError(value: unknown): value is Error {
-  return value instanceof Error;
-}
+import { isError, getErrorMessage } from '@giulio-leone/lib-shared';
+export { isError, getErrorMessage };
 
 /**
  * Safe cast with runtime validation.
@@ -61,30 +61,6 @@ export function isError(value: unknown): value is Error {
  */
 export function safeCast<T>(value: unknown, validator: (v: unknown) => v is T): T | undefined {
   return validator(value) ? value : undefined;
-}
-
-/**
- * Extract error message safely from unknown error.
- * Use in catch blocks instead of `(error: any)`.
- *
- * @example
- * try {
- *   // ...
- * } catch (error) {
- *   logger.error(getErrorMessage(error));
- * }
- */
-export function getErrorMessage(error: unknown): string {
-  if (isError(error)) {
-    return error.message;
-  }
-  if (typeof error === 'string') {
-    return error;
-  }
-  if (isObject(error) && typeof error.message === 'string') {
-    return error.message;
-  }
-  return String(error);
 }
 
 /**
