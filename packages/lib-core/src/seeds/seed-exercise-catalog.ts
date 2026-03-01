@@ -1,35 +1,96 @@
 import { PrismaClient } from '@prisma/client';
 import { createId } from '@giulio-leone/lib-shared';
 
+import { EXERCISE_CATALOG } from './exercise-catalog-data';
+
+const EXERCISE_TYPES = [
+  { name: 'Strength', imageUrl: null },
+  { name: 'Cardio', imageUrl: null },
+  { name: 'Flexibility', imageUrl: null },
+  { name: 'Balance', imageUrl: null },
+] as const;
+
+const MUSCLES = [
+  'Chest',
+  'Back',
+  'Shoulders',
+  'Biceps',
+  'Triceps',
+  'Quadriceps',
+  'Hamstrings',
+  'Glutes',
+  'Calves',
+  'Abs',
+  'Forearms',
+] as const;
+
+const BODY_PARTS = ['Upper Body', 'Lower Body', 'Core', 'Full Body'] as const;
+
+const EQUIPMENTS = [
+  'Barbell',
+  'Dumbbell',
+  'Kettlebell',
+  'Resistance Band',
+  'Pull-up Bar',
+  'Bench',
+  'Cable Machine',
+  'Bodyweight',
+] as const;
+
+const EXERCISE_TYPE_TRANSLATIONS: Record<string, { en: string; it: string }> = {
+  Strength: { en: 'Strength', it: 'Forza' },
+  Cardio: { en: 'Cardio', it: 'Cardio' },
+  Flexibility: { en: 'Flexibility', it: 'Flessibilita' },
+  Balance: { en: 'Balance', it: 'Equilibrio' },
+};
+
+const MUSCLE_TRANSLATIONS: Record<string, { en: string; it: string }> = {
+  Chest: { en: 'Chest', it: 'Petto' },
+  Back: { en: 'Back', it: 'Schiena' },
+  Shoulders: { en: 'Shoulders', it: 'Spalle' },
+  Biceps: { en: 'Biceps', it: 'Bicipiti' },
+  Triceps: { en: 'Triceps', it: 'Tricipiti' },
+  Quadriceps: { en: 'Quadriceps', it: 'Quadricipiti' },
+  Hamstrings: { en: 'Hamstrings', it: 'Femorali' },
+  Glutes: { en: 'Glutes', it: 'Glutei' },
+  Calves: { en: 'Calves', it: 'Polpacci' },
+  Abs: { en: 'Abs', it: 'Addominali' },
+  Forearms: { en: 'Forearms', it: 'Avambracci' },
+};
+
+const BODY_PART_TRANSLATIONS: Record<string, { en: string; it: string }> = {
+  'Upper Body': { en: 'Upper Body', it: 'Parte superiore' },
+  'Lower Body': { en: 'Lower Body', it: 'Parte inferiore' },
+  Core: { en: 'Core', it: 'Core' },
+  'Full Body': { en: 'Full Body', it: 'Corpo intero' },
+};
+
+const EQUIPMENT_TRANSLATIONS: Record<string, { en: string; it: string }> = {
+  Barbell: { en: 'Barbell', it: 'Bilanciere' },
+  Dumbbell: { en: 'Dumbbell', it: 'Manubrio' },
+  Kettlebell: { en: 'Kettlebell', it: 'Kettlebell' },
+  'Resistance Band': { en: 'Resistance Band', it: 'Banda elastica' },
+  'Pull-up Bar': { en: 'Pull-up Bar', it: 'Sbarra trazioni' },
+  Bench: { en: 'Bench', it: 'Panca' },
+  'Cable Machine': { en: 'Cable Machine', it: 'Macchina cavi' },
+  Bodyweight: { en: 'Bodyweight', it: 'Corpo libero' },
+};
+
+function toStableExerciseId(slug: string): string {
+  if (slug === 'bench-press') return 'exr_bench_press_001';
+  return `exr_${slug.replace(/-/g, '_')}`;
+}
+
 export async function seedExerciseCatalog(prisma: PrismaClient, adminUserId: string) {
-  const exerciseTypes = [
-    { name: 'Strength', imageUrl: null },
-    { name: 'Cardio', imageUrl: null },
-    { name: 'Flexibility', imageUrl: null },
-    { name: 'Balance', imageUrl: null },
-  ];
-  for (const t of exerciseTypes) {
+  for (const exerciseType of EXERCISE_TYPES) {
     await prisma.exercise_types.upsert({
-      where: { name: t.name },
+      where: { name: exerciseType.name },
       update: {},
-      create: { id: createId(), ...t },
+      create: { id: createId(), ...exerciseType },
     });
   }
 
-  const muscles = [
-    'Chest',
-    'Back',
-    'Shoulders',
-    'Biceps',
-    'Triceps',
-    'Quadriceps',
-    'Hamstrings',
-    'Glutes',
-    'Calves',
-    'Abs',
-    'Forearms',
-  ];
-  for (const name of muscles) {
+  for (const name of MUSCLES) {
     await prisma.muscles.upsert({
       where: { name },
       update: {},
@@ -37,8 +98,7 @@ export async function seedExerciseCatalog(prisma: PrismaClient, adminUserId: str
     });
   }
 
-  const bodyParts = ['Upper Body', 'Lower Body', 'Core', 'Full Body'];
-  for (const name of bodyParts) {
+  for (const name of BODY_PARTS) {
     await prisma.body_parts.upsert({
       where: { name },
       update: {},
@@ -46,17 +106,7 @@ export async function seedExerciseCatalog(prisma: PrismaClient, adminUserId: str
     });
   }
 
-  const equipments = [
-    'Barbell',
-    'Dumbbell',
-    'Kettlebell',
-    'Resistance Band',
-    'Pull-up Bar',
-    'Bench',
-    'Cable Machine',
-    'Bodyweight',
-  ];
-  for (const name of equipments) {
+  for (const name of EQUIPMENTS) {
     await prisma.equipments.upsert({
       where: { name },
       update: {},
@@ -64,69 +114,250 @@ export async function seedExerciseCatalog(prisma: PrismaClient, adminUserId: str
     });
   }
 
-  // Helper
-  const idBy = async (
-    table: 'muscles' | 'body_parts' | 'equipments' | 'exercise_types',
-    name: string
-  ) => {
-    switch (table) {
-      case 'muscles':
-        return (await prisma.muscles.findUnique({ where: { name } }))!.id;
-      case 'body_parts':
-        return (await prisma.body_parts.findUnique({ where: { name } }))!.id;
-      case 'equipments':
-        return (await prisma.equipments.findUnique({ where: { name } }))!.id;
-      case 'exercise_types':
-        return (await prisma.exercise_types.findUnique({ where: { name } }))!.id;
+  const [exerciseTypes, muscles, bodyParts, equipments] = await Promise.all([
+    prisma.exercise_types.findMany({ select: { id: true, name: true } }),
+    prisma.muscles.findMany({ select: { id: true, name: true } }),
+    prisma.body_parts.findMany({ select: { id: true, name: true } }),
+    prisma.equipments.findMany({ select: { id: true, name: true } }),
+  ]);
+
+  const exerciseTypeIdByName = new Map(exerciseTypes.map((row) => [row.name, row.id]));
+  const muscleIdByName = new Map(muscles.map((row) => [row.name, row.id]));
+  const bodyPartIdByName = new Map(bodyParts.map((row) => [row.name, row.id]));
+  const equipmentIdByName = new Map(equipments.map((row) => [row.name, row.id]));
+
+  for (const exerciseType of EXERCISE_TYPES) {
+    const exerciseTypeId = exerciseTypeIdByName.get(exerciseType.name);
+    if (!exerciseTypeId) continue;
+    const labels = EXERCISE_TYPE_TRANSLATIONS[exerciseType.name] ?? {
+      en: exerciseType.name,
+      it: exerciseType.name,
+    };
+
+    for (const locale of ['en', 'it'] as const) {
+      await prisma.exercise_type_translations.upsert({
+        where: {
+          exerciseTypeId_locale: { exerciseTypeId, locale },
+        },
+        update: {
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+        create: {
+          id: createId(),
+          exerciseTypeId,
+          locale,
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+      });
     }
-  };
+  }
 
-  // Sample exercises
-  const strengthTypeId = await idBy('exercise_types', 'Strength');
-  const benchPressId = 'exr_bench_press_001';
-  const chestId = await idBy('muscles', 'Chest');
-  const tricepsId = await idBy('muscles', 'Triceps');
-  const shouldersId = await idBy('muscles', 'Shoulders');
-  const upperBody = await idBy('body_parts', 'Upper Body');
-  const barbell = await idBy('equipments', 'Barbell');
-  const bench = await idBy('equipments', 'Bench');
+  for (const muscle of MUSCLES) {
+    const muscleId = muscleIdByName.get(muscle);
+    if (!muscleId) continue;
+    const labels = MUSCLE_TRANSLATIONS[muscle] ?? { en: muscle, it: muscle };
 
-  await prisma.exercises.upsert({
-    where: { id: benchPressId },
-    update: {},
-    create: {
-      id: benchPressId,
-      slug: 'bench-press',
-      exerciseTypeId: strengthTypeId,
-      overview: 'The bench press is a compound exercise that primarily targets the chest muscles.',
-      keywords: ['press', 'chest', 'compound'],
-      instructions: [
-        'Lie flat on the bench with feet on the ground',
-        'Grip the bar slightly wider than shoulder width',
-        'Lower the bar to your chest with control',
-        'Press the bar back up to starting position',
-      ],
-      exerciseTips: [
-        'Keep your shoulder blades retracted',
-        'Maintain a slight arch in your lower back',
-        "Don't bounce the bar off your chest",
-      ],
-      variations: ['Incline Bench Press', 'Decline Bench Press', 'Close-Grip Bench Press'],
-      approvalStatus: 'APPROVED',
-      approvedAt: new Date(),
-      approvedById: adminUserId,
-      isUserGenerated: false,
-      createdById: adminUserId,
-      exercise_muscles: {
-        create: [
-          { muscleId: chestId, role: 'PRIMARY' },
-          { muscleId: tricepsId, role: 'SECONDARY' },
-          { muscleId: shouldersId, role: 'SECONDARY' },
-        ],
+    for (const locale of ['en', 'it'] as const) {
+      await prisma.muscle_translations.upsert({
+        where: {
+          muscleId_locale: { muscleId, locale },
+        },
+        update: {
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+        create: {
+          id: createId(),
+          muscleId,
+          locale,
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+      });
+    }
+  }
+
+  for (const bodyPart of BODY_PARTS) {
+    const bodyPartId = bodyPartIdByName.get(bodyPart);
+    if (!bodyPartId) continue;
+    const labels = BODY_PART_TRANSLATIONS[bodyPart] ?? { en: bodyPart, it: bodyPart };
+
+    for (const locale of ['en', 'it'] as const) {
+      await prisma.body_part_translations.upsert({
+        where: {
+          bodyPartId_locale: { bodyPartId, locale },
+        },
+        update: {
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+        create: {
+          id: createId(),
+          bodyPartId,
+          locale,
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+      });
+    }
+  }
+
+  for (const equipment of EQUIPMENTS) {
+    const equipmentId = equipmentIdByName.get(equipment);
+    if (!equipmentId) continue;
+    const labels = EQUIPMENT_TRANSLATIONS[equipment] ?? { en: equipment, it: equipment };
+
+    for (const locale of ['en', 'it'] as const) {
+      await prisma.equipment_translations.upsert({
+        where: {
+          equipmentId_locale: { equipmentId, locale },
+        },
+        update: {
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+        create: {
+          id: createId(),
+          equipmentId,
+          locale,
+          name: labels[locale],
+          description: labels[locale],
+          updatedAt: new Date(),
+        },
+      });
+    }
+  }
+
+  for (const item of EXERCISE_CATALOG) {
+    const exerciseId = toStableExerciseId(item.slug);
+    const exerciseTypeId = exerciseTypeIdByName.get(item.type);
+
+    if (!exerciseTypeId) {
+      throw new Error(`[seedExerciseCatalog] Missing exercise type: ${item.type}`);
+    }
+
+    await prisma.exercises.upsert({
+      where: { id: exerciseId },
+      update: {
+        slug: item.slug,
+        exerciseTypeId,
+        overview: item.overview,
+        keywords: item.keywords,
+        instructions: item.instructions,
+        exerciseTips: item.exerciseTips,
+        variations: item.variations,
+        approvalStatus: 'APPROVED',
+        approvedAt: new Date(),
+        approvedById: adminUserId,
+        isUserGenerated: false,
+        createdById: adminUserId,
+        updatedAt: new Date(),
       },
-      exercise_body_parts: { create: [{ bodyPartId: upperBody }] },
-      exercise_equipments: { create: [{ equipmentId: barbell }, { equipmentId: bench }] },
-      updatedAt: new Date(),
-    },
-  });
+      create: {
+        id: exerciseId,
+        slug: item.slug,
+        exerciseTypeId,
+        overview: item.overview,
+        keywords: item.keywords,
+        instructions: item.instructions,
+        exerciseTips: item.exerciseTips,
+        variations: item.variations,
+        approvalStatus: 'APPROVED',
+        approvedAt: new Date(),
+        approvedById: adminUserId,
+        isUserGenerated: false,
+        createdById: adminUserId,
+        updatedAt: new Date(),
+      },
+    });
+
+    await Promise.all([
+      prisma.exercise_muscles.deleteMany({ where: { exerciseId } }),
+      prisma.exercise_body_parts.deleteMany({ where: { exerciseId } }),
+      prisma.exercise_equipments.deleteMany({ where: { exerciseId } }),
+    ]);
+
+    const muscleRelations = [
+      ...item.primaryMuscles.map((name) => ({
+        exerciseId,
+        muscleId: muscleIdByName.get(name) ?? '',
+        role: 'PRIMARY' as const,
+      })),
+      ...item.secondaryMuscles.map((name) => ({
+        exerciseId,
+        muscleId: muscleIdByName.get(name) ?? '',
+        role: 'SECONDARY' as const,
+      })),
+    ].filter((row) => row.muscleId);
+
+    if (muscleRelations.length > 0) {
+      await prisma.exercise_muscles.createMany({
+        data: muscleRelations,
+        skipDuplicates: true,
+      });
+    }
+
+    const bodyPartRelations = item.bodyParts
+      .map((name) => ({
+        exerciseId,
+        bodyPartId: bodyPartIdByName.get(name) ?? '',
+      }))
+      .filter((row) => row.bodyPartId);
+
+    if (bodyPartRelations.length > 0) {
+      await prisma.exercise_body_parts.createMany({
+        data: bodyPartRelations,
+        skipDuplicates: true,
+      });
+    }
+
+    const equipmentRelations = item.equipment
+      .map((name) => ({
+        exerciseId,
+        equipmentId: equipmentIdByName.get(name) ?? '',
+      }))
+      .filter((row) => row.equipmentId);
+
+    if (equipmentRelations.length > 0) {
+      await prisma.exercise_equipments.createMany({
+        data: equipmentRelations,
+        skipDuplicates: true,
+      });
+    }
+
+    for (const locale of ['en', 'it'] as const) {
+      const trans = item.translations[locale];
+      await prisma.exercise_translations.upsert({
+        where: {
+          exerciseId_locale: { exerciseId, locale },
+        },
+        update: {
+          name: trans.name,
+          shortName: trans.shortName,
+          description: trans.description,
+          searchTerms: trans.searchTerms,
+          updatedAt: new Date(),
+        },
+        create: {
+          id: createId(),
+          exerciseId,
+          locale,
+          name: trans.name,
+          shortName: trans.shortName,
+          description: trans.description,
+          searchTerms: trans.searchTerms,
+          updatedAt: new Date(),
+        },
+      });
+    }
+  }
 }
