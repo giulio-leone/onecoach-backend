@@ -431,23 +431,23 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "3.0.2",
-    "@ai-sdk/google": "3.0.2",
-    "@ai-sdk/openai": "3.0.2",
-    "@ai-sdk/xai": "3.0.3",
+    "@ai-sdk/anthropic": "3.0.50",
+    "@ai-sdk/google": "3.0.34",
+    "@ai-sdk/openai": "3.0.37",
+    "@ai-sdk/xai": "3.0.60",
     "@auth/prisma-adapter": "^2.11.1",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/types": "workspace:*",
     "@openrouter/ai-sdk-provider": "6.0.0-alpha.1",
-    "@prisma/adapter-pg": "7.2.0",
+    "@prisma/adapter-pg": "7.4.2",
     "@stripe/stripe-js": "^8.7.0",
     "@vercel/edge-config": "^1.4.3",
-    "ai": "6.0.77",
+    "ai": "6.0.105",
     "bcryptjs": "^3.0.3",
     "next": "16.1.6",
     "next-auth": "5.0.0-beta.30",
-    "pg": "^8.16.3",
-    "stripe": "^20.1.0",
+    "pg": "^8.19.0",
+    "stripe": "^20.4.0",
     "vercel-minimax-ai-provider": "^0.0.1"
   },
   "peerDependencies": {
@@ -457,7 +457,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
-    "@types/pg": "^8.16.0",
+    "@types/pg": "^8.18.0",
     "tsup": "^8.0.0",
     "typescript": "^5.9.3"
   },
