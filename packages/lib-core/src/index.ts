@@ -60,3 +60,15 @@ export * from './analytics';
 
 // Marketplace services (merged from lib-marketplace)
 export * from './marketplace';
+
+// Platform Abstraction Layer (Hexagonal Architecture)
+export { PlatformFactory } from './platform';
+export type { DeployPlatform } from './platform';
+export type {
+  ConfigProvider,
+  ConfigProviderWriteResult,
+  FeatureFlagsProvider,
+  FlagDefinition,
+  CronProvider,
+  CronJob,
+} from './platform/ports';
