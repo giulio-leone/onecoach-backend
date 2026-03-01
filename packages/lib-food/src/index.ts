@@ -9,6 +9,18 @@ export {
   levenshteinSimilarity,
 } from './food-matching.service';
 export { FoodVisionService } from './food-vision.service';
+export { FoodSearchFacade } from './food-search-facade.service';
+export type { FoodSearchResult, FoodSearchResultItem } from './food-search-facade.service';
+
+// Adapters
+export { OpenFoodFactsAdapter } from './adapters/openfoodfacts.adapter';
+
+// Ports
+export type {
+  IExternalFoodSource,
+  ExternalFoodItem,
+  ExternalFoodSearchResult,
+} from './ports/external-food-source.port';
 
 // Utilities
 export { normalizeFoodName, calculateMacrosFromQuantity, updateVisionModelConfig } from './utils';

@@ -446,6 +446,25 @@ export class FoodService {
   }
 
   /**
+   * Cerca alimento per barcode
+   */
+  static async findByBarcode(barcode: string): Promise<FoodItem | null> {
+    const food = await prisma.food_items.findFirst({
+      where: { barcode },
+      include: {
+        food_item_translations: {
+          where: { locale: DEFAULT_LOCALE },
+          take: 1,
+        },
+        brand: true,
+        categories: { include: { food_categories: true } },
+      },
+    });
+    if (!food) return null;
+    return this.mapToFoodItem(food);
+  }
+
+  /**
    * Cerca alimenti per nome normalizzato (batch lookup)
    */
   static async getFoodsByNames(
