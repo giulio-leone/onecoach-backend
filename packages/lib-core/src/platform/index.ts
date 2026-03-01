@@ -78,8 +78,19 @@ export const PlatformFactory = {
   /** Get the cron provider for the current platform */
   getCronProvider(): CronProvider {
     if (cronProvider) return cronProvider;
-    // All platforms use no-op by default (crons handled externally)
-    cronProvider = new NoOpCronAdapter();
+
+    const platform = getPlatform();
+    if (platform === 'vps') {
+      // VPS needs programmatic scheduling; lazy-load to avoid requiring node-cron on other platforms
+      const { NodeCronAdapter } = require('./adapters/node-cron-adapter') as typeof import('./adapters/node-cron-adapter');
+      const adapter = new NodeCronAdapter();
+      adapter.init().catch((err: Error) => console.warn('[PlatformFactory] node-cron not available:', err.message));
+      cronProvider = adapter;
+    } else {
+      // Vercel (vercel.json) and Firebase (Cloud Scheduler) handle crons externally
+      cronProvider = new NoOpCronAdapter();
+    }
+
     return cronProvider;
   },
 
