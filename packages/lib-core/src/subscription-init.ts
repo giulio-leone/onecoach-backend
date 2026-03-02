@@ -9,7 +9,7 @@ import { marketplaceService } from './marketplace/marketplace.service';
  * Uses dynamic import for lib-ai to break circular dep: lib-core → lib-ai → lib-core.
  */
 export async function initSubscriptionService() {
-  const { OpenRouterSubkeyService } = await import('@giulio-leone/lib-ai');
+  const { OpenRouterSubkeyService } = await import('@giulio-leone/ai-config');
   subscriptionService.setDependencies({
     affiliateService: AffiliateService as unknown as IAffiliateService,
     promotionService: PromotionService as unknown as IPromotionService,

@@ -91,7 +91,7 @@ export async function registerAllServices(): Promise<void> {
     import('@giulio-leone/one-nutrition'),
     import('@giulio-leone/one-workout'),
     import('@giulio-leone/lib-food'),
-    import('@giulio-leone/lib-ai'),
+    import('@giulio-leone/ai-config'),
   ]);
 
   const exerciseServiceAdapter = exerciseService as unknown as IExerciseService;
