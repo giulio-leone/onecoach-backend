@@ -7,13 +7,13 @@ vi.mock('@giulio-leone/lib-core', () => ({
   prisma: {
     $transaction: (fn: any) =>
       fn({
-        agendaProject: {
+        agenda_projects: {
           create: vi.fn().mockResolvedValue({ id: 'proj_1' }),
         },
-        agendaTask: {
+        agenda_tasks: {
           create: vi.fn().mockResolvedValue({ id: 'task_1' }),
         },
-        agendaHabit: {
+        agenda_habits: {
           create: vi.fn().mockResolvedValue({ id: 'habit_1' }),
         },
       }),
