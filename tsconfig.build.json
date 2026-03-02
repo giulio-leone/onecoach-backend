@@ -127,12 +127,6 @@
       "@giulio-leone/lib-api/*": [
         "./packages/lib-api/src/*"
       ],
-      "@giulio-leone/lib-ai": [
-        "../lib-ai/src/index.ts"
-      ],
-      "@giulio-leone/lib-ai/*": [
-        "../lib-ai/src/*"
-      ],
       "@giulio-leone/lib-stores": [
         "./packages/lib-stores/src/index.ts"
       ],
@@ -168,12 +162,6 @@
       ],
       "@giulio-leone/one-agenda/*": [
         "../../one-agenda/src/*"
-      ],
-      "@giulio-leone/one-agent": [
-        "../../one-agent/src/index.ts"
-      ],
-      "@giulio-leone/one-agent/*": [
-        "../../one-agent/src/*"
       ],
       "@giulio-leone/types": [
         "../onecoach-types/src/index.ts"
