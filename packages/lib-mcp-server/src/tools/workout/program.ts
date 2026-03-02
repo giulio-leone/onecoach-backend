@@ -113,6 +113,11 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
     'Generates a complete workout program structure. The AI will decide on split type, volume, intensity, and progression strategies based on athlete profile and goals. Provides flexible framework without prescriptive methodologies.',
   parameters: workoutGenerateProgramSchema,
   execute: async (args: WorkoutGenerateProgramArgs, _context: McpContext) => {
+    // Apply safe defaults for fields the LLM may have omitted
+    const goal = args.goal ?? 'general_fitness';
+    const durationWeeks = args.durationWeeks ?? 8;
+    const daysPerWeek = args.daysPerWeek ?? 4;
+
     const profile = await prisma.user_profiles.findFirst({
       where: { userId: args.athleteId },
     });
@@ -141,10 +146,7 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
       }));
     } else {
       // Create minimal framework - AI will decide on split, volume, progression
-      const totalWeeks = args.durationWeeks;
-      const daysPerWeek = args.daysPerWeek;
-
-      for (let w = 1; w <= totalWeeks; w++) {
+      for (let w = 1; w <= durationWeeks; w++) {
         const isDeload = args.includeDeload && w % 4 === 0;
 
         const days: WorkoutDay[] = [];
@@ -174,11 +176,11 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
     const program = await prisma.workout_programs.create({
       data: {
         id: programId,
-        name: `Programma ${args.goal}`,
-        description: `Programma ${args.durationWeeks} settimane per ${args.goal}. ${args.daysPerWeek} giorni/settimana. L'AI determinerà split, volume, intensità e progressione ottimali.`,
+        name: `Programma ${goal}`,
+        description: `Programma ${durationWeeks} settimane per ${goal}. ${daysPerWeek} giorni/settimana. L'AI determinerà split, volume, intensità e progressione ottimali.`,
         difficulty: 'INTERMEDIATE',
-        durationWeeks: args.durationWeeks,
-        goals: [args.goal],
+        durationWeeks,
+        goals: [goal].filter(Boolean),
         status: 'ACTIVE',
         weeks: toPrismaJsonValue(weeks as unknown[]),
         userId: args.athleteId,
@@ -193,9 +195,9 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
       data: {
         programId: program.id,
         programName: program.name,
-        goal: args.goal,
-        durationWeeks: args.durationWeeks,
-        daysPerWeek: args.daysPerWeek,
+        goal,
+        durationWeeks,
+        daysPerWeek,
         splitType: args.splitType,
       },
     });
@@ -204,9 +206,9 @@ export const workoutGenerateProgramTool: McpTool<WorkoutGenerateProgramArgs> = {
       `✅ **Struttura programma creata!**
 
 📋 **${program.name}**
-⏱️ Durata: ${args.durationWeeks} settimane
-📅 Giorni/settimana: ${args.daysPerWeek}
-🎯 Obiettivo: ${args.goal}
+⏱️ Durata: ${durationWeeks} settimane
+📅 Giorni/settimana: ${daysPerWeek}
+🎯 Obiettivo: ${goal}
 ${args.splitType ? `📊 Split suggerito: ${args.splitType}` : "📊 Split: da determinare dall'AI"}
 ${args.includeDeload ? '🔄 Include settimane di deload' : ''}
 
