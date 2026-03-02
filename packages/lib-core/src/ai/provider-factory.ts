@@ -1,9 +1,3 @@
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
-import { createOpenAI, type OpenAIProvider } from '@ai-sdk/openai';
-import { createAnthropic, type AnthropicProvider } from '@ai-sdk/anthropic';
-import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';
-import { createXai, type XaiProvider } from '@ai-sdk/xai';
-import { createMinimax, type MinimaxProvider } from 'vercel-minimax-ai-provider';
 import { getOpenRouterConfig, getAIProviderKey } from '../config/env';
 
 /** Gemini CLI thinkingLevel for Gemini 3 models */
@@ -32,86 +26,77 @@ export interface ProviderConfig {
 }
 
 /**
+ * Provider config descriptor returned by the factory.
+ * Replaces the AI SDK LanguageModel — consumers should use Gauss Agent directly.
+ */
+export interface ProviderConfigDescriptor {
+  readonly provider: string;
+  readonly modelId: string;
+  readonly apiKey: string;
+  readonly baseUrl?: string;
+  readonly preferredProvider?: string | null;
+}
+
+/**
  * AIProviderFactory
  *
- * Centralized factory for creating AI SDK 6 providers.
- * Merges the most up-to-date logic from one-agent and lib-ai-agents.
+ * Centralized factory for AI provider configuration.
+ * Returns config descriptors instead of AI SDK models —
+ * all actual AI calls go through Gauss Agent.
  */
 export class AIProviderFactory {
   /**
-   * Create an OpenRouter provider with standard attribution headers
+   * Create an OpenRouter config descriptor
    */
   public static createOpenRouter(
     config?: Partial<ProviderConfig> & { preferredProvider?: string | null }
-  ) {
+  ): (model: string) => ProviderConfigDescriptor {
     const envConfig = getOpenRouterConfig();
     const apiKey = config?.apiKey || envConfig.apiKey;
-
     if (!apiKey) {
       throw new Error(
         'OpenRouter API key is missing. Please set OPENROUTER_API_KEY environment variable.'
       );
     }
+    const baseUrl = config?.baseUrl || envConfig.baseUrl;
+    const preferredProvider = config?.preferredProvider;
 
-    // NOTE: Provider routing (order, allowFallbacks) should be passed at request time
-    // via providerOptions.openrouter.provider, NOT at factory level.
-    // See: https://openrouter.ai/docs/features/provider-routing
-    // The buildProviderOptions utility handles this correctly.
-    return createOpenRouter({
+    return (modelId: string) => ({
+      provider: 'openrouter',
+      modelId,
       apiKey,
-      baseURL: config?.baseUrl || envConfig.baseUrl,
-      headers: {
-        'HTTP-Referer': config?.siteUrl || envConfig.siteUrl || 'https://onecoach.ai',
-        'X-Title': config?.appName || envConfig.appName || 'onecoach AI',
-      },
+      baseUrl,
+      preferredProvider,
     });
   }
 
-  /**
-   * Create an OpenAI provider
-   */
-  public static createOpenAI(apiKey?: string): OpenAIProvider {
+  public static createOpenAI(apiKey?: string): (model: string) => ProviderConfigDescriptor {
     const key = apiKey || getAIProviderKey('openai');
-    return createOpenAI({ apiKey: key });
+    return (modelId: string) => ({ provider: 'openai', modelId, apiKey: key });
   }
 
-  /**
-   * Create an Anthropic provider
-   */
-  public static createAnthropic(apiKey?: string): AnthropicProvider {
+  public static createAnthropic(apiKey?: string): (model: string) => ProviderConfigDescriptor {
     const key = apiKey || getAIProviderKey('anthropic');
-    return createAnthropic({ apiKey: key });
+    return (modelId: string) => ({ provider: 'anthropic', modelId, apiKey: key });
   }
 
-  /**
-   * Create a Google provider
-   */
-  public static createGoogle(apiKey?: string): GoogleGenerativeAIProvider {
+  public static createGoogle(apiKey?: string): (model: string) => ProviderConfigDescriptor {
     const key = apiKey || getAIProviderKey('google');
-    return createGoogleGenerativeAI({ apiKey: key });
+    return (modelId: string) => ({ provider: 'google', modelId, apiKey: key });
   }
 
-  /**
-   * Create an xAI provider
-   */
-  public static createXAI(apiKey?: string): XaiProvider {
+  public static createXAI(apiKey?: string): (model: string) => ProviderConfigDescriptor {
     const key = apiKey || getAIProviderKey('xai');
-    return createXai({ apiKey: key });
+    return (modelId: string) => ({ provider: 'xai', modelId, apiKey: key });
   }
 
-  /**
-   * Create a MiniMax provider using official vercel-minimax-ai-provider
-   * https://github.com/MiniMax-AI/vercel-minimax-ai-provider
-   */
-  public static createMiniMax(apiKey?: string): MinimaxProvider {
+  public static createMiniMax(apiKey?: string): (model: string) => ProviderConfigDescriptor {
     const key = apiKey || getAIProviderKey('minimax');
-    // Official provider uses Anthropic-compatible API by default
-    // which provides better support for advanced features
-    return createMinimax({ apiKey: key });
+    return (modelId: string) => ({ provider: 'minimax', modelId, apiKey: key });
   }
 
   /**
-   * Get a model instance from a provider
+   * Get a model config descriptor
    */
   public static async getModel(
     providerName: AIProviderType,
@@ -121,24 +106,23 @@ export class AIProviderFactory {
       preferredProvider?: string | null;
       thinkingLevel?: GeminiThinkingLevel;
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): Promise<any> {
+  ): Promise<ProviderConfigDescriptor> {
     switch (providerName) {
       case 'openrouter':
         return this.createOpenRouter({
           apiKey: config?.apiKey,
           preferredProvider: config?.preferredProvider,
-        }).languageModel(modelName);
+        })(modelName);
       case 'openai':
-        return this.createOpenAI(config?.apiKey).languageModel(modelName);
+        return this.createOpenAI(config?.apiKey)(modelName);
       case 'anthropic':
-        return this.createAnthropic(config?.apiKey).languageModel(modelName);
+        return this.createAnthropic(config?.apiKey)(modelName);
       case 'google':
-        return this.createGoogle(config?.apiKey).languageModel(modelName);
+        return this.createGoogle(config?.apiKey)(modelName);
       case 'xai':
-        return this.createXAI(config?.apiKey).languageModel(modelName);
+        return this.createXAI(config?.apiKey)(modelName);
       case 'minimax':
-        return this.createMiniMax(config?.apiKey).languageModel(modelName);
+        return this.createMiniMax(config?.apiKey)(modelName);
       default:
         throw new Error(`Unsupported provider: ${providerName}`);
     }
