@@ -6,8 +6,10 @@ import type {
   ExternalFoodItem,
 } from './ports/external-food-source.port';
 
+export type FoodSourceType = 'local' | 'openfoodfacts' | 'usda' | string;
+
 export interface FoodSearchResultItem extends FoodItem {
-  source: 'local' | 'openfoodfacts';
+  source: FoodSourceType;
 }
 
 export interface FoodSearchResult {
@@ -42,7 +44,7 @@ function mapExternalToFoodItem(item: ExternalFoodItem): FoodSearchResultItem {
   }
 
   return {
-    id: `off:${item.externalId}`,
+    id: `${item.source}:${item.externalId}`,
     name: item.name,
     nameNormalized: item.name.toLowerCase().trim(),
     barcode: item.barcode ?? undefined,
@@ -61,15 +63,24 @@ function mapExternalToFoodItem(item: ExternalFoodItem): FoodSearchResultItem {
     },
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    source: 'openfoodfacts',
+    source: item.source,
   };
 }
 
 export class FoodSearchFacade {
-  private static externalSource: IExternalFoodSource | null = null;
+  private static externalSources: IExternalFoodSource[] = [];
 
+  /** @deprecated Use addExternalSource instead */
   static setExternalSource(source: IExternalFoodSource) {
-    this.externalSource = source;
+    this.externalSources = [source];
+  }
+
+  static addExternalSource(source: IExternalFoodSource) {
+    this.externalSources.push(source);
+  }
+
+  static clearExternalSources() {
+    this.externalSources = [];
   }
 
   static async search(
@@ -84,42 +95,57 @@ export class FoodSearchFacade {
       limit,
     });
 
-    // 2. If local results are sufficient or no external source, return them
-    if (localResults.length >= LOCAL_THRESHOLD || !this.externalSource) {
+    // 2. If local results are sufficient or no external sources, return them
+    if (localResults.length >= LOCAL_THRESHOLD || this.externalSources.length === 0) {
       return {
         items: localResults.map((item) => ({ ...item, source: 'local' as const })),
         total: localResults.length,
       };
     }
 
-    // 3. Supplement with external results
+    // 3. Query all external sources in parallel
     const remaining = limit - localResults.length;
-    let externalResults;
-    try {
-      externalResults = await this.externalSource.search(query, {
-        locale: options.locale,
-        limit: remaining,
-      });
-    } catch (error) {
-      logger.error('[FoodSearchFacade] external search error', error);
-      return {
-        items: localResults.map((item) => ({ ...item, source: 'local' as const })),
-        total: localResults.length,
-      };
-    }
+    const perSource = Math.max(5, Math.ceil(remaining / this.externalSources.length));
 
-    // 4. Deduplicate by barcode
+    const externalPromises = this.externalSources.map(async (source) => {
+      try {
+        return await source.search(query, { locale: options.locale, limit: perSource });
+      } catch (error) {
+        logger.error(`[FoodSearchFacade] external source error`, error);
+        return { items: [], total: 0, source: 'unknown' };
+      }
+    });
+
+    const externalResults = await Promise.all(externalPromises);
+
+    // 4. Merge all external items
+    const allExternalItems = externalResults.flatMap((r) => r.items);
+
+    // 5. Deduplicate by barcode (local takes priority, then first-seen)
     const localBarcodes = new Set(
       localResults
         .map((r) => r.barcode)
         .filter((barcode): barcode is string => typeof barcode === 'string' && barcode.length > 0),
     );
-    const uniqueExternal = externalResults.items.filter(
-      (item) => !item.barcode || !localBarcodes.has(item.barcode),
+    const seenBarcodes = new Set(localBarcodes);
+    const seenNames = new Set(
+      localResults.map((r) => r.nameNormalized),
     );
 
-    // 5. Map and merge
-    const mergedExternalItems = uniqueExternal.map(mapExternalToFoodItem);
+    const uniqueExternal: ExternalFoodItem[] = [];
+    for (const item of allExternalItems) {
+      const normName = item.name.toLowerCase().trim();
+      if (item.barcode && seenBarcodes.has(item.barcode)) continue;
+      if (seenNames.has(normName)) continue;
+      if (item.barcode) seenBarcodes.add(item.barcode);
+      seenNames.add(normName);
+      uniqueExternal.push(item);
+    }
+
+    // 6. Map and merge (capped to requested limit)
+    const mergedExternalItems = uniqueExternal
+      .slice(0, remaining)
+      .map(mapExternalToFoodItem);
 
     return {
       items: [
@@ -135,7 +161,6 @@ export class FoodSearchFacade {
    * Returns the existing item if already present by barcode.
    */
   static async importExternalFood(externalItem: ExternalFoodItem): Promise<FoodItem> {
-    // Check if already exists by barcode
     if (externalItem.barcode) {
       const existing = await FoodService.findByBarcode(externalItem.barcode);
       if (existing) return existing;
@@ -143,7 +168,7 @@ export class FoodSearchFacade {
 
     return FoodService.createFood({
       name: externalItem.name,
-      description: externalItem.name, // Use name as description fallback
+      description: externalItem.name,
       barcode: externalItem.barcode ?? undefined,
       macrosPer100g: externalItem.macrosPer100g,
       servingSize: externalItem.servingSize,

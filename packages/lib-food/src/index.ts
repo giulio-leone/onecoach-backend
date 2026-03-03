@@ -10,10 +10,15 @@ export {
 } from './food-matching.service';
 export { FoodVisionService } from './food-vision.service';
 export { FoodSearchFacade } from './food-search-facade.service';
-export type { FoodSearchResult, FoodSearchResultItem } from './food-search-facade.service';
+export type { FoodSearchResult, FoodSearchResultItem, FoodSourceType } from './food-search-facade.service';
 
 // Adapters
 export { OpenFoodFactsAdapter } from './adapters/openfoodfacts.adapter';
+export { USDAFoodAdapter } from './adapters/usda.adapter';
+
+// Cache
+export { InMemoryFoodCache, CachedFoodSource } from './cache/food-cache.service';
+export type { IFoodCacheRepository } from './cache/food-cache.service';
 
 // Ports
 export type {
