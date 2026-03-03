@@ -11,7 +11,6 @@ export {
 export { FoodVisionService } from './food-vision.service';
 export { FoodSearchFacade } from './food-search-facade.service';
 export { FoodSeedService, ITALIAN_FOOD_CATEGORIES } from './food-seed.service';
-export { FoodSeedService, ITALIAN_FOOD_CATEGORIES } from './food-seed.service';
 export type {
   SeedCategoryConfig,
   SeedOptions,
