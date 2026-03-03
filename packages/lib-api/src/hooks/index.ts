@@ -24,3 +24,7 @@ export * from './use-affiliate';
 export * from './use-analytics';
 export * from './use-projects';
 export * from './use-direct-messaging';
+export * from './use-water-tracking';
+export * from './use-progress-photos';
+export * from './use-compliance';
+export * from './use-groups';
