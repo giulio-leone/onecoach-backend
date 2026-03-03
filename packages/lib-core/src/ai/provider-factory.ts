@@ -32,7 +32,7 @@ export interface ProviderConfig {
 export interface ProviderConfigDescriptor {
   readonly provider: string;
   readonly modelId: string;
-  readonly apiKey: string;
+  readonly apiKey: string | undefined;
   readonly baseUrl?: string;
   readonly preferredProvider?: string | null;
 }

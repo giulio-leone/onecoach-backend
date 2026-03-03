@@ -7,7 +7,7 @@
 
 import { createClient } from '@vercel/edge-config';
 import { logError } from '@giulio-leone/lib-shared';
-import type { ConfigProvider, ConfigProviderWriteResult } from '../ports/config-provider';
+import type { ConfigProvider, ConfigProviderWriteResult } from '../../ports/config-provider';
 
 export class VercelConfigAdapter implements ConfigProvider {
   readonly name = 'vercel-edge-config';

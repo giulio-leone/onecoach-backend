@@ -8,7 +8,7 @@
  */
 
 import { logError } from '@giulio-leone/lib-shared';
-import type { ConfigProvider, ConfigProviderWriteResult } from '../ports/config-provider';
+import type { ConfigProvider, ConfigProviderWriteResult } from '../../ports/config-provider';
 
 /**
  * Firebase Remote Config adapter.

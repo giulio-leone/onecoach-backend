@@ -9,7 +9,7 @@
  */
 
 import { logError } from '@giulio-leone/lib-shared';
-import type { ConfigProvider, ConfigProviderWriteResult } from '../ports/config-provider';
+import type { ConfigProvider, ConfigProviderWriteResult } from '../../ports/config-provider';
 
 const ENV_PREFIX = 'ONECOACH_CONFIG_';
 
