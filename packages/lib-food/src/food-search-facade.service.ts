@@ -147,6 +147,11 @@ export class FoodSearchFacade {
       .slice(0, remaining)
       .map(mapExternalToFoodItem);
 
+    // 7. Auto-import external items to local DB in background (stealth import)
+    this.autoImportExternal(uniqueExternal.slice(0, remaining)).catch((err) =>
+      logger.warn('[FoodSearchFacade] background auto-import failed', err),
+    );
+
     return {
       items: [
         ...localResults.map((item) => ({ ...item, source: 'local' as const })),
@@ -181,5 +186,19 @@ export class FoodSearchFacade {
         importedAt: new Date().toISOString(),
       },
     });
+  }
+
+  /**
+   * Background auto-import of external items shown in search results.
+   * Non-blocking — failures are logged but don't affect the user experience.
+   */
+  private static async autoImportExternal(items: ExternalFoodItem[]): Promise<void> {
+    for (const item of items) {
+      try {
+        await this.importExternalFood(item);
+      } catch (err) {
+        logger.warn(`[FoodSearchFacade] auto-import failed for "${item.name}"`, err);
+      }
+    }
   }
 }

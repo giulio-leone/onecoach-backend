@@ -465,6 +465,27 @@ export class FoodService {
   }
 
   /**
+   * Increment the usage count for a food item (used for search ranking).
+   */
+  static async incrementUsageCount(foodId: string): Promise<void> {
+    await prisma.food_items.update({
+      where: { id: foodId },
+      data: { usageCount: { increment: 1 } },
+    });
+  }
+
+  /**
+   * Batch increment usage counts for multiple food items.
+   */
+  static async incrementUsageCounts(foodIds: string[]): Promise<void> {
+    if (foodIds.length === 0) return;
+    await prisma.food_items.updateMany({
+      where: { id: { in: foodIds } },
+      data: { usageCount: { increment: 1 } },
+    });
+  }
+
+  /**
    * Cerca alimenti per nome normalizzato (batch lookup)
    */
   static async getFoodsByNames(

@@ -10,6 +10,15 @@ export {
 } from './food-matching.service';
 export { FoodVisionService } from './food-vision.service';
 export { FoodSearchFacade } from './food-search-facade.service';
+export { FoodSeedService, ITALIAN_FOOD_CATEGORIES } from './food-seed.service';
+export { FoodSeedService, ITALIAN_FOOD_CATEGORIES } from './food-seed.service';
+export type {
+  SeedCategoryConfig,
+  SeedOptions,
+  SeedProgress,
+  SeedResult,
+  CategorySeedResult,
+} from './food-seed.service';
 export type { FoodSearchResult, FoodSearchResultItem, FoodSourceType } from './food-search-facade.service';
 
 // Adapters
