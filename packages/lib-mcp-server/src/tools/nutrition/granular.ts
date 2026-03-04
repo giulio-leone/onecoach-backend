@@ -11,7 +11,7 @@ import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { getDbClient } from '@giulio-leone/core';
 import type { Prisma } from '@prisma/client';
-const prisma = getDbClient() as any;
+const prisma = getDbClient() as import('@prisma/client').PrismaClient;
 function fuzzyMatch(a: string, b: string): boolean {
   return a.toLowerCase().includes(b.toLowerCase()) || b.toLowerCase().includes(a.toLowerCase());
 }

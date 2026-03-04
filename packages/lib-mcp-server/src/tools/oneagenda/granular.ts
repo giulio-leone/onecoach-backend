@@ -11,7 +11,7 @@ import type { Prisma } from '@prisma/client';
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as any;
+const prisma = getDbClient() as import('@prisma/client').PrismaClient;
 function successResult(message: string, data?: unknown) {
   return { content: [{ type: 'text' as const, text: message }], data };
 }

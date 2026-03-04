@@ -9,7 +9,7 @@
 import { z } from 'zod';
 import type { McpTool } from '../../types';
 import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as any;
+const prisma = getDbClient() as import('@prisma/client').PrismaClient;
 
 // ==================== LIST ====================
 

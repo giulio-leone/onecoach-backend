@@ -18,7 +18,7 @@ import { GranularSessionService } from '@giulio-leone/one-workout';
 import { workoutProgramSchema } from '@giulio-leone/schemas';
 import { normalizeWorkoutProgram } from './program-normalizer';
 import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as any;
+const prisma = getDbClient() as import('@prisma/client').PrismaClient;
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 
 // =====================================================

@@ -6,7 +6,7 @@
  */
 
 import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as any;
+const prisma = getDbClient() as import('@prisma/client').PrismaClient;
 import type { MilestoneStatus } from '@prisma/client';
 
 export interface CreateMilestoneInput {
