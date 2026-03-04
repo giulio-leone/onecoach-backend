@@ -1,14 +1,24 @@
 /**
  * @giulio-leone/lib-core
  *
- * Servizi core (auth, credit, subscription, prisma, profile, payment, onboarding)
+ * Servizi core (auth, credit, subscription, profile, payment, onboarding)
  * Implementa contratti da @giulio-leone/contracts
+ *
+ * NOTE: The prisma singleton is exported with @deprecated markers.
+ * Application code should use @giulio-leone/core (repository layer
+ * or getDbClient() escape hatch) instead of importing prisma directly.
+ * Only infrastructure code (seed scripts, instrumentation) should use these.
  */
 
 // Re-export ID generation utility
 export { createId } from '@paralleldrive/cuid2';
 
-export * from './prisma';
+// Prisma — explicit named exports (was: export * from './prisma')
+// Only getPrisma (for bootstrap), disconnectPrisma (for cleanup), and
+// prisma (for seed scripts) are re-exported. All marked @deprecated.
+export { getPrisma, disconnectPrisma, prisma } from './prisma';
+export type { PrismaClient } from './prisma';
+export { Prisma } from './prisma';
 export * from './db';
 export * from './user-memory.service';
 export * from './user-memory/types';
