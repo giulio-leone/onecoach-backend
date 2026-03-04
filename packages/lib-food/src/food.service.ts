@@ -1,6 +1,11 @@
 import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as any;
 import { Prisma } from '@prisma/client';
+
+interface DbClientWithRaw {
+  $queryRaw<T = unknown>(query: ReturnType<typeof Prisma.sql>): Promise<T>;
+  [key: string]: any;
+}
+const prisma: DbClientWithRaw = getDbClient() as DbClientWithRaw;
 import { createId } from '@giulio-leone/lib-shared/id-generator';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import { SUPPORTED_FOOD_LOCALES } from '@giulio-leone/lib-shared';
