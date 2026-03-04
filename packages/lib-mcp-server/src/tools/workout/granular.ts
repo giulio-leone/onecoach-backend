@@ -17,7 +17,8 @@ import type { McpTool } from '../../types';
 import { GranularSessionService } from '@giulio-leone/one-workout';
 import { workoutProgramSchema } from '@giulio-leone/schemas';
 import { normalizeWorkoutProgram } from './program-normalizer';
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 
 // =====================================================

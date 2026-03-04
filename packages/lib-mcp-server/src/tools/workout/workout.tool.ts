@@ -8,7 +8,8 @@
  */
 
 import { z } from 'zod';
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import { normalizeWorkoutProgram } from './program-normalizer';
 import { workoutActions, type WorkoutProgramData, type AgenticActionHandler } from './workout.actions';

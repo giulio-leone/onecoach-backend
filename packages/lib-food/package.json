@@ -34,7 +34,8 @@
     "zod": "4.3.6"
   },
   "peerDependencies": {
-    "@prisma/client": ">=7.0.0"
+    "@prisma/client": ">=7.0.0",
+    "@giulio-leone/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.5.1",

@@ -5,7 +5,8 @@
  * Follows hexagonal architecture: this is the adapter for persistence.
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import type {
   GoalData,
   TaskData,

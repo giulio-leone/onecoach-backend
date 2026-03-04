@@ -35,7 +35,8 @@
     "@giulio-leone/one-workout": "workspace:*",
     "@giulio-leone/schemas": "workspace:*",
     "@giulio-leone/types": "workspace:*",
-    "@prisma/client": "^7.2.0"
+    "@prisma/client": "^7.2.0",
+    "@giulio-leone/core": "workspace:*"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",

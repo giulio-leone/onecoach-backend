@@ -1,4 +1,5 @@
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 
 import { FoodService } from './food.service';
 import { normalizeFoodName } from './utils';

@@ -5,7 +5,8 @@
  * Usa Prisma direttamente invece di API HTTP calls
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import type { HabitFrequency } from '@prisma/client';
 
 export interface CreateHabitInput {

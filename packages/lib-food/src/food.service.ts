@@ -1,4 +1,5 @@
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import { Prisma } from '@prisma/client';
 import { createId } from '@giulio-leone/lib-shared/id-generator';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';

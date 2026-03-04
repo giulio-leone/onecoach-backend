@@ -12,7 +12,9 @@ import type { Prisma } from '@prisma/client';
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { userProfileService, prisma } from '@giulio-leone/lib-core';
+import { userProfileService } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import { createId } from '@giulio-leone/lib-shared';
 
 // ============================================================================

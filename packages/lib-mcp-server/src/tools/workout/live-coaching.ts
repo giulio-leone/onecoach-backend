@@ -14,7 +14,8 @@
 
 import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 import { logger } from '@giulio-leone/lib-shared';
 
 // =====================================================

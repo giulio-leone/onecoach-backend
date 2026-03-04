@@ -7,7 +7,8 @@
  * Schema: exercises has no 'name' field - names are in exercise_translations
  */
 
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient } from '@giulio-leone/core';
+const prisma = getDbClient() as any;
 
 // ============================================================================
 // Types
