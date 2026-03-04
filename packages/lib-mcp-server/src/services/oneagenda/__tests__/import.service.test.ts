@@ -1,24 +1,31 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { OneAgendaImportService } from '../import.service';
 import type { AIParseContext } from '@giulio-leone/lib-shared/import-core';
 import type { ImportedOneAgenda } from '../imported-oneagenda.schema';
 
-vi.mock('@giulio-leone/lib-core', () => ({
-  prisma: {
-    $transaction: (fn: any) =>
-      fn({
-        agenda_projects: {
-          create: vi.fn().mockResolvedValue({ id: 'proj_1' }),
-        },
-        agenda_tasks: {
-          create: vi.fn().mockResolvedValue({ id: 'task_1' }),
-        },
-        agenda_habits: {
-          create: vi.fn().mockResolvedValue({ id: 'habit_1' }),
-        },
-      }),
-  },
+const mockPrisma = vi.hoisted(() => ({
+  $transaction: (fn: any) =>
+    fn({
+      agenda_projects: {
+        create: vi.fn().mockResolvedValue({ id: 'proj_1' }),
+      },
+      agenda_tasks: {
+        create: vi.fn().mockResolvedValue({ id: 'task_1' }),
+      },
+      agenda_habits: {
+        create: vi.fn().mockResolvedValue({ id: 'habit_1' }),
+      },
+    }),
 }));
+
+vi.mock('@giulio-leone/core', () => ({
+  getTypedDbClient: () => mockPrisma,
+}));
+
+vi.mock('@giulio-leone/lib-core', () => ({
+  prisma: mockPrisma,
+}));
+
+import { OneAgendaImportService } from '../import.service';
 
 describe('OneAgendaImportService', () => {
   const aiContext: AIParseContext<ImportedOneAgenda> = {
