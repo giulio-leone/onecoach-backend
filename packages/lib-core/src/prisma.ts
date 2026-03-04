@@ -206,9 +206,18 @@ export function getPrisma(): InstanceType<typeof PrismaClient> {
  * Prisma client getter - LAZY initialization.
  * Uses a getter function to defer client creation until first access.
  *
+ * @deprecated Use `getDbClient()` from `@giulio-leone/core` or the repository layer
+ * instead. Direct prisma access bypasses the hexagonal architecture.
+ * Only `instrumentation.ts` (bootstrap) should use this import.
+ *
  * @example
+ * // OLD (deprecated):
  * import { prisma } from '@giulio-leone/lib-core';
- * const users = await prisma.users.findMany(); // Client created here
+ * const users = await prisma.users.findMany();
+ *
+ * // NEW (preferred):
+ * import { getUserRepo } from '@giulio-leone/core';
+ * const users = await getUserRepo().findMany();
  */
 export const prisma: InstanceType<typeof PrismaClient> = new Proxy({} as InstanceType<typeof PrismaClient>, {
   get(_target, prop) {

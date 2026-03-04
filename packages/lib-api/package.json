@@ -71,6 +71,7 @@
     "@tanstack/react-query": "^5.90.21"
   },
   "peerDependencies": {
+    "@giulio-leone/core": "workspace:*",
     "@giulio-leone/lib-core": "workspace:*",
     "@giulio-leone/lib-shared": "workspace:*",
     "@giulio-leone/lib-stores": "workspace:*",

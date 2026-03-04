@@ -1,7 +1,7 @@
 import type { PrismaClient } from '@prisma/client';
-import { prisma } from '@giulio-leone/lib-core';
+import { getDbClient as getCoreDbClient } from '@giulio-leone/core';
 
-/** Type-safe accessor for the PrismaClient. */
+/** Type-safe accessor for the PrismaClient via the hexagonal core layer. */
 export function getDbClient(): PrismaClient {
-  return prisma;
+  return getCoreDbClient() as PrismaClient;
 }
