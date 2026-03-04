@@ -5,7 +5,17 @@ interface DbClientWithRaw {
   $queryRaw<T = unknown>(query: ReturnType<typeof Prisma.sql>): Promise<T>;
   [key: string]: any;
 }
-const prisma: DbClientWithRaw = getDbClient() as DbClientWithRaw;
+
+let _prisma: DbClientWithRaw | null = null;
+function getPrismaClient(): DbClientWithRaw {
+  if (!_prisma) _prisma = getDbClient() as DbClientWithRaw;
+  return _prisma;
+}
+const prisma = new Proxy({} as DbClientWithRaw, {
+  get(_t, prop, receiver) {
+    return Reflect.get(getPrismaClient(), prop, receiver);
+  },
+});
 import { createId } from '@giulio-leone/lib-shared/id-generator';
 import { toPrismaJsonValue } from '@giulio-leone/lib-shared';
 import { SUPPORTED_FOOD_LOCALES } from '@giulio-leone/lib-shared';
