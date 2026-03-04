@@ -8,8 +8,8 @@
 
 import { z } from 'zod';
 import type { McpTool } from '../../types';
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 
 // ==================== ANALYZE TRENDS ====================
 

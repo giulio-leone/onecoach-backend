@@ -7,8 +7,8 @@
  * Schema: exercises has no 'name' field - names are in exercise_translations
  */
 
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 
 // ============================================================================
 // Types

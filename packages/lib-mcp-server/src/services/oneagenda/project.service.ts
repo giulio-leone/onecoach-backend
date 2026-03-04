@@ -5,8 +5,8 @@
  * Usa Prisma direttamente invece di API HTTP calls
  */
 
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 import type { ProjectStatus } from '@prisma/client';
 
 export interface CreateProjectInput {

@@ -1,5 +1,5 @@
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 
 import { FoodService } from './food.service';
 import { normalizeFoodName } from './utils';

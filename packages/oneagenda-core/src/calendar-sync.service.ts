@@ -8,8 +8,8 @@
  * This service uses a JSON-based storage approach as an intermediate step.
  */
 
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 import type { CalendarProvider, CalendarProviderConfig } from './types';
 
 export class CalendarSyncService {

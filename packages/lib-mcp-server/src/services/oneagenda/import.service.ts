@@ -1,6 +1,6 @@
 import type { Prisma } from '@prisma/client';
-import { getDbClient } from '@giulio-leone/core';
-const prisma = getDbClient() as import('@prisma/client').PrismaClient;
+import { getTypedDbClient } from '@giulio-leone/core';
+const prisma = getTypedDbClient();
 import type {
   AIParseContext,
   ImportOptions,
