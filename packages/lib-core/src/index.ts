@@ -52,7 +52,6 @@ export * from './direct-messaging.service';
 export * from './logger.service';
 export * from './types/safe-types';
 export * from './ai/provider-factory';
-export * from './ai-generation.service';
 export * from './config/env';
 export * from './versioning';
 export * from './rate-limit';
