@@ -73,3 +73,6 @@ export type {
   CronProvider,
   CronJob,
 } from './platform/ports';
+
+// Logger
+export * from './logger.service';

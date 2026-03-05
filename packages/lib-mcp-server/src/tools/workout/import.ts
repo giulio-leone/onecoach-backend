@@ -23,7 +23,7 @@ import type { ImportProgress } from '@giulio-leone/lib-shared/import-core';
 import { type ImportedWorkoutProgram } from '@giulio-leone/schemas';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 /**
  * Schema per i parametri del tool
  */

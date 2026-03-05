@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { FoodAdminService, foodImportSchema } from '@giulio-leone/lib-food';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 const batchCreateParameters = z.object({
   items: z.array(foodImportSchema).max(100),
 });

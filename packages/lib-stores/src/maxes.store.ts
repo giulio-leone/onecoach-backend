@@ -17,7 +17,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Visibility } from '@prisma/client';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 
 // ============================================================================
 // Types (no legacy imports)

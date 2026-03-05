@@ -24,7 +24,7 @@ import {
 import type { ImportedBodyMeasurements } from '@giulio-leone/lib-core/body-measurements';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 // Re-export constants for UI/Client usage
 export const supportedFormats = {
   spreadsheets: ['csv', 'xlsx', 'xls', 'ods'],

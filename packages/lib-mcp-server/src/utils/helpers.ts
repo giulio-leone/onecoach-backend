@@ -12,7 +12,8 @@
  * @module lib-mcp-server/utils/helpers
  */
 
-import { logger, handleMemoryEvent } from '@giulio-leone/lib-core';
+import { handleMemoryEvent } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 import type { McpSuccessResponse, McpTool } from '../types';
 
 // ============================================================================

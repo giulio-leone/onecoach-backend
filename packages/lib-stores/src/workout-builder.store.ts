@@ -11,7 +11,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import type { WorkoutProgram } from '@giulio-leone/types/workout';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 // Dependencies interface
 interface WorkoutBuilderDependencies {
   workoutApi: {

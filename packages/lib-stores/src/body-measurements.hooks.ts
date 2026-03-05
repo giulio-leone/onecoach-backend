@@ -14,7 +14,7 @@ import { useRealtimeSubscription } from './realtime.hooks';
 import { useBodyMeasurementsStore } from './body-measurements.store';
 import type { BodyMeasurement } from '@giulio-leone/types/analytics';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 // Query keys for body measurements
 export const bodyMeasurementsKeys = {
   all: ['body-measurements'] as const,

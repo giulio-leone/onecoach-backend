@@ -5,8 +5,6 @@
  */
 
 import type { User } from '@giulio-leone/lib-stores';
-
-import { logger } from '@giulio-leone/lib-core';
 /**
  * Login credentials
  */
@@ -148,7 +146,7 @@ export const authQueries = {
       });
     } catch (error: unknown) {
       // Ignore errors, we'll clear local session anyway
-      logger.warn('Logout API call failed:', { error });
+      console.warn('Logout API call failed:', { error });
     }
   },
 

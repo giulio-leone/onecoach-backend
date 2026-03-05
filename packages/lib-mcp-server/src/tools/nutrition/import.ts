@@ -4,7 +4,7 @@ import { NutritionImportService, createNutritionAIContext } from '@giulio-leone/
 import { IMPORT_LIMITS } from '@giulio-leone/lib-shared/import-core';
 import { randomUUID } from 'crypto';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 const importFileSchema = z.object({
   name: z.string(),
   mimeType: z.string().optional(),

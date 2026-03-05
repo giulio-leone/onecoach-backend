@@ -2,7 +2,7 @@ import type { McpTool, McpContext } from '../../types';
 import { foodService } from '@giulio-leone/lib-food';
 import { createFoodSchema } from '@giulio-leone/schemas';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 export const foodCreateTool: McpTool = {
   name: 'food_create',
   description: `Creates a new food item. Requires admin privileges.

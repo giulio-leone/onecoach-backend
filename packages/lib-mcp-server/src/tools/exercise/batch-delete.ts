@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { McpTool, McpContext } from '../../types';
 import { exerciseService } from '@giulio-leone/one-workout';
 
-import { logger } from '@giulio-leone/lib-core';
+import { logger } from '@giulio-leone/lib-core/logger.service';
 const batchDeleteParameters = z.object({
   ids: z.array(z.string()).max(100),
 });
