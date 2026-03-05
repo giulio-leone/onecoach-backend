@@ -25,7 +25,6 @@ export default defineConfig({
     'realtime.hooks': 'src/realtime.hooks.ts',
     'realtime.store': 'src/realtime.store.ts',
     'sidebar.store': 'src/sidebar.store.ts',
-    'storage.native': 'src/storage.native.ts',
     'ui.store': 'src/ui.store.ts',
     'versioning.store': 'src/versioning.store.ts',
     'workout-builder.store': 'src/workout-builder.store.ts',

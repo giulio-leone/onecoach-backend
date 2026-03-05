@@ -13,7 +13,6 @@ export default defineConfig({
     'user-memory/timeline.service': 'src/user-memory/timeline.service.ts',
     'auth/index': 'src/auth/index.ts',
     'auth/session': 'src/auth/session.ts',
-    'auth/session.native': 'src/auth/session.native.ts',
     'auth/guards': 'src/auth/guards.ts',
     'auth/roles': 'src/auth/roles.ts',
     'auth/config': 'src/auth/config.ts',

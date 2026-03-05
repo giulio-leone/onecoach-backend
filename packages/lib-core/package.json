@@ -143,16 +143,6 @@
         "default": "./dist/auth/session.cjs"
       }
     },
-    "./auth/session.native": {
-      "import": {
-        "types": "./dist/auth/session.native.d.ts",
-        "default": "./dist/auth/session.native.js"
-      },
-      "require": {
-        "types": "./dist/auth/session.native.d.cts",
-        "default": "./dist/auth/session.native.cjs"
-      }
-    },
     "./auth/guards": {
       "import": {
         "types": "./dist/auth/guards.d.ts",
