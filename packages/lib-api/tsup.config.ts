@@ -9,7 +9,6 @@ export default defineConfig({
     'react-query/config': 'src/react-query/config.ts',
     'queries/index': 'src/queries/index.ts',
     memory: 'src/memory.ts',
-    native: 'src/native.ts',
     'server/index': 'src/server/index.ts',
   },
   format: ['cjs', 'esm'],

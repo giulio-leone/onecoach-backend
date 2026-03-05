@@ -15,9 +15,6 @@ export * from './use-body-measurements';
 export * from './use-oneagenda';
 export * from './use-health';
 export * from './use-iap';
-// Native-only hooks - not exported for web builds
-// export * from './use-health-native';
-// export * from './use-iap-native';
 export * from './use-marketplace';
 export * from './use-promo-code-validation';
 export * from './use-affiliate';
